@@ -1,0 +1,30 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(314,105)(0,-10)
+\put(60,70){\ellipse{30}{30}}
+\path(55,65)(65,75)
+\path(55,75)(65,65)
+\put(215,70){\ellipse{30}{30}}
+\path(210,65)(220,75)
+\path(210,75)(220,65)
+\path(160,50)(160,90)(120,90)
+	(120,50)(160,50)
+\put(140,65){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h[n]$}}}}}
+\path(0,70)(45,70)
+\path(37.000,68.000)(45.000,70.000)(37.000,72.000)
+\path(75,70)(120,70)
+\path(112.000,68.000)(120.000,70.000)(112.000,72.000)
+\path(160,70)(200,70)
+\path(192.000,68.000)(200.000,70.000)(192.000,72.000)
+\path(230,70)(280,70)
+\path(272.000,68.000)(280.000,70.000)(272.000,72.000)
+\path(215,20)(215,55)
+\path(217.000,47.000)(215.000,55.000)(213.000,47.000)
+\path(60,20)(60,55)
+\path(62.000,47.000)(60.000,55.000)(58.000,47.000)
+\put(0,50){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x[n]$}}}}}
+\put(265,50){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X(z_k)$}}}}}
+\put(95,75){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $g[n]$}}}}}
+\put(180,75){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $y[k]$}}}}}
+\put(215,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $V^{-k^2/2}$}}}}}
+\put(60,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $(r_0e^{j\theta_0})^{-n}V^{-n^2/2}$}}}}}
+\end{picture}

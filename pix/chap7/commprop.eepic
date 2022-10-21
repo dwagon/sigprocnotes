@@ -1,0 +1,24 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(460,115)(0,-10)
+\path(140,40)(140,100)(60,100)
+	(60,40)(140,40)
+\path(0,70)(60,70)
+\path(52.000,68.000)(60.000,70.000)(52.000,72.000)
+\path(140,70)(200,70)
+\path(192.000,68.000)(200.000,70.000)(192.000,72.000)
+\path(400,40)(400,100)(320,100)
+	(320,40)(400,40)
+\path(260,70)(320,70)
+\path(312.000,68.000)(320.000,70.000)(312.000,72.000)
+\path(400,70)(460,70)
+\path(452.000,68.000)(460.000,70.000)(452.000,72.000)
+\put(230,60){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $\Leftrightarrow$}}}}}
+\put(100,60){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h[n]$}}}}}
+\put(360,60){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $f[n]$}}}}}
+\put(5,75){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x[n]$}}}}}
+\put(180,75){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y[n]$}}}}}
+\put(265,75){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x[n]$}}}}}
+\put(440,75){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y[n]$}}}}}
+\put(100,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $y[n]=h[n]\ast x[n]$}}}}}
+\put(360,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $y[n]=f[n] \ast x[n]$}}}}}
+\end{picture}

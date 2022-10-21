@@ -1,0 +1,8 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(448,148)(0,-10)
+\put(0,120){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Analog Lowpass prototype filter: $H_{lp}(s)$}}}}}
+\put(0,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Digital highpass, bandpass or bandstop filter: $H'_{lp}(z)$, $H_{hp}$, $H_{bp}(z)$, $H_{bs}(z)$}}}}}
+\put(0,60){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Analog Highpass, bandpass or bandstop filter: $H'_{lp}(s)$, $H_{hp}(s)$, $H_{bp}(s)$, $H_{bs}(s)$}}}}}
+\put(100,80){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Downarrow$ $\leftarrow$ s-plane transformation}}}}}
+\put(100,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Downarrow$ $\leftarrow$ bilinear transformation}}}}}
+\end{picture}

@@ -1,0 +1,1196 @@
+% $Id: laptrans.zd,v 1.2 1993/06/09 01:50:35 dwagon Exp $
+% $Header: /ccstaff2/edp/dwagon/signotes/RCS/laptrans.zd,v 1.2 1993/06/09 01:50:35 dwagon Exp $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Laplace Transformation and its applications}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\minitoc
+
+It is a revision chapter of its definition, properties and its applications to
+analysis of electrical networks.
+
+\section{Definition and Properties of the Laplace Transform} %1
+\begin{Def}
+The Laplace transform $F(s)$ of a function $f(t)$ is defined by
+\begin{equation}
+F(s) = \int_{0^-}^{\infty} f(t)e^{-s t} dt 
+\end{equation}
+where $s$ is the complex frequency variable taking the place of $j\omega$ in
+the Fourier transform, $s=\sigma+j\omega$. It is also denoted by
+\begin{equation}
+F(s)=\L[f(t)] 
+\end{equation}
+
+The inverse transform in defined by
+\begin{equation}
+f(t)=\frac{1}{2\pi j} \int_{\sigma-j\infty}^{\sigma+j\infty} F(s)e^{s t} ds 
+\end{equation}
+It is also denoted by 
+\begin{equation}
+f(t) = \L^{-1}[F(s)] 
+\end{equation}
+\end{Def}
+
+\begin{Rem}
+The Laplace transform has a wider validity than the Fourier transform.
+\end{Rem}
+
+\begin{Exa}
+Find the Laplace transform for $e^{\alpha t}$ where $\alpha$ is a positive
+real constant.
+\begin{align}
+\intertext{Solution:}
+F(s) &= \L[e^{\alpha t}] \\
+	 &= \int_{0^-}^{\infty} e^{\alpha t} e^{-s t} dt \\
+	 &= \int_{0^-}^{\infty} e^{(\alpha-s)t} dt \\
+	 &= \left. \frac{1}{\alpha-s} e^{(\alpha-s) t}\right|_{0}^{\infty} \\
+	 &= \frac{1}{s-\alpha} \\
+F(s) &= \frac{1}{s-\alpha} \qquad \mbox{if $\Re(s)=\sigma>\alpha$}
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+Find the Laplace transform of the unit step function $U(t)$
+\begin{align}
+\intertext{Solution}
+F(s) &= \L[U(t)] \\
+	 &= \int_{0^-}^{\infty} U(t) e^{-s t} dt \\
+	 &= \left.-\frac{1}{s} e^{-s t} \right|_{0}^{\infty} = \frac{1}{s} \\
+F(s) &= \frac{1}{s} \qquad \mbox{if $\Re(s)>0$}
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+\begin{align}
+\L[\delta(t)] &= \int_{0^-}^{\infty} \delta(t)e^{-s t} dt \\
+			  &= \int_{0^-}^{0^+} \delta(t)e^{-s t} dt \\
+			  &= e^{-s 0} \\
+			  &= 1
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+\begin{align}
+\L[e^{\pm j\omega_0 t}] &= \int_{0^-}^{\infty} e^{\pm j\omega_0 t} e^{-s t} dt\\
+&= \int_{0^-}^{\infty} e^{-(s\mp j\omega_0) t} dt \\
+&= \left. \frac{-1}{s\mp j\omega_0} e^{-(s\mp j\omega_0) t}
+\right|_{0}^{\infty} \\
+&= \frac{1}{s\mp j\omega_0} 
+\end{align}
+\end{Exa}
+
+\section{Properties of the Laplace Transform}	%2
+\subsection{Linearity}
+If $\L[f_i(t)]=F_i(s)$ for $i=1,2,\ldots,n$, 
+\begin{equation}
+\L\left[\sum_{i=1}^{n} a_i f_i(t) \right] = \sum_{i=1}^{n} a_i F_i(s) 
+\end{equation}
+
+\begin{Exa}
+Find the Laplace transform of $\cos(\omega_0 t)$ and $\sin(\omega_0 t)$.
+\begin{align}
+\intertext{Solution:}
+\intertext{Since}
+\L\left[e^{\pm j\omega_0 t}\right] &= \frac{1}{s\mp j\omega_0} \\
+\intertext{and}
+\cos(\omega_0 t) &= \half[e^{j\omega_0 t}+e^{-j\omega_0 t}] \\
+\sin(\omega_0 t) &= \frac{1}{2j}[e^{j\omega_0 t}-e^{-j\omega_0 t}] \\
+\L[\cos{\omega_0 t}] &= \half\left\{
+\frac{1}{s-j\omega_0}+\frac{1}{s+j\omega_0} \right\} \\
+&= \frac{s}{s^2+\omega_0^2} \\
+\L[\sin(\omega_0 t)] &= \frac{1}{2j}\left\{ \frac{1}{s-j\omega_0} -
+\frac{1}{s+j\omega_0} \right\} \\
+&= \frac{\omega_0}{s^2+\omega_0^2}
+\end{align}
+\end{Exa}
+
+\subsection{Scaling}
+\begin{equation}
+\L[f(\alpha t)] =\frac{1}{\alpha}F\left(\frac{s}{\alpha}\right) 
+\end{equation}
+
+\subsection{Differentiation in the Time Domain}
+\begin{equation}
+\L\left[\frac{df(t)}{dt}\right] =s F(s)-f(0^-) 
+\end{equation}
+where $\L[f(t)]=F(s)$ and $f(0^-)$ is also called the initial value of $f(t)$.
+And
+\begin{equation}
+\L\left[f^{(n)}(t)\right]=s^n F(s)-s^{n-1}f(0^-)-s^{n-2}f'(0^-)-\cdots
+f^{(n-1)}(0^-) 
+\end{equation}
+where $f^{(n-1)}(0^-)$ is the $(n-1)^{\mbox{th}}$ derivative of $f(t)$
+evaluated at $t=0^{-}$.
+
+\subsection{Integration in the Time Domain}
+\begin{equation}
+\L\left[\int_{0^-}^{0^+} f(\tau) d\tau \right] = \frac{F(s)}{s} 
+\end{equation}
+where $\L[f(t)]=F(s)$.
+
+\begin{Rem}
+The above two properties can be used to convert an integro-differential
+equation into an algebraic equation.
+\end{Rem}
+
+\subsection{Differentiation in the Frequency Domain}
+If $\L[f(t)]=f(s)$, then
+\begin{equation}
+\l^{-1}\left[\frac{dF(s)}{ds}\right] = -t f(t) 
+\end{equation}
+
+\begin{Exa}
+\begin{align}
+\intertext{Find $\L^{-1}\left[\frac{s}{(s^2+\omega_0^2)^2}\right]$}
+\intertext{Solution:}
+\intertext{1: Since}
+-\frac{1}{2\omega_0} \frac{d}{ds} \left( \frac{\omega_0}{s^2+\omega_0^2}
+\right) &= \frac{s}{(s^2+\omega_0^2)^2} \\
+\intertext{and}
+\L[\sin(\omega_0 t)] &= \frac{\omega_0}{s^2+\omega_0^2} \\
+\intertext{2:}
+\L^{-1}\left[ \frac{s}{(s^2+\omega_0^2)^2} \right] &= -\frac{1}{2\omega_0}
+-t\sin(\omega_0 t) \\
+&= \frac{1}{2\omega_0} t\sin(\omega_0 t) 
+\end{align}
+\end{Exa}
+
+\subsection{Integration in the Frequency Domain}
+If $\L[f(t)]=F(s)$ then
+\begin{equation}
+\L^{-1}\left[\int_s^{\infty} F(s) ds \right] = \frac{f(t)}{t} 
+\end{equation}
+
+\subsection{Translation in the Time Domain}
+If $\L[f(t)]=F(s)$ then
+\begin{equation}
+\L[f(t-\alpha) \mu(t-\alpha)] = e^{-\alpha s} F(s) 
+\end{equation}
+
+\begin{Exa}
+Find the $\L[p(t)]$ where $p(t)$ is shown in Figure~\ref{f4-pt}.
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set xrange [-1:5]
+set yrange [0:2]
+set nozeroaxis
+set samples 400
+set arrow from -1,0 to 5,0
+set label "$t$" at 5,-0.1
+set arrow from 0,0 to 0,2
+set label "$p(t)$" at 0.1,2
+set label "$T$" at 1,-0.1
+set label "$0$" at -0.1,-0.1
+plot abs(x-0.5)<0.5?1:0
+%#
+\end{center}
+\caption{Function $p(t)$\label{f4-pt}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\parbox{3.5in}{\subfigure[$U(t)$] {
+%# gnuplot
+set terminal eepic
+set samples 400
+set nokey
+set noborder
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -1,0 to 5,0
+set arrow from 0,-0.5 to 0,2
+set xrange [-1:5]
+set yrange [-0.5:2]
+set label "$1$" at -0.3,1
+set label "$U(t)$" at -0.1,2.1
+set label "$t$" at 5,-0.1
+set size 0.6,0.8
+plot x>0?1:0
+%#
+}} \parbox{3.5in}{\subfigure[$-U(t-T)$]{
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set noxtics
+set noytics
+set xrange [-1:5]
+set yrange [-1.5:1.5]
+set nozeroaxis
+set samples 400
+set size 0.6,0.8
+set arrow from -1,0 to 5,0
+set arrow from 0,-1.5 to 0,1.5
+set label "$T$" at 1,0.1
+set label "$t$" at 5,-0.1
+set label "$-1$" at -0.7,-1
+set label "$-U(t-T)$" at -0.3,1.65
+plot x>1?-1:0
+%#
+}}
+\end{center}
+\caption{Frequency domain integration example\label{f4-ut}}
+\end{figure}
+
+\begin{align}
+\intertext{Solution:}
+p(t) &= U(t)-U(t-T) \\
+\intertext{See Figure~\ref{f4-ut}}
+\L[U(t)] &= \frac{1}{s} \\
+\intertext{and}
+\L[U(t-T)] &= e^{-Ts}\frac{1}{s} \\
+\L[p(t)] &= \L[U(t)-U(t-T)] \\
+&= \L[U(t)]-\L[U(t-T)] \\
+&= \frac{1}{s}-\frac{1}{s}e^{-T s}
+\end{align}
+\end{Exa}
+
+\subsection{Translation in the Frequency Domain}
+If $\L[f(t)]=F(s)$
+ \begin{equation}
+ \L^{-1}[F(s-\alpha)]=e^{\alpha t} f(t) 
+ \end{equation}
+\subsection{The Laplace Transform of Periodic Signals}
+If $f(t)$ is a periodic function with period $T$
+
+\begin{align}
+f(t-rT) &= f(t) \qquad \mbox{for $r=1,2,\ldots$} \\
+\L \left[f(t)\right] &= \int_{0^-}^{\infty} f(t) e^{-st} dt \\
+&= \int_{0^-}^T f(t) e^{-s t} dt + \int_{T}^{2T} e^{-s t} dt + \cdots \\
+&\phantom{=} + \int_{rT}^{(r+1)T} f(t) e^{-s t} dt + \cdots  \\
+\intertext{Define}
+\hat{f}(t) &= \begin{cases}
+     f(t) & 0\leqslant t \leqslant T \\
+     0    & \mbox{otherwise} 
+\end{cases} \\
+\L \left[\hat{f}(t)\right] &= \hat{F}(s) = \int_{0^-}^T f(t) e^{-s t} dt \\
+\intertext{and}
+f(t) &= \sum_{r=0}^{\infty} \hat{f}(t-rT) U(t-rT) \\
+\intertext{Then}
+\L \left[f(t)\right] &= \L \left[\sum_{r=0}^{\infty} \hat{f}(t-rT) U(t-rT) \right] \\
+&= \hat{F}(s)+e^{-Ts} \hat{F}(s)+e^{-2Ts} \hat{F}(s)+ \cdots \\
+&= \hat{F}(s) \left( \sum_{r=0}^{\infty} e^{-r T s} \right) \\
+&= \frac{\hat{F}(s)}{1-e^{-Ts}} \qquad\mbox{for $|e^{-Ts}|<1$}
+\end{align}
+
+\subsection{Convolution}
+If $f_1(t)$ and $f_2(t)$ are casual, the convolution of $f_1(t)$ and $f_2(t)$
+is defined as:
+\begin{align}
+f_1(t) \ast f_2(t) &\triangleq \int_{0^-}^{\infty} f_1(t-\tau)f_2(\tau)d\tau \\
+&\triangleq \int_{0^-}^t f_1(\overbrace{t-\tau}^{t'}) f_2(\tau) d\tau \\
+\intertext{($f_1(t-\tau)=0$ when $\tau>t$)}
+f_1(t) \ast f_2(t) &= f_2(t) \ast f_1(t) \\
+\intertext{Assume that}
+\L [f_1(t)] &= F_1(s) \\
+\intertext{and}
+\L [f_2(t)] &= F_2(s) \\
+\L [f_1(t) \ast f_2(t)] &= F_1(s) F_2(s)
+\end{align}
+
+Proof:
+\begin{align}
+\L\left[ \int_{0^-}^t f_1(t-\tau) f_2(\tau) d\tau \right] & \\
+&= \int_{0^-}^{\infty} \left( \int_{0^-}^t f_1(t-\tau) f_2(\tau) d\tau \right)
+e^{-s t} dt \\
+&= \int_{0^-}^{\infty} \left( \int_{0^-}^{\infty} f_1(t-\tau) f_2(\tau) d\tau
+\right) e^{-s t} dt \\
+&= \int_{0^-}^{\infty} \left( \int_{0^-}^{\infty} f_1(x) f_2(\tau) d\tau
+\right) e^{-s(x+\tau)} dx \qquad\mbox{$x=t-\tau$}\\
+&= \int_{0^-}^{\infty}\int_{0^-}^{\infty} f_1(x) e^{-s x} dx
+\int_{0^-}^{\infty} f_2(\tau) e^{-s \tau} d\tau \\
+&= F_1(s) F_s(2)
+\end{align}
+
+\subsection{The Initial and Final Value Theorems}
+\begin{Thm}[Initial Value Theorem]
+Assume that $f(t)$ is continuous at $t=0$ or has a finite discontinuity at
+this point, its Laplace transform $F(s)$ is a proper function. Then
+\begin{equation}
+\lim_{t\rightarrow 0^{+}} f(t) = \lim_{s\rightarrow\infty} s F(s) 
+\end{equation}
+\end{Thm}
+
+\begin{Exa}
+\begin{align}
+\intertext{Given}
+F(s) &= \frac{2(s+1)}{s^2+2 s+5} \\
+f(0^+) &= \lim_{s\rightarrow\infty} s F(s)  \\
+&= \lim_{s\rightarrow\infty} \frac{2 s(s+1)}{s^2+2 s+5} \\
+&=  \lim_{s\rightarrow\infty} \left( 2-\frac{2s+10}{s^2+2s+5}\right) \\
+&= 2 
+\end{align}
+\end{Exa}
+
+\begin{Thm}[Final Value Theorem]
+Assume that a function $f(t)$ whose transform $F(s)$ has poles only in the
+left half-plane or on the $j\omega$-axis. Then
+\begin{equation}
+\lim_{t\rightarrow\infty} f(t) = \lim_{s\rightarrow 0} s F(s) 
+\end{equation}
+\end{Thm}
+
+\begin{Exa}
+\begin{align}
+\intertext{Given}
+F(s) &= \frac{(5s+3)}{s(s+1)} \\
+\intertext{which has poles at $s=0$ and $s=-1$}
+f(\infty) &= \lim_{s\rightarrow 0} s F(s) \\
+&= \lim_{s\rightarrow 0} s\frac{5s+3}{s(s+1)} \\
+&= \lim_{s\rightarrow 0} \frac{5s+3}{s+1} \\
+&= 3
+\end{align}
+\end{Exa}
+
+\section{The Inverse Laplace Transform of a Rational Function}	%3
+In this section, methods will be examined which find a function $f(t)$ from
+its Laplace transform $F(s)$.
+\begin{Def}
+$F(s)$ is a real rational function if
+\begin{equation}
+F(s) = \frac{N(s)}{D(s)} 
+\end{equation}
+where $N(s)$ and $D(s)$ are polynomials with real coefficients.
+\end{Def}
+
+\begin{Def}
+$F(s)$ is a proper function if $F(s)$ is a real rational function and 
+\begin{equation}
+\deg N(s) < \deg D(s) 
+\end{equation}
+\end{Def}
+
+\begin{Exa}
+\begin{equation}
+\deg(s^10+s^5-3s^2+1) = 10 
+\end{equation}
+\end{Exa}
+
+\begin{Rem}
+A real rational function $F(s)$ can be represented by a polynomial of $s$ and
+a proper function $F'(s)$. ie.
+\begin{equation}
+F(s)=P(s)+F'(s) 
+\end{equation}
+where $F(s)=\frac{N(s)}{D(s)}$ and $F'(s)=\frac{N_1(s)}{D(s)}$.
+\end{Rem}
+
+So to find the inverse Laplace transform of a real rational function is to
+find the inverse Laplace transform of a proper function (where $\deg N(s) <
+\deg D(s)$) and that of a polynomial of $s$ (when $\deg N(s) \geqslant \deg
+D(s)$).
+
+Since 
+\begin{align}
+P(s)=\sum_{i=0}^{n} p_i s^i \\
+\intertext{where each $p_i$ is a real constant, and}
+\L^{-1}[1] &= \delta(t) \\
+\L^{-1}[S^n] &= \frac{d^n \delta(t)}{dt^n}
+\end{align}
+to find the inverse Laplace transform for $P(s)$ is trivial.
+
+Now the problem of finding the inverse Laplace transform of a real rational
+function becomes that of finding the inverse Laplace transform of a proper
+function.
+
+In general, finding inverse Laplace transforms of $F(s)$ by definition is not
+a trivial task. However, a ``Look Up Table'' approach can be used to
+facilitate this operation. For instance we know that
+\begin{align}
+\L^{-1}\left[\frac{1}{s}\right] &= U(t)  \\
+\L^{-1}\left[\frac{1}{s+\alpha}\right] &= e^{-\alpha t} \\
+\L^{-1}\left[\frac{\omega_0}{s^2+\omega_0^2}\right] &= \sin(\omega_0 t) \\
+\L^{-1}\left[\frac{s}{s^2+\omega_0^2}\right] &= \cos(\omega_0 t) \\
+\L^{-1}\left[\frac{n!}{s^{n+1}}\right] &= t^n \qquad\mbox{$n$ is an integer}
+\\
+\L^{-1}\left[F(s-\alpha)\right] &= e^{\alpha t} f(t) \qquad \mbox{$\L[f(t)]=F(s)$}
+\\
+\L^{-1}\left[\frac{\beta}{(s-\alpha)^2+\beta^2}\right] &= e^{\alpha
+t}\sin(\beta t) \\
+\L^{-1}\left[\frac{(s-\alpha)}{(s-\alpha)^2+\beta^2}\right] &= e^{\alpha t}
+\cos(\beta t) 
+\end{align}
+
+If a given $F(s)$ can be expressed by a sum of the above trivial terms for
+which the inverse Laplace transform is trivial, the inverse of $F(s)$ will
+also be trivial.
+
+The method used here is the partial fraction expansion.
+
+It is known that the frequencies $s_k$ that makes $F(s)=\infty$ (or $D(s)=0$)
+are the poles of $F(s)$. Then
+\begin{equation}
+F(s) =\frac{N(s)}{ \prod_{k=1}^{n} (\delta-s_k)^{m_k}} \label{eq4-lappoles}
+\end{equation}
+where $S_k (k=1,2,\ldots,n)$ are poles of $F(s)$ and $m_k$ may be any positive
+integer value.
+
+\begin{Exa}
+\begin{equation}
+F(s) = \frac{2s^3+1}{s^4+5s^3+8s^2-4s} 
+\end{equation}
+$F(s)$ is a proper function of $s$ and
+\begin{enumerate}
+\item
+\begin{align}
+D(s) &= s^4-5s^3+8s^2-4s \\
+D(0) &= 0 \\
+D(1) &= 1-5+8-4=0 \\
+D(2) &= 16-40+32-8=0
+\end{align}
+\item
+\begin{equation}
+D(s) = s(s^3-5s^2+8s-4) 
+\end{equation}
+\item
+\begin{equation}
+\begin{array}{rc@{}c@{}c@{}c}
+     & s^2 &-4s   &+4 \\ \cline{2-5}
+ s-1 |& s^3 &-5s^2 &+8s &-4 \\
+	 & s^3 & -s^2 \\
+	 &      & \multicolumn{3}{c}{\begin{array}{c@{}c@{}c}
+	         -4s^2 &+8s &\\
+	         -4s^2 &+4s &\\ \hline
+	               &\multicolumn{2}{c}{\begin{array}{c@{}c}
+					4s  &-4 \\
+	                4s  &-4 \\ \hline
+						& 0 \\
+				   \end{array}}
+			\end{array}}
+\end{array} 
+\end{equation}
+\begin{equation}
+D(s) = s(s-1)(s^2-4s+4) 
+\end{equation}
+\item
+\begin{equation}
+\begin{array}{rc@{}c@{}c@{}}
+	&s & -2 \\ \cline{2-4}
+s-2 |& s^2 & -4s & +4 \\
+	& s^2 & -2s & \\ \cline{2-4}
+	&     & -2s & +4 \\
+	&     & -2s & +4 \\ \cline{3-4}
+	&     &     & 0 \\
+	\end{array} 
+	\end{equation}
+\end{enumerate}
+
+So,
+\begin{align}
+D(s) &= s(s-1)(s-2)^2 \\
+\intertext{or}
+F(s) &= \frac{2s^3+1}{s(s-1)(s-2)^2} \\
+     &= \frac{?}{s}+\frac{?}{s-1}+\frac{?}{(s-2)^2}+\frac{?}{s-2}
+\end{align}
+\end{Exa}
+
+In Equation~\ref{eq4-lappoles}, poles of $F(s)$ may take different forms.
+
+\begin{enumerate}
+\renewcommand{\theenumi}{\roman{enumi}}
+\item A simple pole
+\begin{equation}
+(s-s_k) 
+\end{equation}
+where $s_k$ is either real of complex. If $s_k$ is complex,
+\begin{equation}
+s_k=\alpha+j\beta 
+\end{equation}
+there must be another pole of $F(s)$ which is the conjugate of $s_k$ or
+\begin{equation}
+s_k^{\ast}=\alpha-j\beta 
+\end{equation}
+to make $D(s)$ a polynomial with real coefficients.  Therefore
+\begin{align}
+(s-s_k)(s-s_k^{\ast}) &= [s-(\alpha+j\beta)][s-(\alpha-j\beta)] \\
+&= s^2-2\alpha s+(\alpha^2+\beta^2) \\
+&= s^2-c s+d \\
+&= (s-\alpha)^2+\beta^2
+\end{align}
+where $c=-2\alpha$ and $d=\alpha^2+\beta^2$.
+If $\alpha=c=0$ then $(s-s_k)(s-s_k^\ast) = s^2+\beta^2$ which corresponds to
+a pair of pure imaginary poles.
+
+\item A multiple pole
+\begin{equation}
+(s-s_k)^r 
+\end{equation}
+where $r>1$.
+
+If $s_k$ and $s_k^\ast$ form two complex poles of $F(s)$
+\begin{equation}
+(s-s_k)^r(s-s_k^\ast)^r = (s^2+cs+d)^r 
+\end{equation}
+So, in general, a proper function of $s$
+\begin{equation}
+F(s)=\frac{N(s)}{(s-a)(s-b)^r(s^2+cs+d)(s^2+es+f)^m}
+\end{equation}
+The partial fraction expansion of $F(s)$ is given as 
+\begin{equation}
+\begin{split}
+F(s)=\frac{A}{s-a} &+\left( \frac{B_1}{(s-b)^r} +\frac{B_2}{(s-b)^{r-1}} +\cdots
++\frac{B_r}{s-b} \right) + \frac{Cs+D}{s^2+cs+d} \\ &+ \left(
+\frac{E_1s+F_1}{(s^2+es+f)^m} + \frac{E_2s+F_2}{(s^2+es+f)^{m+1}} + \cdots
++\frac{E_ms+F_m}{s^2+es+f} \right)
+\label{eq4-multipole}
+\end{split}
+\end{equation}
+
+\end{enumerate}
+Now the problem is to determine the constants in the numerator of each term.
+
+\subsection{Algebraic Method}
+\begin{Exa}
+\label{ex-432}
+Find the inverse Laplace transform of the function
+\begin{equation}
+F(s) = \frac{s^2-6}{s^7+4s^3+3 s} 
+\end{equation}
+\begin{enumerate}
+\item 
+\begin{align}
+D(s) &= S^3+4s^2+3s = s(s^2+4s+3) \\
+D(0) &= 0 \\
+D(-1) &= 0 \\
+\begin{array}{rc@{}c@{}c}
+& s & +3 \\ \cline{2-4}
+s+1 | & s^2 & +4s & +3 \\
+& s^2 &+s \\ \cline{2-4}
+&& 3s &+3 \\
+&& 3s &+3 \\ \cline{3-4}
+&&&0
+\end{array} \\
+D(s) &= s(s+1)(s+3) \qquad \mbox{i.e. $D(-3)=0$}
+\end{align}
+\item 
+\begin{align}
+F(s) &= \frac{s^2-6}{s(s+1)(s+3)} \zdtag \\ 
+	 &= \frac{A}{s}+\frac{B}{s+1} +\frac{C}{s+3} \label{eq4-434} \\
+\intertext{Multiply both sides of the Equation~\ref{eq4-434} by $s(s+1)(s+3)$}
+s^2-6 &= A(s+1)(s+3)+Bs(s+3)+Cs(s+1) \zdtag \\
+	  &= (A+B+C)s^2+(4A+3B+C)s +3A \label{eq4-435} \\
+\intertext{To make the two polynomials of Equation~\ref{eq4-435} equal we have}
+s^0: \qquad &-6=3A \zdtag \\
+	 & A=-\frac{6}{3}=-2 \\
+s^1: \qquad &4A+3B+C=0 \\
+\intertext{Substitute $A=-2$ into the above equation}
+	 &-8+3B+C=0 \zdtag \\
+	 &3B+C=8 \label{eq4-438}\\
+s^2: \qquad & A+B+C=1 \zdtag \\
+	 & B+C=3 \\
+	 & C=3-B \label{eq4-4310}\\
+\intertext{Substitute Equation~\ref{eq4-4310} into Equation~\ref{eq4-438}.}
+& 3B+3-B=8 \zdtag \\
+& B=\frac{5}{2} \\
+\intertext{Substitute $B=\frac{5}{2}$ into Equation~\ref{eq4-4310}.}
+& C=\half \zdtag \\
+F(s) &= -\frac{2}{5}+\frac{5}{2}\frac{1}{s+1}+\frac{1}{2}\frac{1}{s+3} 
+\end{align}
+\item 
+\begin{align}
+\L^{-1}[F(s)] &=\L^{-1}\left[-\frac{2}{s}\right] +\L^{-1}\left[ \frac{5}{2}
+\frac{1}{s+1}\right] + \L^{-1}\left[ \frac{1}{2} \frac{1}{s+3}\right] \\
+&= -2U(t)+\frac{5}{2}e^{-t}U(t)+\frac{1}{2}e^{-3t}U(t)
+\end{align}
+\end{enumerate}
+Note: $\L[U(t)]=\frac{1}{s}$, and the property of translation in the frequency
+domain.
+\end{Exa}
+
+\begin{Exa}
+Find the inverse Laplace transform of the function 
+\begin{equation}
+F(s) =\frac{16}{s(s^2+4)^2} 
+\end{equation}
+\begin{align}
+\intertext{Solution:}
+F(s) &= \frac{16}{s(s^2+4)^2} = \frac{A}{s}+\frac{B_1s+C_1}{s^2+4} +
+\frac{B_2s+C_2}{(s^2+4)^2} \\
+16 &= A(s^2+4)^2 + (B_1s+C_1)s(s^2+4) + s(B_2s+C_2) \\
+&= (A+B_1)s^4 + C_1s^3 + (8A+4B_1+B_2)s^2 + (4C_1+C_2)s + 16A \\
+s^0: \qquad & 16A=16 \\
+\therefore & A=1  \\
+s^1: \qquad & 4C_1+C_2=0 \\
+s^2: \qquad & 8A+4B_1+B_2=0 \\
+s^3: \qquad & C_1=0 \\
+\therefore & C_2=0 \\
+s^4: \qquad & A+B_1=0 \\
+& B_1=-1 \\
+\intertext{Therefore}
+8A+4B_1+B_2 &= 0\\
+B_2 &= -(4B_1+8A) \\
+&= -4
+\end{align}
+\begin{equation}
+F(s)=\frac{1}{s}+\frac{-s}{s^2+4}+\frac{-4s}{(s^2+4)^2}
+\end{equation}
+\begin{align}
+\L^{-1} &= \L^{-1}\left[ \frac{1}{s} \right] - \L^{-1}\left[ \frac{s}{s^2+4}
+\right] -4\L\left[ \frac{s}{(s^2+4)^2} \right] \\
+&= U(t)-\cos(2t)U(t)-t\sin(2t)U(t)
+\end{align}
+\end{Exa}
+
+(Note:
+\begin{align}
+-\frac{1}{2\omega_0} \frac{d}{ds} \left( \frac{\omega_0}{s^2+\omega_0^2}
+\right) &= \frac{s}{(s^2+\omega_0^2)^2} \\
+\intertext{and}
+\L^{-1}\left[ \frac{s}{(s^2+\omega_0^2)^2} \right] &= -\frac{1}{2\omega_0} (-t
+f(t)) \\
+&= -\frac{1}{2\omega_0} \left( -t \L^{-1} \left[
+\frac{\omega_0}{s^2+\omega_0^2} \right] \right) \\
+&= -\frac{1}{2\omega_0} \left( -t \cos(\omega_0 t) \right) \\
+&= \frac{t}{2\omega_0} \cos(\omega_0 t)
+\end{align}
+where $\omega_0=2$.
+)
+
+\subsection{Formulae for the residues}
+\subsubsection{Simple Real Poles}
+If
+\begin{equation}
+F(s)=\frac{A_1}{s-a_1} + \frac{A_2}{s-a_2} + \frac{A_3}{s-a_3} + \cdots 
+\end{equation}
+\begin{equation}
+A_i=\lim_{s\rightarrow a_i} (s-a_i) F(s) \qquad \mbox{where $i=1,2,3,\ldots$}
+\end{equation}
+(Note:
+\begin{align}
+\intertext{if $i=1$}
+A_1 &= \lim_{s\rightarrow a_1} \left\{ (s-a_1) \frac{A_1}{s-a_1} +
+\underbrace{\frac{(s-a_1)A_2}{s-a_2}}_{=0} + \underbrace{
+\frac{(s-a_1)A_3}{s-a_3}}_{=0} \right\} \\
+&= \lim_{s\rightarrow a_1} (s-a_1) F(s)
+\end{align})
+
+\begin{Exa}
+Find the inverse Laplace transform of
+\begin{equation}
+F(s)=\frac{s^2-6}{s(s+1)(s+3)} 
+\end{equation}
+\begin{align}
+\intertext{Solution:}
+F(s)=\frac{s^2-6}{s(s+1)(s+3)} &= \frac{A}{s}+\frac{B}{s+1}+\frac{C}{s+3} \\
+A=\lim_{s\rightarrow 0} sF(s) &= \frac{-6}{1\cdot 3} = -2 \\
+B=\lim_{s\rightarrow -1} (s+1)F(s) &=
+\frac{1-6}{(-1)(-1+3)}=\frac{-5}{-2}=\frac{5}{2} \\
+C=\lim_{s\rightarrow -3} (s+3)F(s) &= \frac{9-6}{(-3)(-3+1)} = \frac{3}{6} =
+\frac{1}{2}
+\end{align}
+
+The rest of the procedure is the same as that in Example~\ref{ex-432}.
+\end{Exa}
+
+\subsubsection{Multiple Real Poles\label{sss-mrpoles}}
+Assume $F(s)$ has an $r^{\mbox{th}}$ order pole at $s=\alpha$ and
+\begin{align}
+F(s) &= \frac{N(s)}{D(s)} = \frac{\phi(s)}{(s-\alpha)^r} \\
+\intertext{where}
+\phi(s)=(s-\alpha)^r \frac{N(s)}{D(s)} \\
+\intertext{Expand $\phi(s)$ in the series at $s=\alpha$}
+\begin{split}
+\phi(s) &= \Phi(\alpha)+(s-\alpha)\Phi'(\alpha)+ \frac{(s-\alpha)^2}{2!}
+\Phi''(\alpha)+ \cdots\\ &\phantom{=}+ \frac{(s-\alpha)^{r-1}}{(r-1)!} \Phi^{(r-1)}(\alpha)
++ (s-\alpha)^r G(s)
+\end{split} \\
+\intertext{then}
+\begin{split}
+F(s) = \frac{\phi(s)}{(s-\alpha)^r} &= \frac{\Phi(\alpha)}{(s-\alpha)^r} +
+\frac{\Phi'(\alpha)}{(s-\alpha)^{r-1}} +
+\frac{\Phi''(\alpha)}{2!(s-\alpha)^{r-2}} + \cdots\\ &\phantom{=}+
+\frac{\Phi^{r-1}(\alpha)}{(r-1)!(s-\alpha)} + G(s)
+\end{split} \\
+\intertext{Assume}
+F(s) &= \frac{k_0}{(s-\alpha)^r} + \frac{k_1}{(s-\alpha)^{r-1}} + \cdots +
+\frac{k_{r-1}}{(s-\alpha)} + G(s) \\
+\intertext{where}
+k_i &= \left. \frac{1}{i!} \frac{d^i}{ds^i} \Phi(s) \right|_{s=\alpha} \qquad 
+\mbox{for $i=0,1,\ldots,(r-1)$}
+\end{align}
+
+\begin{Exa}
+Find the inverse Laplace transform of the function 
+\begin{equation}
+F(s)=\frac{s-2}{s(s+1)^3} 
+\end{equation}
+Solution:
+\begin{enumerate}
+\item \begin{equation}
+F(s) = \frac{A}{s} + \frac{k_0}{(s+1)^3} + \frac{k_1}{(s+1)^2} +
+\frac{k_2}{(s+1)}
+\end{equation}
+\item \begin{equation}
+A= \lim_{s\rightarrow 0} s F(s) = \left. \frac{s-2}{(s+1)^3}
+\right|_{s=0} = -2 
+\end{equation}
+\item \begin{align}
+\Phi(s) &= (s+1)^3 F(s) = \frac{s-2}{s} = 1-\frac{2}{s} \\
+\Phi'(s) &= \frac{2}{s^2} \\
+\Phi''(s) &= -\frac{4}{s^3} \\
+k_0 &= \Phi(-1) = 1- \frac{2}{-1} = 3 \\
+k_1 &= \Phi'(-1) = 2 \\
+k_2 &= \frac{\Phi''(-1)}{2!} = \frac{-4}{2(-1)^3} = 2
+\end{align}
+\item \begin{equation}
+F(s)= -\frac{2}{s} + \frac{3}{(s+1)^3} + \frac{2}{(s+1)^2} +
+\frac{2}{(s+1)} 
+\end{equation}
+\item \begin{equation}
+f(t)=\L^{-1}[F(s)] = -2U(t) + \left\{ e^{-t}\left( \frac{3}{2} t^2
+\right) + e^{-t}(2t)+2 \right\} U(t) 
+\end{equation}
+Note:
+\begin{equation}
+\L[t^n] = \frac{n!}{s^{n+1}} 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+\subsubsection{A pair of simple complex conjugate poles}
+\begin{align}
+\intertext{Assume that}
+F(s) &= \frac{N(s)}{D(s)} \zdtag \\
+&= \frac{\phi(s)}{(s-a)^2+b^2} = \frac{As+B}{(s-a)^2+b^2}+G(s) \\
+\lim_{s\rightarrow a+jb} ((s-a)^2+b^2) F(s) &= \lim_{s\rightarrow a+jb}
+\Phi(s) \zdtag \\
+&= A(a+jb)+B \zdtag \\
+&= (Aa+B)+jAB \zdtag \\
+&= \Phi_1+j\Phi_2 \zdtag
+\end{align}
+where $\Phi_1=Aa+B$ and $\Phi_2=Ab$
+\begin{align}
+A &=\frac{\Phi_2}{b} = \frac{\Im \left[ \lim_{s\rightarrow a+jb} ((s-a)^2+b^2)
+F(s) \right]}{b} \zdtag
+\end{align}
+
+\begin{align}
+B &= \Phi_1-\Phi_2 \frac{a}{b} = \frac{b\Phi_1-a\Phi_2}{b} \zdtag \\
+&= \frac{b \Re \left[ \lim_{s\rightarrow a+jb} ((s-a)^2+b^2) F(s) \right]
+-a\Im \left[ \lim_{s\rightarrow a+jb} ((s-a)^2+b^2) F(s) \right]}{b} \zdtag
+\end{align}
+
+\begin{align}
+\frac{As+b}{(s-a)^2+b^2} &= \frac{(\Phi_2/b)s+(b\Phi_1-a\Phi_2)/b}{ (s-a)^2 +
+b^2} \zdtag \\
+&= \frac{1}{b} \frac{(s-a)\Phi_2 + b\Phi_1}{ (s-a)^2+b^2} \\
+\L^{-1}\left[ \frac{1}{b} \frac{(s-a)\Phi_2+b\Phi_1}{ (s-a)^2+b^2} \right] &=
+\frac{1}{b} e^{at} \left\{ \Phi_2\cos(b t) + \Phi_1\sin(b t) \right\} \zdtag \\
+&= \frac{1}{b}e^{at} (\Phi_1^2+\Phi_2^2)^{\half} \left\{ \frac{\Phi_2}{
+(\Phi_1^2+\Phi_2^2)} \cos(b t) + \frac{\Phi_1}{(\Phi_1^2+\Phi_2^2)^{\half}}
+\sin(b t) \right\} \\
+&= \frac{1}{b}e^{at}(\Phi_1^2+\Phi_2^2)^{\half} \left\{ \sin(\theta) \cos(b t) +
+\cos(\theta)\sin(b t)\right\} \zdtag \\
+&= \frac{1}{b}e^{at} (\Phi_1^2+\Phi_2^2)^{\half} \sin(bt+\theta) \\
+\intertext{where}
+\theta &= \tan^{-1}\left(\frac{\Phi_2}{\Phi_1}\right) \zdtag
+\end{align}
+It follows that
+\begin{align}
+\L^{-1}[F(s)]=\frac{1}{b}e^{at} (\Phi_1^2+\Phi_2^2)^{\half} \sin(b t + \theta) +
+\L^{-1}[G(s)]
+\end{align}
+
+It is obvious that a pair of poles of $F(s)$ at $s=a\pm j b$ gives rise in the
+time domain to 
+\begin{enumerate}
+\item Steady sinusoidal oscillation if $a=0$
+\item damped oscillation with the damping factor $e^{-|a|t}$ if $a<0$
+\item oscillation with indefinately growing amplitudes if $a>0$.
+\end{enumerate}
+
+\subsubsection{Multiple Complex Conjugate Pole pairs}
+\begin{equation}
+F(s)=\frac{N(s)}{[(s-a)^2 + b^2]^r \sum_{k=0}^{n-2r} (\delta-s_k)}
+\end{equation}
+Either algebraic methods or that used in Section~\ref{sss-mrpoles} for
+multiple real poles may be used in this case.
+
+\section{The Significance of Poles and Zeros}	%4
+The locations of poles of $F(s)$ determine the time behaviour of $f(t)$ and
+those of zeros determine the magnitude of each term of $f(t)$.
+
+% ZD - Put pictures here
+
+\section{Solution of Linear Differential Equations using the Laplace Transform}	%5
+
+\begin{Exa}
+Solve the following differential equation.
+\begin{equation}
+f'''(t)+6f''(t)+11f'(t)+6f(t)=1 \label{eq4-451}
+\end{equation}
+with the zero inital conditions. i.e.
+\begin{equation}
+f''(0^-)=f'(0^-)=f(0^-)=0 
+\end{equation}
+\begin{enumerate}
+\item Take the Laplace tranform of Equation~\ref{eq4-451}.
+\begin{equation*} \begin{split}
+s^3F(s)&-s^2f(0)-sf'(0)-f''(0) + 6[s^2F(s)-sf(0)\\ 
+	&- f'(0)] +11[sF(s)-f(0)] + 6F(s) = \frac{1}{s}
+\end{split} \end{equation*}
+\begin{align}
+s^3F(s)+6s^2F(s)+11sF(s)+6F(s) &= \frac{1}{s} \\
+F(s) &= \frac{1}{s(s^3+6s^2+11s+6)}
+\end{align}
+\item 
+\begin{align}
+F(0) &= F(-1) = F(-2) = F(-3) = 0 \\
+F(s) &= \frac{1}{s(s+1)(s+2)(s+3)} \\
+F(s) &= \frac{A}{s} +\frac{B}{s+1} +\frac{C}{s+2} +\frac{D}{s+3}
+\end{align}
+\begin{alignat}{3}
+A &= \lim_{s\rightarrow 0} s F(s) &= \lim_{s\rightarrow 0}
+\frac{a}{s^3+6s^2+11s+6} \\
+&= \frac{1}{6} \\
+B &= \lim_{s\rightarrow -1} (s+1) F(s) &= \lim_{s\rightarrow -1}
+\frac{1}{s(s+2)(s+3)} \\
+&= -\frac{1}{2} \\
+C &= \lim_{s\rightarrow -2} (s+2) F(s) &= \lim_{s\rightarrow -2}
+\frac{1}{s(s+1)(s+3)} \\
+&= \frac{1}{2} \\
+D &= lim_{s\rightarrow -3} (s+3) F(s) &= \lim_{s\rightarrow -3}
+\frac{1}{s(s+1)(s+2)} \\
+&= -\frac{1}{6}
+\end{alignat}
+Therefore
+\begin{equation}
+F(s)=\frac{1}{6s}+\frac{-1}{2(s+1)} + \frac{1}{2(s+2)} + \frac{-1}{6(s+3)} 
+\end{equation}
+\item 
+\begin{equation}
+f(t)=\L^{-1}[F(s)] =\frac{1}{6}U(t) + \left( -\frac{1}{2} \right) e^{-t}
+U(t) + \half e^{-2t}U(t) - \frac{1}{6}e^{-3t} U(t) 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+\section{Network Analysis Using the Laplace Transform}	%6
+\subsection{The Basic Building Blocks}
+\subsubsection{The Resistor}
+\begin{center}
+\begin{tabular}{crcl}
+%picture
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(228,67)(0,-10)
+\path(164,20)(164,40)(64,40)
+	(64,20)(164,20)
+\put(114,26){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$R$}}}}}
+\path(4,30)(64,30)
+\path(164,30)(224,30)
+\path(4,30)(39,30)
+\path(31.000,28.000)(39.000,30.000)(31.000,32.000)
+\put(4,40){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$+$}}}}}
+\put(224,40){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$-$}}}}}
+\put(34,40){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$i(t)$}}}}}
+\put(104,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$V(t)$}}}}}
+\end{picture}
+$ \Downarrow$ & $V(t)=Ri(t)$ & $\Rightarrow$ & $V(s)=RI(s)$ \\
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(228,67)(0,-10)
+\path(164,20)(164,40)(64,40)
+	(64,20)(164,20)
+\put(114,26){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$R$}}}}}
+\path(4,30)(64,30)
+\path(164,30)(224,30)
+\path(4,30)(39,30)
+\path(31.000,28.000)(39.000,30.000)(31.000,32.000)
+\put(4,40){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$+$}}}}}
+\put(224,40){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$-$}}}}}
+\put(34,40){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$I(s)$}}}}}
+\put(104,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$V(s)$}}}}}
+\end{picture} &&& \\
+\end{tabular}
+\end{center}
+\begin{equation}
+z(s)=\frac{V(s)}{I(s)}=R 
+\end{equation}
+\begin{equation}
+y(s)=\frac{I(s)}{V(s)}=G=\frac{1}{R} 
+\end{equation}
+
+\subsubsection{The Inductor}
+\begin{center}
+\begin{tabular}{ccc}
+\input{pix/laptrans/inductor.eepic} & $\Rightarrow$ & \input{pix/laptrans/inductor2.eepic} \\
+$v(t)=L\frac{di(t)}{dt}$ & $\Rightarrow$ & $V(s)=L(sI(s)-i(0^-))$ \\
+\end{tabular}
+\end{center}
+
+The impendance is defined as the ratio of $V(s)$ to $I(s)$ under zero initial
+conditions.
+\begin{align}
+Z(s) &= \frac{V(s)}{I(s)} = Ls \\
+Y(s) &= \frac{1}{Z(s)}=\frac{1}{Ls} 
+\end{align}
+\subsubsection{The Capacitor}
+\begin{align}
+v(t) &= \frac{1}{C} \int_{-\infty}^t i(\tau) d\tau \\
+&= \frac{1}{C} \int_{-\infty}^{0^-} i(\tau)d\tau + \frac{1}{C} \int_{0^-}^{t}
+i(\tau) d\tau \\
+&= v(0^-)+\frac{1}{C} \int_{0^-}^t i(\tau)d\tau
+\end{align}
+\begin{center}
+\begin{tabular}{ccc}
+\input{pix/laptrans/capacitor.eepic} & $\Rightarrow$ & \input{pix/laptrans/capacitor2.eepic} \\
+\end{tabular}
+\end{center}
+\begin{equation}
+V(s)=\frac{1}{sC}I(s)+\frac{v(0^-)}{s} 
+\end{equation}
+
+\subsection{The Transformed Network}
+
+To find the impedance of the RLC series circuit shown in Figure~\ref{f4-rlc} we
+start with:
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/laptrans/rlc.eepic}
+\end{center}
+\caption{Series $RLC$ circuit \label{f4-rlc}}
+\end{figure}
+
+\begin{align}
+V(s) &= V_R(s)+V_L(s)+V_C(s) \\
+&= R I(s)+L_sI(s)+\frac{1}{C_s} I(s) \\
+Z(s) &= \frac{V(s)}{I(s)}=R+Ls+\frac{1}{Cs} 
+\end{align}
+
+For a series connection of $n$ impedances as shown in Figure~\ref{f4-nimp},
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/laptrans/imped.eepic}
+\end{center}
+\caption{Series connection of $n$ impedences\label{f4-nimp}}
+\end{figure}
+
+\begin{align}
+V(s) &= Z_1(s)I(s)+Z_2(s)I(s)+\cdots+Z_n(s)I(s) \\
+	 &= \sum_{i=1}^{n} Z_i(s) I(s) \\
+\intertext{So}
+Z(s) &= \frac{V(s)}{I(s)} = \sum_{i=1}^{n} Z_i(s) 
+\end{align}
+
+\subsection{Single Loop Network}
+
+Solve $i(t)$ with the excitation $v(t)$ as shown in Figure~\ref{f4-sln} using
+the Laplace transform.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/laptrans/sln.eepic}
+\end{center}
+\caption{Single Loop Network\label{f4-sln}}
+\end{figure}
+
+\begin{enumerate}
+\item Convert the given network into a transformed network using the basic
+building blocks giving Figure~\ref{f4-sln-trans}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/laptrans/sln2.eepic}
+\end{center}
+\caption{Transformed Single Loop Network\label{f4-sln-trans}}
+\end{figure}
+
+\item Solve the transformed network using the standard methods.
+\begin{align}
+V(s) &= R I(s)+Ls I(s) - Li(0^-)+\frac{1}{Cs} I(s)+\frac{v_c(0^-)}{s} \\
+I(s) &= \frac{a}{R+Ls+\frac{1}{Cs}}\left( V(s)+Li(0^-)-\frac{v_c(0^-)}{s}
+\right) 
+\end{align}
+
+\item \begin{equation}
+i(t)=\L^{-1}[I(s)] 
+\end{equation}
+\end{enumerate}
+
+\begin{Exa}
+Given $R=1\ohm$, $L=2H$, $C=1F$ and $i(0^-)=1 A$, $V_c(0^-)=5 V$ in the RLC
+single loop network shown in Figure~\ref{f4-sln}. Assume $v(t)=U(t)$, a unit
+step function.
+
+Find the current $i(t)$.
+
+Solution:
+\begin{enumerate}
+\item 
+In the transformed network
+\begin{equation}
+V(s)=\L[U(t)] = \frac{1}{s} 
+\end{equation}
+\item \begin{align}
+\frac{1}{s} &= I(s)+2sI(s)-2+\frac{1}{s}I(s)+\frac{5}{s} \\
+I(s) &= \frac{1}{1+2s+\frac{1}{5}}\left( \frac{1}{s}+2-\frac{5}{s} \right) \\
+&= \frac{2s-4}{2s^2+s+1} \\
+&= \frac{s-2}{s^2+0.5s+0.5} \\
+&= \frac{s-2}{(s+0.25)^2+\underbrace{0.5-0.0625}_{0.4375}} 
+\end{align}
+
+\item \begin{align}
+I(s) &= \frac{s-2}{(s+0.25)^2+0.4375} \\
+&= \frac{s+0.25-0.25-2}{(s+0.25)^2+0.4375} \\
+&= \frac{(s+0.25)}{(s+0.25)^2+(\sqrt{0.4735})^2} -
+\frac{2.25}{(s+0.25)^2+(\sqrt{0.4375})^2} \\
+i(t) &= \L^{-1}[I(s)] \\
+&= \L^{-1}\left[ \frac{s+0.25}{(s+0.25)^2 + 0.66^2} - \frac{2.25}{0.66}
+\frac{0.66}{(s+0.25)^2+0.66^2} \right]\\
+&= e^{-0.25} \left[ \cos(0.66 t)- 3.41\sin(0.66 t) \right]
+\end{align}
+\end{enumerate}
+\end{Exa}
+
+\begin{Exa}
+\label{ex-tnet}
+Find $V_0(t)$ in the network shown in Figure~\ref{f4-463nw} with zero initial
+conditions and the input conditions shown in Figure~\ref{f4-463ex}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/laptrans/egnet.eepic}
+\end{center}
+\caption{Network for Example~\ref{ex-tnet}\label{f4-463nw}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set noytics
+set noborder
+set size 1,0.8
+set nozeroaxis
+set arrow from 0,0 to 4.5,0
+set arrow from 0,0 to 0,1.5
+set label "$v_i(t)$" at 0,1.6
+set label "$t$" at 5,0
+set label "$0$" at 0,-0.1
+set label "$1$" at 1,-0.1
+set label "$2$" at 2,-0.1
+set label "$3$" at 3,-0.1
+set label "$4$" at 4,-0.1
+set xrange [0:4]
+plot (x<1)?x:(x>1 && x<3)?1:-x+4
+%#
+\end{center}
+\caption{Excitation for Example~\ref{ex-tnet}\label{f4-463ex}}
+\end{figure}
+
+Solution:
+\begin{enumerate}
+\item \begin{align}
+v_i(t) &= t U(t)-(t-1)U(t-1)-(t-3) U(t-3)+ (t-4) U(t-4) \\
+V_i(s) &= \frac{1}{s^2} \left( 1-e^{-s} - e^{-3s} + e^{-4s}  \right)
+\end{align}
+
+\item Transformed network
+\begin{center}
+\input{pix/laptrans/egnetxf.eepic}
+\end{center}
+
+\begin{align}
+V_O(s) &= \frac{\frac{1}{s}}{1+\frac{1}{s}} V_i(s) \\
+&= \frac{1}{s+1} \frac{1}{s^2} \left( 1-e^{-s}-e^{-3s}+e^{-4s} \right) \\
+\frac{1}{s^2(s+1)} &= \frac{A_1}{s^2}+\frac{A_2}{s}+\frac{B}{s+1}
+\end{align}
+Since
+
+\begin{alignat*}{2}
+B &= \lim_{s\rightarrow -1}(s+1)\frac{1}{s^2(s+1)} &&=\frac{1}{s^2} =1 \\
+A_1 &= \lim_{s\rightarrow 0} s^2 \frac{1}{s^2(s+1)} &&= \lim_{s\rightarrow 0}
+\frac{1}{s+1} = 1\\
+A_2 &= \lim_{s\rightarrow 0} \left( s^2 \frac{1}{s^2(s+1)}\right)' &&=
+\lim_{s\rightarrow 0}\left( \frac{1}{s+1} \right)' \\
+&= \lim_{s\rightarrow 0} \frac{-1}{(s+1)^2} &&= -1
+\end{alignat*}
+
+So that
+
+\begin{align}
+\frac{1}{s^2(s+1)} &= \frac{1}{s^2}-\frac{1}{s}+\frac{1}{s+1} \\
+\L^{-1}\left[ \frac{1}{s^2(s+1)} \right] &= \L^{-1} \left[ \frac{1}{s^2} -
+\frac{1}{s} + \frac{1}{s+1} \right] \\
+&= (t-1+e^{-t}) U(t) \\
+&\triangleq v_o'(t) \\
+v_O(t) &= \L^{-1}\left\{ \frac{1}{s^2(s+1)} [1- e^{-s}-e^{-3s}+ e^{-4s}]
+\right\} \\
+&= v_O'(t)-v_O(t-4)U(t-4) \\
+&= (t-1-e^{-t})U(t) -(t-2-e^{-(t-1)}) U(t-1) \\
+&\phantom{= =} -(t-4-e^{-(t-3)}) U(t-3) + (t-5-e^{-(t-4)}) U(t-4) 
+\end{align}
+
+Note: \begin{equation}
+\L[f(t-\alpha)U(t-\alpha)]=e^{-\alpha t} F(s) 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+\begin{Exa}
+To analyze a given network, we may use nodal or loop methods.
+From Figure~\ref{f4-mnms} use the nodal analysis method.
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=eps/NetworkA.eps}}
+\caption[Multi-node multi-source network]{Multi-node multi-source network ---
+Baher\label{f4-mnms}}
+\end{figure}
+
+Basic building blocks:
+
+\begin{center}
+\begin{tabular}{ccc}
+\input{pix/laptrans/parinduct.eepic} & $\Rightarrow$ &
+\input{pix/laptrans/parinduct2.eepic} \\
+\input{pix/laptrans/parcapac.eepic} & $\Rightarrow$ &
+\input{pix/laptrans/parcapac2.eepic} \\
+\end{tabular}
+\end{center}
+
+\begin{equation}
+\begin{split}
+\left( \frac{1}{R_1}+C_1 s+C_2 s+\frac{1}{Ls} \right) V_{n_1}(s) - \left( C_2
+s + \frac{1}{Ls} \right) V_{n_2}(s) \\
+= \frac{V_{O_1}(s)}{R_1}+C_1 v_{C_2}(0^-)
++ C_2v_{C_2}(0^-) - \frac{i_L(0^-)}{s}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+-\left( C_2 s+\frac{1}{Ls} \right) V_{n_1}(s) - \left( \frac{1}{R_2} + C_2 s
++ C_3s + \frac{1}{Ls} \right) V_{n_2}(s) \\
+= \frac{V_{O_2}(s)}{R_2}-C_2 v_{C_2}
+(0^-) + C_3v_{C_3}(0^-) - \frac{i_L(0^-)}{s}
+\end{split}
+\end{equation}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=eps/NetworkB.eps}}
+\caption[Converted Network]{Network in Figure~\ref{f4-mnms} with voltage
+sources converted into current sources\label{f4-mnmsb}}
+\end{figure}
+
+When all the parameters and initial conditions and excitations of the network
+are given the above is nothing but two linear algebraic equations with two
+unknowns $V_{n_1}(s)$ and $V_{n_2}(s)$. When $V_{n_1}(s)$ and $V_{n_2}(s)$ are
+solved, $v_{n_1}(t)=\L^{-1}[V_{n_1}(s)]$ and $v_{n_2}(t)=\L^{-1}[V_{n_2}(s)]$.
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=eps/NetworkC.eps}}
+\caption[Transformed network with generators]{Transformed network with initial
+condition generators --- Baher\label{f4-mnmsc}}
+\end{figure}
+
+\end{Exa}
+

@@ -1,0 +1,6 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(40,55)(0,-10)
+\path(40,0)(40,40)(0,40)
+	(0,0)(40,0)
+\put(17,17){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\large s}}}}}
+\end{picture}

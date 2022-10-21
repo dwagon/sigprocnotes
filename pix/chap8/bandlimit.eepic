@@ -1,0 +1,37 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(465,275)(0,-10)
+\put(140,213){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Continuous-time LTI system}}}}}
+\put(147,195){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$h_c(t)$, $H_c(j\Omega)$}}}}}
+\path(324,160)(324,260)(104,260)
+	(104,160)(324,160)
+\path(24,210)(104,210)
+\path(96.000,208.000)(104.000,210.000)(96.000,212.000)
+\path(324,210)(404,210)
+\path(396.000,208.000)(404.000,210.000)(396.000,212.000)
+\path(124,20)(124,60)(84,60)
+	(84,20)(124,20)
+\path(344,20)(344,60)(304,60)
+	(304,20)(344,20)
+\path(264,0)(264,80)(164,80)
+	(164,0)(264,0)
+\path(44,40)(84,40)
+\path(76.000,38.000)(84.000,40.000)(76.000,42.000)
+\path(124,40)(164,40)
+\path(156.000,38.000)(164.000,40.000)(156.000,42.000)
+\path(264,40)(304,40)
+\path(296.000,38.000)(304.000,40.000)(296.000,42.000)
+\path(344,40)(384,40)
+\path(376.000,38.000)(384.000,40.000)(376.000,42.000)
+\put(24,220){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$x_c(t)$}}}}}
+\put(389,220){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$y_c(t)$}}}}}
+\put(204,120){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Downarrow$}}}}}
+\put(104,35){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}C/D}}}}}
+\put(324,35){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}D/C}}}}}
+\put(214,37){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}LTI system}}}}}
+\put(214,55){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Discrete-time}}}}}
+\put(214,15){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$h[n]$,$H(e^{j\omega})$}}}}}
+\put(44,20){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$x_c(t)$}}}}}
+\put(384,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$y_r(t)=y_c(t)$}}}}}
+\put(284,20){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$y[n]$}}}}}
+\put(144,20){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$x[n]$}}}}}
+\end{picture}

@@ -1,0 +1,25 @@
+\setlength{\unitlength}{0.0100in}%
+%\begin{picture}(570,203)(20,580)
+\begin{picture}(570,203)(20,580)
+\put( 20,600){\vector( 1, 0){560}}
+\put(300,600){\vector( 0, 1){180}}
+\thicklines
+\put(300,600){\framebox(40,120){}}
+\put(460,600){\framebox(40,120){}}
+\put(140,600){\framebox(40,120){}}
+\thinlines
+\put(380,600){\line( 0,-1){  5}}
+\put(380,595){\line( 0, 1){  5}}
+\put(220,600){\line( 0,-1){  5}}
+\put(315,770){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$f(t)$}}}
+\put(590,595){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$t$}}}
+\put(300,585){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{$0$}}}
+\put(340,580){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{$t_0$}}}
+\put(285,720){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{$1$}}}
+\put(380,580){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{$T/2$}}}
+\put(460,580){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{$T$}}}
+\put(500,580){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$T+t_0$}}}
+\put(140,580){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{$-T$}}}
+\put(160,580){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$-T+t_0$}}}
+\put(220,580){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$-T/2$}}}
+\end{picture}

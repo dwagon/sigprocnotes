@@ -1,0 +1,111 @@
+% $Id: notes.zd,v 1.4 1993/06/09 01:52:10 dwagon Exp dwagon $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/notes.zd,v 1.4 1993/06/09 01:52:10 dwagon Exp dwagon $
+\documentclass[12pt,twoside]{report}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{makeidx}
+\usepackage{fancyheadings}
+\usepackage{a4}
+%\usepackage{12pt}
+\usepackage{verbatim}
+\usepackage{theorem}
+%\usepackage{twoside}	% comment this line out if you want only one sided printing
+\usepackage{minitoc}
+\usepackage{righttag}
+\usepackage{psfig}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{figstuff}
+\input{amssym.def}
+\input{amssym}
+\pagestyle{headings}
+\theoremstyle{plain}
+\theoremheaderfont{\sc}
+\newtheorem{Def}{Definition}[section]
+\newtheorem{Exa}{Example}[section]
+\newtheorem{Thm}{Theorem}[section]
+\newtheorem{Rem}{Remark}[section]
+\addtolength{\textwidth}{21pt}
+\newcommand{\fpair}{\leftrightarrow}
+\newcommand{\B}{\cal B}
+\newcommand{\E}{\cal E}
+\newcommand{\F}{\cal F}
+\renewcommand{\L}{\cal L}
+\newcommand{\Z}{\cal Z}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ev}{\operatorname{Ev}}
+\newcommand{\Od}{\operatorname{Od}}
+\newcommand{\infint}{\int_{-\infty}^{\infty}}
+\newcommand{\infsum}[1]{\sum_{#1=-\infty}^{\infty}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\zdtag}{}	% If you dont want tags define this as notag
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\wn}[1]{W_{N}^{#1}}	% N-point DFT weighting factor
+\newcommand{\whn}[1]{W_{N/2}^{#1}}	% N/2-point DFT weighting factor
+\renewcommand{\theequation}{\thesection-\arabic{equation}}
+\renewcommand{\theDef}{\thesection-\arabic{Def}}
+\renewcommand{\theExa}{\thesection-\arabic{Exa}}
+\renewcommand{\theThm}{\thesection-\arabic{Thm}}
+\renewcommand{\theRem}{\thesection-\arabic{Rem}}
+%\newcommand{\sevrm}{\rm}
+%\newcommand{\ninrm}{\rm}
+%\newcommand{\tenrm}{\rm}
+\newcommand{\twlrm}{\rm}
+\newcommand{\ohm}{\Omega}
+\newcommand{\nconv}{\bigcirc\hspace{-1em}n\;} % N-point convolution symbol
+\newcommand{\lbrak}{[} % Added to stop subfigure barfing when ] used in
+\newcommand{\rbrak}{]} % [caption] causing it to think end of caption
+\renewcommand{\Diamond}{\bullet} % This is what gnuplot uses for points.
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\makeindex
+\pssilent
+\psdraftbox
+\newcommand{\largemonash}{x}	% Unless you have the monlogos
+\psdraft    % Comment this line to make the final version, otherwise all 
+			% PostScript pictures will only be boxes.
+
+\begin{document}
+\title{\largemonash\\RDT3600 Signal Processing\\Monash University\\Clayton Campus}
+\author{Dr. Henry Wu
+\\ $\cal A$\kern-.1667em\lower.5ex\hbox{$\cal
+M$}\kern-.125em$\cal S$-\LaTeX\ by Dougal Scott
+}
+\maketitle
+
+\pagenumbering{roman}
+\dominitoc
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\include{outline}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+% 1
+\include{intro}
+% 2
+\include{fourseries}
+% 3
+\include{fourtrans}
+% 4
+\include{laptrans}
+% 5
+\include{anasigproc}
+% 6
+\include{digitanalog}
+% 7
+\include{discsig}
+% 8
+\include{filterdes}
+% 9
+\include{DFT}
+% 10
+\include{compDFT}
+% 11
+\include{advDSP}
+\printindex
+\end{document}

@@ -1,0 +1,155 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(319,318)(0,-10)
+\put(39,290){\ellipse{4}{4}}
+\put(119,290){\ellipse{4}{4}}
+\put(199,290){\ellipse{4}{4}}
+\put(279,290){\ellipse{4}{4}}
+\path(39,290)(279,290)
+\path(39,290)(59,290)
+\path(51.000,288.000)(59.000,290.000)(51.000,292.000)
+\path(119,290)(139,290)
+\path(131.000,288.000)(139.000,290.000)(131.000,292.000)
+\path(199,290)(219,290)
+\path(211.000,288.000)(219.000,290.000)(211.000,292.000)
+\put(39,250){\ellipse{4}{4}}
+\put(119,250){\ellipse{4}{4}}
+\put(199,250){\ellipse{4}{4}}
+\put(279,250){\ellipse{4}{4}}
+\path(39,250)(279,250)
+\path(39,250)(59,250)
+\path(51.000,248.000)(59.000,250.000)(51.000,252.000)
+\path(119,250)(139,250)
+\path(131.000,248.000)(139.000,250.000)(131.000,252.000)
+\path(199,250)(219,250)
+\path(211.000,248.000)(219.000,250.000)(211.000,252.000)
+\put(39,210){\ellipse{4}{4}}
+\put(119,210){\ellipse{4}{4}}
+\put(199,210){\ellipse{4}{4}}
+\put(279,210){\ellipse{4}{4}}
+\path(39,210)(279,210)
+\path(39,210)(59,210)
+\path(51.000,208.000)(59.000,210.000)(51.000,212.000)
+\path(119,210)(139,210)
+\path(131.000,208.000)(139.000,210.000)(131.000,212.000)
+\path(199,210)(219,210)
+\path(211.000,208.000)(219.000,210.000)(211.000,212.000)
+\put(39,170){\ellipse{4}{4}}
+\put(119,170){\ellipse{4}{4}}
+\put(199,170){\ellipse{4}{4}}
+\put(279,170){\ellipse{4}{4}}
+\path(39,170)(279,170)
+\path(39,170)(59,170)
+\path(51.000,168.000)(59.000,170.000)(51.000,172.000)
+\path(119,170)(139,170)
+\path(131.000,168.000)(139.000,170.000)(131.000,172.000)
+\path(199,170)(219,170)
+\path(211.000,168.000)(219.000,170.000)(211.000,172.000)
+\put(39,130){\ellipse{4}{4}}
+\put(119,130){\ellipse{4}{4}}
+\put(199,130){\ellipse{4}{4}}
+\put(279,130){\ellipse{4}{4}}
+\path(39,130)(279,130)
+\path(39,130)(59,130)
+\path(51.000,128.000)(59.000,130.000)(51.000,132.000)
+\path(119,130)(139,130)
+\path(131.000,128.000)(139.000,130.000)(131.000,132.000)
+\path(199,130)(219,130)
+\path(211.000,128.000)(219.000,130.000)(211.000,132.000)
+\put(39,90){\ellipse{4}{4}}
+\put(119,90){\ellipse{4}{4}}
+\put(199,90){\ellipse{4}{4}}
+\put(279,90){\ellipse{4}{4}}
+\path(39,90)(279,90)
+\path(39,90)(59,90)
+\path(51.000,88.000)(59.000,90.000)(51.000,92.000)
+\path(119,90)(139,90)
+\path(131.000,88.000)(139.000,90.000)(131.000,92.000)
+\path(199,90)(219,90)
+\path(211.000,88.000)(219.000,90.000)(211.000,92.000)
+\put(39,50){\ellipse{4}{4}}
+\put(119,50){\ellipse{4}{4}}
+\put(199,50){\ellipse{4}{4}}
+\put(279,50){\ellipse{4}{4}}
+\path(39,50)(279,50)
+\path(39,50)(59,50)
+\path(51.000,48.000)(59.000,50.000)(51.000,52.000)
+\path(119,50)(139,50)
+\path(131.000,48.000)(139.000,50.000)(131.000,52.000)
+\path(199,50)(219,50)
+\path(211.000,48.000)(219.000,50.000)(211.000,52.000)
+\put(39,10){\ellipse{4}{4}}
+\put(119,10){\ellipse{4}{4}}
+\put(199,10){\ellipse{4}{4}}
+\put(279,10){\ellipse{4}{4}}
+\path(39,10)(279,10)
+\path(39,10)(59,10)
+\path(51.000,8.000)(59.000,10.000)(51.000,12.000)
+\path(119,10)(139,10)
+\path(131.000,8.000)(139.000,10.000)(131.000,12.000)
+\path(199,10)(219,10)
+\path(211.000,8.000)(219.000,10.000)(211.000,12.000)
+\path(39,290)(119,250)
+\path(119,290)(39,250)
+\path(39,210)(119,170)
+\path(119,210)(39,170)
+\path(39,130)(119,90)
+\path(119,130)(39,90)
+\path(39,50)(119,10)
+\path(119,50)(39,10)
+\path(119,210)(199,290)
+\path(119,170)(199,250)
+\path(119,250)(199,170)
+\path(119,290)(199,210)
+\path(119,130)(199,50)
+\path(119,90)(199,10)
+\path(119,50)(199,130)
+\path(119,10)(199,90)
+\path(199,10)(279,170)
+\path(199,50)(279,210)
+\path(199,90)(279,250)
+\path(199,130)(279,290)
+\path(199,290)(279,130)
+\path(199,250)(279,90)
+\path(199,210)(279,50)
+\path(199,170)(279,10)
+\put(34,10){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[7]$}}}}}
+\put(34,90){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[5]$}}}}}
+\put(34,210){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[2]$}}}}}
+\put(34,290){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[0]$}}}}}
+\put(119,190){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{0}$}}}}}
+\put(119,110){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{0}$}}}}}
+\put(119,30){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{0}$}}}}}
+\put(119,270){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{0}$}}}}}
+\put(79,80){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $\wn{4}$}}}}}
+\put(79,160){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $\wn{4}$}}}}}
+\put(79,240){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $\wn{4}$}}}}}
+\put(79,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $\wn{4}$}}}}}
+\put(199,160){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{6}$}}}}}
+\put(199,40){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{4}$}}}}}
+\put(199,200){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{4}$}}}}}
+\put(199,80){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{2}$}}}}}
+\put(199,240){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{2}$}}}}}
+\put(199,280){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{0}$}}}}}
+\put(199,120){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{0}$}}}}}
+\put(199,0){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{6}$}}}}}
+\put(279,0){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{7}$}}}}}
+\put(279,40){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{6}$}}}}}
+\put(279,80){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{5}$}}}}}
+\put(279,120){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{4}$}}}}}
+\put(279,160){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{3}$}}}}}
+\put(279,200){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{2}$}}}}}
+\put(279,240){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{1}$}}}}}
+\put(279,280){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\wn{0}$}}}}}
+\put(284,10){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[7]$}}}}}
+\put(284,50){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[6]$}}}}}
+\put(284,90){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[5]$}}}}}
+\put(284,130){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[4]$}}}}}
+\put(284,170){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[3]$}}}}}
+\put(284,210){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[2]$}}}}}
+\put(284,250){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[1]$}}}}}
+\put(284,290){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X[0]$}}}}}
+\put(34,50){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[3]$}}}}}
+\put(34,130){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[1]$}}}}}
+\put(34,170){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[6]$}}}}}
+\put(34,250){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[4]$}}}}}
+\end{picture}

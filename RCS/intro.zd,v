@@ -1,0 +1,619 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	93.06.25.10.32.08;	author dwagon;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	93.03.24.03.54.10;	author dwagon;	state Exp;
+branches;
+next	;
+
+
+desc
+@Introduction to Signal Processing
+@
+
+
+1.2
+log
+@Fixed up the old latex type figures into new EEPIC figures
+Changed two example systems so they did not overlap
+@
+text
+@% $Id: intro.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+% $Header: /ccstaff2/edp/dwagon/signotes/RCS/intro.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{Def}
+\index{signal!definition}
+A signal is a physical quantity, or quality which conveys {\em information}.
+Signals are used to control and utilize energy and information.
+\end{Def}
+
+\begin{Def}
+\index{signal!processing!definition}
+Operations on signals are signal processing. Signal processing is concerned
+with the {\em representation}, {\em transformation} and {\em manipulation} of
+signals and information that they contain.
+\end{Def}
+
+\section{Applications of Signal Processing} %1
+\begin{itemize}
+\item Speech and data communication
+\item biomedical engineering
+\item acoustics
+\item sonar
+\item radar
+\item seismology
+\item oil exploration
+\item instrumentation
+\item robotics
+\item consumer electronics
+\end{itemize}
+
+Further information can be found in 
+\begin{enumerate}
+\item IEEE Transactions on Acoustics, Speech and Signal Processing
+\item IEEE Transactions on Circuits and Systems
+\item IEEE Transactions on Communications
+\item IEEE Transactions on Information Theory
+\item IEEE Transactions on Automatic Control
+\item Automatica
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=eps/Pilot.eps}}
+\caption[PILOT FMCW navigation radar]{PILOT Frequency Modulated Continuous Wave navigation radar --- K. Fuller, IEEE Proceedings}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\begin{tabular}{c}
+\subfigure[No MTI]{\psfig{figure=eps/NoMTI.eps}} \\
+\subfigure[MTI]{\psfig{figure=eps/MTI.eps}} \\
+\end{tabular}
+\end{center}
+\caption[MTI Clutter Reduction]{Reducing clutter with Moving Target Indication (MTI)}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{angle=270,figure=eps/Speech.eps}}
+\caption[Two Channel Speech Coder]{TC-WVQ two channel speech coder --- Rao \& Yip}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\begin{tabular}{cc}
+\subfigure[Original Image]{\psfig{figure=eps/MoonA.eps}} &
+\subfigure[Processed Image]{\psfig{figure=eps/MoonB.eps}} \\
+\end{tabular}
+\end{center}
+\caption[Examples of image processing]{Examples of image processing ---
+Gonzalez \& Wintz}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\begin{tabular}{cc}
+\subfigure[Original Image]{\psfig{figure=eps/RibsA.eps,angle=180}} &
+\subfigure[Processed Image]{\psfig{figure=eps/RibsB.eps,angle=180}} \\
+\end{tabular}
+\end{center}
+\caption[Examples of image processing]{Examples of image processing ---
+Gonzalez \& Wintz}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\begin{tabular}{cc}
+\subfigure[Original Image]{\psfig{figure=eps/GirlA.eps,angle=180}} &
+\subfigure[Processed Image]{\psfig{figure=eps/GirlB.eps,angle=180}} \\
+\end{tabular}
+\end{center}
+\caption[Examples of image processing]{Examples of image processing ---
+Gonzalez \& Wintz}
+\end{figure}
+
+\section{Classification of Signals}			%2
+\subsection{Analog Signals}
+\index{analog signals}\index{signal!analog}
+The signal $f(t)$ is defined for all values of the continuous variable $t$ and
+its amplitude. See Figures~\ref{f1-analog1} and~\ref{f1-analog2} for examples of
+analog signals.
+(continuous-time, continuous)
+
+\begin{figure}[hbtp]
+\begin{center}
+% Place examples of analog signals here
+\begin{tabular}{c}
+\subfigure[Continuous-Time, Non-periodic]{
+% Example 1
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from 1,0 to 11,0
+set arrow from 3,0 to 3,3
+set label "$f(t)$" at 3,3.2
+set label "$0$" at 3,-0.25
+set label "$t$" at 11,-0.25
+set size 1,0.8
+set nokey
+set xrange[1:10]
+set yrange[-0.3:3.2]
+plot exp(sin(x+cos(x*2)-sin(x/2)))
+%#
+}
+\\
+\subfigure[Continuous-Time, Periodic]{
+% Example 2
+%# gnuplot
+set terminal eepic
+set nozeroaxis
+set arrow from -15,0 to 15,0
+set arrow from 0,-1.3 to 0,1.3
+set label "$0$" at 0.25,-0.25
+set label "$t$" at 15,-0.25
+set label "$f(t)$" at -0.75,1.32
+set noborder
+set noxtics
+set noytics
+set nokey
+set size 1,0.8
+set yrange [-1.35:1.35]
+set xrange [-14:14]
+plot sin(x)
+%#
+}
+\\
+\end{tabular}
+\end{center}
+\caption{Examples of analog signals\label{f1-analog1}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+% Place examples of analog signals here
+\begin{tabular}{c}
+\subfigure{
+% Example 3
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set size 1,0.8
+set samples 400
+set arrow from 0,0 to 11,0
+set arrow from 0,0 to 0,2.5
+set label "$0$" at 0,-0.25
+set label "$f(t)$" at -0.25,2.5
+set label "$t$" at 11,-0.25
+set xrange [0:10]
+set yrange [-0.3:2.5]
+plot 2*(int(x)%2)
+%#
+}
+\\
+\subfigure{
+% Example 4
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set size 1,0.9
+set arrow from 0,0 to 85,0
+set arrow from 0,0 to 0,0.6
+set label "$0$" at 0,-0.05
+set label "$t$" at 85,-0.05
+set label "$f(t)$" at 0,0.62
+set yrange [0:0.55]
+set xrange [0:80]
+plot exp(log10(x))-sqrt(x/2.1)-0.4
+%#
+}
+\\
+\end{tabular}
+\end{center}
+\caption{Examples of analog signals\label{f1-analog2}}
+\end{figure}
+
+\subsection{Discrete-time signals}
+\index{discrete-time signals}\index{signal!discrete-time}
+The signal $f(t)$ is defined for all values of its amplitude but only
+discrete values of $t_i$ where $i$ is an integer. See Figure~\ref{f1-discrete}
+for an example.
+Special Case:
+$t_i=iT$, where $T$ is a constant.
+(Analog sampled-data)
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from 1,0 to 11,0
+set arrow from 3,0 to 3,1.1
+set label "$0$" at 3,-0.1
+set label "$T$" at 3.4,-0.1
+set label "$-T$" at 2.5,-0.1
+set label "$f(nT)$" at 3,1.2
+set label "$t=nT$" at 11,-0.1
+set samples 20
+set xrange [1:10]
+plot 2*rand(x)-1 with impulses
+%#
+\end{center}
+\caption{Example of a discrete-time signal\label{f1-discrete}}
+\end{figure}
+
+\subsection{Digital Signals}
+\index{digital signals}\index{signal!digital}
+If the discrete-time signal $f(iT)$ amplitudes assume only discrete values
+which are integral multiples of the same quantity $q$, the resulting signal
+is a digital signal.
+This introduces an error called {\em quantization error\index{quantization
+error}\index{error!quantization}}. See Figure~\ref{f1-quant} for an example of
+quantization error.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Analog input signal]{
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nokey
+set size 1,0.8
+set samples 250
+plot sin(x/4)*8
+%#
+}
+
+\subfigure[Digitized output signal]{
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nokey
+set size 1,0.8
+set samples 250
+plot floor(sin(x/4)*8) with points 1
+%#
+}
+
+\subfigure[Error introduced by quantization]{
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nokey
+set size 1,0.8
+set samples 250
+set noxzeroaxis
+plot (sin(x/4)*8)-floor(sin(x/4)*8) with points 3
+%#
+}
+\end{center}
+\caption{Error introduced by quantization\label{f1-quant}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Continuous time speech signal]{
+\psfig{figure=eps/Sample1.eps} }
+\subfigure[Sampled time speech signal]{
+\psfig{figure=eps/Sample2.eps} }
+\end{center}
+\caption[Speech digitization]{Speech digitization --- Oppenheim \& Schaffer}
+\end{figure}
+
+\subsection{Deterministic and Random Signals}
+\index{deterministic signals}\index{signal!deterministic}
+\index{random signals}\index{signal!random}
+Deterministic signals can be described by a functional relationship or an
+arbitrary graph or in tabular form.
+
+Random signals can only be described by statistical methods.
+
+\subsection{Electrical vs Non-electrical signals}
+
+\section{Signal Processing Systems}			%3
+
+Systems which manipulate the required signals for the purpose of 
+\begin{itemize}
+\item analysis
+\item transmission
+\item detection
+\item enhancement
+\item control
+\item compression
+\item identification and pattern recognition
+\item suppresion of noise
+\end{itemize}
+\subsection{Analog systems}
+\index{analog system}\index{system!analog}
+An analog system is a device, or collection of well defined building blocks.
+It accepts analog excitation signal $f(t)$ and produces analog response
+signal $g(t)$, as shown in Figure~\ref{f1-anasys}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(20.00,50.00){\vector(1,0){50.00}}
+\put(220.00,50.00){\vector(1,0){50.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{Analog System}}
+\put(0.00,50.00){\makebox(0,0)[cc]{$f(t)$}}
+\put(280.00,50.00){\makebox(0,0)[cc]{$g(t)$}}
+\end{picture}
+\end{center}
+\caption{Analog System\label{f1-anasys}}
+\end{figure}
+
+\begin{Exa}
+See Figure~\ref{f1-eganasys} for examples of analog systems.
+\begin{figure}[hbtp]
+\begin{tabular}{c}
+\subfigure[Simple $RC$ analog system]{\input{pix/intro/1.3.1-1a.eepic}} \\
+
+\subfigure[Complex analog system]{\input{pix/intro/1.3.1-1b.eepic}} \\
+\end{tabular}
+\caption{Examples of analog systems\label{f1-eganasys}}
+\end{figure}
+
+\end{Exa}
+
+Other analog systems can be simulated by means of an electrical network.
+
+\begin{Exa}
+What can you say about this system
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(20.00,50.00){\vector(1,0){50.00}}
+\put(220.00,50.00){\vector(1,0){50.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{Analog System}}
+\put(0.00,50.00){\makebox(0,0)[rc]{$a_if_i(t)$}}
+\put(280.00,50.00){\makebox(0,0)[lc]{$b_ig_i(t)$}}
+\end{picture}
+\end{center}
+if
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(20.00,50.00){\vector(1,0){50.00}}
+\put(220.00,50.00){\vector(1,0){50.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{System}}
+\put(0.00,50.00){\makebox(0,0)[rc]{$\sum a_if_i(t-\tau)$}}
+\put(280.00,50.00){\makebox(0,0)[lc]{$\sum b_ig_i(t-\tau)$}}
+\end{picture}
+\end{center}
+and
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(20.00,50.00){\vector(1,0){50.00}}
+\put(220.00,50.00){\vector(1,0){50.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{System}}
+\put(0.00,50.00){\makebox(0,0)[rc]{$f_i(t)=0$}}
+\put(280.00,50.00){\makebox(0,0)[lc]{$g_i(t)=0$}}
+\end{picture}
+\end{center}
+for $t<\tau$ ($\tau$ may be zero).
+
+The system is Linear, time-invariant and causal.
+\end{Exa}
+
+The linear systems that are considerd can be modelled by conventional clumped
+networks and their input and output relations can be represented or described
+by an ordinary linear differential equation with constant coefficients.
+\begin{equation}
+\sum_{i=0}^{n} a_i \frac{D^i}{dt}g(t) = \sum_{j=0}^{m} b_j
+\frac{d^j}{dt}f(t) 
+\end{equation}
+where
+\begin{equation}
+\frac{d^0}{dt}f(t)=f(t) 
+\end{equation}
+
+Basic equaiton and the building blocks for signal processing:
+\begin{description}
+\item[Multiplier:]
+\begin{equation}
+g(t)=K f(t) 
+\end{equation}
+See Figure~\ref{f1-multbb} for circuit.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/intro/1.3.2a.eepic}
+\end{center}
+\caption{Multiplier building block\label{f1-multbb}}
+\end{figure}
+
+\item[Differentiator:]
+\begin{equation}
+g(t)=\alpha \frac{d(f)}{dt} 
+\end{equation}
+See Figure~\ref{f1-diffbb} for circuit.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/intro/1.3.2b.eepic}
+\end{center}
+\caption{Differentiator building block\label{f1-diffbb}}
+\end{figure}
+
+\item[Integrator:]
+\begin{equation}
+g(t)=\alpha\int_{-\infty}^{t} f(\tau)d\tau 
+\end{equation}
+See Figure~\ref{f1-intgbb} for circuit.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/intro/1.3.2c.eepic}
+\end{center}
+\caption{Integrator building block\label{f1-intgbb}}
+\end{figure}
+
+\item[Adder:]
+\begin{equation}
+g(t)=\sum_{i=1}^{n}f_i(t) 
+\end{equation}
+See Figure~\ref{f1-addrbb} for circuit.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/intro/1.3.2d.eepic}
+\end{center}
+\caption{Adder building block\label{f1-addrbb}}
+\end{figure}
+
+\end{description}
+\subsection{Discrete and digital systems}
+\index{discrete systems}\index{system!discrete}
+\index{digital systems}\index{system!digital}
+A discrete (or digital) system accepts a discrete (or digital) input $f(nT)$
+and produces a discrete (or digital) response $g(nT)$.
+
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(20.00,50.00){\vector(1,0){50.00}}
+\put(220.00,50.00){\vector(1,0){50.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{Discrete or Digital System}}
+\put(0.00,50.00){\makebox(0,0)[rc]{$f(nT)$}}
+\put(280.00,50.00){\makebox(0,0)[lc]{$g(nT)$}}
+\end{picture}
+\end{center}
+
+\begin{Exa}
+\begin{enumerate}
+\item Discrete-time: switched-capacitor network
+\item DSP based system
+\item Given 
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(20.00,50.00){\vector(1,0){50.00}}
+\put(220.00,50.00){\vector(1,0){50.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{Digital System}}
+\put(0.00,50.00){\makebox(0,0)[rc]{$a_if_i(nT)$}}
+\put(280.00,50.00){\makebox(0,0)[lc]{$b_ig_i(nT)$}}
+\end{picture}
+\end{center}
+what can you say about the system if
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(20.00,50.00){\vector(1,0){50.00}}
+\put(220.00,50.00){\vector(1,0){50.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{Digital System}}
+\put(0.00,50.00){\makebox(0,0)[rc]{$\sum_i a_if_i(nT-rT)$}}
+\put(280.00,50.00){\makebox(0,0)[lc]{$\sum_i b_ig_i(nT-rT)$}}
+\end{picture}
+\end{center}
+\end{enumerate}
+\end{Exa}
+
+\section{History of Signal Processing}		%4
+
+{\raggedright Assignment:\\}
+\begin{enumerate}
+\item Read Chapter 1 of ``Discrete-Time Signal Processing'' by Oppenheim and
+Schafer
+\item Read ``The Acoustics, Speech, and Signal Processing Society --- A
+Historical Perspective'' by L. R. Rabiner, in IEEE ASSP Mag, Jan 1984
+\end{enumerate}
+
+Analog vs. Discrete (or Digital)
+
+Digital signal processing has many advanteages over analog counterparts in
+terms of 
+\begin{itemize}
+\item reliability
+\item reproducibility
+\item high precision
+\item freedom from ageing and temperature effects
+\end{itemize}
+
+However analog signal processing will accompany digital signal processing for
+years to come.
+\begin{enumerate}
+\item A typical digital signal processing system
+\item Neural network
+\end{enumerate}
+
+This subject will reinforce our knowledge of analog and digital signal
+processing by going through fundamental concepts and theories and basic
+design methods.
+
+(How and Why)
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+% $Id$
+% $Header$
+d46 1
+a46 1
+\caption[PILOT FMCW navigation radar]{PILOT Frequency Modulated Continuous Wave navigation radar --- K. Fuller, IEE Proceedings}
+d109 1
+a109 1
+\subfigure{
+d122 1
+d125 1
+d130 1
+a130 1
+\subfigure{
+d136 1
+a136 1
+set arrow from 0,-1.5 to 0,1.5
+d139 1
+a139 1
+set label "$f(t)$" at -0.75,1.5
+d144 2
+d169 1
+d177 1
+d191 1
+d230 1
+a230 1
+set label "$-T$" at 2.6,0.1
+d352 1
+a352 1
+\subfigure[Simple $RC$ analog system]{\input{pix/intro/1.3.1-1a.latex}} \\
+d354 1
+a354 1
+\subfigure[Complex analog system]{\input{pix/intro/1.3.1-1b.latex}} \\
+@

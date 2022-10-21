@@ -1,0 +1,23 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(264,191)(0,-10)
+\put(135,80){\ellipse{120}{120}}
+\put(165,120){\ellipse{10}{10}}
+\put(165,40){\ellipse{10}{10}}
+\put(75,80){\blacken\ellipse{10}{10}}
+\put(75,80){\ellipse{10}{10}}
+\put(195,80){\blacken\ellipse{10}{10}}
+\put(195,80){\ellipse{10}{10}}
+\put(195,20){\ellipse{10}{10}}
+\put(195,140){\ellipse{10}{10}}
+\put(65,140){\ellipse{10}{10}}
+\put(65,20){\ellipse{10}{10}}
+\path(35,80)(235,80)
+\path(227.000,78.000)(235.000,80.000)(227.000,82.000)
+\path(135,0)(135,160)
+\path(137.000,152.000)(135.000,160.000)(133.000,152.000)
+\path(25,155)(80,110)
+\path(72.542,113.518)(80.000,110.000)(75.075,116.614)
+\put(235,85){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Re$}}}}}
+\put(135,165){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Im$}}}}}
+\put(55,160){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}Unit Circle}}}}}
+\end{picture}

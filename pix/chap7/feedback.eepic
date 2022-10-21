@@ -1,0 +1,33 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(262,133)(0,-10)
+\path(30,100)(230,100)
+\path(70,100)(130,60)(130,100)
+\path(130,60)(130,20)(190,100)
+\path(45,100)(50,100)
+\path(42.000,98.000)(50.000,100.000)(42.000,102.000)
+\path(100,100)(105,100)
+\path(97.000,98.000)(105.000,100.000)(97.000,102.000)
+\path(155,100)(160,100)
+\path(152.000,98.000)(160.000,100.000)(152.000,102.000)
+\path(200,100)(210,100)
+\path(202.000,98.000)(210.000,100.000)(202.000,102.000)
+\path(130,90)(130,80)
+\path(128.000,88.000)(130.000,80.000)(132.000,88.000)
+\path(130,50)(130,40)
+\path(128.000,48.000)(130.000,40.000)(132.000,48.000)
+\path(130,60)(100,80)
+\path(107.766,77.226)(100.000,80.000)(105.547,73.898)
+\path(130,20)(160,60)
+\path(156.800,52.400)(160.000,60.000)(153.600,54.800)
+\put(230,105){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $g[n]$}}}}}
+\put(30,105){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $f[n]$}}}}}
+\put(70,105){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $w_1[n]$}}}}}
+\put(130,105){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $w_2[n]$}}}}}
+\put(190,105){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $w_3[n]$}}}}}
+\put(125,45){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $w_4[n]$}}}}}
+\put(130,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $w_5[n]$}}}}}
+\put(165,50){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $-a^2$}}}}}
+\put(135,75){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $z^{-1}$}}}}}
+\put(135,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $z^{-1}$}}}}}
+\put(95,65){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $a$}}}}}
+\end{picture}

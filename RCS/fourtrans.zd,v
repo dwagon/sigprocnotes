@@ -1,0 +1,1983 @@
+head	1.2;
+access;
+symbols;
+locks
+	dwagon:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	93.06.09.01.50.35;	author dwagon;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	93.03.24.03.54.10;	author dwagon;	state Exp;
+branches;
+next	;
+
+
+desc
+@The Fourier Transformation and Generalized Signals
+@
+
+
+1.2
+log
+@Fixed problems with newlines in some equations
+@
+text
+@% $Id: fourtrans.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/fourtrans.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[Fourier Transforms and Generalized Signals]{The Fourier Transformation and Generalized Signals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this chapter, the Fourier transforms will be discussed with respect to the
+Fourier series coefficients for the periodic functions. Basic properties of
+the Fourier transform wil be presented. The Unit Impulse function and its
+properties will also be examined.
+
+\section{Fourier Transform and its Properties}	%1
+
+So far, we have only dealt with periodic functions of time, eg. $f(t)$, and
+their frequency domain representation using the Fourier series. It is
+important to notice that the frequency spectrum of a periodic function is
+discrete ($C_k$).
+
+However, many functions that exit in the real applications are non-periodic.
+The Fourier integral is introduced to find the frequency domain representation
+for non-periodic functions. The evolution from the Fourier series to the
+Fourier integral can be found in Chapter~3 of Baher's book, or other
+references.
+
+\begin{Def}
+Given a function $f(t)$, provided that $f(t)$ has only a finite number of
+maxima and minima as well as a finite number of discontinuities over
+$(-\infty,\infty)$, in addition $f(t)$ is bounded, or 
+\begin{equation}
+\int_{-\infty}^{\infty}|f(t)| dt \qquad\mbox{is finite} 
+\end{equation}
+the fourier transform (FT) of $f(t)$ is given by
+
+\begin{equation}
+F(\omega)=\int_{-\infty}^{\infty}f(t)e^{-j\omega t}dt
+\end{equation}
+and the inverse Fourier transform of $F(\omega)$ is defined by 
+\begin{equation}
+f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}F(\omega)e^{j\omega t}d\omega
+\end{equation}
+\end{Def}
+
+$f(t)$ and $F(\omega)$ constitute a Fourier transform pain and may be
+expressed by
+\begin{equation}
+f(t) \fpair F(\omega) 
+\end{equation}
+
+By convention, the following notations are used:
+\begin{align}
+F(\omega) &=\F[f(t)] \\
+f(t) &=\F^{-1}[F(\omega)] \\
+\intertext{In general, the Fourier Transform $F(\omega)$ of a function $f(t)$ is a complex function of $\omega$.}
+F(\omega) &=|F(\omega)|e^{j\phi(\omega)} \\
+ &=R(\omega)+jx(\omega) 
+\end{align}
+
+where $\omega$ is a continuous variable and $|F(\omega)|$ plotted against
+$\omega$ is the continuous amplitude spectrum of $f(t)$ and $\phi(\omega)$
+plotted against $\omega$ presents the continuous phase spectrum.
+
+{\raggedright Note:\\}
+\begin{tabular}{r@@{:}c@@{$\rightarrow$}l}
+function & periodic & nonperiodic \\
+spectrum & discrete & continuous \\
+Fourier & series & integral (transform) \\
+\end{tabular}
+
+\begin{Exa}
+Given a function
+\begin{equation}
+f(t)=\begin{cases}
+	e^{-bt} & t\geqslant 0 \\
+	0 & t<0 \\
+	\end{cases}
+\end{equation}
+
+where $b>0$, find its Fourier Transform.
+
+\begin{align}
+\intertext{Solution:}
+F(\omega) &=\int_{-\infty}^{\infty}f(t)e^{-j\omega t} dt \\
+&= \int_{-\infty}^{0}0 e^{-j\omega t}dt+\int_0^{\infty}e^{-bt}e^{-j\omega t}
+dt \\
+&= \int_{0}^{\infty} e^{-(b_j\omega) t} dt \\
+&= -\left.\frac{1}{b+j\omega} e^{-(b+j\omega)t}\right|_0^{\infty} \\
+&= \frac{1}{b+j\omega}
+\end{align}
+
+\begin{center}
+\parbox[c]{2in}{\psfig{height=2in,figure=eps/fpair1.eps}}
+$\fpair$ 
+\parbox[c]{2in}{\psfig{height=2in,figure=eps/fpair2.eps}}
+\end{center}
+\end{Exa}
+
+The F.T. possesses linearity: if
+\begin{align}
+f_1(t) &\fpair F_1(\omega) \\
+\intertext{and}
+f_2(t) &\fpair F_2(\omega) \\
+\intertext{then}
+a_1f_1(t)+a_2f_2(t) &\fpair a_1F_1(\omega)+a_2F_2(\omega)
+\end{align}
+where $a_i (i=1,2)$ are arbitrary constants.
+
+\subsection{Fourier Transform of Real Functions}
+The definition of the Fourier Transform can be further simplified if $f(t)$ is a real
+function or real even or real odd function.
+
+As mentioned previously that the Fourier Transform of a function is generally complex, it
+can be expressed as
+
+\begin{align}
+F(\omega) &=|F(\omega)|e^{j\phi(\omega)} \\
+\intertext{or}
+F(\omega) &=R(\omega)+jx(\omega) \\
+\intertext{where $R(\omega)$ and $x(\omega)$ are the real part and imaginary part of the $F(\omega)$}
+|F(\omega)| &=\sqrt{R^2(\omega)+x^2(\omega)} \\
+\phi(\omega) &=\tan^{-1}\frac{x(\omega)}{R(\omega)} \\
+\intertext{If $f(t)$ is real,}
+F(\omega) &=\int_{-\infty}^{\infty}f(t)\left(\cos \omega t -j\sin \omega t\right) dt \\
+ &= \int_{-\infty}^{\infty}f(t)\cos \omega t dt -j\int_{-\infty}^{\infty} f(t)\sin \omega t dt \\
+ &= R(\omega)+jx(\omega) \\
+\intertext{where}
+R(\omega) &=\int_{-\infty}^{\infty}f(t)\cos \omega t dt \\
+x(\omega) &=\int_{-\infty}^{\infty}f(t)\sin \omega t dt 
+\end{align}
+
+Furthermore, $R(\omega)$ is even and $x(\omega)$ is odd.
+Therefore
+\begin{equation}
+F^{\ast}=F(-\omega) 
+\end{equation}
+where $\ast$ (the asterisk) denotes the complex conjugate.
+
+And $|F(\omega)|$ is an even function of $\omega$ and $\phi(\omega)$ is an odd
+function of $\omega$.
+
+If the function $f(t)$ is real and even, i.e. 
+
+\begin{align}
+f(-t) &=f(t) \\
+\intertext{then}
+F(\omega) &=R(\omega)=\int_{-\infty}^{\infty} f(t)\cos \omega t dt \\
+&= 2\int_0^{\infty} f(t)\cos \omega t dt \\
+\intertext{(Because $x(\omega)=-\int_{-\infty}^{\infty} \underbrace{f(t)\sin \omega t}_{\mbox{odd}} dt=0$.)}
+\intertext{If the function $f(t)$ is odd, ie.}
+f(-t) &=-f(t) \\
+\intertext{then}
+F(\omega) &=jx(\omega)=-j\int_{-\infty}^{\infty} \sin \omega t dt \\
+&= -2j \int_0^\infty \sin \omega t dt 
+\end{align}
+
+(Because $R(\omega)=\int_{-\infty}^{\infty}\underbrace{f(t)\cos \omega
+t}_{\mbox{odd}} dt =0$.)
+
+\begin{Exa}
+Find the fourier transform of the function $f=\frac{1}{t}$.
+
+\begin{center}
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.8,0.8
+set nozeroaxis
+set xrange [-1:1]
+set yrange [-100:100]
+set arrow from -1.1,0 to 1.1,0
+set arrow from 0,-105 to 0,105
+set label "$t$" at 1.1,10
+set label "$f(t)$" at 0,110
+plot 1/x
+%#
+\end{center}
+
+{\raggedright Solution:\\}
+\begin{enumerate}
+\item \begin{equation}
+f(-t)=-\frac{1}{t}=-f(t) 
+\end{equation}
+The function is odd.
+\item 
+
+\begin{align}
+F(\omega) &=-2j\int_{0}^{\infty} \frac{\sin \omega t}{t} dt \\
+          &= -2j\omega \int_0^{\infty} \frac{\sin \omega t}{\omega t} dt \\
+          &= -2j \int_{0}^{\infty} \frac{\sin \omega t}{\omega t} d(\omega t) \\
+\intertext{Now $\psi\triangleq\omega t$}
+\int_0^{\infty} \frac{\sin \omega t}{\omega t} d \omega t &=\int_{0}^{\infty}\\
+&=\frac{\sin \psi}{\psi} d\psi \\
+\intertext{is called the sine integral and}
+\int_{0}^{\infty} \frac{\sin \psi}{\psi} d\psi &=\begin{cases}
+	\frac{\pi}{2} & \omega >0 \\
+	-\frac{\pi}{2} & \omega <0 \\
+	0 & \omega =0 
+	\end{cases} \\
+F(\omega) &=-2j\frac{\pi}{2} \sgn (\omega) \\
+          &=-j\pi \sgn(\omega) \\
+\intertext{where}
+\sgn(\omega)&=\begin{cases}
+	1 & \omega>0 \\
+	-1 & \omega<0  \\
+	\end{cases}
+\end{align}
+
+\item Thus
+\begin{equation}
+\frac{1}{t}\fpair -j\pi \sgn(\omega) 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+Generally, for a real function $f(t)$
+\begin{align}
+F(\omega) &=\F[f(t)] \\
+\F[f(-t)] &= \int_{-\infty}^{\infty} f(-t)e^{-j\omega t} dt \\
+t' &\triangleq -t \\
+& \left( \begin{array}{r@@{\rightarrow}lr@@{\rightarrow}l}
+	t & -\infty & t' & +\infty \\
+	t & +\infty & t' & -\infty \\
+	\end{array} \right. \\
+\F[f(-t)] &= F[f(t')] \\
+&= \int_{\infty}^{\infty} f(t')e^{j\omega t'} d(-t') \\
+&= -\int_{-\infty}^{\infty} f(t') e^{j\omega t'} dt' \\
+&= \int_{-\infty}^{\infty} f(t')e^{-j\omega t'} dt' \\
+&= F(\omega ') \\
+&= F(-\omega) 
+\end{align}
+As 
+\begin{align}
+F(-\omega) &= R(-\omega)+jx(-\omega) \\
+ &= R(\omega)-jx(\omega)
+\end{align}
+(If $f(t)$ is real, $R(\omega)$ even, $x(\omega)$ odd.)
+it follows that
+\begin{align}
+f(t) &\fpair R(\omega)+jx(\omega) \\
+f(-t) &\fpair R(\omega)-jx(\omega) 
+\end{align}
+
+For a given real function $f(t)$
+\begin{equation}
+f(t)=\underbrace{\mbox{even part}}_{\frac{1}{2}[f(t)+f(-t)]}+\underbrace{ \mbox{odd part}}_{\frac{1}{2}[f(t)-f(t)]} 
+\end{equation}
+Using linearity of F.T.
+\begin{align}
+\frac{1}{2}[f(t)+f(-t)] &\fpair \frac{1}{2}\left\{[R(\omega)+jx(\omega)]+[R(\omega)-jx(\omega)]\right\} \\
+&= \frac{1}{2}\{2R(\omega)\} \\
+&= R(\omega) \\
+\frac{1}{2}[f(t)-f(-t)] &\fpair \frac{1}{2}\left\{[R(\omega)+jx(\omega)]-[R(\omega)-jx(\omega)]\right\} \\
+&= j\frac{1}{2}\{2x(\omega)\} \\
+&= jx(\omega) 
+\end{align}
+It is concluded that:
+
+The even part of a real function is transformed into the real part of the F.T.
+and the odd part of the function in transformed into the imaginary part of the
+F.T. See Figure~\ref{f3-evod} for an example.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Real Function $f(t)$]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.8,0.8
+set nozeroaxis
+set xrange [-4.6:4.6]
+set arrow from -5,0 to 5,0
+set label "$t$" at 5,0.1
+set arrow from 0,-15 to 0,150
+set label "$f(t)$" at 0,160
+f(x)=exp(-x)
+plot f(x)
+%#
+}
+\subfigure[Even part of $f(t)$]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.8,0.8
+set nozeroaxis
+set xrange [-4.6:4.6]
+set arrow from -5,0 to 5,0
+set arrow from 0,-10 to 0,55
+set label "$t$" at 5,0.1
+set label "$\Ev f(t)$" at 0,60
+f(x)=exp(-x)
+plot 0.5*(f(x)+f(-x))
+%#
+}
+\subfigure[Odd part of $f(t)$]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.8,0.8
+set nozeroaxis
+set xrange [-4.6:4.6]
+set arrow from -5,0 to 5,0
+set arrow from 0,-80 to 0,80
+set label "$t$" at 5,0.1
+set label "$\Od f(t)$" at 0,90
+f(x)=exp(-x)
+plot 0.5*(f(x)-f(-x))
+%#
+}
+\end{center}
+\caption{Even and Odd parts of a real function\label{f3-evod}}
+\end{figure}
+
+\subsection{Fourier Transform of Causal Signals}
+For a real causal function
+\begin{equation}
+f(-t)=0 \qquad t>0 
+\end{equation}
+it can be expressed as
+\begin{equation}
+\begin{array}{cc@@{+}c}
+f(t)=&\frac{1}{2}[f(t)+f(-t)]           & \frac{1}{2}[f(t)-f(-t)] \\
+     & \multicolumn{1}{c}{\Updownarrow}  & \multicolumn{1}{c}{\Updownarrow} \\
+     & \frac{1}{2}f(t)                   & \frac{1}{2}f(t) \\
+\end{array}
+\end{equation}
+or
+\begin{align}
+	f(t) &= 2 \times \mbox{even part of $f(t)$}\\
+	     &= 2 \times \mbox{odd part of $f(t)$}
+\end{align}
+Using linearity of the F.T.
+\begin{align}
+f(t) &\fpair 2R(\omega) \zdtag \\
+f(t) &\fpair 2jx(\omega) 
+\label{eq3-lin}
+\end{align}
+
+provided that $f(t)$ is casual and real. Equation~\ref{eq3-lin} states that a
+real causal function is uniquely determined by either the real or imaginary
+part of the Fourier Transform.
+
+The relation between $R(\omega)$ and $x(\omega)$ of the $F(\omega)$ of a
+real causal function $f(t)$ is stated by the Hilbert Transform\index{Hilbert
+Transform}.
+
+\section{Basic Properties of the Fourier Transform}	%2
+
+\begin{center}
+\input{pix/fourtrans/repr.eepic}
+\end{center}
+
+\begin{itemize}
+\item Representation
+\item Understanding
+\item Operation and Manipulation
+\end{itemize}
+
+\subsection{Symmetry}
+if
+\begin{align}
+f(t) &\fpair F(\omega) \zdtag \\
+F(\pm t) &\fpair f(\mp \omega) \zdtag \\
+\intertext{Proof:}
+F(\omega) &=\int_{-\infty}^{\infty}f(t)e^{-j\omega t} dt \label{eq3-sym1}\\
+f(t) &=\frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega)e^{j\omega t}d\omega \label{eq3-sym2}\\
+\intertext{In Equation~\ref{eq3-sym2} $t\rightarrow -\omega$, $\omega\rightarrow t$ and multiply by $2\pi$}
+2\pi f(-\omega) &= \int_{-\infty}^{\infty}F(t)e^{-j\omega t}dt \\
+&= \F[F(t)] 
+\end{align}
+
+\begin{Exa}
+
+Given
+
+\begin{center}
+\parbox[c]{2.5in}{
+\begin{equation*}
+f(t) = \begin{cases}
+	1 & |t|<\frac{a}{2} \\
+	0 & \mbox{otherwise}
+	\end{cases}
+\end{equation*}
+}
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.8,0.8
+set nozeroaxis
+set xrange [-10:10]
+set yrange [0:1.5]
+set arrow from -11,0 to 11,0
+set samples 200
+set arrow from 0,-0.2 to 0,1.5
+set label "$t$" at 11,0.1
+set label "$f(t)$" at 0,1.6
+set label "$-\frac{a}{2}$" at -4,-0.1
+set label "$\frac{a}{2}$" at 4,-0.1
+plot abs(x)<4?1:0
+%#
+}
+\end{center}
+
+The Fourier Transform of $f(t)$ is
+\begin{align}
+F(\omega) &= \int_{-\infty}^{\infty}f(t)e^{-j\omega t} dt \\
+&= \int_{-a/2}^{a/2}1 e^{-j\omega t} dt \\
+&= -\frac{1}{j\omega} \left. e^{-j\omega t}\right|_{-a/2}^{a/2} \\
+&= -\frac{1}{j\omega}\left\{ e^{-j\omega \frac{a}{2}}-e^{j\omega
+\frac{a}{2}}\right\} \\
+&= -\frac{1}{j\omega}\left\{\cos \frac{\omega a}{2} -j\sin \frac{\omega a}{2}
+-\cos\frac{\omega a}{2} -j\sin \frac{\omega a}{2} \right\} \\
+&= \frac{2}{\omega} \sin \frac{\omega a}{2} \\
+&= a\frac{\sin \frac{\omega a}{2}}{\frac{\omega a}{2}} \\
+\intertext{That is}
+f(t) &\fpair a\frac{\sin \frac{\omega a}{2}}{\frac{\omega a}{2}}
+\end{align}
+
+\begin{center}
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 1,0.8
+set nozeroaxis
+set xrange [-20:20]
+set yrange [-0.5:1.5]
+set arrow from -21,0 to 21,0
+set arrow from 0,-0.2 to 0,1.5
+set label "$t$" at 21,0.1
+set label "$f(t)$" at 0,1.6
+set label "$a$" at 0.1,1.1
+set label "$-\frac{2\pi}{a}$" at -8,-0.1
+set label "$\frac{2\pi}{a}$" at 8,-0.1
+plot sin(x/2)/(x/2)
+%#
+\end{center}
+
+Using the symmetry property
+\begin{align}
+a\frac{\sin\frac{t a}{2}}{\frac{t a}{2}} &\fpair 2\pi f(-\omega) \\
+\intertext{or}
+\frac{\sin\frac{a t}{2}}{\pi t} &\fpair f(-\omega) \\
+f(-\omega) &=\begin{cases}
+	1 & |\omega|<\frac{a}{2} \\
+	0 & \mbox{otherwise}
+	\end{cases} 
+\end{align}
+
+\begin{center}
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.6,0.8
+set nozeroaxis
+set samples 100
+set xrange [-20:20]
+set yrange [-0.5:1.5]
+set arrow from -21,0 to 21,0
+set arrow from 0,-0.2 to 0,1.5
+set label "$t$" at 21,0.1
+set label "$F(t)$" at 0,1.6
+set label "$\frac{a}{\pi 2}$" at 0.1,1.1
+set label "$-\frac{2\pi}{a}$" at -8,-0.1
+set label "$\frac{2\pi}{a}$" at 8,-0.1
+plot sin(x/2)/(x/2)
+%#
+}
+$\fpair$ 
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.6,0.8
+set samples 100
+set nozeroaxis
+set xrange [-10:10]
+set yrange [0:1.5]
+set arrow from -11,0 to 11,0
+set arrow from 0,-0.2 to 0,1.5
+set label "$\omega$" at 11,0.1
+set label "$f(\omega)$" at 0,1.6
+set label "$-\frac{a}{2}$" at -4,-0.1
+set label "$\frac{a}{2}$" at 4,-0.1
+plot abs(x)<4?1:0
+%#
+}
+\end{center}
+\end{Exa}
+
+\subsection{Conjugate}
+If $f(t)$ is a complex function and $\F[f(t)]=F(\omega)$,
+\begin{align}
+\F[f^{\ast}(f)] &=\int_{-\infty}^{\infty} f^{\ast}(t)e^{-j\omega t} dt \\
+ &= \left\{ \int_{-\infty}^{\infty} f(t)[e^{-j\omega t}]^{\ast} dt
+ \right\}^{\ast} \\
+ &= \left\{ \int_{-\infty}^{\infty} f(t)e^{j\omega t}] dt\right\}^{\ast} \\
+ &= \left\{ \int_{-\infty}^{\infty} f(t)e^{-j\omega t'}] dt\right\}^{\ast} \\
+ &= F^{\ast}(\omega ') \\
+ &= F^{\ast}(-\omega) \\
+ \intertext{That is $f^{\ast}\fpair F^{\ast}(\omega)$}
+ \intertext{However, if $f(t)$ is real}
+ f^{\ast}(t) &= f(t) \\
+ \intertext{it follows that}
+ f(t) &\fpair F^{\ast}(-\omega) \\
+ \intertext{and}
+ F(\omega) &= F^{\ast}(-\omega) 
+ \end{align}
+
+\subsection{Linearity}
+If
+\begin{align}
+a_iF_i(t) &\fpair a_iF_i(\omega) \\
+\sum_i a_i f_i(t) &\fpair \sum_i a_i F_i(\omega) 
+\end{align}
+where $a_i$ are arbitrary constants.
+
+\subsection{Scaling}
+
+If $\alpha$ is a real constant,
+\begin{equation}
+f(\alpha t) \fpair \frac{1}{|\alpha|}F\frac{\omega}{\alpha} 
+\end{equation}
+The scaling property states that the compression of the time scale corresponds
+to the expansion of te frequency scale. The magnitude is contracted while the
+horizontal expands. As shown in Figure~\ref{f3-scale}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[$\alpha=0.5$]{
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+#set noytics
+set samples 200
+set size 0.6,0.8
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -11,0 to 11,0
+set arrow from 0,-0.05 to 0,1.05
+set label "$t$" at 11,0
+set label "$f(\alpha t)$" at 0,1.1
+a=0.5
+f(x)=sin(x)/(x)
+F(x)=abs(x)<1?1:0
+g(x)=f(a*x)
+G(x)=1/abs(a)*F(x/a)
+plot g(x)
+%#
+}
+$\fpair$
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+#set noytics
+set samples 200
+set size 0.6,0.8
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -11,0 to 11,0
+set arrow from 0,-0.05 to 0,5.15
+set label "$t$" at 11,0
+set label "$f(\alpha t)$" at 0,5.2
+a=0.2
+f(x)=sin(x)/(x)
+F(x)=abs(x)<1?1:0
+g(x)=f(a*x)
+G(x)=1/abs(a)*F(x/a)
+plot G(x)
+%#
+}
+}
+\subfigure[$\alpha=1$]{
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+#set noytics
+set samples 200
+set size 0.6,0.8
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -11,0 to 11,0
+set arrow from 0,-0.05 to 0,1.05
+set label "$t$" at 11,0
+set label "$f(\alpha t)$" at 0,1.1
+a=1
+f(x)=sin(x)/(x)
+F(x)=abs(x)<1?1:0
+g(x)=f(a*x)
+G(x)=1/abs(a)*F(x/a)
+plot g(x)
+%#
+}
+$\fpair$
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+#set noytics
+set samples 200
+set size 0.6,0.8
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -11,0 to 11,0
+set arrow from 0,-0.05 to 0,1.05
+set label "$t$" at 11,0
+set label "$f(\alpha t)$" at 0,1.1
+a=1
+f(x)=sin(x)/(x)
+F(x)=abs(x)<1?1:0
+g(x)=f(a*x)
+G(x)=1/abs(a)*F(x/a)
+plot G(x)
+%#
+}
+}
+\subfigure[$\alpha=2$]{
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+#set noytics
+set samples 200
+set size 0.6,0.8
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -11,0 to 11,0
+set arrow from 0,-0.05 to 0,1.05
+set label "$t$" at 11,0
+set label "$f(\alpha t)$" at 0,1.1
+a=2
+f(x)=sin(x)/(x)
+F(x)=abs(x)<1?1:0
+g(x)=f(a*x)
+G(x)=1/abs(a)*F(x/a)
+plot g(x)
+%#
+}
+$\fpair$
+\parbox[c]{3in}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+#set noytics
+set samples 200
+set size 0.6,0.8
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -11,0 to 11,0
+set arrow from 0,-0.05 to 0,.55
+set label "$t$" at 11,0
+set label "$f(\alpha t)$" at 0,.6
+a=2.01
+f(x)=sin(x)/(x)
+F(x)=abs(x)<1?1:0
+g(x)=f(a*x)
+G(x)=(1/abs(a))*F((x/a))
+plot G(x)
+%#
+}
+}
+\end{center}
+\caption{Time-scaling property of the Fourier transform\label{f3-scale}}
+\end{figure}
+
+\subsection{Shifting in Time}
+If $f(t)\fpair F(\omega)$
+\begin{equation}
+f(t-\alpha)\fpair e^{-j\alpha \omega)} F(\omega) 
+\end{equation}
+It states that $f(t-\alpha)$ has the same amplitude as $f(t)$ and only differs
+in the phase spectrum by $(-\alpha \omega)$. See Figure~\ref{f3-timeshift} for
+an example.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[$e^{-bt}$]{
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set nozeroaxis
+set xrange [-5:10]
+set yrange [0:1.2]
+set arrow from -5,0 to 11,0
+set arrow from 0,-0.1 to 0,1.2
+set label "$t$" at 12,0
+set label "$1$" at -0.3,1
+set label "$f(t)$" at 1.3,0.1
+set noxtics
+set noytics
+plot x>0?exp(-x):0
+%#
+}
+
+\subfigure[$e^{-bt}$ shifted by $\alpha$]{
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set nozeroaxis
+set xrange [-5:10]
+set yrange [0:1.2]
+set arrow from -5,0 to 11,0
+set arrow from 0,-0.1 to 0,1.2
+set label "$t$" at 12,0
+set label "$1$" at -0.3,1
+set label "$\alpha$" at 5,-0.1
+set label "$f(t-\alpha)$" at 1.3,0.1
+set noxtics
+set noytics
+plot (x>5)?exp(-x+5):0
+%#
+}
+\end{center}
+\caption{Example of Shifting in Time\label{f3-timeshift}}
+\end{figure}
+
+\subsection{Shifting in Frequency}
+
+If 
+\begin{align}
+f(t)&\fpair F(\omega) \\
+f(t)e^{\pm j \omega_0 t} &\fpair F(\omega \mp \omega_0) \\
+\F\left[f(t)e^{\pm j \omega_0 t}\right] &\\
+&= \int_{-\infty}^{\infty} f(t) e^{\pm j\omega_0 t}e^{-j\omega t} dt \\
+&= \int_{-\infty}^{\infty} f(t) e^{-j(\omega \mp \omega_0) t} dt \\
+&= \int_{-\infty}^{\infty} f(t) e^{(-j\omega ')t} dt \\
+&= F(\omega ') \\
+&= F(\omega \mp \omega_0)
+\end{align}
+
+\subsection{Modulation}
+
+Using the linearity and the shifting in frequency properties of the Fourier
+Transform.
+\begin{align}
+\frac{1}{2}f(t)\left[e^{j\omega_0 t)}+e^{-j\omega_0 t}\right] &\fpair
+\frac{1}{2}\left[F(\omega-\omega_0)+F(\omega+\omega_0)\right] \\
+ \Updownarrow \qquad &\\
+f(t)\cos \omega_0 t  &\fpair
+\frac{1}{2}\left[F(\omega-\omega_0)+F(\omega+\omega_0)\right]
+\end{align}
+
+In this case $\cos \omega_0 t$ is called the carrier\index{carrier} and $f(t)$
+is called modularity\index{modularity signal}\index{signal!modualarity} or
+baseband signal\index{baseband signal}\index{signal!baseband}. The function
+$\cos \omega_0 t$ is said to be modulated in amplitude by the signal $f(t)$,
+
+The spectrum of the modulated signal is obtained from that of $f(t)$ by
+shifting the baseband spectrum by $-\omega_0$ and $\omega_0$ producing two
+side-bands\index{side bands} as shown in Figure~\ref{f3-modulation}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[The baseband]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.8,0.8
+set nozeroaxis
+set xrange [-5:5]
+set arrow from -6,0 to 6,0
+set arrow from 0,-0.1 to 0,1.1
+set label "$\omega$" at 5.2,0
+set label "$F(\omega)$" at 0.1,1.2
+f(x)=abs(x)<1?cos(x*3):0
+plot f(x)
+%#
+}
+\subfigure[The two side bands]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.8,0.8
+set nozeroaxis
+set xrange [-5:5]
+set arrow from -6,0 to 6,0
+set arrow from 0,-0.1 to 0,0.55
+set label "$\omega$" at 5.2,0
+set label "$\omega_0$" at 2,-0.1
+set label "$-\omega_0$" at -2,-0.1
+f(x)=abs(x)<1?cos(x*3):0
+plot 0.5*f(x-2),0.5*f(x+2)
+%#
+}
+\end{center}
+\caption{Illustration of the amplitude modulation property of the Fourier
+transform\label{f3-modulation}}
+\end{figure}
+\begin{Exa}
+Examine the amplitude spectrum of a $\cos \omega_0 t$ function modulated by a
+pulse signal with a width of $2d$.
+
+The baseband spectrum of the pulse function is shown in~(b).
+\begin{equation}
+P_{2d}\fpair \frac{2\sin d\omega}{\omega} 
+\end{equation}
+
+Using the modualtion property of the F.T.
+\begin{equation}
+P_{2d}\cos \omega_0 t \fpair \frac{\sin
+d(\omega-\omega_0)}{\omega-\omega_0}+\frac{\sin d(\omega+\omega_0)}{\omega+\omega_0} 
+\end{equation}
+as shown in~(c) and~(d).
+\end{Exa}
+
+\subsection{Differentiation with respect to time}
+If
+\begin{align}
+f(t) &\fpair F(\omega) \\
+\frac{d^nf(t)}{dt^n} &\fpair (j\omega)^n F(\omega) \\
+\intertext{provided that}
+\frac{d^nf(t)}{dt^n}
+\end{align}
+still satisfies the Fourier Transform conditions.
+
+\subsection{Differentiation with respect to frequency}
+If
+\begin{align}
+f(t) &\fpair F(\omega) \\
+(-jt)^n f(t) &\fpair \frac{d^n F(\omega)}{d\omega^n}
+\end{align}
+
+\subsection{Time convolution}
+If
+\begin{align}
+f_1(t) &\fpair F_1(\omega) \\
+f_2(t) &\fpair F_2(\omega) \\
+\intertext{and define the convolution of $f_1(t)$ and $f_2(t)$ as}
+f_1(t) \ast f_2(t) &\triangleq \int_{-\infty}^{\infty} f_1(t-\tau) f_2(\tau)
+d\tau \\
+&\triangleq  \int_{-\infty}^{\infty} f_1(\tau)f(t-\tau) d\tau \\
+f_1(t) \ast f_2(t) &\fpair F_1(\omega)F_2(\omega) 
+\end{align}
+
+\subsection{Frequency convolution}
+If
+\begin{align}
+f_1(t) &\fpair F_1(\omega) \\
+\intertext{and}
+f_2(t) &\fpair F_2(\omega) \\
+f_1(t)f_2(t) &\fpair \frac{1}{2\pi}F_1(\omega)\ast F_2(\omega) \\
+\intertext{where}
+F_1(\omega)\ast F_2(\omega) &\triangleq \int_{-\infty}^{\infty} F_1(\mu)
+F_2(\omega-\mu) d\mu \\
+&\triangleq \int_{-\infty}^{\infty} F_1(\omega-\mu) F_2(\mu) d\mu \\
+\intertext{Proof:}
+\F^{-1}[F_1(\omega)\ast F_2(\omega)] &=\frac{1}{2\pi}\int_{-\infty}^{\infty}
+F_1(\omega)\ast F_2(\omega) e^{j\omega t} d\omega \\
+&= \frac{1}{2\pi}\int_{-\infty}^{\infty} \left\{ \int_{-\infty}^{\infty}
+F_1(\mu)F_2(\omega-\mu) d\mu \right\} e^{j\omega t} d\omega \\
+\intertext{As $\omega=\mu+x$}
+&=\frac{1}{2\pi}\int_{-\infty}^{\infty} \left\{ \int_{-\infty}^{\infty}
+F_1(\mu) F_2(x) d\mu \right\} e^{j(\mu+x)t} dx \\
+ &=\frac{1}{2\pi}\int_{-\infty}^{\infty} F_1(\mu) e^{j\mu t} d\mu
+ \int_{-\infty}^{\infty} F_2(x) e^{jx t} dx \\
+ &=f_1(t) 2\pi f_2(t) \\
+ \intertext{Thus}
+ \frac{1}{2\pi}\F^{-1}[F_1(\omega)\ast F_2(\omega)] &= f_1(t)f_2(t) 
+ \end{align}
+
+\section{Parseval's Theorem and Energy Spectrum}	%3
+
+The frequecny-convolution property of the Fourier Transform can be used to derive Parseval's
+theorem presented as follows:
+\begin{align}
+\infint f(t)f^{\ast}(t) dt &= \frac{1}{2\pi}\infint F(\omega)F^{\ast}(\omega)
+d\omega \zdtag \\
+\intertext{or}
+\infint |f(t)|^2 dt &= \frac{1}{2\pi} \infint |F(\omega)|^2 d\omega \label{eq3-pars}
+\end{align}
+
+For a real function $f(t)$, $|f(t)|$ can be replaced by $f(t)$ in the above
+equation.
+
+The theorem states that the energy contents of $f(t)$ is given by
+$\frac{1}{2\pi}$ times the area under the {\em energy spectrum}\index{energy
+spectrum} which is the plot of $|F(\omega)|^2$ against $\omega$.
+
+Energy spectrum (or energy spectral density\index{spectral density} of the
+signal $f(t)$) can bne defined as
+\begin{equation}
+\E(\omega) \triangleq |F(\omega)|^2 
+\end{equation}
+
+Equation~\ref{eq3-pars} states the face that the total energy in the spectrum
+is equal to the total energy in the $f(t)$, and $f(t)$ is a {\em finite energy
+signal} as well.
+
+\section{Correlations Functions and the Wiener-Kintchine Theorem}	%4
+
+In some applications we would like to know the resemblance of signals $f(t)$
+and $g(t)$ or the resemblance of a section (segment) of a signal with its
+neighbourhood.
+
+\begin{Def}
+The autocorrelation\index{autocorrelation function} function of a real finite
+energy signal $f(t)$ is defined
+as
+\begin{equation}
+\rho_{ff}(\tau)=\infint f(t)f(t+\tau) dt 
+\end{equation}
+\end{Def}
+
+\begin{Thm}[Wiener-Kintchine Theorem 1]
+If
+\begin{align}
+f(t) &\fpair F(\omega) \\
+\rho_{ff}(\tau) &\fpair F^{\ast}(\omega)F(\omega) \\
+\intertext{or}
+\rho_{ff}(\tau) &\fpair |F(\omega)|^2
+\end{align}
+\end{Thm}
+
+This means that the autocorrelation function and the energy spectrum
+constitute a Fourier transform pair.
+
+\begin{align}
+\intertext{Proof:}
+\F[\rho{ff}(\tau)] &= \infint \left\{ \infint f(t) f(t+\tau) dt \right\} e^{-j
+\omega \tau} d\tau \\
+\intertext{as $t+\tau=x$}
+&= \infint \left\{ \infint f(t)f(x)dx\right\} e^{-j\omega(x-t)} d\tau \\
+&= \underbrace{\infint f(t) e^{-j\omega t} dt}_{F^\ast(\omega)}
+\underbrace{\infint f(x)e^{-j\omega x} dx}_{F(\omega)}
+\end{align}
+
+\begin{Def}
+The cross-correlation\index{cross-correlation} between two finite energy
+signals $f(t)$ and $g(t)$ is
+defined as
+\begin{equation}
+\rho_{fg}(\tau)=\infint f(t)g(t+\tau)dt 
+\end{equation}
+\end{Def}
+
+\begin{Thm}[Wiener-Kintchine Theorem 2]
+If 
+\begin{align}
+	f(t) &\fpair F(\omega) \\
+\intertext{and}
+	g(t) &\fpair G(\omega) \\
+	\rho_{fg}(\tau) &\fpair F^{\ast}(\omega) G(\omega) \\
+\intertext{or}
+	\rho_{fg}(\tau) &\fpair \E_{fg}(\omega) 
+\end{align}
+
+where $\E_{fg}(\omega) \triangleq F^{\ast}(\omega)G(\omega)$ is caled the
+Cross-energy spectrum\index{cross-energy spectrum} of the two given signals.
+That is the cross-correlation and the cross-energy spectrum constitute a
+Fourier transform pair.
+
+If $\rho_{fg}(\tau)$ is zero for all $\tau$, the two signals are said to be
+uncorrelated.
+\end{Thm}
+
+\section{The Unit impulse and Generalized Functions}	%5
+
+{\raggedright What is the problem?\\}
+Given a unit step function
+\begin{align}
+U(t)&=\begin{cases}
+	1 & t>0 \\
+	0 & t<0 
+	\end{cases} \\
+\intertext{try to calculate its Fourier transform}
+\F[U(t)] &= \infint U(t)e^{-j\omega t} dt \\
+&= \int_0^{\infty} 1 e^{-j\omega t} dt \\
+&= \frac{1}{-j\omega} \int_0^{\infty} e^{-j\omega t} d(-j\omega t) \\
+&= \left.\frac{1}{-j\omega} e^{-j\omega t}\right|_0^\infty \\
+&= \frac{1}{-j\omega} e^{-j\omega \infty}+\frac{1}{j\omega} 
+\end{align}
+
+{\bf It does not converge!} 
+
+In otherwords, a simple and very useful function like $U(t)$ does not have a
+Fourier transform.
+
+The need arises to introduce the unit impulse function (or Dirac
+delta\index{Dirac delta} function) and definition of generalized functions.
+
+\subsection{A Heuristic introduction of the Unit Impulse functions}
+Since the unit step function $U(t)$ cannot be differentiated at $t=0$ (its
+discontinuity point), a function $\nu(t)$ is introduced.
+
+\begin{equation}
+\nu(t)=\begin{cases}
+	\frac{1}{\epsilon} & 0<t<\epsilon \\
+	0 & \mbox{otherwise} 
+	\end{cases} 
+	\end{equation}
+
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set size 1,0.7
+set noytics
+set nokey
+set samples 100
+set nozeroaxis
+set xrange [-2:4]
+set arrow from -2,0 to 4,0
+set label "$t$" at 4.5,0
+set arrow from 0,0 to 0,1
+set label "$\nu(t)$" at 0.2,1.1
+set label "$\frac{1}{\epsilon}$" at -0.2,0.7
+plot (x>0&&x<1)?0.7:0
+%#
+
+The integral of $\nu(t)$ is almost equal to $U(t)$ except for the
+$[0,\epsilon]$ as
+\begin{align}
+ \int_{-\infty}^{t}\nu(t) dt &= \begin{cases}
+	0 & t \leqslant 0 \\
+	\frac{t}{\epsilon} & 0 < t < \epsilon \\
+	1 & \epsilon \leqslant t < \infty 
+	\end{cases} \\
+\infint \nu(t) dt &= \int_{0^-}^{\epsilon} \nu(t)dt =1 
+\end{align}
+
+when $\epsilon\rightarrow 0$, $\nu(t)$ approaches the Dirac delta function
+(Unit Impulse) $\delta(t)$ defined as
+
+\begin{equation}
+\infint \delta(t)dt = \int_{0^-}^{0^+} \delta(t) dt =1 
+\end{equation}
+
+A more rigorous derivation of the impulse $\delta(t)$ may be found in Baher's
+book (p.p. 88--93) using the concept of distribution or the limit of a
+sequence.
+
+\subsection{Properties of the Unit Impulse}
+\begin{align}
+\intertext{Property 1}
+	\delta(\alpha t) &=\frac{1}{|\alpha|}\delta(t) \\
+	\intertext{where $\alpha$ is a real constant}
+\intertext{Property 2}
+	\delta(t) &= \delta(-t) \\
+\intertext{Property 3}
+	\delta(t) &\fpair 1 \\
+	1 &\fpair 2\pi \delta(\omega) \\
+\intertext{Property 4}
+	\infint \phi(\tau)\left(\frac{d^n\delta(\tau)}{d\tau^n}\right)d\tau &=
+	(-1)^n\left. \frac{d^n\phi(t)}{dt^n}\right|_{t=0} \\
+\intertext{Proof:}
+	\infint \phi(\tau)\delta(\tau-t) d\tau &= \phi(t) \\
+\intertext{Differentiate two sides of the equation $n$ times with respect to
+$t$}
+\intertext{$n=1$:}
+\infint \phi(\tau)\frac{d\delta(\tau-t)}{d(\tau-t)}.\frac{d(\tau-t)}{dt} d\tau
+&=\frac{d\phi(t)}{dt} \\
+\infint  \phi(\tau)\frac{d\delta(\tau-t)}{d(\tau-t)}.(-1)d\tau &=
+\frac{d\phi(t)}{dt} \\
+\intertext{As $t\rightarrow 0$}
+\infint \phi(\tau)\frac{d\delta(\tau)}{d\tau} d\tau &=
+(-1)\left.\frac{d\phi(t)}{dt}\right|_{t=0} \\
+\intertext{$n$:}
+\infint \phi(\tau) \frac{d^{n}\delta(\tau-t)}{d(\tau-t)^{n}} \left(\frac{d(\tau-t)}{dt}^{n}
+\right) d\tau &= \frac{d^{n}\phi(t)}{dt^{n}} \\
+\intertext{As $t\rightarrow 0$}
+\infint \phi(\tau) \frac{d^{n}\delta(\tau-t)}{d\tau^{n}} d\tau
+&= (-1)^{n} \left.\frac{d^{n}\phi(t)}{dt}\right|_{t=0} \\
+\intertext{Property 5}
+g(t)\delta(t-\alpha) &= g(\alpha)\delta(t-\alpha) \\
+\intertext{Property 6}
+\delta(t) &= \frac{dU(t)}{dt} 
+\end{align}
+With the introduction of the $\delta(t)$ function, Fourier transforms of many
+useul functions become possible.
+\begin{enumerate}
+\item 
+	\begin{align}
+		K\delta(t) & \fpair K \\
+		K &\fpair 2\pi K \delta(\omega) 
+	\end{align} 
+\item 
+\begin{align}
+\intertext{If}
+U(t) &= \frac{1}{2}+\frac{1}{2}\sgn(t) \\
+U(t) &\fpair \pi\delta(\omega)+\frac{1}{j\omega} \\
+\intertext{Proof:}
+\intertext{Recalling}
+\frac{1}{t} &\fpair \frac{1}{-j\pi} 2\pi \left( \frac{1}{-\omega} \right) =
+\frac{2}{j\omega} \\
+\intertext{use symmetry property}
+\F[U(t)] &= \F[\frac{1}{2}+F[\frac{1}{2}\sgn(t)] \\
+&= 2\pi \frac{1}{2} \delta(\omega)+\frac{1}{2}\frac{2}{j\omega} \\
+&= \pi\delta(\omega)+\frac{1}{j\omega}
+\end{align}
+\item The relation between the Fourier Transform of $f(t)$ and that of its integral is
+\begin{equation}
+\infint f(\tau)d\tau \fpair \pi
+F(0)\delta(\omega)+\frac{F(\omega)}{j\omega} 
+\end{equation}
+\item Use time shifting property
+\begin{align}
+\delta(t-T) &\fpair e^{-j\omega T}\\
+\delta(t+T) &\fpair e^{j\omega T}\\
+\intertext{Therefore}
+\frac{1}{2}[\delta(t-T)+\delta(t+T)] &\fpair \cos \omega T \\
+\intertext{and}
+\frac{1}{2j}[\delta(t+T)-\delta(t-T)] &\fpair \sin \omega T
+\end{align}
+\item Using the symmetry property
+\begin{align}
+e^{j\omega_0t} &\fpair 2\pi \delta(\omega-\omega_0) \\
+e^{-j\omega_0t} &\fpair 2\pi \delta(\omega+\omega_0) \\
+\intertext{therefore}
+\cos \omega_0 t &\fpair \pi[\delta(\omega-\omega_0)+\delta(\omega+\omega_0)] \\
+\sin \omega_0 t &\fpair j\pi[\delta(\omega-\omega_0)+\delta(\omega+\omega_0)]
+\end{align}
+\end{enumerate}
+
+\section{The Impulse Response and System Function}	%6
+A linear time-invariant system may be represented by
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,50.00)
+\put(20.00,25.00){\vector(1,0){50.00}}
+\put(220.00,25.00){\vector(1,0){50.00}}
+\put(70.00,0.00){\framebox(150.00,50.00)[cc]{$h(\cdot)$}}
+\put(0.00,25.00){\makebox(0,0)[cc]{$f(t)$}}
+\put(280.00,25.00){\makebox(0,0)[cc]{$g(t)$}}
+\end{picture}
+\end{center}
+
+where
+\begin{equation}
+g(t)=\infint h(\tau)f(t-\tau)d\tau 
+\end{equation}
+or
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,50.00)
+\put(20.00,25.00){\vector(1,0){50.00}}
+\put(220.00,25.00){\vector(1,0){50.00}}
+\put(70.00,0.00){\framebox(150.00,50.00)[cc]{$H(\omega)$}}
+\put(0.00,25.00){\makebox(0,0)[cc]{$F(\omega)$}}
+\put(280.00,25.00){\makebox(0,0)[cc]{$G(\omega)$}}
+\end{picture}
+\end{center}
+where
+\begin{align}
+F(\omega) &= \F[f(t)] \\
+G(\omega) &= \F[g(t)] \\
+\intertext{and}
+H(\omega) &=\F[h(t)] 
+\end{align}
+If $f(t)=\delta(t)$
+\begin{equation}
+g(t)=\infint h(\tau)\delta(t-\tau)d\tau = h(t) 
+\end{equation}
+Therefore $h(t)$ is called the impulse response\index{impulse response} of the
+system.
+
+In this case:
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,50.00)
+\put(20.00,25.00){\vector(1,0){50.00}}
+\put(220.00,25.00){\vector(1,0){50.00}}
+\put(70.00,0.00){\framebox(150.00,50.00)[cc]{$h(\cdot)$}}
+\put(0.00,25.00){\makebox(0,0)[cc]{$\delta(t)$}}
+\put(280.00,25.00){\makebox(0,0)[cc]{$h(t)$}}
+\end{picture}
+\end{center}
+
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,50.00)
+\put(20.00,25.00){\vector(1,0){50.00}}
+\put(220.00,25.00){\vector(1,0){50.00}}
+\put(70.00,0.00){\framebox(150.00,50.00)[cc]{$H(\omega)$}}
+\put(0.00,25.00){\makebox(0,0)[cc]{$1$}}
+\put(280.00,25.00){\makebox(0,0)[cc]{$H(\omega)$}}
+\end{picture}
+\end{center}
+
+If $f(t)=e^{j\omega_0 t}$,
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(300.00,50.00)
+\put(20.00,25.00){\vector(1,0){50.00}}
+\put(220.00,25.00){\vector(1,0){50.00}}
+\put(70.00,0.00){\framebox(150.00,50.00)[cc]{linear, time-invariant}}
+\put(0.00,25.00){\makebox(0,0)[cc]{$e^{j\omega_0 t}$}}
+\put(280.00,25.00){\makebox(0,0)[cc]{$g(t)$}}
+\end{picture}
+\end{center}
+
+\begin{align}
+g(t) &= \infint h(\tau)e^{j\omega_0(t-\tau)}d\tau \\
+     &= e^{j\omega_0 t}\infint \underbrace{h(\tau)e^{-j\omega_0 \tau}d\tau}_{
+	 H(\omega_0)} \\
+\intertext{or}
+g(t) &= H(\omega)e^{j\omega t} 
+\end{align}
+
+This means that if $f(t)$ is an exponential function, the response $g(t)$ is
+also one with a difference in the amplified $|H(\omega)|$ and the phase
+$\phi(\omega)$ where $H(\omega)=|H(\omega)|e^{j\phi(\omega)}$.
+
+\begin{align}
+\intertext{If}
+f(t) &= \cos(\omega t) =\frac{1}{2}[e^{j\omega t}+e^{-j\omega t} \\
+&= \Re(e^{j\omega t}) \\
+g(t) &= \frac{1}{2} H(\omega)e^{j\omega t}+\frac{1}{2}H(-\omega)e^{-j\omega t}
+\\
+&= \half A(\omega)e^{j\phi(\omega)}e^{j\omega t}+\half A(-\omega)
+e^{j\phi(-\omega)}e^{-j\omega t} \\
+&= \half A(\omega)e^{j\omega t+j\phi(\omega)}+\half A(\omega)e^{-j\omega
+t-j\phi(\omega)} \\
+&= \half A(\omega) \left\{ \cos (\omega t+\phi(\omega))+j\sin(\omega
+t+\phi(\omega)) +\half \cos (\omega t+\phi(\omega))- j\sin (\omega
+t+\phi(\omega)) \right\} \\
+&= A(\omega)\cos(\omega t+\phi(\omega)) 
+\end{align}
+
+\section{Causal Functions and the Hilbert Transform}	%7
+\begin{Def}
+A system is causal\index{causal} if its impulse response $h(t)$ is a causal
+function.
+\begin{equation}
+h(t)=0 \qquad\mbox{for $t<0$} 
+\end{equation}
+\end{Def}
+
+As a result, if the input $f(t)$ is causal,
+\begin{align}
+g(t) &=\infint f(t)h(t-\tau)d\tau \\
+	 &= \int_{-\infty}^{t} h(t-\tau)d\tau+\underbrace{\int_{t}^{\infty} f(t)h(t-\tau) d\tau}_{=0} \\
+\intertext{for $t-\tau<0$ or $\tau>t$, $h(t-\tau)=0$}
+	 &= \int_{-\infty}^{t} f(t)h(t-\tau)d\tau\\
+\intertext{ $g(t)$ is a `product' of the past $f(t)$ contribution, therefore causal.}
+ \intertext{and if}
+	f(t)&=0 \qquad\mbox{for $t<0$} \\
+	g(t)&=0 \qquad\mbox{for $t<0$}
+\end{align}
+
+For a causal function $f(t)$, we showed previously that $f(t)$ is uniquely
+determined by $R(\omega)$ or $x(\omega)$, which is the real or imaginary
+part of its Fourier transform
+
+\begin{align}
+f(t) &\fpair 2R(\omega) \\
+f(t) &\fpair 2jx(\omega) \\
+\intertext{If}
+f(t) &= \sin \omega t \\
+\intertext{it can be proven that}
+g(t) &= A(\omega)\sin(\omega t+\phi(\omega)) \\
+\intertext{Note:}
+f(t) &= \sin \omega t =\frac{1}{2j}\left(e^{j\omega t}-e^{-j\omega t}\right) 
+\end{align}
+
+Now it has been proven that the repsonse of a linear time-invariant system to
+a sinusoid is another sinusoid with the same frequency but with a different
+amplitude and phase.
+
+It is concluded that the system frequency response function $H(\omega)$ can be
+defined (or obtained) as one of the following:
+\begin{enumerate}
+\item $H(\omega)$ is the Fourier Transform of the $h(t)$;
+\item $g(t)=H(\omega)e^{j\omega t}$ ;
+\item $H(\omega)=\frac{G(\omega)}{F(\omega)}=\frac{\mbox{FT of the output}}{\mbox{FT of the input}}$
+\end{enumerate}
+
+Furthermore $f(t)$ satisfies
+\begin{align}
+\mbox{even part of $f(t)$} &= \mbox{odd part of $f(t)$} \qquad \mbox{for
+$t>0$} \zdtag \\
+\intertext{and}
+f(t)&=0 \qquad t<0 \zdtag \\
+\intertext{If we adopt Baher's symbol}
+\Ev f(t) &= \Od f(t)\sgn(t) \label{eq3-caus-ev}\\
+\intertext{or}
+\Od f(t) &= \Ev f(t)\sgn(t) \label{eq3-caus-od}\\
+\intertext{Using the previous results}
+\Ev f(t) &\fpair R(\omega) \zdtag \\
+\Od f(t) &\fpair jx(\omega) \zdtag \\
+\intertext{and}
+\sgn t &\fpair \frac{2}{j\omega} \zdtag \\
+\F (\Ev f(t)) &= \F(\Od f(t) \sgn t) \zdtag \\
+R(\omega) &=\frac{1}{2\pi} jx(\omega)\ast \frac{2}{j\omega} \zdtag \\
+\intertext{That is}
+R(\omega) &= \frac{1}{\pi} \infint \frac{x(\mu)}{\omega-\mu}d\mu 
+\label{eq3-causal}
+\end{align}
+
+Equation~\ref{eq3-causal} expresses the relation between $R(\omega)$ and
+$x(\omega)$ of a causal (real) function $f(t)$.
+
+Taking Fourier Transform of both side Equation~\ref{eq3-caus-od} gives
+\begin{equation}
+x(\omega)=-\frac{1}{\pi}\infint \frac{R(\mu)}{\omega-\mu} d\mu
+\label{eq3-caus3}
+\end{equation}
+
+Equations~\ref{eq3-causal} and \ref{eq3-caus3} constitute a Hilbert trasnform
+pair.
+
+If the real part of the Fourier Transform of a real (causal) function is given, the Hilbert
+transform can be used to generate the imaginary part to complete Fourier
+Transform if the
+given function and vice versa.
+
+\section{The Impulse Train and its applications}	%8
+
+The impulse train is defined as
+\begin{align}
+\delta_n(t) &=\sum_{k=-n}{n} \delta(t+kT) \\
+\intertext{using the time-shift property of the Fourier Transform, the Fourier transform
+$\delta_n(t)$ is given by}
+\hat{C}_n(\omega) &=\sum_{k=-n}^{n} e^{j k T \omega} \\
+\intertext{ie}
+\delta_n(t) &\fpair \hat{C}_n(\omega) \zdtag \\
+\intertext{A diagram of an impulse train and its transform can be seen in
+Figure~\ref{f3-sigtrain}.}
+\intertext{if $n\rightarrow \infty$}
+\delta_{\infty} &= \lim_{n\rightarrow\infty} \delta_n(t) \\
+\intertext{and it can be shown that}
+\delta_{\infty}(t) &\fpair \omega_0 \delta_{\infty}(\omega) \\
+\intertext{where}
+\delta_{\infty}(\omega) &=\sum_{k=-\infty}^{\infty} \delta(\omega-k\omega_0) \zdtag 
+\end{align}
+
+A diagram of an infinite impulse train and its transform can be seen in
+Figure~\ref{f3-infimp}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Train of $2n+1$ impulses]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-5:5]
+set yrange [0:1.2]
+set arrow from -5,0 to 5,0
+set arrow from 0,0 to 0,1.2
+set label "$\delta_n(t)$" at 0.1,1.2
+set label "$\cdots$" at -3,0.5
+set label "$\cdots$" at 3,0.5
+set label "$t$" at 5.1,0
+set arrow from -4,0 to -4,1
+set label "$-nT$" at -4,-0.1
+set arrow from -2,0 to -2,1
+set label "$-2T$" at -2,-0.1
+set arrow from -1,0 to -1,1
+set label "$-T$" at -1,-0.1
+set arrow from 0,0 to 0,1
+set label "$0$" at 0,-0.1
+set arrow from 1,0 to 1,1
+set label "$T$" at 1,-0.1
+set arrow from 2,0 to 2,1
+set label "$2T$" at 2,-0.1
+set arrow from 4,0 to 4,1
+set label "$nT$" at 4,-0.1
+plot 0
+%#
+}
+
+\subfigure[and its spectrum]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-5:5]
+set samples 200
+set arrow from -5,0 to 5,0
+set arrow from 0,0 to 0,1.2
+set label "$\hat{C}_n(\omega)$" at 0.1,1.2
+set label "$\omega$" at 5.1,0
+set label "$\omega_0$" at 4,-0.1
+set label "$-\omega_0$" at -4,-0.1
+set label "$0$" at 0,-0.1
+f(x)=sin(x*10)/(x*10)
+plot f(x-4)+f(x)+f(x+4)
+%#
+}
+\end{center}
+\caption{Finite impulse train and spectrum\label{f3-sigtrain}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Train of $\infty$ impulses]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-4:4]
+set yrange [0:1.2]
+set samples 5
+set arrow from -4,0 to 4,0
+set arrow from 0,0 to 0,1.2
+set label "$\delta_\infty(t)$" at 0.1,1.2
+set label "$\cdots$" at -3,0.5
+set label "$\cdots$" at 3,0.5
+set label "$t$" at 4.1,0
+set arrow from -2,0 to -2,1
+set label "$-2T$" at -2,-0.1
+set arrow from -1,0 to -1,1
+set label "$-T$" at -1,-0.1
+set arrow from 0,0 to 0,1
+set label "$0$" at 0,-0.1
+set arrow from 1,0 to 1,1
+set label "$T$" at 1,-0.1
+set arrow from 2,0 to 2,1
+set label "$2T$" at 2,-0.1
+plot 0
+%#
+}
+
+\subfigure[and its spectrum]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-4:4]
+set yrange [0:1.2]
+set samples 5
+set arrow from -4,0 to 4,0
+set arrow from 0,0 to 0,1.2
+set label "$\omega_0\delta_\infty(\omega)$" at 0.1,1.2
+set label "$\cdots$" at -3,0.5
+set label "$\cdots$" at 3,0.5
+set label "$\omega$" at 4.1,0
+set arrow from -2,0 to -2,1
+set label "$-2\omega_0$" at -2,-0.1
+set arrow from -1,0 to -1,1
+set label "$-\omega_0$" at -1,-0.1
+set arrow from 0,0 to 0,1
+set label "$0$" at 0,-0.1
+set arrow from 1,0 to 1,1
+set label "$\omega_0$" at 1,-0.1
+set arrow from 2,0 to 2,1
+set label "$2\omega_0$" at 2,-0.1
+plot 0
+%#
+}
+\end{center}
+\caption{Infinite impulse train and spectrum\label{f3-infimp}}
+\end{figure}
+
+\subsection{Extending a function $F(t)$ using $\delta_n(t)$}
+Given a function $f(t)$, another function $f_n(t)$ can be defined as
+
+\begin{align}
+f_n(t) &=\sum_{k=-n}^{n} f(t-kT) \\
+\intertext{or}
+f_n(t) &= f(t) \ast \delta_n(t) \\
+\intertext{noticing}
+f(t-kT) &=f(t) \ast \delta(t-kT) \zdtag \\
+\intertext{and}
+\delta_n(t) &=\sum_{k=-n}^{n} \delta(t-kT) \zdtag \\
+\intertext{If}
+f(t) &\fpair F(\omega) \zdtag \\
+f_n(t) &\fpair F(\omega) \hat{C}_n(\omega)  \zdtag \\
+\intertext{where}
+\hat{C}_n(\omega) &= \sum_{k=-n}^{n} e^{j k T \omega}=\frac{\sin
+(n+\half)T\omega}{\sin \frac{T\omega}{2}} \zdtag 
+\end{align}
+
+An example of signal extension can be seen in Figure~\ref{f3-sigext}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[A signal $f(t)$]{
+%# gnuplot
+set terminal eepic
+set noxtics
+set noytics
+set nozeroaxis
+set nokey
+set noborder
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,0 to 0,3
+set label "$t$" at 11,0
+set label "$0$" at 0,-0.2
+f(x)=(-x**2+5+cos(x-2))/2
+plot f(x)>0?f(x):0
+%#
+}
+
+\subfigure[the signal obtained by extension $f(t)$ every $T$ seconds]{
+%# gnuplot
+set terminal eepic
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,0 to 0,3
+set label "$t$" at 11,0
+set label "$0$" at 0,-0.2
+set label "$-nT$" at -10,-0.2
+set label "$-T$" at -5,-0.2
+set label "$T$" at 5,-0.2
+set label "$nT$" at 10,-0.2
+set label "$\cdots$" at 7.5,1
+set label "$\cdots$" at -7.5,1
+set nokey
+set noborder
+f(x)=(-x**2+5+cos(x-2))/2
+plot f(x)>0?f(x):0,f(x-5)>0?f(x-5):0,f(x+5)>0?f(x+5):0,f(x-10)>0?f(x-10):0,f(x+10)>0?f(x+10):0
+%#
+}
+\end{center}
+\caption{Example of signal extension using $\delta_n$\label{f3-sigext}}
+\end{figure}
+
+\subsection{The Fourier Transform of a Periodic Function}
+Given a periodic function $f_p(t)$, form a non-periodic function $f(t)$, as
+shown in Figure~\ref{f3-periodic} such that
+\begin{align}
+f(t) &=\begin{cases}
+	f_p(t) & \mbox{for $|t|<\frac{T}{2}$} \\
+	0 & \mbox{for $|t|>\frac{T}{2}$}
+	\end{cases} \\
+\intertext{Assume $f(t)\fpair F(\omega)$ so that}
+F(\omega) &= \int_{-T/2}^{T/2} f(t)e^{-j\omega t} dt \zdtag \\
+\intertext{Because elsewhere $f(t)=0$. It is obvious that}
+f_p(t) &= f(t)\ast \delta_{\infty}(t) \\
+\intertext{To find the Fourier Transform $F_p(\omega)$ of $f_p(t)$ we have}
+F_p(\omega) &= \F[f_p(t)] =\F(f(t)\ast\delta_{\infty}(t)) \zdtag \\
+&=F(\omega)[\omega_0 \delta_{\infty}(t)] \zdtag \\
+&= \omega_0 F(\omega) \sum_{k=-\infty}^{\infty} \delta(\omega-k\omega_0) \\
+\intertext{For $\omega \neq k\omega_0$}
+\delta(\omega-k\omega_0) &=0 \zdtag \\
+\intertext{Thus}
+F_p(\omega) &=\omega_0 \sum_{k=-\infty}^{\infty}
+F(k\omega_0)\delta(\omega_k\omega_0) \\
+\intertext{where}
+F(k\omega_0) &=\int_{-T/2}^{T/2} f(t)e^{-j k\omega_0 t}dt \zdtag \\
+\intertext{and} 
+\omega_0 &=\frac{2\pi}{T} \zdtag
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[A periodic signal $f_p(t)$]{
+%# gnuplot
+set terminal eepic
+set noxtics
+set noytics
+set noborder
+set nokey
+set arrow from -11,0 to 11,0
+set arrow from 0,0 to 0,1.1
+set label "$t$" at 11.5,0
+set label "$f(t)$" at 0.1,1.1
+set label "$\frac{-T}{2}$" at -2,-0.2
+set label "$\frac{T}{2}$" at 2,-0.2
+set xrange [-10:10]
+plot sin(x+cos(x))**2
+%#
+}
+
+\subfigure[A non-periodic signal obtained $f_p(t)$]{
+%# gnuplot
+set terminal eepic
+set noxtics
+set noytics
+set noborder
+set nokey
+set xrange [-10:10]
+set arrow from -11,0 to 11,0
+set arrow from 0,0 to 0,1.1
+set label "$t$" at 11.5,0
+set label "$f(t)$" at 0.1,1.1
+set label "$\frac{-T}{2}$" at -2,-0.2
+set label "$\frac{T}{2}$" at 2,-0.2
+plot abs(x)<2?sin(x+cos(x))**2:0
+%#
+}
+\end{center}
+\caption{Generating a non-periodic signal from a periodic signal\label{f3-periodic}}
+\end{figure}
+
+Therefore, the Fourier transform spectrum $F_p(\omega)$ of a periodic
+function $f_p(t)$ with period $T$, is the infinite train of equidistant
+impulses, ($\omega_0$ apart). Each impulse is of strength $F(k\omega_0)$ which
+is the value at $k\omega_0$ of the Fourier Transform of the non-periodic function $f(t)$
+defining $f_p(t)$ over one period.
+
+\begin{align}
+\intertext{If we define}
+C_k(k\omega_0) &= \frac{1}{T}F(k\omega_0) \zdtag \\
+&= \frac{1}{T}\int_{T/2}^{T/2} f(t)e^{-j k \omega_0 t} dt \\
+\intertext{the Fourier Transform of the periodic function $f_p(t)$ is:}
+F_p(\omega) &= 2\pi \sum_{k=-\infty}^{\infty} C_k \delta(\omega-k\omega_0) \label{eq3-ftper} \\
+\intertext{The inverse Fourier Transform of the $F_p(\omega)$ is given by }
+f_p(t) &=\sum_{k=-\infty}^{\infty} C_ke^{j k \omega_0 t} \label{eq3-invftper}
+\end{align}
+
+( Comparing Equation~\ref{eq3-ftper} and~\ref{eq3-invftper} with the Fourier
+series coefficients
+\begin{align}
+f(t) &=\sum_{k=-\infty}^{\infty} C_ke^{j k \omega_0 t} \\
+C_k &= \frac{1}{T}\int_{-T/2}^{T/2} f(t)E^{-j k \omega_0 t} dt \mbox{)}
+\end{align}
+
+
+Fourier series is a special case of the Fourier transform.
+
+\begin{Rem}
+Any periodicity in the time domain results in impulses in the Fourier Spectrum
+\end{Rem}
+
+\begin{Exa}
+Find the Fourier spectrum of the periodic train of rectangular pulses show in
+Figure~\ref{f3-recpulse}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[A periodic train of rectangular pulses]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+f(x)=abs(x)<1?1:0
+set size 1,0.8
+set xrange [-8:8]
+set yrange [-0.2:1.3]
+set arrow from -8,0 to 8,0
+set arrow from 0,0 to 0,1.2
+set label "$P_p(t)$" at 0,1.3
+set label "$t$" at 8.1,0
+set label "$-T$" at -5,-0.1
+set label "$T$" at 5,-0.1
+set label "$\frac{a}{2}$" at 1,-0.1
+set label "$-\frac{a}{2}$" at -1,-0.1
+set samples 100
+plot f(x),f(x-5),f(x+5)
+%#
+}
+
+\subfigure[Its spectrum as a train of impulses]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 1,0.8
+set xrange [-8:8]
+set arrow from -8,0 to 8,0
+set arrow from 0,0 to 0,1.2
+set label "$C_k(k\omega_0)$" at 0,1.3
+set label "$\omega$" at 8.1,0
+set samples 20
+plot sin(x)/x with impulses
+%#
+}
+\end{center}
+\caption{A periodic train of rectangular pulses and its fourier series
+coefficients\label{f3-recpulse}}
+\end{figure}
+
+\begin{align}
+\intertext{Solution:}
+\intertext{Method 1: The Fourier coefficients}
+C_k &=\frac{1}{T}\int_{-T/2}^{T/2} f(t)e^{-j k \omega_0 t} dt \\
+    &=\frac{1}{T}\int_{-T/2}^{T/2} P_{p}e^{-j k \omega_0 t} dt \\
+    &=\frac{1}{T}\int_{-a/2}^{a/2} e^{-j k \omega_0 t} dt \\
+    &=\frac{1}{T}\left.\frac{1}{-j k \omega_0} e^{-j k \omega_0 t} dt
+	\right|_{-a/2}^{a/2} \\
+	&= \frac{1}{-j k \omega_0}\left\{ e^{-j k \omega_0 \frac{a}{2}}-e^{j k
+	\omega_0 \frac{a}{2}}\right\} \\
+	&= \frac{1}{T} \frac{1}{-j k \omega_0}\left\{ \cos\left(-k\omega_0
+	\frac{a}{2}\right)- \sin\left(k\omega_0\frac{a}{2}\right) -\cos\left(k\omega_0\frac{a}{2}\right)
+	-j\sin\left(k\omega_0\frac{a}{2}\right) \right\} \\
+	&= \frac{1}{T}\frac{1}{-j k \omega_0} \left\{-2j\sin\left(k\omega_0\frac{a}{2}\right)
+	\right\} \\
+	&= \frac{1}{T}\frac{2\sin\left(k\omega_0\frac{a}{2}\right)}{k\omega_0} \\
+	&= \frac{a}{T} \frac{\sin\left(k\omega_0\frac{a}{2}\right)}{k\omega_0\frac{a}{2}} \\
+\intertext{Method 2:}
+\intertext{1) Find the  fourier transform for the non-periodic pulse function
+$P_a(t)$}
+\F[P_a(t)] &= F(\omega) \\
+&= \infint P_a(t)e^{-j\omega t} dt \\
+&= \int_{-a/2}^{a/2} e^{-j\omega t} dt \\
+&= \left. \frac{1}{-j\omega} e^{-j\omega t} \right|_{-a/2}^{a/2} \\
+&= \frac{1}{-j\omega} \left\{
+   e^{-j\omega\frac{a}{2}}-e^{j\omega\frac{a}{2}}\right\} \\
+&= \frac{1}{-j\omega} \left\{ -2j\sin\left(\omega\frac{a}{2}\right)\right\} \\
+\intertext{2)}
+C_k(k\omega_0) &= \frac{1}{T}F(k\omega_0) \\
+ &= \frac{a}{T}\frac{\sin\left(k\omega_0\frac{a}{2}\right)}{k\omega_0\frac{a}{2}} \\
+\intertext{3)}
+F_p(\omega) &= 2\pi \sum_{k=-\infty}^{\infty} C_k \delta
+	\left(\delta\omega-k\omega_0\right) \\
+&= \frac{2\pi a}{T} \sum_{k=-\infty}^{\infty}
+   \frac{\sin\left(k\omega_0\frac{a}{2}\right)}{k\omega_0 \frac{a}{2}} 
+   \delta\left(\omega-k\omega_0\right)
+\end{align}
+\end{Exa}
+
+\begin{Rem}
+Fourier coefficients of the Fourier series and Fourier transform $F_p(\omega)$
+of the periodic function $P_p(t)$ are two equivalent representations in the
+Fourier domain.
+\end{Rem}
+
+\subsection{Power Spectra and Correlation Functions}
+A periodic signal is a finite power signal rather that a finite energy one
+becuase for a signal to be of finite energy, it has to be square integratable
+over $[-\infty,\infty]$ (recalling
+\begin{equation}
+\infint f^2(t)dt = \frac{1}{2\pi}\infint |F(\omega)|^2 d\omega 
+\end{equation}
+to be finite.)
+for a signal to be of finite power, it has to satsify
+\begin{equation}
+\frac{1}{T}\int_{-T/2}^{T/2} [f(t)]^2 dt =\infsum{k} |C_k|^2 
+\end{equation}
+being finite.
+
+Define the autocorrelation function $\rho_{ff}(\tau)$ of the periodic signal
+$f_\rho(t)$ as
+\begin{equation}
+\rho_{ff}(\tau)=\frac{1}{T}\int_{-T/2}^{T/2} f_rho(t) f_rho(t+\tau) dt
+\end{equation}
+
+\begin{align}
+\intertext{Assume}
+f_\rho(t) &= \infsum{k} C_ke^{j k \omega_0 t} \zdtag \\
+\intertext{then}
+f_\rho(t+\tau) &= \infsum{k} C_k e^{j k \omega_0 (t+\tau)} \zdtag \\
+\rho_{ff}(\tau) &= \frac{1}{T} \int_{-T/2}^{T/2} \left( \infsum{k} C_k e^{j k
+\omega_0 (t+\tau)} f_\rho(t)\right) dt \zdtag \\
+&= \infsum{k} C_ke^{j k \omega_0 \tau} \frac{1}{T}\int_{-T/2}^{T/2}f_\rho(t)
+e^{j k \omega_0 t} dt \zdtag \\
+&= \infsum{k} C_k C^{\ast}_k e^{j k \omega_0 \tau} \\
+\intertext{(Notice that}
+C_k &=\frac{1}{T}\int_{-T/2}^{T/2} f(t)e^{-j k \omega_0 t} dt \zdtag \\
+\intertext{and}
+C^{\ast}_k &= \frac{1}{T} \int_{-T/2}^{T/2} f(t) e^{j k \omega_0 t} dt \zdtag \\
+\intertext{)}
+\rho_{ff} &=\infsum{k} |C_k|^2 e^{j k \omega_0 \tau} \label{eq3-corr}
+\end{align}
+
+By the definition, the power spectral amplitudes $|C_k|^2$ are the
+coefficients of the Fourier series of the autocorrelation function
+$\rho_{ff}(\tau)$.
+(Notice the definition of the inverse Fourier Transform
+\begin{equation}
+f_\rho(t) =\infsum{k} C_k e^{j k \omega_0 t} \mbox{)}
+\end{equation}
+If $\tau=0$ in Equation~\ref{eq3-corr} then
+\begin{align}
+\rho_{ff} &= \frac{1}{T}\int_{-T/2}^{T/2} f_\rho(t)f_\rho(t) dt \zdtag \\
+&= \infsum{k} |C_k|^2  \label{eq3-pars-per}
+\end{align}
+
+It is obvious that $\rho_{ff}(0)$ is equal to the average power of the signal.
+Equation~\ref{eq3-pars-per} is Parsevals theorem for periodic functions.
+
+If we define the power spectrum\index{Power spectrum} $P(\omega)$ of a
+periodic signal $F_\rho(t)$ as the Fourier Transform of its autocorrelation
+$\rho_{ff}(t)$,
+
+\begin{align}
+P(\omega) &= \F\left[\infsum{k} |C_k|^2 e^{j k \omega_0 t} \right] \zdtag \\
+ &= 2\pi \infsum{k} |C_k|^2 \delta(\omega-k\omega_0)  \\
+\intertext{Noticing that:}
+e^{j\omega_0 t} &\fpair 2\pi \delta(\omega-\omega_0) \zdtag \\
+\intertext{or}
+e^{j k\omega_0 t} &\fpair 2\pi \delta(\omega-k\omega_0) \zdtag
+\end{align}
+
+Therefore, the power spectrum of a periodic function consists of impulses at
+$\omega_0$ and its harmonics. The strength of each impulse is $2\pi|C_k|^2$.
+
+The cross-correlation $\rho_{fg}(\tau)$ of two periodic signals $f(t)$ and
+$g(t)$ is defined as
+
+\begin{align}
+\rho_{fg}(\tau) &=\frac{1}{T}\int_{-T/2}^{T/2} f(t) g(t+\tau) dt \\
+\intertext{Assume}
+f(t) &=\infsum{k} C_k e^{j k \omega_0 t} \zdtag \\
+\intertext{and}
+g(t) &= \infsum{k} d_k e^{j k \omega_0 t} \zdtag \\
+\rho_{fg}(\tau) &= \infsum{k} C_k d^{\ast}_{k}e^{j k \omega_0 \tau}
+\label{eq3-cc1} \\
+\intertext{The cross-power spectrum of the two signals is defined as}
+\rho_{fg}(\omega) &= \F[\rho_{fg}(\tau)] \zdtag \\
+&= 2\pi \infsum{k} C_k d^{\ast}_k \delta(\omega-k\omega_0) \label{eq3-cc2}
+\end{align}
+
+Equation~\ref{eq3-cc1} and~\ref{eq3-cc2} constitute the Wiener-Kintchine theorem
+for finite power signals.
+\subsection{Poisson's summation formula}
+Given a non-periodic function $f(t)$, a periodic function $f_\rho(t)$ may be
+defined as
+\begin{align}
+f_\rho(t) &= f(t)\ast\delta_{\infty}(t) \zdtag \\
+\intertext{where}
+\delta_{\infty}(t) &= \infsum{k} \delta(t-kT) \zdtag \\
+\intertext{Since}
+f_\rho(t) &= \infsum{k} C_k e^{j k \omega_0 t} \zdtag \\
+\intertext{or}
+f_\rho(t) &=\frac{1}{T} \infsum{k} F(k\omega_0) e^{j k \omega_0 t} \zdtag \\
+&= \frac{1}{T} \infsum{k} F(k\omega_0)e^{j k \omega_0 t} \\
+\intertext{If $t=0$, we have}
+\infsum{k} f(k T) &= \frac{1}{T}\infsum{k} F(k \omega_0) \label{eq3-poissum} \\
+f_\rho(t) &= f(t)\ast\delta_{\infty} = \infsum{k}f(t+kT) \zdtag \\
+\end{align}
+
+Equation~\ref{eq3-poissum} is called {\em Poisson's summation formula\index{Poisson
+summation}} which states that if $f(t)$ is an arbitrary function with Fourier
+transform $F(\omega)$, then the sum of the values of the function $f(t)$ at
+discrete values of $t=kT (k=0,1,\ldots)$ is related ot the sum of the values
+of the $F(\omega)$ evaluated at discrete values of $\omega=k\omega_0 (\omega_0
+=w\pi/T)$.
+
+\subsection{Schwartz's inequality}
+Schwartz's inequality states that
+\begin{equation}
+\left(\infint f^2(t)dt\right)\left(\infint g^2(t)dt\right) \geqslant
+\left(\infint f(t)g(t)dt\right)^2 
+\end{equation}
+\subsection{The Uncertainty Principle}
+Assume the Fourier transform pair
+\begin{equation}
+f(t) \fpair F(\omega) 
+\end{equation}
+and $f(t)$ is of duration $\Delta t$ and $F(\omega)$ has a band-width of
+$\Delta \omega$.
+\begin{align}
+(\Delta t)^2 &= \frac{1}{\epsilon} \infint (t-\Hat(t))^2 f^2(t) dt \\
+\intertext{where}
+\epsilon &=\infint f^2(t)dt =\frac{1}{2\pi}\infint |F(\omega)|^2 d\omega
+\zdtag \\
+\Hat{t} &=\frac{1}{\epsilon}\infint t f^2(t) dt \zdtag \\
+\intertext{And,}
+(\Delta \omega)^2 &= \frac{1}{2\pi\epsilon} \infint (\omega-\Hat{\omega})^2
+|F(\omega)|^2 d\omega \\
+\intertext{where}
+\Hat{\omega} &= \frac{1}{2\pi\epsilon} \infint \omega |F(\omega)|^2 d\omega
+\zdtag \\
+\intertext{The {\em Uncertainty Principle} states that:}
+\intertext{If}
+\sqrt{t}f(t) &\rightarrow 0 \qquad\mbox{as $|t|\rightarrow \infty$} \zdtag \\
+ \Delta t \Delta \omega &\geqslant \half
+\end{align}
+
+It means that the duration $\Delta t$ of $f(t)$ and its spectral band-width
+$\Delta \omega$ cannot be simultaneously small.
+
+\subsection{Time-limited and Band-limited signals}
+
+\begin{Def}
+A function is time-limited\index{time-limited} if
+\begin{equation}
+f(t)=0 \qquad\mbox{for $|t|>\tau$} 
+\end{equation}
+$f(t)$ is called $\tau$-limited.
+\end{Def}
+
+\begin{Def}
+A function $f(t)$ is band-limited\index{band-limited} if the spectrum
+$F(\omega)$ of the $f(t)$ satisfies:
+\begin{equation}
+F(\omega)=0 \qquad\mbox{for $|\omega|>\omega_0$} 
+\end{equation}
+It is called $\omega_0$-limited.
+\end{Def}
+
+\begin{Thm}
+A fucntion $f(t)$ cannot be both band-limited and time-limited.
+\end{Thm}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+% $Id$
+% $Header$
+d76 2
+a77 2
+	
+	\end{equation}
+a330 1
+
+a335 1
+
+@

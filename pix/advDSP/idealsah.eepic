@@ -1,0 +1,25 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(444,215)(0,-10)
+\put(270,95){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm Zero-order}}}}}
+\put(270,77){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm hold}}}}}
+\put(270,59){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h_o(t)$}}}}}
+\path(340,40)(340,120)(200,120)
+	(200,40)(340,40)
+\put(120,80){\ellipse{42}{42}}
+\path(0,80)(100,80)
+\path(92.000,78.000)(100.000,80.000)(92.000,82.000)
+\path(140,80)(200,80)
+\path(192.000,78.000)(200.000,80.000)(192.000,82.000)
+\path(120,140)(120,100)
+\path(118.000,108.000)(120.000,100.000)(122.000,108.000)
+\path(340,80)(420,80)
+\path(412.000,78.000)(420.000,80.000)(412.000,82.000)
+\path(110,70)(130,90)
+\path(110,90)(130,70)
+\dashline{4.000}(360,0)(360,200)(60,200)
+	(60,0)(360,0)
+\put(400,60){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x_0(t)$}}}}}
+\put(155,60){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x_s(t)$}}}}}
+\put(80,150){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $s(t) = \sum_{n=-\infty}^{\infty} \delta(t-nT)$}}}}}
+\put(0,60){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x_c(t)$}}}}}
+\end{picture}

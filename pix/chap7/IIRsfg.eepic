@@ -1,0 +1,19 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(222,73)(0,-10)
+\path(30,40)(190,40)
+\path(70,40)(150,0)(150,40)
+\path(45,40)(50,40)
+\path(42.000,38.000)(50.000,40.000)(42.000,42.000)
+\path(110,40)(120,40)
+\path(112.000,38.000)(120.000,40.000)(112.000,42.000)
+\path(120,15)(110,20)
+\path(118.050,18.211)(110.000,20.000)(116.261,14.633)
+\path(150,30)(150,20)
+\path(148.000,28.000)(150.000,20.000)(152.000,28.000)
+\path(165,40)(170,40)
+\path(162.000,38.000)(170.000,40.000)(162.000,42.000)
+\put(190,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $g[n]$}}}}}
+\put(30,45){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $f[n]$}}}}}
+\put(105,5){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $a$}}}}}
+\put(155,10){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $z^{-1}$}}}}}
+\end{picture}

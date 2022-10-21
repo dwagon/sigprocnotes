@@ -1,0 +1,40 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(351,153)(0,-10)
+\put(76,60){\ellipse{4}{4}}
+\put(76,120){\ellipse{4}{4}}
+\put(196,60){\ellipse{4}{4}}
+\put(196,120){\ellipse{4}{4}}
+\path(36,120)(236,120)
+\path(76,120)(76,0)(196,0)(196,120)
+\path(196,60)(76,60)
+\path(36,120)(56,120)
+\path(48.000,118.000)(56.000,120.000)(48.000,122.000)
+\path(196,120)(216,120)
+\path(208.000,118.000)(216.000,120.000)(208.000,122.000)
+\path(116,120)(136,120)
+\path(128.000,118.000)(136.000,120.000)(128.000,122.000)
+\path(156,60)(136,60)
+\path(144.000,62.000)(136.000,60.000)(144.000,58.000)
+\path(156,0)(136,0)
+\path(144.000,2.000)(136.000,0.000)(144.000,-2.000)
+\path(196,110)(196,90)
+\path(194.000,98.000)(196.000,90.000)(198.000,98.000)
+\path(76,10)(76,30)
+\path(78.000,22.000)(76.000,30.000)(74.000,22.000)
+\path(76,70)(76,90)
+\path(78.000,82.000)(76.000,90.000)(74.000,82.000)
+\path(196,45)(196,30)
+\path(194.000,38.000)(196.000,30.000)(198.000,38.000)
+\put(241,120){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $g[n]$}}}}}
+\put(201,85){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $z^{-1}$}}}}}
+\put(201,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $z^{-1}$}}}}}
+\put(201,55){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $w_3[n]=g[n-1]=w_2[n-1]$}}}}}
+\put(201,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $w_4[n]=w_3[n-1]=g[n-2]$}}}}}
+\put(136,65){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $-b_1$}}}}}
+\put(136,5){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $-b_2$}}}}}
+\put(71,55){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $w_5[n]$}}}}}
+\put(196,125){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $w_2[n]$}}}}}
+\put(76,125){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $w_1[n]$}}}}}
+\put(31,120){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $f[n]$}}}}}
+\put(51,125){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $a$}}}}}
+\end{picture}

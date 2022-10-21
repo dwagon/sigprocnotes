@@ -1,0 +1,2752 @@
+head	1.1;
+access;
+symbols;
+locks
+	dwagon:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	93.03.24.03.54.10;	author dwagon;	state Exp;
+branches;
+next	;
+
+
+desc
+@Digitization of Analog Signals
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@% $Id$
+% $Header$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Digitization of Analog Signals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The conversion of an analog signal (continuous-time, continuous magnitude) to
+a digital signal involves
+\begin{description}
+\item[sampling] --- Approximation in time,
+\item[quantization] --- Approximation in magnitude, and
+\item[coding] --- Representation.
+\end{description}
+
+\begin{figure}[hbtp]
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.7,0.7
+set noborder
+set xrange [-8:2]
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set arrow from -8,-4 to 2,-4
+set arrow from -8,-4 to -8,4
+set label "$f(t)$" at -8,5
+set label "$t$" at 2.5,-4
+set title "continuous time"
+set arrow from 3,0 to 6,0
+set label "sampling" at 3.0,0.4
+plot 2*(sin(x)+cos(x/2))
+%#
+
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.7,0.7
+set noborder
+set xrange [-8:2]
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set arrow from -8,-4 to 2,-4
+set arrow from -8,-4 to -8,4
+set label "$f(t)$" at -8,5
+set label "$t$" at 2.5,-4
+set title "continuous magnitude"
+set label "quantization" at 2.5,0.4
+set arrow from 3,0 to 6,0
+plot 2*(sin(x)+cos(x/2))
+%# 
+
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.7,0.7
+set noborder
+set xrange [-8:2]
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set arrow from -8,-4 to 2,-4
+set arrow from -8,-4 to -8,4
+set label "$f(t)$" at -8,5
+set label "$t$" at 2.5,-4
+set title "value by real number"
+set label "coding" at 3.5,0.4
+set arrow from 3,0 to 6,0
+plot 2*(sin(x)+cos(x/2))
+%# 
+}
+\hspace{3em}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.7,0.7
+set noborder
+set xrange [-8:2]
+set noxtics
+set noytics
+set nokey
+set label "$0$" at -8,-4.5
+set label "$2T$" at -6,-4.5
+set label "$4T$" at -4,-4.5
+set label "$6T$" at -2,-4.5
+set label "$8T$" at 0,-4.5
+set nozeroaxis
+set samples 10
+set arrow from -8,-4 to 2,-4
+set arrow from -8,-4 to -8,4
+set label "$f(nT)$" at -8,5
+set label "$t$" at 2.5,-4
+set title "discrete time"
+plot 2*(sin(x)+cos(x/2)) with points
+%#
+
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.7,0.7
+set noborder
+set xrange [-8:2]
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set label "$0$" at -8,-4.5
+set label "$2T$" at -6,-4.5
+set label "$4T$" at -4,-4.5
+set label "$6T$" at -2,-4.5
+set label "$8T$" at 0,-4.5
+set label "$q$" at -8.7,-3
+set label "$3q$" at -8.7,-1
+set label "$5q$" at -8.7,1
+set label "$7q$" at -8.7,3
+set arrow from -8,-4 to 2,-4
+set arrow from -8,-4 to -8,4
+set label "$f_q(nT)$" at -8,5
+set label "$t$" at 2.5,-4
+set samples 10
+set title "discrete magnitude"
+plot int(2*(sin(x)+cos(x/2))) with points
+%# 
+
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.7,0.7
+set noborder
+set xrange [-8:2]
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set label "$0$" at -8,-4.5
+set label "$2T$" at -6,-4.5
+set label "$4T$" at -4,-4.5
+set label "$6T$" at -2,-4.5
+set label "$8T$" at 0,-4.5
+set label "$q$" at -8.7,-3
+set label "$3q$" at -8.7,-1
+set label "$5q$" at -8.7,1
+set label "$7q$" at -8.7,3
+set label "$(001)$" at -7,-2
+set label "$(010)$" at -6,1
+set label "$(100)$" at -4,1
+set label "$(110)$" at -2,1
+set arrow from -8,-4 to 2,-4
+set arrow from -8,-4 to -8,4
+set label "$f_q(nT)$" at -8,5
+set label "$t$" at 2.5,-4
+set samples 10
+set title "value by a set of numbers"
+plot int(2*(sin(x)+cos(x/2))) with points
+%# 
+}
+\caption{Sampling, quantization and coding of analog signals\label{f6-sampl}}
+\end{figure}
+
+Although sampling of an analog signal does not have to be at regular time
+intervals, the periodic sampling is commonly used in most of the cases. $T$ is
+called the sampling period.
+
+Uniform and non-uniform quantization may be used at the quantization operation
+and linear or non-linear coding may also be used at the encoding stage.
+
+In practice, the entire process of sampling, quantization and encoding is
+usually called analog-to-digital (A/D) conversion.
+
+\section{Sampling}	%1
+\subsection{Sampling using the ideal impulse}
+Given an analog signal $f(t)$, it may be sampled using a periodic train of
+impulses
+\begin{align}
+\delta_\infty(t) &= \sum_{n=-\infty}^{\infty} \delta(t-nT) \\
+\intertext{and the sampled function $f_s(t)$ is presented as follows}
+f_s(t) &=f(t) \sum_{n=-\infty}^{\infty} \delta(t-nT) \\
+\intertext{Recalling the property of the unit impulse}
+f(t)\delta(t-\alpha) &= f(\alpha)\delta(t-\alpha) \\
+f_s(t) &= \sum_{n=-\infty}^{\infty} f(nT) \delta(t-nT)
+\end{align}
+
+The operation is called the impulse modulation\index{impulse modulation} and
+it is depicted in Figure~\ref{f6-sampling}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/sampling.eepic}
+\end{center}
+\caption{Impulse modulation\label{f6-sampling}}
+\end{figure}
+
+Assume the Fourier spectrum of the function $f(t)$ is $F(\omega)$ which is
+band limited to $\omega_m$,
+\begin{equation}
+|F(\omega)|=0 \qquad \mbox{for $|\omega|>\omega_m$} 
+\end{equation}
+we shall find out what effects that the sampling operation will have on the
+spectrum of the given signal
+
+\begin{center}
+\begin{equation}
+f(t) \stackrel{\F}{\fpair} F(\omega) 
+\end{equation}
+\input{pix/digitanalog/spectrum.eepic}
+\end{center}
+
+Find the Fourier transform of $f_s(t)$.
+Using the property of the Fourier transform ( convolution-in-frequency domain
+)
+
+\begin{align}
+f_1(t)f_s(t) &\fpair \frac{1}{2\pi} F_1(\omega) \ast F_2(\omega) \zdtag \\
+\F[f_s(t)] &= \F[f(t) \delta_\infty(t) ] \\
+&= \frac{1}{2\pi} \F[f(t)] \ast \F \left[ \infsum{n} \delta(t-nT) \right] \\
+\intertext{where}
+\F[f(t)] &= F(\omega) \\
+\intertext{and}
+\F\left[ \infsum{n} \delta(t-nT) \right] &= \omega_0 \infsum{n}
+\delta(\omega-n\omega_0) \zdtag \\
+\omega_0 = \frac{2\pi}{T} \zdtag \\
+\intertext{$\omega_0$ is the sampling frequency and $T$ is the sampling period.}
+\intertext{Thus:}
+F_s(\omega) = \F[f_s(t)] &= \frac{1}{2\pi} F(\omega) \ast \left\{
+\frac{2\pi}{T} \infsum{n} \delta(\omega-n\omega_0) \right\} \zdtag \\
+&= \frac{1}{T} \left\{ F(\omega) \ast \infsum{n} \delta(\omega-n\omega_0)
+\right\} \zdtag \\
+&= \frac{1}{T} \infsum{n} F(\omega-n\omega_0) \label{eq6-616}
+\end{align}
+
+(Noticing:
+\begin{align}
+F(\omega) \ast \infsum{n} \delta(\omega-n\omega_0) &= \infsum{n} \infint
+F(\omega-v)\delta(v-n\omega_0) dv \\
+&= \infsum{n} F(\omega-n\omega_0).
+\end{align}
+$\phantom{Noticing:}$)
+
+From Equation~(\ref{eq6-616}) the spectrum of the sampled signal consists of the
+periodic extension of the spectrum $F(\omega)$ of the analog signal $f(t)$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/prdexten.eepic}
+\end{center}
+\caption{Effects of changing sampling rate\label{f6-chngsamp}}
+\end{figure}
+
+From Figure~\ref{f6-chngsamp}, when the sampling frequency $\omega_0 \geqslant
+2\omega_m$ where $\omega_m$ is the highest frequency component of the
+band-limited spectrum $F(\omega)$ of the  $f(t)$, $F(\omega)$ can be retrieved
+from $F_s(\omega)$, if an ideal low-pass filter $H(\omega)$ is applied. Thus
+$f(t)$ can be fully recovered, by inverse Fourier tranforming
+$F(\omega)=H(\omega) F_s(\omega)$.
+
+\begin{Def}[Nyquist frequency\index{Nyquist frequency}]
+The minimum sampling rate required to prevent aliasing is twice the highest
+frequency component $\omega_m$ in the spectrum $F(\omega)$ of $f(t)$. This
+minimum sampling rate is defined as the Nyquist frequency $\omega_N$, i.e.
+\begin{equation}
+\omega_N=2\omega_m 
+\end{equation}
+\end{Def}
+\subsubsection{The sampling theorem}
+A signal $f(t)$ whose spectrum is band-limited to below a frequency
+$\omega_m$, can be completely recovered from its samples $\{f(nT)\}$ taken at
+a rate
+\begin{equation}
+f_N=\frac{\omega_N}{2\pi}=\frac{1}{T_N} \qquad \mbox{where
+$\omega_N=2\omega_m$} 
+\end{equation}
+
+The signal $f(t)$ is determined from its sample values $\{f(nT)\}$ by
+\begin{align}
+f(t) &= \infsum{n} f(nT) \frac{\sin \omega_m(t-nT)}{\omega_m (t-nT)} \label{eq6-617}\\
+\intertext{where}
+T &= \frac{\pi}{\omega_m} = \frac{2\pi}{\omega_N} = \frac{1}{f_N}
+\end{align}
+
+Proof:\\
+
+If the sampling rate is greater than the Nyquist frequency
+$\omega_N=2\omega_m$, $F(\omega)$ can be recovered from $F_s(\omega)$ by
+using an ideal low-pass filter of magnitude $T$ and cut-off at $\omega_m$ as
+shown in Figure~\ref{f6-reconfilt}.
+
+\begin{figure}[hbtp]
+\begin{align}
+H(j\omega) &= \begin{cases}
+T & |\omega| \leqslant \omega_m \\
+0 & |\omega| > \omega_m \\
+\end{cases}  \\
+F(\omega) &= F_s(\omega) H(\omega) 
+\end{align}
+
+\begin{center}
+\input{pix/digitanalog/lpfilt.eepic}
+\end{center}
+\caption{Low-pass reconstruction filter\label{f6-reconfilt}}
+\end{figure}
+
+That is
+\begin{align}
+f(t) &= \F^{-1}[ F_s(\omega) ] \ast \F^{-1}[ H(\omega) ] \zdtag \\
+&= f_s(t) \ast h(t) \zdtag \\
+\intertext{where $h(t)$ is the impulse response of the ideal low-pass filter
+$H(\omega)$.}
+H(\omega) &= Te^{-j k \omega}|_{k=0} \zdtag \\
+\hat{h}(t) &= \frac{1}{2\pi} \infint H(\omega) e^{j t \omega} d\omega \zdtag \\
+&= \frac{1}{2\pi} \int_{-\omega_m}^{\omega_m} T e^{-j k \omega} e^{j t \omega}
+d\omega \zdtag \\
+&= \frac{T}{2\pi} \int_{-\omega_m}^{\omega_m} e^{j(t-k)\omega} d\omega \zdtag
+\\
+&= \left. \frac{T}{2\pi} \frac{1}{j(t-k)} e^{j(t-k)\omega}
+\right|_{-\omega_m}^{\omega_m} \zdtag \\
+&= \frac{T}{2\pi} \frac{1}{j(t-k)} \left\{ e^{j(t-k)\omega_m} - e^{-j(t-k)
+\omega_m} \right\} \zdtag \\
+&= \frac{T}{2\pi} \frac{1}{j(t-k)} \left\{ \cos[(t-k) \omega_m] +j\sin [ (t-k)
+\omega_m ] - \right. \notag \\
+& \phantom{=}\quad \left. \cos [ (t-k) \omega_m ] +j \sin [(t-k) \omega_m] \right\} \zdtag \\
+&= \frac{T}{2\pi} \frac{1}{j(t-k)} 2j \sin[ (t-k) \omega_m] \zdtag \\
+&= \frac{T}{\pi(t-k)} \sin [(t-k) \omega_m] \\
+h(t) &= \hat{h}(t)\left|_{k=0}= T \frac{\sin(\omega_m t)}{\pi t} \right. \\
+&= \frac{\sin(\omega_m t)}{\omega_m t} \\
+f(t) &= f_s(t) \ast h(t) \zdtag \\
+&= \infint \left( \infsum{n} f(nT)\delta(\tau-nT) \right) \frac{
+\sin[\omega_m(t-\tau)]}{\omega_m(t-\tau)} d\tau \zdtag \\
+&= \infsum{n} \left\{ \infint f(nT) \frac{ \sin[\omega_m (t-\tau) ]}{ \omega_m
+(t-\tau)} \delta(\tau-nT) d\tau \right\} \zdtag \\
+&= \infsum{n} f(nT) \frac{ \sin [\omega_m (t-nT)]}{\omega_m (t-nT)}
+\label{eq6-6111}
+\end{align}
+
+Equation~(\ref{eq6-617}) or~(\ref{eq6-6111}) is essentially a formula for the
+interpolation of the signal values by its values at the sampling points.
+
+\begin{Rem} \ \ 
+\begin{enumerate}
+\item $f(t)$ is recoverable from its sample values if and only if the sampling
+theorem is satisfied.
+\item In practice, we cannot expect all signals to have a limited band
+spectrum. Therefore the spectrum of the signal is made band-limited to a
+frequency $\omega_N/2$ prior to sampling at $\omega_N$. The prefiltering is
+required to accomplish this task.
+\item Because the ideal filter is physically unrealizable, in practice the
+sampling frequency is chosen to be higher than the Nyquist rate. ( Speech
+signals are band limited to 3.4 kHz and sampled at 8 kHz. PCM uses 7 bits plus
+1 bit parity $\rightarrow$ 64 kbits/s $\rightarrow$ 64 kHz which is the
+channel bandwidth allocated for telephone lines).
+\item For a band-pass signal the spectrum of which lies in the range
+\begin{equation}
+\omega_1 < |\omega| < \omega_2
+\end{equation}
+the Nyquist frequency $\omega_N$ is given by
+\begin{equation}
+\omega_N = 2(\omega_2 - \omega_1 ) 
+\end{equation}
+and the band-pass filter must be used for the reconstruction of the signal.
+\end{enumerate}
+\end{Rem}
+
+\subsection{Practical sampling functions}
+
+Since the ideal impulse train is not feasible in practice, a periodic train
+of rectangular pulse is used in its place.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/rectpulse.eepic}
+\end{center}
+\caption{Rectangular pulse train\label{f6-rectpulse}}
+\end{figure}
+
+In Figure~\ref{f6-rectpulse}, $\tau$ is the pulse width and $T=2\pi/\omega_0$
+is the sampling period of the function $s(t)$.
+\begin{align}
+f_s(t) &= f(t) s(t) \\
+\intertext{The Fourier series of $s(t)$ is given by}
+s(t) &= \infsum{k} C_k e^{j k \omega_0} \\
+\intertext{where}
+C_k &= \frac{\tau}{T} \frac{\sin(k \pi \tau/T)}{k \pi \tau/T} \\
+\intertext{Therefore}
+f_s(t) &= f(t) s(t) \zdtag \\
+&= \infsum{k} C_k f(t) e^{j k \omega_0 t} \\
+\intertext{The Fourier transform of $f_s(t)$ is given by}
+F_s(\omega) &= \F[f_s(t)] \zdtag \\
+&= \infint \left\{ \infsum{k} C_k f(t) e^{j k \omega_0 t} \right\} e^{-j
+\omega t} dt \zdtag \\
+&= \infsum{k} C_k \underbrace{ \infint f(t) e^{-j(\omega-k\omega_0)t}
+dt}_{F(\omega-k\omega_0)} \zdtag \\
+&= \infsum{k} C_k F(\omega-k\omega_0)  \label{eq6-6117}
+\end{align}
+
+From Equation~(\ref{eq6-6117}), apart from a coefficient $C_k$, it has the same
+form as Equation~(\ref{eq6-616}). That is, the sampling theorem still holds.
+
+\begin{align}
+\left( \qquad C_0 \right. &= \left. \frac{\tau}{T} \frac{\frac{\pi\tau}{T} \cos
+\frac{k\pi\tau}{T}}{ \frac{ \pi\tau}{T}}\right|_{k=0} \\
+&= \left. \frac{\tau}{T} \qquad \right)
+\end{align}
+
+As well, from Equation~(\ref{eq6-6117}), it is obvious the actual shape of the
+sampling pulses is immaterial, the theorem is always valid.
+
+\section{Windowed Signals}	%2
+It is often the case in digital signal processing that only part of a waveform
+can be captured or stored for processing.
+
+\begin{Def}[Windowing]
+\index{windowing}
+The operation of multiplying the true signal by a rectangular function of
+appropriate duration is called windowing.
+\end{Def}
+
+\begin{Rem} \ \ 
+\begin{enumerate}
+\item The wider the window, the more closely the windowed spectrum approaches
+that of the original continuous signal.
+\item The effect of windowing is to smear out the spectrum.
+\end{enumerate}
+\end{Rem}
+
+\begin{Def}[Leakage]
+\index{leakage}
+Leakage is used to refer to the spectral spreading caused by time domain
+windowing.
+\end{Def}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Original Signal]{
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,-1.1 to 0,1.1
+set xrange [-10:10]
+set size 0.7,0.7
+set xlabel "Time Domain"
+plot cos(x)
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,-1.1 to 0,1.1
+set xrange [-10:10]
+set size 0.7,0.7
+set arrow from -5,0 to -5,1
+set arrow from 5,0 to 5,1
+set xlabel "Frequency Domain"
+plot abs(x)<0.001?1:0 
+%#
+}}
+\subfigure[Window]{
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,-0.1 to 0,1.1
+set size 0.7,0.7
+set xlabel "Time Domain"
+plot abs(x)<7.5?1:0
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,-0.1 to 0,1.1
+set size 0.7,0.7
+set xlabel "Frequency Domain"
+sinc(x)=sin(x*2)/(x*2)
+plot sinc(x)
+%#
+}}
+\subfigure[Signal after windowing]{
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,-1.1 to 0,1.1
+set xrange [-10:10]
+set size 0.7,0.7
+set xlabel "Time Domain"
+plot abs(x)<7.5?cos(x):0
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,-0.1 to 0,1.1
+set size 0.7,0.7
+sinc(x)=sin(x*2)/(x*2)
+set xlabel "Frequency Domain"
+plot sinc(x-5)+sinc(x+5)
+%#
+}}
+\end{center}
+\caption{Windowing with wide rectangular window\label{f6-widewindow}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Original Signal]{
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,-1.1 to 0,1.1
+set xrange [-10:10]
+set size 0.7,0.7
+set xlabel "Time Domain"
+plot cos(x)
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,-1.1 to 0,1.1
+set xrange [-10:10]
+set size 0.7,0.7
+set arrow from -5,0 to -5,1
+set arrow from 5,0 to 5,1
+set xlabel "Frequency Domain"
+plot abs(x)<0.001?1:0 
+%#
+}}
+\subfigure[Window]{
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,-0.1 to 0,1.1
+set size 0.7,0.7
+set xlabel "Time Domain"
+plot abs(x)<2.5?1:0
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,-0.1 to 0,1.1
+set size 0.7,0.7
+set xlabel "Frequency Domain"
+sinc(x)=sin(x/1)/(x/1)
+plot sinc(x)
+%#
+}}
+\subfigure[Signal after windowing]{
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,-0.6 to 0,1.1
+set xrange [-10:10]
+set size 0.7,0.7
+set xlabel "Time Domain"
+plot abs(x)<2.5?cos(x):0
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-10:10]
+set arrow from -10,0 to 10,0
+set arrow from 0,-0.1 to 0,1.1
+set size 0.7,0.7
+sinc(x)=sin(x)/(x)
+set xlabel "Frequency Domain"
+plot sinc(x-6)+sinc(x+6)
+%#
+}}
+\end{center}
+\caption{Windowing with narrow rectangular window\label{f6-narrowwindow}}
+\end{figure}
+
+Different windows may be applied to reduce the leakage caused by time domain
+windowing. Examples of windowing can be seen in Figure~\ref{f6-widewindow} and
+Figure~\ref{f6-narrowwindow}.
+
+\section{Quantization}	%3
+\begin{Def}
+\index{quantization} Quantization is defined as an approximation of each
+sample value $f(nT)$ by an integer multiple of a basic quantity $q$. $q$ is
+called the quantizing step\index{quantizing step}. The system which does the
+quantization is called a quantizer as shown in Figure~\ref{f6-quant}.
+\end{Def}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/quant.eepic}
+\end{center}
+\caption{Quantization operation\label{f6-quant}}
+\end{figure}
+
+Two quantization methods are rounding and truncation.
+
+The sampled signal $f(nT)$ can be represented by a sum of the quantizer output
+$f_q(nT)$ and an error signal $\E(nT)$, i.e.
+\begin{equation}
+f(nT)=f_q(nT) + \E(nT)
+\end{equation}
+
+\subsection{Rounding}
+When rounding is used in the quantization, each sample value $f(nT)$ is
+rounded to $nq$ where $(n-\half)q \leqslant f(nT) < (n+\half)q $.
+
+The maximum error $|\E(nT)| \leqslant \frac{q}{2}$.
+
+\subsection{Truncation}
+When truncating is used in the quantization, each sample value $f(nT)$ is
+truncated to $nq$ where $nq \leqslant f(nT) < (n+1)q$.
+
+The maximum error $|\E(nT)| < q$.
+
+\section{Encoding and Binary Number Representation}	%4
+The sampled and quantized signal can be represented by a set of numbers which
+are almost always in binary form.
+
+A given number $N$ can be represented with finite precision in the following
+general form
+\begin{equation}
+N=\sum_{i=-m}^{n} C_i r^2
+\end{equation}
+where $C_i$ is the ith coefficient and $r$ is the radix and $0 \leqslant C_i
+\leqslant (r-1)$.
+
+It can also be written as
+\begin{equation}
+N=(C_n C_{n-1} \cdots C_1 C_0 . C_{-1} C_{-2} \cdots C_{-m})_r 
+\end{equation}
+
+If $r=10$, it is the decimal system. If $r=2$ it is the binary system.
+
+Multiplication and division methods can be used for the conversion.
+
+To implement arithmetic operations on binary numbers using the finite word
+length, two number representations may be used, i.e. the fixed-point numbers
+and floating-point numbers.
+
+Thus the names fixed-point arithmetic and floating-point arithmetic.
+
+\subsection{Fixed-point arithmetic}
+Using l-bit word, a fixed-point number may be represented as shown in
+Figure~\ref{f6-fixedpoint}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/fixedpoint.eepic}
+\end{center}
+\caption{Fixed-point Number Representation\label{f6-fixedpoint}}
+\end{figure}
+
+In all cases, the most significant bit (MSB\index{MSB}) is used as the sign bit.
+
+Multiplication of two integers results in an increased word-length which
+cannot be reduced by rounding or quantization.
+
+Mixed numbers are difficult to multiply.
+
+For one's complement representation,
+\begin{equation}
+N_{OC} = \begin{cases}
+N 				& \mbox{for $N \geqslant 0$} \\
+2-2^{-l}-|N| 	& \mbox{for $N<0$} \\
+\end{cases}
+\end{equation}
+where $N$ is a proper fraction within the range $-(1-2^{-l}) \leqslant N
+\leqslant 1-2^{-l}$ and $l$ is the word-length with sign-bit excluded.
+
+For two's complement representation
+\begin{equation}
+N_{TC} = \begin{cases}
+N 		& \mbox{for $N \geqslant 0$} \\
+2-|N| 	& \mbox{for $N<0$} \\
+\end{cases}
+\end{equation}
+
+where $N$ is a proper fraction within the range $-1 \leqslant N \leqslant
+1-2^{-l}$ and $l$ is the word-length with the sign-bit excluded.
+
+Remarks on the three types of fixed-point arithmetic:
+\begin{enumerate}
+\item Sign-magnitude addition requires sign checks, complementing and
+end-around carry.
+\item Special algorithms are required for one's and two's complement
+arithmetic multiplication.
+\end{enumerate}
+
+As a result, fixed-point arithmetic uses a format which represents proper
+fractions only. (Multiplication of two proper fractions is still a proper
+fraction, $|N|<1$ and the product can be rounded off to maintain a pre-set
+word length.) The rage of the numbers under this arrangement is:
+\begin{equation}
+-1 \leqslant N \leqslant 1-2^{-l} 
+\end{equation}
+where $l$ is the word-length (sign-bit excluded).
+
+\begin{Exa}
+
+\begin{center}
+\begin{tabular}{c@@{.}c@@{}ccc@@{.}c@@{}ccc}
+\multicolumn{3}{c}{One's} & & \multicolumn{3}{c}{Two's} & & Numeric \\
+\multicolumn{3}{c}{Complement} & & \multicolumn{3}{c}{Complement}
+& & Value $N$\\
+0 & 1 & 1 & \hspace{1em} & 0 & 1 & 1 & \hspace{1em} & 3/4 \\
+0 & 1 & 0 & & 0 & 1 & 0 & & 1/2 \\
+0 & 0 & 1 & & 0 & 0 & 1 & & 1/4 \\
+$\begin{array}{c}0\\1\end{array}$  &
+$\begin{array}{c}0\\1\end{array}$  &
+$\left.\begin{array}{c}0\\1\end{array}\right\}$  &
+&  0 & 0 & 0 & & 0 \\
+1 & 1 & 0 & & 1 & 1 & 1 & & -1/4 \\
+1 & 0 & 1 & & 1 & 1 & 0 & & -1/2 \\
+1 & 0 & 0 & & 1 & 0 & 1 & & -3/4 \\
+\multicolumn{3}{c}{ } & & 1 & 0 & 0 & & -1 \\ 
+\end{tabular}
+\end{center}
+\end{Exa}
+
+\begin{Exa}
+Given $l=2$, find $(-\frac{1}{4}-\frac{1}{2})$.
+
+One's complement arithmetic (end-around carry)
+
+\parbox{0.4\textwidth}{
+\begin{tabular}{lc@@{.}c@@{}cl}
+  & 1 & 1 & 0 & -1/4 \\
++ & 1 & 0 & 1 & -1/2 \\ \hline
+1 & 0 & 1 & 1 \\
+  &   &   & 1 \\ \hline
+  & 1 & 0 & 0 & -3/4 \\
+\end{tabular}}\parbox{0.4\textwidth}{End-around carry: A carry bit at most
+significant position is added at the least significant position}
+
+Two's complement arithmetic
+
+\parbox{0.4\textwidth}{
+\begin{tabular}{lc@@{.}c@@{}cl}
+  & 1 & 1 & 1 & -1/4 \\
++ & 1 & 1 & 0 & -1/2 \\ \hline
+1 & 1 & 0 & 1 \\ \hline
+  & 1 & 0 & 1 & -3/4 \\
+\end{tabular}}\parbox{0.4\textwidth}{
+A carry bit at the most significant position is discarded.}
+\end{Exa}
+
+\subsection{Number Quantization}
+
+In the finite-word-length computation, there are two problems.
+\begin{enumerate}
+\item Overflow\index{overflow} occurs when the result of an addition
+operation cannot be accommodated by the given word-length.
+\item Round off\index{round off} operation is required if a pre-set word-length
+is to be maintained after multiplication.
+\end{enumerate}
+
+Again, rounding or truncation may be used for the round off.
+
+In truncation, all bits after $l$th are simply discarded.
+
+In rounding, if the $(l+1)$th bit is 0, discard $(l+1)$th as well as any bits
+after it, where $l$ is the word-length, excluding the sign bit. If the
+$(l+1)$th bit is 1, add 1 to the $l$th bit and discard any bits after it.
+ 
+This is a simple rounding towards $+\infty$:
+\begin{equation}
+\begin{array}{c@@{\rightarrow}c}
+1.6 & 2\\
+1.5 & 2\\
+1.4 & 1\\
+-1.6 & -2\\
+-1.5 & -1\\
+-1.4 & -1\\
+\end{array} 
+\end{equation}
+
+\subsection{Floating point numbers}
+\subsubsection{Representation}
+
+A number $N$ can be represented in the floating-point form
+\begin{equation}
+N=2^c M
+\end{equation}
+where $c$ is the exponent, $M$ is the mantissa. $c$ is an integer, $M$ is
+usually normalized to the range
+\begin{equation}
+\half \leqslant M \leqslant 1
+\end{equation}
+
+\begin{Exa}
+\begin{align}
+(2.5)_{10} &= 2^{10.0} 0.101 \\
+&= 2^2 ( 2^{-1}+2^{-3}) \\
+&= 2+2^{-1} \\
+&= 2.5 \\
+(1.25)_{10} &= 2^{1.0}0.101
+\end{align}
+\end{Exa}
+
+\subsubsection{Multiplication and division}
+
+Given $N_1=2^{c_1} M_1$ and $N_2=2^{c_2}M_2$.
+\begin{align}
+N_1 \times N_2 &= 2^{c_1} M_1 \times 2^{c_2} M_2 \zdtag \\
+&= 2^{c_1+c_2}(M_1\times M_2)  \\
+\intertext{and}
+\frac{N_1}{N_2} &= \frac{2^{c_1} M_1}{2^{c_2} M_2} = 2^{c_1-c_2}
+\frac{M_1}{M_2} 
+\end{align}
+
+\subsubsection{Addition}
+
+The floating point addition requires the adjustment of the mantissa of the
+smaller number until the exponents $c_1$ and $c_2$ are equal. The result is
+usually normalized.
+
+\begin{Exa}[Floating-point binary representation]
+Given
+\begin{align}
+N_1=2^{10.0} 0.101 &= (2.5)_{10} \\
+\intertext{and}
+N_2=2^{1.0} 0.101 &= (1.25)_{10} 
+\end{align}
+\begin{enumerate}
+\item \begin{align}
+N_1 \times N_2 &= 2^{10.0+1.0} \{ 0.101 \times 0.101 \} \\
+&= 2^{11.0} 0.011001 \\
+&= 2^{11.0} 2^{-1} 0.11001 \\
+&= 2^{10.0} 0.11001 = (3.125)_{10}
+\end{align}
+\item \begin{align}
+N_1+N_2 &= 2^{10.0}0.101 + 2^{1.0} 0.101 \\
+&= 2^{10.0} 0.101 + 2^{10.0}2^{-1} 0.101 \\
+&= 2^{10.0} \{ 0.101 + 0.0101 \} \\
+&= 2^{10.0}0.1111 = (3.75)_{10} 
+\end{align}
+\item Rounding
+\begin{equation}
+2^{10.0}1.000 = 2^{11.0} 0.100 = (4)_{10} 
+\end{equation}
+\item Truncation
+\begin{equation}
+2^{10.0}0.111 = (3.5)_{10} 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+\subsection{Comparison between the finite-word-length-arithmetics}
+\begin{enumerate}
+\item In the fixed-point arithmetic multiplication results in round off
+errors, while addition will introduce overflow.
+\item In the floating-point arithmetic, round off errors exist in both
+multiplication and addition.
+\item The valid dynamic range in the fixed-point arithmetic is small
+\begin{equation}
+-1 \leqslant N \leqslant 1-2^{-l} 
+\end{equation}
+while the dynamic range in the floating-point arithmetic is large. If the
+exponent is 6 signed bit integer
+\begin{equation}
+2^{-64} \leqslant |N| < 2^{63} 
+\end{equation}
+\end{enumerate}
+
+\section{Reconstruction Filter}	%5
+
+To reconstruct an analog signal after digital processing, a conversion is
+required to change the signal into its analog for, A zero-order hold D/A
+converter may be used 
+
+\begin{center}
+\input{pix/digitanalog/recon.eepic}
+\end{center}
+
+\begin{equation}
+g(t) = \sum_{n} g(n) h(t-nT) 
+\end{equation}
+
+The Fourier spectrum of the zero-order hold D/A converter is shown in
+Figure~\ref{f6-zoh} while the input and output of the D/A converter is shown
+in Figure~\ref{f6-daconv}.
+
+\begin{figure}[hbtp]
+\begin{equation}
+h(t) = \begin{cases} 1 & 0<t<T \\
+0 & \mbox{otherwise} \\ \end{cases} 
+\end{equation}
+
+\parbox{0.30\textwidth}{
+\input{pix/digitanalog/zoh.eepic}
+} $\stackrel{\F}{\Leftrightarrow}$ \parbox{0.6\textwidth}{
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set noxtics
+set noytics
+set size 0.8,1
+set nozeroaxis
+set xrange [-4.5:4.5]
+set yrange [-0.5:1.5]
+set arrow from -5,0 to 5,0
+set arrow from 0,-0.1 to 0,1.4
+set label "$|H(j\omega)|$" at 0,1.5
+set label "$\omega$" at 5,0
+set label "$\frac{-2\pi}{T}$" at -pi,-0.1
+set label "$\frac{2\pi}{T}$" at pi,-0.1
+set label "$\frac{-\pi}{T}$" at -pi/2,-0.1
+set label "$\frac{\pi}{T}$" at pi/2,-0.1
+set label "$T$" at 0.1,1.1
+plot (sin(x)/x)**2,(abs(x)<(pi/2)?1:0)
+%#
+}
+\caption{Zero-order-hold D/A converter\label{f6-zoh}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Input to D/A Converter]{ \input{pix/digitanalog/daconvinput.eepic}}
+
+\subfigure[Resulting Output from D/A Converter]{\input{pix/digitanalog/daconvoutput.eepic}}
+\end{center}
+\caption{D/A Converter \label{f6-daconv}}
+\end{figure}
+
+Obviously, a post-filter is required to help the reconstruction of the analog
+signal.
+
+Since the Fourier transform of the zero-order hold D/A is given by
+\begin{align}
+H(j\omega) & \F[h(t)] = \int_0^T e^{-j\omega t} dt = \left. -\frac{1}{j\omega}
+e^{-j \omega t} \right|_0^T \zdtag \\
+&= \frac{j}{\omega} \left( e^{-j\omega T} - 1 \right) \zdtag \\
+&= \frac{j}{\omega} e^{-j\frac{\omega T}{2}}  \left( e^{-\frac{j\omega T}{2}}
+- e^{\frac{j\omega T}{2}} \right) \zdtag \\
+&= \frac{j}{\omega} e^{-\frac{j\omega T}{2}} \left( -2j\sin \frac{\omega
+T}{2} \right)  \zdtag \\
+&= \frac{2\sin \left( \frac{\omega T}{2} \right)}{\omega} e^{-\frac{j\omega
+T}{2}} 
+\end{align}
+
+If we are going to implement an ideal low-pass interpolating filter
+$H_r(j\omega)$, as shown in Figure~\ref{f6-ideallow} we need a post filter after the D/A converted which makes
+\begin{equation}
+\underbrace{H_r(j\omega)}_{\mbox{Reconstruction filter}} =
+\overbrace{H(j\omega)}^{\mbox{zero-order hold D/A converter}} \cdot
+\underbrace{\tilde{H}_r(j\omega)}_{\mbox{post filter}}
+\end{equation}
+where
+\begin{equation}
+\tilde{H}_r(j\omega) = \begin{cases}
+\frac{(\omega T/2)}{\sin \left( \frac{\omega T}{2} \right) } e^{\frac{j\omega
+T}{2}} & |\omega| < \frac{\pi}{T} \\
+0 & |\omega| > \frac{\pi}{T} \\ \end{cases} 
+\end{equation}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Frequency response]{ 
+%# gnuplot
+set terminal eepic
+set xrange [-5:5]
+set yrange [0:1.5]
+set nokey
+set noxtics
+set noxtics
+set noytics
+set noborder
+set nozeroaxis
+set arrow from -5,0 to 5,0
+set arrow from 0,0 to 0,1.5
+set label "$-\frac{F_s}{2}$" at -2,-.1
+set label "$\frac{F_s}{2}$" at 2,-.1
+set label "$T$" at 0.1,1.1
+set label "$T=\frac{1}{F_s}$" at 3,1
+set label "$F$" at 5.1,0
+plot (abs(x)<2)?1:0
+%#
+}
+\subfigure[Impulse response]{ 
+%# gnuplot
+set terminal eepic
+set xrange [-4.5:4.5]
+set yrange [-1:1.5]
+set noxtics
+set noytics
+set nokey
+set noborder
+set nozeroaxis
+set arrow from -5,0 to 5,0
+set arrow from 0,0 to 0,1.5
+set label "$t$" at 5.1,0
+plot sin(x/0.25)/(x/0.25)
+%#
+}
+\end{center}
+\caption{Ideal low pass filter charactersitics\label{f6-ideallow}}
+\end{figure}
+
+For more information/discussion, refer to ``Discrete-Time Signal Processing'',
+by A.\ V.\ Oppenheim and R.\ W.\ Schafer.
+
+\section{The Concept of Frequency in Continuous-Time and Discrete-Time
+Signals}	%6
+
+
+\subsection{Continuous-time Sinusoidal Signals}
+
+A continuous-time sinusoidal signal $x_a(t)$ can be used to describe a simple
+harmonic oscillation
+\begin{equation}
+x_a = A\cos ( \Omega t + \theta ) 
+\end{equation}
+where $-\infty < t < \infty$, $A$ is the amplitude, $\Omega$ is the frequency
+in rad/s and $\theta$ is the phase in radians.
+\begin{equation}
+\Omega=2\pi F 
+\end{equation}
+where $F$ is the frequency in cycles per second or Hertz (Hz). Hence
+\begin{equation}
+x_a(t) = A\cos ( 2\pi F t + \theta )
+\end{equation}
+
+The waveform is shown in Figure~\ref{f6-waveform}.
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set nozeroaxis
+set xrange [-.9:.9]
+set yrange [-1.2:1.5]
+set noxtics
+set noytics
+set arrow from -1,0 to 1,0
+set arrow from 0,-1.1 to 0,1.4
+set label "$x_a(t)=A\cos(2\pi F t + \theta)$"  at 0.02,1.45
+set label "$t$" at 1.01,0.05
+set label "$A\cos \theta$" at 0.1,-0.8
+set arrow from 0.1,-0.82 to 0,-0.82
+set arrow from -0.6,1 to 0.4,1
+set arrow from 0.4,1 to -0.6,1
+set label "$T_p=1/F$" at -0.4,1.1
+F=1
+theta=10
+plot cos(2*pi*F*x+theta)
+%#
+\end{center}
+\caption{Waveform of continuous-time sinusoidal signal\label{f6-waveform}}
+\end{figure}
+
+\subsubsection{Properties of the sinusoidal signal $x_a(t)$}
+\begin{enumerate}
+\renewcommand{\theenumi}{\roman{enumi}}
+\item $x_a(t)$ is periodic for every fixed value of $F$, i.e.
+\begin{equation}
+x_a(t+T_p) = x_a(t)
+\end{equation}
+where $T_p=\frac{1}{F}$ is the fundamental period of the $x_a(t)$.
+\item If $F_1 \neq F_2$
+\begin{align}
+x_a(t) &= A\cos(2\pi F_1 t + \theta) \\
+& \neq A\cos(2\pi F_2 t + \theta ) = x'_a(t)
+\end{align}
+or
+
+Continuous-time sinusoids signals with distinct (different) frequencies are
+themselves distinct.
+\item Increasing $F$ results in an increase in the rate of oscillation of the
+signal or more periods are included in a given time interval.
+\end{enumerate}
+
+\begin{Rem}
+Due to continuity of the time variable $t$, $F=\frac{1}{T_p}$ can be increased
+without limit. i.e. $F\rightarrow\infty$.
+\end{Rem}
+
+The frequency $F$ of the continuous time sinusoidal signal is defined in
+$(-\infty,\infty)$.
+
+The negative frequencies come about for mathematical convenience.
+
+Since (the Euler identity)
+
+\begin{align}
+e^{\pm j \phi} &= \cos \phi \pm j \sin \phi \\
+X_a(t) &= A\cos(2\pi F t + \theta) \zdtag \\
+&= \underbrace{\frac{A}{2} e^{j(2\pi F t + \theta)} + \frac{A}{2} e^{-j(2\pi F
+t + \theta)}}_{\mbox{Phasor expression}}
+\end{align} \index{phasor expression}
+
+\subsection{Discrete-time Sinusoidal Signals}
+
+A discrete-time sinusoidal signal may be expressed as
+\begin{equation}
+x[n] = A\cos(\omega n + \theta)
+\end{equation}
+where $n$ is an integer variable $(-\infty < n < \infty)$ which is the sample
+number, $A$ is again the amplitude of the sinusoid, $\omega$ is the frequency
+in radians per sample, and $\theta$ is the phase in radians. See
+Figure~\ref{f6-discwave}.
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set nozeroaxis
+set xrange [-.9:.9]
+set yrange [-1.2:1.5]
+set noxtics
+set noytics
+set arrow from -1,0 to 1,0
+set arrow from 0,-1.1 to 0,1.4
+set label "$x_a(t)=A\cos(\omega n + \theta)$"  at 0,1.45
+set label "$t$" at 1,0.05
+set label "$A\cos \theta$" at 0.1,-0.8
+set samples 21
+F=1
+theta=10
+plot cos(2*pi*F*x+theta) with impulses
+%#
+\end{center}
+\caption{Waveform of discrete-time sinusoidal signal\label{f6-discwave}}
+\end{figure}
+
+If we define 
+\begin{align}
+\omega &\triangleq 2\pi f \\
+x[n] &= A\cos(2\pi f n + \theta)
+\end{align}
+where $f$ is the frequency in cycles per second or Hz.
+
+\subsubsection{Properties of the discrete sinusoidal signals}
+\begin{enumerate}
+\renewcommand{\theenumi}{\roman{enumi}}
+\item A discrete-time sinusoid is periodic only if its frequency $f$ is a
+rational number.
+
+A discrete-time signal $x[n]$ is periodic with period $N$ $(N>0)$, if and only
+if
+
+\begin{equation}
+x[n+N]=x[n] \qquad \mbox{for all $n$} \label{eq6-6610}
+\end{equation}
+
+The smallest value of $N$ for which Equation~(\ref{eq6-6610}) is true is called
+the fundamental period\index{fundamental period}.
+
+Proof:\\
+
+For $x[n]$ with a given $f_0$ to be periodic, the following must be held
+according to Equation~(\ref{eq6-6610}):
+\begin{align}
+\cos[2\pi f_0 (N+n)+\theta] &= \cos(2\pi f_0 n + \theta) \label{eq6-6611}\\
+\intertext{For Equation~(\ref{eq6-6611}) to be true, it requires}
+2\pi f_0 (N+n) &= 2\pi f_0 n +2 k \pi \\
+\intertext{where $k$ is an integer. Or}
+2\pi f_0 N &= 2 k \pi \\
+f_0 &= \frac{k}{N} \label{eq6-6614}
+\end{align}
+
+This means that a discrete-time sinusoidal signal $x[n]$ is periodic only is
+$f_0$ is rational (expressed as the ratio of two integers).
+
+When $k$ and $N$ is Equation~(\ref{eq6-6614}) are prime numbers (i.e. they have
+no common factors), $N$ is called the fundamental period\index{fundamental
+period}.
+
+Remark: \\
+A small change in the frequency can result in a large change in the
+fundamental period.
+\begin{Exa}
+\begin{align}
+f_1=\frac{31}{60} &\rightarrow N=60 \\
+f_1=\frac{30}{60} &\rightarrow N=2
+\end{align}
+\end{Exa}
+
+\item Discrete-time sinusoids whose frequencies are separated by an integer
+multiple of $2\pi$ are identical.(Compare with the continuous time case!)
+
+Proof:\\
+
+For a given $\omega_0$,
+
+\begin{align}
+\cos[(\omega_0+2\pi)n+\theta] &= \cos(\omega_0 n + \theta + 2\pi n) \zdtag \\
+&= \cos(\omega_0 n + \theta )  \\
+\intertext{Or in general}
+x_k &= \cos [ \overbrace{(\omega_0+2 k \pi)}^{\omega_k} n + \theta] \zdtag \\
+&= \cos[ \omega_0 n + \theta + 2k\pi n] \zdtag \\
+&= \cos[\omega_0 n + \theta] 
+\end{align}
+where $k=0,\pm 1,\pm 2, \ldots$
+
+As a result, all $x_k(n)$ are indistinguishable or identical.
+
+However, the discrete-time sinusoidals with different frequencies in the range
+of $|\omega| \leqslant \pi$ or $|f| \leqslant \half$ are unique or distinct.
+
+\begin{Def}[Alias]
+\index{alias}
+The sinusoid with frequency $|\omega|>\pi$ is called an alias of a
+corresponding sinusoid with frequency $|\omega|<\pi$.
+\end{Def}
+
+\item The highest rate of oscillation in a discrete-time sinusoid is attained
+when $|\omega|=\pi$ or $|f|=\half$.
+
+Assume that
+\begin{equation}
+x[n]=\cos(\omega_0 n)
+\end{equation}
+when $\omega_0=0$, there is no oscillation. 
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.7,0.7
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,0 to 0,2
+set label "$x[n]$" at 1,2
+set label "$n$" at 10,0.1
+set label "$\omega_0=0$" at 5,1.5
+set xrange [-9:9]
+set yrange [0:2]
+set samples 21
+plot cos(0*x) with impulses, cos(0*x) with points
+%#
+
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set size 0.7,0.7
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,0 to 0,2
+set label "$x[n]$" at 1,2
+set label "$n$" at 10,0.1
+set label "$\omega_0=\frac{\pi}{8}$" at 5,1.5
+set xrange [-9:9]
+set yrange [-1:2]
+set samples 19
+plot cos(pi/8*x) with impulses, cos(pi/8*x) with points
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set size 0.7,0.7
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,0 to 0,2
+set label "$x[n]$" at 1,2
+set label "$n$" at 10,0.1
+set label "$\omega_0=\frac{\pi}{4}$" at 5,1.5
+set xrange [-9:9]
+set yrange [-1:2]
+set samples 19
+plot cos((pi/4)*x) with impulses, cos(pi/4*x) with points
+%#
+}
+
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set size 0.7,0.7
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,0 to 0,2
+set label "$x[n]$" at 1,2
+set label "$n$" at 10,0.1
+set label "$\omega_0=\frac{\pi}{2}$" at 5,1.5
+set xrange [-9:9]
+set yrange [-1:2]
+set samples 19
+plot cos(pi/2*x) with impulses, cos(pi/2*x) with points
+%#
+}
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set size 0.7,0.7
+set noytics
+set nozeroaxis
+set arrow from -10,0 to 10,0
+set arrow from 0,0 to 0,2
+set label "$x[n]$" at 1,2
+set label "$n$" at 10,0.1
+set label "$\omega_0=\pi$" at 5,1.5
+set xrange [-9:9]
+set yrange [-1:2]
+set samples 19
+plot cos(pi*x) with impulses, cos(pi*x) with points
+%#
+}
+\end{center}
+\caption{Change in oscillation of discrete-time sinusoid\label{f6-oscil}}
+\end{figure}
+
+If $\pi<\omega_0'<2\pi$,
+$\omega_0'=2\pi-\omega_0$ where $|\omega_0|\leqslant \pi$. As a result
+\begin{align}
+x[n] &= \cos(\omega_0' n) \\
+&= \cos[(2\pi-\omega_0) n ] \\
+&= \cos(-\omega_0 n) \\
+&= \cos(\omega_0 n)
+\end{align}
+or $\omega_0'$ is an alias of $\omega_0$.
+
+Note: when $\pi<\omega_0'<2\pi$ and increases, corresponding $\omega_0$
+($\omega_0=2\pi-\omega_0'$) is decreasing.
+
+Again, negative frequencies can be introduced for discrete-time sinusoids.
+\begin{equation}
+x[n] = A\cos(\omega n + \theta) = \frac{A}{2} e^{j(\omega n+\theta)} +
+\frac{A}{2} e^{-j(\omega n + \theta)}
+\end{equation}
+\end{enumerate}
+
+Final remarks:\\
+
+The frequency range for discrete-time sinusoidal signals is finite with
+duration $2\pi$.
+
+The fundamental rage is defined as 
+\begin{align}
+-\pi \leqslant \omega \leqslant \pi \qquad &\mbox{(or $0\leqslant \omega <
+2\pi$)} \\
+\intertext{or}
+-\half \leqslant f \leqslant \half \qquad &\mbox{(or $0\leqslant f \leqslant
+1$)}
+\end{align}
+
+\section{Analog to Digital Conversion and Digital to Analog Conversion}	%7
+ 
+A digital signal processing system can be illustrated in Figure~\ref{f6-dsp},
+provided both input and output signals are in analog form.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/dsp.eepic}
+\end{center}
+\caption{Digital signal processing system\label{f6-dsp}}
+\end{figure}
+
+The A/D converter can be further decomposed into two major parts as shown in
+Figure~\ref{f6-adc}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/adc.eepic}
+\end{center}
+\caption{A/D converter\label{f6-adc}}
+\end{figure}
+
+\subsection{Sampling of Analog Sinusoidal Signals}
+\subsubsection{Periodic sampling}
+Periodic or uniform sampling is used most often in practice.
+
+In the relation
+\begin{equation}
+x[n] = x_a(nT) \qquad \mbox{for $-\infty < n < \infty$}
+\end{equation}
+
+$x[n]$ is the discrete time signal obtained by taking samples of the analog
+signal every $T$ seconds.
+\begin{description}
+\item[$T$] sampling period\index{sampling period} (or sample interval\index{sample interval})
+\item[$F_s$] $\frac{1}{T}$ is the sampling rate\index{sampling rate} in
+samples per second ( or sampling frequency in Hz).
+\end{description}
+Obviously,
+\begin{equation}
+x_a(nT) = x_a(t)|_{t=nT=n\frac{1}{F_s}}
+\end{equation}
+
+\subsubsection{Relationship between analog and discrete time sinusoids}
+The relationship between the variable $F$ (or $\Omega$) for analog sinusoids
+and the frequency variable $f$ (or $\omega$) for discrete time sinusoids is
+discussed in this subsection.
+
+Considering an analog sinusoidal signal given by
+\begin{equation}
+x_a(t) = A\cos(2\pi F t + \theta)
+\end{equation}
+Use a sampling rate $F_s=\frac{1}{T}$ to obtain a discrete-time sinusoid
+$x[n]$, which yields
+\begin{align}
+x[n] &\triangleq x_a(nT) = A\cos ( 2\pi F n T + \theta ) \zdtag \\
+&= A\cos\left( 2\pi n \frac{F}{F_s}+ \theta\right) \zdtag \\
+&= A\cos(2\pi f n + \theta) 
+\end{align}
+where $f=\frac{F}{F_s}$ is called relative frequency\index{relative frequency}
+or normalized frequency\index{normalized frequency}.
+
+Notice that
+\begin{align}
+\omega &= 2\pi f = 2\pi \frac{F}{F_s} \zdtag \\
+&= 2\pi F T \zdtag \\
+&= \Omega T \label{eq6-675}
+\end{align}
+
+Although the range of $F$ or $\Omega$ for $x_a(t)$ is infinite:
+\begin{align}
+-\infty < &F < \infty \\
+\intertext{or}
+-\infty < &\Omega < \infty\label{eq6-676}
+\end{align}
+
+the range of $f$ or $\omega$ for $x[n]$ is finite with fundamental range
+\begin{align}
+-\half \leqslant &f \leqslant \half \\
+\intertext{or}
+-\pi \leqslant &\omega \leqslant \pi\label{eq6-677}
+\end{align}
+($x[n]$ is obtained using a sampling rate $F_s$.)
+
+From Equation~(\ref{eq6-675}) and Equation~(\ref{eq6-677}), it yields
+\begin{align}
+-\half \leqslant &\frac{F}{F_s} \leqslant \half \zdtag \\
+\intertext{or}
+-\pi \leqslant &\Omega T \leqslant \pi \label{eq6-678}
+\end{align}
+
+Thus 
+\begin{align}
+-\frac{F_s}{2} \leqslant &F \leqslant \frac{F_s}{2} \zdtag \\
+\intertext{or}
+-\frac{\pi}{T} \leqslant &\Omega \leqslant \frac{\pi}{T}\label{eq6-679} 
+\end{align}
+
+Using a sampling rate $F_s$ to convert $x_a(t)$ into $x[n]$,
+Equation~(\ref{eq6-679}) conveys the following messages:
+\begin{enumerate}
+\renewcommand{\theenumi}{\roman{enumi}}
+\item If $F$ satisfies Equation~(\ref{eq6-679}), the sampling will yield a
+unique $x[n]$ with distinct $f$ ($|f|\leqslant \half$) from $x_a(t)$;
+otherwise, it will produce $x'[n]$ which is an alias of $x[n]$.
+\item The highest frequency in a continuous time signal that can be uniquely
+distinguished is $F_{max}=F_s/2$ or $\Omega_{max}=\pi F_s$ when such a signal
+is sampled a rate $F_s=\frac{1}{T}$.
+($F_s/2$ is also called the folding frequency\index{folding frequency}).
+\end{enumerate}
+
+\begin{table}[hbtp]
+\begin{center}
+\begin{tabular}{|c|c|c|} \hline
+Analog Signals & & Discrete-Time Signals \\ \hline
+\begin{tabular}{ccc}
+$\Omega$ & $=$ & $2\pi F$ \\
+$\frac{\mbox{radians}}{\mbox{sec}}$ & & hertz \\
+\end{tabular} & &
+\begin{tabular}{ccc}
+$\omega$ & $=$ & $2\pi f$ \\
+$\frac{\mbox{radians}}{\mbox{sample}}$ & & $\frac{\mbox{cycles}}{\mbox{sample}}$
+\end{tabular} \\
+$-\infty < \Omega < \infty$ & $\omega=\Omega T$ & $-\pi \leqslant \omega
+\leqslant \pi $ \\
+$-\infty < F < \infty $ & $f=F/F_s$ & $-\half \leqslant f \leqslant \half$ \\
+& $\Leftrightarrow$ & \\
+$-\pi/T \leqslant \Omega \leqslant \pi/T$ & $\Omega = \omega/T$ & \\
+$-F_s/2 \leqslant F \leqslant F_s/2$ & $F=f \cdot F_s$ & \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Relations between frequency and relative frequency\label{t6-relfreq}}
+\end{table}
+
+\begin{Exa}
+Given two analog sinusoids:
+\begin{align}
+x_1(t)&=\cos[2\pi(10)t] \\
+\intertext{and}
+x_2(t)&=\cos[2\pi(50)t]
+\end{align}
+use a sampling rate $F_s=40$ Hz to produce discrete-time sinusoids:
+
+\begin{align}
+x_1[n] &= \cos\left[ 2\pi \left( \frac{10}{40} \right) n \right] = \cos
+\frac{\pi}{2} n \\
+&= \cos \left[ 2\pi \left( \frac{1}{4} \right) n \right] \qquad |f_1|\leqslant
+\half \zdtag \\
+\intertext{and}
+x_2[n] &= \cos \left[ 2 \pi \left( \frac{50}{40} \right) n \right] \zdtag \\
+&= \cos \frac{5\pi}{2} n \zdtag \\
+&= \cos \left[ 2\pi \left( \frac{5}{4} \right) n \right] \qquad |f_2|>\half
+\zdtag \\
+&= \cos\left( \frac{\pi}{2} n + 2\pi n \right) \zdtag \\
+&= \cos \frac{\pi}{2} n \zdtag \\
+&= x_1(n) \\
+& \triangleq x[n]  \zdtag
+\end{align}
+
+\begin{Rem} \ \ 
+\begin{enumerate}
+\item $x_2[n]$ is an alias of $x_1[n]$
+\item $F_2$ is an alias of $F_1$ at the sampling frequency $F_s$
+\item All of the sinusoids $\cos[2\pi (f_1+40 k) t ]$ for $k=1,2,\ldots$
+sampled at $F_s=40$ Hz yields $x[n]$.
+\end{enumerate}
+\end{Rem}
+\end{Exa}
+
+\begin{Exa}[Aliasing]
+Given
+\begin{align}
+y_0(t) &= \cos(2\pi F_0 t) \qquad \mbox{with $F_0=\frac{1}{8}$ Hz} \\
+\intertext{and}
+y_1(t) &= \cos(2\pi F_1 t) \qquad \mbox{with $F_1=-\frac{7}{8}$ Hz}
+\end{align}
+when $y_0(t)$ and $y_1(t)$ are sampled at $F_s=1$ Hz (or $T=1$ seconds), they
+produce identical samples as shown in Figure~\ref{f6-aliasing}.
+
+\begin{figure}[hbtp]
+%# gnuplot
+set terminal eepic
+set nokey
+set xlabel "Time in seconds"
+set xrange [0:8]
+set samples 200
+set size 1.1,1.1
+set nozeroaxis
+set label "$y_0$" at 1.7,0.8
+set label "$y_1$" at 3.9,0.8
+set arrow from 1.7,0.8 to 0.9,0.8
+set arrow from 3.9,0.8 to 3.6,0.8
+plot cos(2*pi*0.125*x),cos(2*pi*-7/8*x),"pix/digitanalog/alias1.data"
+%#
+\caption{Example of aliasing\label{f6-aliasing}}
+\end{figure}
+
+As a result, given $y[n]$, there is an ambiguity as to which analog signal
+$y_i(t)$ these samples represent.
+
+Given $y_0(t)$ and $y_1(t)$ as before and 
+\begin{equation}
+y_2(t) = \cos ( 2\pi F_2 t) \qquad \mbox{with $F_2=\frac{9}{8}$ Hz} 
+\end{equation}
+Using $F_s=1$ Hz, we obtain the same group of samples in the form of $y[n]$ as
+shown in Figure~\ref{f6-alias2}.
+
+\begin{figure}[hbtp]
+%# gnuplot
+set terminal eepic
+set nokey
+set xlabel "Time in seconds"
+set xrange [0:8]
+set samples 200
+set size 1.1,1.1
+set nozeroaxis
+plot cos(2*pi*0.125*x),cos(2*pi*-7/8*x),cos(2*pi*9/8*x),"pix/digitanalog/alias1.data"
+%#
+\caption{Example of aliasing\label{f6-alias2}}
+\end{figure}
+
+Note: \\
+\begin{align}
+-\frac{F_s}{2} \leqslant & F_0 \leqslant \frac{F_s}{2} \\
+\intertext{while}
+& F_1 < -\frac{F_s}{2} \\
+\intertext{and}
+& F_2 > \frac{F_s}{2} \\
+\intertext{In fact any}
+y_k(t) &= \cos( 2\pi F_k t) \\
+\intertext{where}
+F_k &= F_0 + k F_s \qquad \mbox{for $k=\pm 1,\pm 2, \ldots$}
+\end{align}
+
+$F_k$ is outside the fundamental range ($-\frac{F_s}{2} \leqslant F \leqslant
+\frac{F_s}{2}$), will produce the same $y[n]$ when sampled at $F_s$.
+\end{Exa}
+
+\subsection{Reconstruction of Analog Signals}
+
+From our previous discussions, if $F_{max}$ is the bandwidth (or the highest
+spectral component) of the analog signal $x_a(t)$, and the sampling frequency
+$F_s=2 F_{max}$ (Nyquist rate) is used to obtain the discrete-time signal
+$x(nT)$. ($T=\frac{1}{F_s}$), the analog signal $x_a(t)$ can be fully
+recovered using the following ideal reconstruction formula (or ideal
+interpolation formula)
+
+\begin{equation}
+x_a(t) = \infsum{n} x(nT) \frac{ \sin \left( \frac{\pi}{T} \right) (t-nT)}{
+\left( \frac{\pi}{T} \right) (t-nT)}
+\end{equation}
+
+However, the ideal interpolation function
+\begin{equation}
+h(t) = \frac{\sin \left( \pi t/T \right) }{ \pi t/T } 
+\end{equation}
+is non causal and cannot be physically realized.
+
+(Note: \\
+\begin{equation}
+\F[h(t)] = \begin{cases} 
+T & |F| = \frac{F_s}{2} \\
+0 & \mbox{otherwise}
+\end{cases} 
+\end{equation}).
+
+\subsubsection{Zero-order hold}
+
+A zero-order hold approximates the analog signal $x[t]$ by a series of
+rectangular pulses whose height is equal to the corresponding value of the
+signal pulse ($x(nT)$) as shown in Figure~\ref{f6-zohapprox}.
+
+The impulse response of the zero-order hold is given by
+\begin{align}
+h_0(t) &= \begin{cases}
+1 & 0 \leqslant t \leqslant T \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{Its frequency response is}
+H_0(F) &= \infint h(t) e^{-j 2\pi F t} dt \zdtag \\
+&= \int_0^T e^{-j 2\pi F t} dt \zdtag \\
+&= T \left( \frac{\sin(\pi F T)}{\pi F T} \right) e^{-j \pi F T} 
+\end{align}
+as shown in Figure~\ref{f6-zohfreq}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/zohapprox.eepic}
+\end{center}
+\caption{Approximation of an analog signal by a zero-order
+hold\label{f6-zohapprox}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure{
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set noborder
+set samples 100
+set arrow from -5,0 to 205,0
+set arrow from 100,0 to 100,0.17
+set label "$F$" at 210,0
+set label "$|H(F)|$" at 105,0.17
+set label "$T$" at 105,0.15
+set label "$-\frac{1}{T}$" at 70,-0.5
+set label "$\frac{1}{T}$" at 130,-0.5
+set label "$-\frac{2}{T}$" at 30,-0.5
+set label "$\frac{2}{T}$" at 170,-0.5
+plot (abs(x-100)<4)?0.15:0,"pix/digitanalog/zohdata.freq" with lines
+%#
+}
+\subfigure{
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set noborder
+set arrow from -10,0 to 210,0
+set arrow from 100,-4.1 to 100,4.1
+set label "$\theta(F)$" at 105,4.2
+set label "$F$" at 215,0
+set label "$\pi$" at 105,3
+set label "$-\pi$" at 105,-3
+set label "$\frac{1}{T}$" at 135,0.5
+set label "$-\frac{1}{T}$" at 65,-0.5
+plot "pix/digitanalog/zohdata.phase" with lines
+%#
+}
+\end{center}
+\caption{Frequency response characteristics of a zero-order
+hold\label{f6-zohfreq}}
+\end{figure}
+
+From the frequency response of a zero-order hold, it is seen that the
+zero-order hold does not possess a sharp cutoff frequency response
+characteristic.
+
+As a result, the zero-order hold passes undesirable aliased frequency
+components which are above $F_s/2$ to its output. A low-pass analog filter is
+normally used to suppress frequency components above $F_s/2$.
+
+\subsubsection{First-order hold}
+
+A first-order hold approximates analog $x[t]$ by straight-line segments which
+have a slope that is determined by the current sample $x(nT)$ and the previous
+sample $x(nT-T)$ as shown in Figure~\ref{f6-fohapprox}.
+
+It is expressed by a piece-wise linear function:
+
+\begin{align}
+\hat{x}(t) &= x(nT) + \frac{x(nT) - x(nT-T)}{T} (t-nT) \\
+\intertext{where}
+&nT \leqslant t < (n+1)T \zdtag \\
+\intertext{The impulse response of the first-order hold is given by}
+h(t) &= \begin{cases}
+1+\frac{t}{T} & \mbox{for $0 \leqslant t \leqslant T$} \\
+1-\frac{t}{T} & \mbox{for $T \leqslant t < 2T$} \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{align}
+as shown in Figure~\ref{f6-fohimpresp}.
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set noxtics
+set noytics
+set nokey
+set noborder
+set nozeroaxis
+set xrange [0:3]
+set yrange [-2.5:2.5]
+set samples 200
+set arrow from 0,0 to 3,0
+set arrow from 0,-2.5 to 0,2.5
+set label "$t$" at 3.1,0
+set label "$h(t)$" at 0.1,2.6
+set label "$1$" at -0.1,1
+set label "$2$" at -0.1,2
+set label "$-1$" at -0.2,-1
+set label "$2T$" at 2,0.2
+plot (x<1)?1+x:0,(x>1 && x<2)?1-x:0
+%#
+\end{center}
+\caption{Impulse response of first-order hold\label{f6-fohimpresp}}
+\end{figure}
+
+The frequency response of the first-order hold is obtained by Fourier
+transforming $h(t)$
+\begin{align}
+H(F) &= \F[ h(t) ] \zdtag \\
+&= T(1+4\pi F^2 T^2)^{\half} \left( \frac{\sin \pi F T}{\pi F T} \right)^2
+e^{j\theta(F)} \\
+\intertext{where}
+\theta(F) &= -\pi F T + \tan^{-1} 2\pi F T \zdtag
+\end{align}
+as shown in Figure~\ref{f6-fohfreqresp}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure{
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set noborder
+set arrow from -10,0 to 136,0
+set arrow from 63,-0.05 to 63,0.6
+set label "$|H(F)|$" at 65,0.6
+set label "$F$" at 140,0
+set label "$\frac{2}{T}$" at 103,-0.05
+set label "$-\frac{2}{T}$" at 20,-0.05
+set label "$\frac{1}{T}$" at 82,-0.05
+set label "$-\frac{1}{T}$" at 40,-0.05
+plot "pix/digitanalog/fohfreq.data" with lines
+%#
+}
+\subfigure{
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set nozeroaxis
+set noborder
+set noytics
+set yrange [-3.4:3.4]
+set arrow from -10,0 to 136,0
+set arrow from 63,-3.4 to 63,3.3
+set label "$\theta(F)$" at 65,3.4
+set label "$F$" at 140,0
+set label "$\pi$" at 65,3
+set label "-$\pi$" at 65,-3.1
+set label "$\frac{2}{T}$" at 103,-0.35
+set label "$-\frac{2}{T}$" at 20,-0.35
+set label "$\frac{1}{T}$" at 82,-0.35
+set label "$-\frac{1}{T}$" at 40,-0.35
+plot "pix/digitanalog/fohphase.data" with lines
+%#
+}
+\end{center}
+\caption{Frequency response characterstics of first-order
+hold\label{f6-fohfreqresp}}
+\end{figure}
+
+
+Since this reconstruction technique also suffers from distortion due to its
+passing frequency components above $F_s/2$, it is followed by an analog filter
+that significantly attenuates frequencies above the folding frequency
+$F_s/2$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/fohapprox.eepic}
+\end{center}
+\caption{Approximation of an analog signal by a first-order
+hold\label{f6-fohapprox}}
+\end{figure}
+
+\subsubsection{Linear interpolation with delay}
+
+The first-order hold with delay performs signal reconstruction by computing
+the slope of the straight line based on the current sample $x(nT)$ and the
+past sample $x(nT-T)$ of the signal as shown in Figure~\ref{f6-tsec}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/tsec.eepic}
+\end{center}
+\caption{Linear interpolation of $x[t]$ with a $T$-second delay
+\label{f6-tsec}}
+\end{figure}
+
+\begin{align}
+\hat{x}(t) &= x(nT-T) + \frac{x(nT)-x(nT-T)}{T}(t-nT) \\
+\intertext{where}
+& nT \leqslant t < (n+1) T \zdtag \\
+\intertext{Its impulse response, shown in Figure~\ref{f6-linimpres} is given by}
+h(t) &= \begin{cases}
+t/T & 0 \leqslant t < T \\
+2-t/T & T \leqslant t < 2T \\
+0 & \mbox{otherwise} \\
+\end{cases} \zdtag \\
+\intertext{Its frequency response is}
+H(F) &= T \left( \frac{\sin \pi F T}{\pi F T} \right)^2 e^{-j2\pi F t} 
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from 0,0 to 3,0
+set arrow from 0,0 to 0,1.5
+set label "$t$" at 3.1,0
+set label "$1$" at 0.1,1
+set label "$T$" at 1,-0.3
+set label "$2T$" at 2,-0.3
+set samples 300
+set noborder
+set xrange [0:3]
+set yrange [0:1.5]
+plot (x<1)?x:0+(x>1 && x<2)?2-x:0
+%#
+\end{center}
+\caption{Impulse response for the linear interpolator with
+delay\label{f6-linimpres}}
+\end{figure}
+
+It can be see in Figure~\ref{f6-linfreq} that its magnitude response falls off
+rapidly and has small side lobes beyond $F_s$, and its phase response is linear
+due to the delay $T$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure{
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set nozeroaxis
+set noborder
+set noytics
+set arrow from -10,0 to 136,0
+set arrow from 63,-0.05 to 63,0.6
+set label "$|H(F)|$" at 65,0.61
+set label "$\frac{1}{T}$" at 85,-0.03
+set label "$-\frac{1}{T}$" at 40,-0.03
+set label "$\frac{2}{T}$" at 105,-0.03
+set label "$-\frac{2}{T}$" at 20,-0.03
+set label "$F$" at 140,0
+set label "$T$" at 68,0.5
+plot "pix/digitanalog/lidfreq.data" with lines
+%#
+}
+\subfigure{
+%# gnuplot
+set terminal eepic
+set nokey
+set noxtics
+set nozeroaxis
+set noborder
+set noytics
+set arrow from -10,0 to 136,0
+set arrow from 63,-3.4 to 63,3.3
+set label "$\frac{1}{T}$" at 85,0.3
+set label "$-\frac{1}{T}$" at 40,0.3
+set label "$\frac{2}{T}$" at 105,0.3
+set label "$-\frac{2}{T}$" at 20,0.3
+set label "$\theta(F)$" at 65,3.4
+set label "$F$" at 140,0
+set label "$\pi$" at 65,3
+set label "-$\pi$" at 65,-3.1
+plot "pix/digitanalog/lidphase.data" with lines
+%#
+}
+\end{center}
+\caption{Frequency response characteristics for the linear interpolator with
+delay\label{f6-linfreq}}
+\end{figure}
+
+\begin{Exa}
+Consider the analog signal 
+\begin{equation}
+x_a(t) = 3\cos(100\pi t) 
+\end{equation}
+
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item Determine the minimum required sampling rate to avoid aliasing.
+\item Suppose that the signal is sampled at $F_s=200$ Hz. What is the
+discrete-time signal obtained after sampling?
+\item Suppose that the signal is sampled at $F_s=75$ Hz. What is the
+discrete-time signal obtained after sampling?
+\item What is the frequency $F<F_s/2$ of a sinusoid that yields samples
+identical to those obtained in part (c)?
+\end{enumerate}
+
+Solution:\\
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item 
+\begin{equation}
+x_a(t) = 3\cos(2\pi 50 t) 
+\end{equation}
+i.e. the frequency of the analog signal is $F=50$ Hz. Hence the minimum
+sampling rate required to avoid aliasing is $F_s=100$ Hz. (=$2\times F$)
+\item If $x_a(t)$ is sampled at $F_s=200$ Hz the discrete-time signal is
+\begin{align}
+x[n] &= 3\cos ( 100\pi n T) \\
+&= 3\cos \left( 100 \pi n \frac{1}{F_s} \right) \\
+&= 3\cos \left( \frac{100 \pi n }{200} \right) \\
+&= 3\cos \left( \frac{\pi}{2} n \right)
+\end{align}
+
+Note: $T=\frac{1}{F_s}$, $f=\frac{1}{4} < \half$
+\item If $x_a(t)$ is sampled at $F_s=75$ Hz,
+\begin{align}
+x[n] &= 300\cos \left( \frac{100\pi}{75} n \right) \\
+&= 3\cos \left( \frac{4}{3} \pi n \right) \\
+&= 3\cos \left( 2\pi - \frac{2\pi}{3} \right) n \\
+&= 3\cos \left( \frac{2}{3} \pi n \right) 
+\end{align}
+\item For $F_s=75$,
+\begin{equation}
+F=F_s f = 75 f 
+\end{equation}
+since $f_0=\frac{1}{3}$ as shown in (c)
+\begin{equation}
+F=75 \times \frac{1}{3} = 25 Hz 
+\end{equation}
+where $F$ is the frequency in $(-\frac{F_s}{2},\frac{F_s}{2})$ that yields
+identical samples to those obtained in (c). 
+
+It can be seen that $F=50$ Hz is an alias of $F=25$ Hz for the sampling rate
+$F_s=75$ Hz.
+\begin{equation}
+\left( \quad 3\cos \left( 2\pi \times 50 \times \frac{n}{75} \right) =
+3\cos \left( 2\pi \times 25 \times \frac{n}{75} \right) \quad \right) 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+\begin{Exa}
+Given the analog signal
+\begin{equation}
+x_a(t) = 3\cos 50\pi t + 10\sin 300 \pi t - \cos 100 \pi t 
+\end{equation}
+Find the Nyquist rate for this signal.
+
+Solution:\\
+Since $F_1=25$ Hz, $F_2=150$ Hz and $F_3=50$ Hz, the highest frequency
+component is $F_{max}=150$ Hz. The Nyquist rate $F_N$ is given by
+\begin{equation}
+F_N=2 F_{max} = 300 Hz 
+\end{equation}
+However, if we choose the sampling rate $F_s=300$ Hz
+\begin{equation}
+10\sin 300 \pi \frac{n}{300} = 10\sin (n \pi ) = 0 
+\end{equation}
+That is $10\sin(300\pi t)$ sampled at its zero-crossing points an, as a
+result, this component will be missed completely. $F_s$ should be higher than
+$F_N$ to avoid this.
+\end{Exa}
+
+\begin{Exa}
+Given 
+\begin{equation}
+x_a(t) = 3\cos 2000 \pi t + 5\sin 6000 \pi t + 10 \cos 12000 \pi t 
+\end{equation}
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item What is the Nyquist rate for this signal?
+\item If $F_s=5000$ samples/s, what is the discrete-time signal obtained after
+sampling?
+\item What is the analog signal $y_a(t)$ we can construct from the samples of
+we use the ideal interpolation?
+\end{enumerate}
+
+Solution:\\
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item $F_1=1$ kHz, $F_2=3$ kHz and $F_3=6$ kHz. Thus $F_{max}=6$ kHz, and the
+Nyquist rate is $F_N=12$ kHz. Therefore, to avoid aliasing the sampling rate
+should be 
+\begin{equation}
+F_s > F_N = 12 kHz 
+\end{equation}
+\item If $F_s=5$ kHz, the folding frequency is
+\begin{equation}
+\frac{F_s}{2} = 2.5 kHz 
+\end{equation}
+and this is the maximum frequency that can be represented uniquely by the
+sampled signal.
+\begin{align}
+x[n] &= x_a(nT) = x_a \left( \frac{n}{F_s} \right) \\
+&= 3\cos \left( \frac{1000}{5000} 2\pi n \right) + 5 \sin \left( 2\pi
+\frac{3000}{5000} n \right) + 10\cos \left( 2\pi \frac{6000}{5000} n\right) \\
+&= 3\cos \left( 2\pi \frac{1}{5} n \right) + 5\sin \left( 2\pi \left( 1 -
+\frac{2}{5} \right) n \right) + 10 \cos \left( 2\pi \left( 1+ \frac{1}{5}
+\right) n \right) \\
+&= 13\cos \left( 2\pi \frac{1}{5} n \right) - 5\sin \left( \frac{2}{5} n
+\pi \right)
+\end{align}
+\item Since only the frequency components at $1$ kHz and $2$ kHz are present
+in the $x[n]$, the analog signal that can be recovered is 
+\begin{equation}
+y_a(t) = 13\cos 2000 \pi t + 5 \sin 4000 \pi t 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+\section{Changing the Sampling Rate Using Discrete Time Processes}	%8
+\subsection{Introduction}
+In many practical applications of digital signal processing, it is often
+required to change the sampling rate of a signal, either increasing it or
+decreasing it by some amount. Such applications include, for example,
+teletype, facsimile speech and video, etc.
+
+\begin{Def}[Sampling Rate Conversion]
+\index{sampling rate conversion}
+The process of converting a discrete-time signal from a given rate to a
+different rate is called sampling rate conversion.
+\end{Def}
+
+\begin{Def}[Multirate DSP Systems]
+\index{multirate dsp systems}
+Systems which employ multiple sampling rates in the processing of rates are
+called multirate digital signal processing systems.
+\end{Def}
+
+\begin{Def}[Downsampling]
+\index{downsampling}
+The operation of reducing the sampling rate (including any filtering) is
+called down sampling.
+\end{Def}
+
+\begin{Def}[Upsampling]
+\index{upsampling}
+The operation of increasing the sample rate is called upsampling.
+\end{Def}
+
+Two general methods can be used for sampling rate conversion of a
+discrete-time signal:
+\begin{itemize}
+\item One approach is to reconstruct the continuous signal $x_c(t)$ from the
+sampled discrete-time sequence $x[n]$. Then obtain the new discrete-time
+sequence $x'[n]$ by sampling $x_c(t)$ at the desired rate. Using this
+approach, the new sampling rate can be selected arbitrarily and need not have
+any special relationship to the old sampling rate. However, signal
+distortion will be introduced by the D/A (as the ideal reconstruction cannot
+be realized) in the signal reconstruction and by the quantization effects in
+the A/D conversion.
+\item The second approach is to change the sampling rate that involves only
+discrete-time operations or is entirely in the discrete-time domain.
+
+Avoiding problems which the former approach faces, the only apparent problem
+in performing the sampling rate conversion in the discrete-time domain is that
+the ratio of new to old sampling rate is constrained to be rational.
+
+However, this constraint does not pose a limitation in most practical
+applications.
+
+Assume that
+\begin{equation}
+x[n] = x_c(nT)
+\end{equation}
+where $x_c(t)$ is a continuous-time signal and $x[n]$ is the discrete-time
+sequence obtained by sampling $x_x[t]$ with a rate $\frac{1}{T}$. Even if
+$x[n]$ was not obtained originally by sampling, an analog band limited signal
+$x_r(t)$ can be found whose samples are $x[n]=x_c(nT)$ where
+\begin{equation}
+x_r(t) = \infsum{n} x[n] \frac{\sin \left[ \frac{\pi (t-nT)}{T} \right]}{
+\frac{\pi(t-nT)}{T}}
+\end{equation}
+Using a different sampling rate, a new discrete-time sequence can be obtained
+\begin{equation}
+x'[n] = x_c(nT')
+\end{equation}
+where $T' \neq T$.
+\end{itemize}
+
+\subsection{Sampling rate reduction by an integer factor}
+
+The sampling rate of a sequence $x[n]$ can be reduced by ``sampling'' $x[n]$,
+to form a new sequence
+\begin{equation}
+x_d[n] = x[n M] = x_c(n M T) \label{eq6-684}
+\end{equation}
+The system defined by Equation~(\ref{eq6-684}) is called a sampling rate
+compressor. Obviously, the compressor performs downsampling.
+
+It can be seen that $x_d[n]$ can be obtained directly from the analog signal
+$x_c(t)$ by sampling with period $T'=M T$.
+
+If $x_c(t)$ is band limited to $\Omega_{max}$ i.e.
+\begin{equation}
+|X_c(j\Omega)| = 0 \qquad \mbox{for $|\Omega| > \Omega_{max}$} 
+\end{equation}
+$x_d[n]$ is an exact representation of $x_c(t)$ or $x_c(t)$ can be
+reconstructed from $x_d[n]$ if the sampling rate $\Omega_s'$ is equal to or
+greater than $2\Omega_{max}$, i.e.
+\begin{align}
+\Omega_s' &\geqslant 2\Omega_{max} \\
+\intertext{It follows}
+\Omega_s' &= 2\pi F_s' = \frac{2\pi}{T'} > 2\Omega_{max} \\
+\frac{\pi}{T'} &= \frac{\pi}{M T} > \Omega_{max} \\
+\intertext{or:}
+\frac{\pi}{T} &> M \Omega_{max} \\
+\Omega_s &= \frac{2\pi}{T} > M( \underbrace{2\Omega_{max}}_{\mbox{Nyquist
+rate}} )
+\end{align}
+
+That is the sampling rate can be reduced by a factor of $M$ without aliasing
+if the original sampling rate was at least $M$ times the Nyquist rate or if
+the bandwidth of the sequence $x[n]$ is first reduced by a factor of $M$ by
+discrete-time filtering.
+
+The downsampler or discrete-time sampler can be represented by the diagram in
+Figure~\ref{f6-downsampler}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/downsampler.eepic}
+\end{center}
+\caption{Representation of downsampler\label{f6-downsampler}}
+\end{figure}
+
+The frequency-domain relation between the input and output of the compressor
+in terms of the discrete-time Fourier transform:
+
+Assume that the Fourier transform of $x_c(t)$ is $X_c(j\Omega)$, that of the
+periodic impulse train $s(t)$ is $S(j\Omega)$, where $s(t)=\infsum{n}
+\delta(t-nT)$. 
+
+Recall that the product of $x_c(t)$ and $s(t)$, and its Fourier transform are
+given as follows:
+
+\begin{align}
+x_s(t) &= x_c(t) s(t) \zdtag \\
+&= x_c(t) \infsum{n} \delta(t-nT) \zdtag \\
+&= \infsum{n} x_c(n T) \delta(t-nT) \\
+\intertext{and}
+X_s(j\Omega) &= \frac{1}{2\pi} X_c(j\Omega) \ast S(j\Omega) \zdtag \\
+&= \frac{1}{T} \infsum{k} X_c(j\Omega-k j \Omega_s) \label{eq6-6811a}
+\end{align}
+
+(Note:
+\begin{equation}
+S(j\Omega) = \frac{2\pi}{T} \infsum{k} \delta(\Omega-k\Omega_s) 
+\end{equation}
+where $\Omega_s=2\pi/T$. )
+
+Recall that the discrete-time sequence $x[n]$ is defined as $x_c(nT)$.
+
+( Note:
+\begin{center}
+\input{pix/digitanalog/convtrain.eepic}
+\end{center}
+\begin{tabbing}
+where \= \\
+\> $x_s(t)$: \= continuous time, areas of impulses; \\
+\> $x[n]$: \> indexed on the integer $n$, finite number.
+\end{tabbing}
+)
+
+Now, to express the discrete-time Fourier transform $X(e^{j\omega})$ of the
+sequence $x[n]$, in terms of $X_s(j\Omega)$ and $X_c(j\Omega)$.
+
+Step 1: Find the Fourier transform of $x_s(t)$: \\
+\begin{align}
+X_s(j\Omega) &= \F[ x_s(t)] \zdtag \\
+&= \F \left[ \infsum{n} x_c(nT) \delta (t-nT) \right] \zdtag \\
+&= \infint \left\{ \infsum{n} x_c(nT) \delta(t-nT) \right \} e ^{-j \Omega t}
+dt \zdtag \\
+&= \infsum{n} x(nT) \infint \delta(t-nT) e^{-j\Omega t} dt \zdtag \\
+&= \infsum{n} x(nT) e^{-j\Omega T n} 
+\end{align}
+
+Step 2: Since
+\begin{align}
+x[n] &= x_c(nT) \zdtag \\
+\intertext{and}
+X(e^{j\omega}) &= \infsum{n} x[n] e^{-j\omega n} \\
+\intertext{it follows that}
+X_s(j\Omega) &= \left. X\left( e^{j\omega} \right) \right|_{\omega=\Omega T} =
+X\left( e^{j\Omega T} \right) \label{eq6-6814a}
+\end{align}
+
+Similarly, the discrete-time Fourier transform of $x_d[n] = x[n M] = x_c(nT')$
+with $T'=M T$ is
+\begin{align}
+X_d\left( e^{j\omega} \right) &= \frac{1}{T'} \infsum{r} X_c \left( j
+\frac{\omega}{T'} - j \frac{2\pi r}{T'} \right) \label{eq6-6816} \\
+\intertext{Substitute $M T$ for $T'$ in Equation~(\ref{eq6-6816})}
+X_d\left( e^{j\omega} \right) &= \frac{1}{M T} \infsum{r} X_c \left( j
+\frac{\omega}{M T} - j\frac{2 \pi r}{M T} \right) \label{eq6-6817} \\
+\intertext{Define} 
+r=i+k M \label{eq6-6818} \\
+\intertext{where $k$ and $i$ are integers such that $-\infty < k < \infty$ and
+$0 \leqslant i \leqslant M-1$.}
+\intertext{It follows that}
+X_d\left( e^{j\omega} \right) &= \frac{1}{M T} \sum_{i=0}^{M-1} \infsum{k} X_c
+\left( j \frac{\omega}{M T} - j \frac{2\pi (i + k M )}{M T} \right) \zdtag \\
+&= \frac{1}{M} \sum_{i=0}^{M-1} \left\{ \frac{1}{T} \infsum{k} X_c \left( j
+\frac{\omega}{M T} - j \frac{2 \pi i}{M T} - j \frac{2 \pi k}{T} \right)
+\right\} \\
+\intertext{From Equation~(\ref{eq6-6814a}) and Equation~(\ref{eq6-6811a}),}
+X\left( e^{j \Omega T} \right) &= X_s(j \Omega) \zdtag \\
+&= \frac{1}{T} \infsum{k} X_c( j\Omega-j k \Omega_s ) \\
+\intertext{and}
+X\left( e^{j\omega} \right) &= \frac{1}{T} \infsum{k} X_c \left( j
+\frac{\omega}{T} - j \frac{2\pi k}{T} \right)
+\end{align}
+
+Thus, the discrete-time Fourier transform $X(e^{j\omega})$ of the sequence
+$x[n]$ is simply a frequency scaled version of $X_s(j\Omega)$ with the
+frequence scaling specified by $\omega=\Omega T$, and therefore, can also be
+expressed using the Fourier transform $X_c(j\Omega)$ of the original analog
+signal $x_c(t)$.
+
+Notice that:
+\begin{align}
+X\left( e^{j(\omega-2\pi i)/M} \right) &= \frac{1}{T} \infsum{k} X_c \left( j
+\frac{\omega-2\pi i}{M T} - j \frac{2 \pi k}{T} \right) \\
+\intertext{Thus}
+X_d(e^{j\omega}) &= \frac{1}{M} \sum_{i=0}^{M-1} X \left( e^{j(\omega-2\pi
+i)/M} \right) \label{eq6-6821}
+\end{align}
+
+Equation~(\ref{eq6-6821}) expressed the Fourier transform of the discrete-time
+sampled sequence $x_d[n]$ (sampling period $M T$) in terms of the Fourier
+transform of the sequence $x[n]$ (sampling period $T$).
+
+From Equation~(\ref{eq6-6817}), $X_d(e^{j\omega})$ can be thought of as being
+composed of an infinite set of copies of $X_c(j\Omega)$, with frequency scaled
+through $\omega=\Omega T'$ and shifted by integer multiples of $2\pi/T'$.
+
+From Equation~(\ref{eq6-6821}), $X_d(e^{j\omega})$ can be seen as $M$ copies of
+the periodic Fourier transform $X(e^{j\omega})$, with frequency scaled by $M$
+and shifted by integer multiples of $2\pi/M$.
+
+\begin{Rem}
+\ \ 
+\begin{enumerate}
+\item $X_d(e^{j\omega})$ is periodic with period $2\pi$ (as are all
+discrete-time Fourier Transforms).
+\item Aliasing can be avoided if $X(e^{j\omega})$ is band limited,
+\begin{equation}
+X(e^{j\omega})=0 \qquad \mbox{for $\omega_N \leqslant |\omega| \leqslant
+\pi$} 
+\end{equation}
+and
+\begin{equation}
+2\pi/M \geqslant 2\omega_N 
+\end{equation}
+\end{enumerate}
+\end{Rem}
+
+\begin{figure}[hbtp]
+\subfigure{ \input{pix/digitanalog/freqdowna.eepic} }
+%\subfigure{ \input{pix/digitanalog/freqdownb.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownc.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownd.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdowne.eepic} }
+\caption{Frequency domain illustration of downsampling\label{f6-freqdown}}
+\end{figure}
+
+In the example shown in Figure~\ref{f6-freqdown}, $2\pi/T=4\Omega_{max}$, i.e.
+the original sampling rate is exactly twice the minimum rate to avoid aliasing.
+Thus, when the original sampled sequence $x[n]$ is downsampled by a factor of
+$M=2$, no aliasing occurs. However, if $M>2$ in this case, aliasing will
+result.
+
+Aliasing due to downsampling is shown in Figure~\ref{f6-freqdownalias} and
+Figure~\ref{f6-freqdownaliasfilt}. In
+this case $2\pi/T=4\Omega_{max}$. Thus, $\omega_N=\Omega_{max} T = \pi/2$. If
+we downsample by a factor of $M=3$, it is obtained $x_d[n]=x[3n]=x_c(3n T)$.
+
+Because $\omega_N'=M \omega_N = 3\pi/2$, which is greater than $\pi$ aliasing
+occurs.
+
+\begin{figure}[hbtp]
+\subfigure{ \input{pix/digitanalog/freqdownaliasa.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasb.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasc.eepic} }
+\caption{Frequency domain illustration of downsampling with aliasing
+\label{f6-freqdownalias}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\subfigure{ \input{pix/digitanalog/freqdownaliasd.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownaliase.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasf.eepic} }
+\caption{Downsampling with prefiltering to avoid aliasing
+\label{f6-freqdownaliasfilt}}
+\end{figure}
+
+\begin{Rem}
+\ \ 
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item In general, to avoid aliasing in downsampling $X[n]$ by a factor of $M$
+requires that 
+\begin{equation}
+M \omega_N < \pi \quad \mbox{or} \quad \omega_N < \pi/ M
+\end{equation}
+where $\omega_N=\Omega_{max} T$, $\Omega_{max}$ is the bandwidth of $x_c(t)$,
+$T$ is the sampling period to obtain $x[n]=x_c(nT)$.
+\item To avoid aliasing due to downsampling $x[n]$ can be filtered by an ideal
+low-pass filter with cutoff frequency $\pi/M$, then the output $\tilde{x}[n]$
+can be downsampled without aliasing. However, the sequence
+$\tilde{x}_d[n]=\tilde{x}[n M]$ no longer represents the original
+continuous-time signal $x_c(t)$.
+\item General system for downsampling by a factor of $M$ is shown in
+Figure~\ref{f6-gendown}. The system is called a {\em decimator}.
+\index{decimator}  The operation is called {\em
+decimation\/}\index{decimation} which performs downsampling by low-pass filter
+followed by compression.
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/gendown.eepic}
+\end{center}
+\caption{General system for downsampling\label{f6-gendown}}
+\end{figure}
+\end{Rem}
+
+\subsection{Sampling rate increase by an integer factor}
+
+The reduction of the sampling rate of a discrete-time signal by an integer
+factor involves sampling the sequence in a manner analagous to sampling a
+continuous-time signal (A/D). Not surprisingly, increasing the sampling rate
+involves operations analagous to D?A conversion.
+
+Assume that we wish to increase the sampling rate, by a factor of $L$, of a
+signal sequence $x[n]$ whose underlying continuous-time signal is $x_c(t)$,
+i.e. to obtain the sample sequence
+\begin{equation}
+x_i[n]=x_c(n T')
+\end{equation}
+where $T'=T/L$, from the sequence of samples
+\begin{equation}
+x[n]=x_c(n T)
+\end{equation}
+
+This operation of increasing the sampling rate is referred to as upsampling.
+
+It can be seen that
+\begin{equation}
+x_i[n]=x[n/L] = x_c(nT/L) \qquad \mbox{for $n=0,\pm L, \pm 2L, \ldots$}
+\end{equation}
+a system can be constructed to obtain $x_i[n]$ from $x[n]$ using only
+discrete-time processing as shown in Figure~\ref{f6-expander}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/expander.eepic}
+\end{center}
+\caption{Expander\label{f6-expander}}
+\end{figure}
+
+The sampling rate expander is defined as
+\begin{align}
+x_e[n] &= \begin{cases}
+	x[n/L] & \mbox{for $n=0, \pm L, \pm 2L, \ldots$} \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \\
+\intertext{or equivalently}
+x_e[n] &= \infsum{k} x[k] \delta[n-k L]
+\end{align}
+
+The lowpass filter with gain $=L$ and cutoff frequency $=\pi/L$ works in a
+similar way as the reconstruction filter does in D/A conversion.
+
+On the whole, the system works in a similar manner to the ideal D/A converter.
+
+The operation of the upsampling system is most easily understood in the
+frequency domain. ( What is the relationship between the spectrum of $x_e[n]$
+and that of $x[n]$? How can we obtain an interpolated sequence $x_i[n]$ to
+represent $x_c(t)$ from $x[n]$? )
+
+The Fourier transform of $x_e[n]$ is given as:
+
+\begin{align}
+X_e(e^{j\omega}) &= \infsum{n} \left\{ \infsum{k} x[k] \delta[n-k L] \right\}
+e^{-j \omega n} \zdtag \\
+&= \infsum{k} x[k] \left\{ \infsum{n} \delta[n-k L] e^{-j\omega n} \right\}
+\zdtag \\
+&= \infsum{k} x[k] e^{-j k (\omega L)} \zdtag \\
+&= \infsum{n} x[n] e^{-j(\omega L) n} \zdtag \\
+&= X(e^{j \omega L})  \label{eq6-686}
+\end{align}
+
+Please notice that $\omega=\Omega T$ where $\Omega$ is the frequency of
+$x_c(t)$ and $T$ is the sampling period to obtain $x[n]$.
+
+From Equation~(\ref{eq6-686}) the Fourier transform of the output of the
+expander, $x_e[n]$, is a frequency-scaled version of the Fourier transform of
+the input, $x[n]$, i.e. replacing $\omega$ by $\omega L$ in $X(e^{j\omega})$
+will result in $X_e(e^{j\omega})$.
+
+Examine Equation~(\ref{eq6-686}) once again
+\begin{align}
+X_e(e^{j\omega}) &= X(e^{j\omega L}) \zdtag \\
+\intertext{If we define $\omega'$,}
+\omega' &= \Omega T' = \Omega \frac{T}{L} = \frac{\omega}{L} \\
+\intertext{Equation~(\ref{eq6-686}) gives}
+X_e\left(e^{j\frac{\omega'}{L}}\right) &= X\left(e^{j\omega'}\right)
+\end{align}
+
+Since for the discrete-time signal $x[n]$, $-\pi \leqslant \omega \leqslant
+\pi$, (fundamental range of $\omega$),
+\begin{equation}
+-\frac{\pi}{L} \leqslant \omega ' \leqslant \frac{\pi}{L}
+\end{equation}
+
+($\omega'=\frac{\omega}{L}$ ) in which the frequency components of $x_e[n]$
+are unique.
+
+Assume the spectrum of $x_i[n]$ is $X_i(e^{j\omega})$ where $-\frac{\pi}{L}
+\leqslant \omega_i \leqslant \frac{\pi}{L}$. We would like to obtain
+$x_i[n]=x[n/L]=x_c(nT/L)$ for $n=0, \pm L, \pm 2L, \ldots$ by finding the
+inverse Fourier transform of $X_i(e^{j\omega_i})$ which is obtained by
+band limiting $X_e(e^{j\omega_i})$ to $-\frac{\pi}{L} \leqslant \omega_i
+\leqslant \frac{\pi}{L}$.
+
+\begin{align}
+x_i[n] &= \frac{1}{2\pi} \int_{-\frac{\pi}{L}}^{\frac{\pi}{L}}
+X_i(e^{j\omega_i}) e^{j\omega_i n} d\omega_i \zdtag \\
+&= \frac{1}{2\pi} \int_{-\frac{\pi}{L}}^{\frac{\pi}{L}} X_e(e^{j\omega_i})
+e^{j \frac{\omega}{L} n} d \left( \frac{\omega}{L} \right) \zdtag \\
+&= \frac{1}{L} \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{j\omega_i L}) e^{j\omega
+\left( \frac{n}{L} \right)} d\omega \zdtag \\
+&= \frac{1}{L} \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{j\omega}) e^{j\omega
+\left( \frac{n}{L} \right)} d\omega \zdtag \\
+&= \frac{1}{L} x\left[ \frac{n}{L} \right]  \label{eq6-6810}
+\end{align}
+
+\begin{equation}
+\left( \mbox{Note:} \qquad \left[ \frac{n}{L} \right] = \frac{1}{2\pi}
+\int_{-\pi}^{\pi} X(e^{j\omega}) e^{j\omega \left( \frac{n}{L} \right)} d\omega
+. \qquad \right)
+\end{equation}
+
+From Equation~(\ref{eq6-6810}), it can be seen that if a band limited lowpass
+ideal filter with unit gain was used to obtain $x_i[n]$, the value of each
+sample is only $\frac{1}{L}$ of that of the $x\left[ \frac{n}{L} \right]$,
+therefore, $x_c\left( n \frac{T}{L} \right)$, meaning the result would not be
+correct.
+
+To correct that, an ideal lowpass filter with gain of $L$ and cutoff frequency
+$|\omega|\leqslant \frac{\pi}{L}$ should be used after the expander.
+
+This shows that the general upsampling system depicted previously in
+Figure~\ref{f6-expander} does indeed give an output satisfying $x_i[n]=x_c(n
+T')$ if the input sequence $x[n]=x_c(n T)$ was obtained by sampling without
+aliasing, where $T'=\frac{T}{L}$.
+
+The system is called an {\em interpolater\/}\index{interpolater} and the
+operation of upsampling is considered to be synonymous with {\em
+interpolation\/}.
+
+The impulse response of the lowpass filter in the ideal ``interpolator'' is
+\begin{align}
+h_i[n] &= \frac{\sin \left( \frac{\pi n}{L} \right)}{\pi\left(\frac{n}{L}
+\right)} \label{eq6-6811b}\\
+\intertext{Thus}
+x_i[n] &= \infsum{m} x_e[m] h[n-m] \zdtag \\
+&= \infsum{m} \left\{ \infsum{k} x[k] \delta[m-k L] \right\} \frac{ \sin
+\left[ \frac{\pi(n-m)}{L} \right]}{ \frac{\pi(n-m)}{L}} \zdtag \\
+&= \infsum{k} x[k] \left\{ \infsum{m} \delta[m-k L]  \frac{ \sin
+\left[ \frac{\pi(n-m)}{L} \right]}{ \frac{\pi(n-m)}{L}} \right\} \zdtag \\
+&= \infsum{k} x[k]  \frac{ \sin
+\left[ \frac{\pi(n-m)}{L} \right]}{ \frac{\pi(n-m)}{L}} \label{eq6-6812}
+\end{align}
+
+From Equation~(\ref{eq6-6811b}), the impulse response has the properties
+\begin{equation}
+\begin{cases}
+h_i[0]=1 & \\
+h_i[n]=0, \mbox{for $n=\pm L, \pm 2L, \ldots$} \\
+\end{cases} \label{eq6-6813}
+\end{equation}
+
+Thus using the ideal lowpass interpolation filter defined by
+Equation~(\ref{eq6-6811b}) and Equation~(\ref{eq6-6813}) produces
+\begin{equation}
+x_i[n] = x[n/L] = x_c(nT/L)=x_c(n T') \qquad \mbox{for $n=0,\pm L, \pm 2L,
+\ldots$} \label{eq6-6814b}
+\end{equation}
+The fact that $x_i[n]=x_c(nT')$ for all $n$ follows from our frequency domain
+argument.
+
+\subsubsection{Linear interpolator}
+
+In practice, ideal lowpass filters cannot be implemented exactly, filters of
+other types are used to approximate the characteristics of the ideal filter.
+
+Although linear interpolation is not very accurate, it is often used in
+practice.
+
+Linear interpolation can be implemented using an expander followed by a filter
+which has an impulse response
+\begin{equation}
+h_{lin}[n] = \begin{cases}
+1-|n|/L & \mbox{for $|n| \leqslant L$} \\
+0 & \mbox{otherwise} \\
+\end{cases} 
+\end{equation}
+
+Figure~\ref{f6-lininterp} shows $h_{lin}[n]$ for $L=5$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/lininterp.eepic}
+\end{center}
+\caption{Impulse response for linear interpolation\label{f6-lininterp}}
+\end{figure}
+
+Therefore, the interpolated output is
+\begin{align}
+x_{lin}[n] &= \infsum{k} x_e[k] h_{lin}[n-k] \zdtag \\
+&= \infsum{k} \left\{ \infsum{m} x[m] \delta[k-m L] \right\} h_{lin}[n-k]
+\zdtag \\
+&= \infsum{m} x[m] \left\{ \infsum{k} \delta[k-m L] h_{lin} [n-k] \right\}
+\zdtag \\
+&= \infsum{m} x[m] h_{lin}[n-m L] \\
+&= \infsum{k} x[k] h_{lin}[n-k L]
+\end{align}
+
+Note that
+\begin{align}
+h_{lin}[0] &= 1 \zdtag \\
+h_{lin}[n] &= 0 \qquad \mbox{for $n=\pm L, \pm 2L, \ldots$} \\
+\intertext{so that}
+x_{lin}[n] &= x[n/L] \qquad \mbox{for $n=0,\pm L,\pm 2L, \ldots$} \\
+\intertext{The frequency response of $h_{lin}[n]$ is}
+H_{lin}(e^{j\omega}) &= \frac{1}{L} \left\{ \frac{\sin (\omega L /
+2)}{\sin(\omega/2)} \right\}^2
+\end{align}
+
+Comparing $H_{lin}(e^{j\omega})$ with the frequency response of the ideal
+lowpass interpolator filter, when the original signal is sampled at the
+Nyquist rate, linear interpolation will not be very good since {\em the output
+of the filter will contain considerable energy in the band $\pi/L < |\omega|
+\leqslant \pi$.}
+
+However, if the original sampling rate is much higher than the Nyquist rate,
+then the linear interpolator will be more successful in removing the
+frequency-scaled image of $X_c(j\Omega)$ at multiples of $2\pi/L$.
+
+(When the original sampling rate is higher than the Nyquist rate, the spectrum
+of the signal $X_c(t)$ will be close to $\Omega=0$, and $X(e^{j\omega})$ close
+to $\omega=\Omega T = 0, \pm 2\pi, \pm 4\pi, \ldots$ and $X_e(e^{j\omega})$
+close to $\omega_i=\Omega T' = 0, \pm \frac{2\pi}{L}, \pm \frac{4\pi}{L},
+\ldots$. At these areas, the $H_{lin}(e^{j\omega})$ attenuates the most.)
+
+\subsection{Changing the Sampling Rate by a non-integer factor}
+
+By combining decimation and interpolation, it is possible to change the
+sampling rate by a non-integer factor.
+
+It is shown in Figure~\ref{f6-interdec} a system which consists of an
+interpolator and a decimator. The interpolator decreases the sampling period
+from $T$ to $T/L$. The decimator increases the sampling period by $M$. The
+overall system produces an output sequence $\tilde{x}_d[n]$ that has an
+effective sampling period of $T'=\left( \frac{M}{L} \right) T$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/digitanalog/interdec.eepic}
+\end{center}
+\caption{System for changing sampling rate by a non-integer
+factor\label{f6-interdec}}
+\end{figure}
+
+\begin{Exa}
+If $M=101$ and $L=100$,
+\begin{equation}
+T'=\frac{M}{L} T = 1.01 T 
+\end{equation}
+\end{Exa}
+
+By choosing $L$ and $M$ arbitrarily, we can approach arbitrarily close to any
+desired ratio of sampling periods.
+
+If $M>L$, there is a net increase in the sampling period (decrease in sampling
+rate) and $\pi/M$ is the dominant cutoff frequency. If $x[n]$ was obtained by
+sampling at the Nyquist rate, the sequence $\tilde{x}_d[n]$ will represent a
+lowpass-filtered version of the original underlying band limited signal
+$x_c(t)$ if we are to avoid aliasing.
+
+If $M<L$, the opposite is true, and $\pi/L$ is the dominant cutoff frequency
+and there will be no need to further limit the bandwidth of the signal below
+the original Nyquist frequency.
+@

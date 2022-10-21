@@ -1,0 +1,754 @@
+% $Id: DFT.zd,v 1.2 1993/06/07 03:08:38 dwagon Exp dwagon $
+% $Header: /ccstaff2/edp/dwagon/signotes/RCS/DFT.zd,v 1.2 1993/06/07 03:08:38 dwagon Exp dwagon $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Discrete Fourier Transform}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\minitoc
+
+The discrete Fourier transform is an alternative Fourier representation for
+finite duration sequences.
+
+\section[Discrete Fourier Series Representation of Periodic Sequences]{The Discrete Fourier Series Representation of Periodic Sequences}	%1
+
+Given a periodic sequence $\tilde{x}[n]$ with period $N$. i.e.
+\begin{equation}
+\tilde{x}[n] = \tilde{x}[n+rN]
+\end{equation}
+
+where $r$ is an integer, the Discrete Fourier Series (DFS) representation
+$\tilde{X}[k]$ is defined as:
+\index{synthesis equation}\index{analysis equation}
+\begin{align}
+\intertext{Synthesis equation:}
+\tilde{x}[n] &= \frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}[k]W^{-kn}_{N} \\
+\intertext{and}
+\intertext{Analysis equation:}
+\tilde{X}[k] &= \sum_{k=0}^{N-1} \tilde{x}[n]W_{N}^{kn}
+\end{align}
+
+where $W_n=e^{-j(\frac{2\pi}{N})}$ and the set of $N$ periodic complex
+exponentials $e_0[n], e_1[n],\ldots,e_{N-1}[n]$ defines all the distinct
+periodic complex exponentials with frequencies that are integer multiples of
+$\frac{2\pi}{N}$. 
+
+Note $e_k[n]=e^{j(\frac{2\pi}{N})kn}=e_k[n+rN]=e_{k+lN}[n]$ with $r$, $l$, $k$
+and $n$ being integer values.
+
+It is natural to represent a periodic sequence using a series of harmonics
+which are also periodic.
+\begin{align}
+\tilde{x}[n] &=\frac{1}{N}\sum_{k}\tilde{X}[k]e^{j(2\pi N) k n}\label{eq9-914}\\
+\intertext{since}
+e_k[n] &= e_{k+lN}[n] \\
+\intertext{i.e. there are only $N$ distinct harmonics or complex exponentials,
+$e_k$ with $k=0,1,\ldots,N-1$, Equation~(\ref{eq9-914} reduces to})
+\tilde{x}[n] &= \frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}[k] e^{j(\frac{2\pi}{N})
+k n} \label{eq9-916} \\
+\intertext{To determine the Fourier series coefficients $\tilde{X}[k]$ multiply
+Equation~(\ref{eq9-916} by $e^{-j(\frac{2\pi}{N})r n})$ and summing $n$ from $0$
+to $N-1$ to obtain}
+\sum_{n=0}^{N-1} \tilde{x}[n] e^{-j(\frac{2\pi}{N}) r n} &= \sum_{n=0}^{N-1}
+\left\{ \frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}[k] e^{j(\frac{2\pi}{N})(k-r)n}
+\right\} \\
+\intertext{Thus:}
+\sum_{k=0}^{N-1} \tilde{X}[k] \left\{ \frac{1}{N} \sum_{n=0}^{N-1}
+e^{j(\frac{2\pi}{N})(k-r)n} \right\} &= \sum_{n=0}^{N-1}
+\tilde{x}[n]e^{-j(\frac{2\pi}{N})r n} \\
+\intertext{From the orthogonality of the complex exponentials:}
+\frac{1}{N} \sum_{n=0}^{N-1} e^{j(\frac{2\pi}{N})(k-r)n} &= \begin{cases}
+	1 & k-r=mN \qquad \mbox{$m$ an integer} \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \label{eq9-919}\\
+\intertext{and note when $k=0,\ldots,N-1$, $k-r=0$ or $k=r$,
+Equation~(\ref{eq9-919} becomes})
+\tilde{X}[r] &= \sum{n=0}^{N-1} \tilde{x}[n] e^{-j(\frac{2\pi}{N})r n} \\
+\intertext{or}
+\tilde{X}[k] &= \sum_{n=0}^{N-1} \tilde{x}[n] e^{-j(\frac{2\pi}{N})k n} 
+\end{align}
+
+To prove the orthogonality of the complex exponentials, we first note that
+\begin{enumerate}
+\renewcommand{\theenumi}{\Alph{enumi}}
+\item if $k-r=m N$,
+	\begin{align}
+		e^{j(\frac{2\pi}{N})(k-r)n} &= e^{j(\frac{2\pi}{N})m N n} = e{j2\pi m n}
+		\zdtag \\
+		&= (1)^{m n}=1 \\
+	\intertext{as $m$ and $n$ are integers, thus}
+	\frac{1}{N} \sum_{n=0}^{N-1} e^{j(\frac{2\pi}{N})(k-r)n} &= \frac{1}{N}
+	\sum_{n=0}^{N-1} 1 = 1
+	\end{align}
+	for $k-r=m N$.
+\item
+In general
+	\begin{align}
+	\frac{1}{N} \sum_{n=0}^{N-1} e^{j(\frac{2\pi}{N}) l n} &= \frac{1}{N}
+	\frac{1-e^{j(\frac{2\pi}{N}) l N}}{1-e^{j(\frac{2\pi}{N}) l}} \zdtag \\
+	&= \begin{cases}
+		\frac{1}{N}\cdot \frac{-j 2\pi e^{j 2\pi l}}{-j(\frac{2\pi}{N})
+		e^{j(\frac{2\pi}{N}) l}} = \frac{1}{N}\cdot N=1 & \mbox{for $l=m N$} \\
+		\frac{1}{N} \cdot \frac{1-e^{j2\pi l}}{1-e^{j(\frac{2\pi}{N}) l}} = 0 &
+		\mbox{for $l \neq m N$} \\
+	\end{cases}
+		\label{eq9-9114}
+	\end{align}
+	Replace $l$ by $k-r$ in Equation~(\ref{eq9-9114}) resulting in
+	Equation~(\ref{eq9-919}).
+\end{enumerate}
+
+\begin{Exa}
+Given a periodic impulse train 
+\begin{equation}
+\tilde{x}[n]=\sum_{r=-\infty}^{\infty} \delta[n+rN]
+\end{equation}
+find its DFS.
+
+\begin{align}
+\intertext{Solution:}
+\intertext{Since}
+\tilde{x}[n] &= \delta[n] \qquad\mbox{for $0\leqslant n \leqslant N-1$} \\
+\intertext{$\tilde{x}[n]$, therefore, can be also expressed as}
+\tilde{x}[n] &= \infsum{r} \delta[n+rN] = \frac{1}{N} \sum_{k=0}^{N-1}
+W_N^{-kn} \zdtag \\
+&= \frac{1}{N} \sum_{k=0}^{N-1} e^{j(\frac{2\pi}{N}) k n} 
+\end{align}
+
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set nozeroaxis
+set noytics
+set noxtics
+set xrange [-3:3]
+set yrange [0:1.5]
+set arrow from -3,0 to 3,0
+set arrow from 0,0 to 0,1.5
+set arrow from 0,0 to 0,1
+set arrow from -1,0 to -1,1
+set arrow from 1,0 to 1,1
+set label "$0$" at 0,-0.1
+set label "$N$" at 1,-0.1
+set label "$-N$" at -1.1,-0.1
+set label "$\tilde{x}[n]$" at 0.1,1.5
+set label "$\cdots$" at 2,0.5
+set label "$\cdots$" at -2,0.5
+plot x=0
+%#
+\end{Exa}
+
+\subsection{The relation between the discrete-time Fourier transform and the
+discrete Fourier series}
+
+Define
+\begin{align}
+x[n] &= \begin{cases}
+	\tilde{x}[n] & 0 \leqslant n \leqslant N-1 \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \\
+\intertext{the discrete-time Fourier transform is}
+X(e^{j\omega}) &= \sum_{n=0}^{N-1} x[n] e^{-j\omega n} = \sum_{n=0}^{N-1}
+\tilde{x}[n] e^{-j\omega n} \\
+\intertext{It can be seen}
+\tilde{X}[k] &= \left. X(e^{j\omega}) \right|_{\omega=2\pi\frac{k}{N}}
+\end{align}
+
+i.e. The DFS corresponds to sampling the Fourier transform at $N$ equally
+spaced frequencies between $\omega=0$ and $\omega=2\pi$ with a frequency
+spaceing of $\frac{2\pi}{N}$.
+
+\begin{Exa}
+Given a periodic sequence $\tilde{x}[n]$ as shown in Figure~\ref{f9-912} find
+$\tilde{X}[k]$ and $X(e^{j\omega})$ for $\tilde{x}[n]$ and $x[n]$
+respectively.
+
+\begin{figure}[hbtp]
+\subfigure[]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set size 1,0.7
+set noytics
+set nozeroaxis
+set samples 31
+set xrange [-15:15]
+set yrange [0:1.5]
+set arrow from -16,0 to 16,0
+set arrow from 0,0 to 0,1.5
+set label "$\tilde{x}[n]$" at 1,1.5
+set label "$n$" at 16.5,-0.1
+set label "$0$" at 0,-0.1
+set label "$1$" at 1,-0.1
+set label "$2$" at 2,-0.1
+set label "$3$" at 3,-0.1
+set label "$4$" at 4,-0.1
+set label "$11$" at 11,-0.1
+set label "$-10$" at -10,-0.1
+f(x)=x>=0 && x<5?1:0.01
+plot f(x)+f(x-11)+f(x+10) with impulses
+%#
+}
+\subfigure[]{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set size 1,0.7
+set noytics
+set nozeroaxis
+set samples 31
+set xrange [-15:15]
+set yrange [0:1.5]
+set arrow from -16,0 to 16,0
+set arrow from 0,0 to 0,1.5
+set label "${x}[n]$" at 1,1.5
+set label "$n$" at 16.5,-0.1
+set label "$0$" at 0,-0.1
+set label "$1$" at 1,-0.1
+set label "$2$" at 2,-0.1
+set label "$3$" at 3,-0.1
+set label "$4$" at 4,-0.1
+f(x)=x>=0 && x<5?1:0.01
+plot f(x) with impulses
+%#
+}
+\caption{Periodic sequence $\tilde{x}[n]$\label{f9-912}}
+\end{figure}
+
+\begin{align}
+\intertext{Solution:}
+\tilde{X}[k] &= \sum_{n=0}^{4} W_{10}^{k n} = \sum_{n=0}^{4} e^{-j
+(\frac{2\pi}{10}) k n} \zdtag \\
+&= \frac{1-W_{10}^{5 k}}{1-W_{10}^{k}} = e^{-j(4\pi\frac{k}{10})} \frac{
+\sin(\frac{\pi k}{2})}{\sin(\frac{\pi k}{10})} \\
+\intertext{and}
+X(e^{j\omega}) &= \sum_{n=0}^{4} e^{-j\omega n} = e^{-j 2 \omega} \frac{
+\sin(\frac{5\omega}{2})}{\sin(\frac{\omega}{2})} \\
+\intertext{or:}
+\tilde{X}[k] &= \left. X(e^{j\omega}) \right|_{\omega=2\pi \frac{k}{10}}
+\end{align}
+\end{Exa}
+
+\subsection{Periodic Convolution}
+Given two periodic sequences $\tilde{x}_1[n]$ and $\tilde{x}_2[n]$, their DFSs
+are denoted by $\tilde{X}_1[k]$ and $\tilde{X}_2[k]$, respectively. The
+periodic convolution of $\tilde{x}_1[n]$ and $\tilde{x}_2[n]$ is defined as
+
+\begin{equation}
+\tilde{x}_3[n]= \sum_{m=0}^{N-1} \tilde{x}_1[m]\tilde{x}_2[n-m]
+\end{equation}
+
+The DFS of $\tilde{x}_3[n]$ can be obtained by 
+
+\begin{align}
+\tilde{X}_3[k] &= \sum_{n=0}^{N-1} W_N^{k n} \left( \sum_{m=0}^{N-1}
+\tilde{x}_1[m] \tilde{x}_2[n-m] \right) \zdtag \\
+&= \sum_{m=0}^{N-1} \tilde{x}_1[m] \sum_{n=0}^{N-1} \tilde{x}_2[n-m]
+W_N^{k(n'+m)} \zdtag \\
+& \stackrel{n'=n-m}{=} \sum_{m=0}^{N-1} \tilde{x}_1[m] \sum_{n'=-m}^{N-1-m}
+\tilde{x}_2[n'] W_N^{k(n'+m)} \zdtag \\
+&= \left( \sum_{m=0}^{N-1} \tilde{x}_1[m] W_N^{k m} \right) \left(
+\sum_{n'=-m}^{N-1-m} \tilde{x}_2[n'] W_N^{k n'} \right) \label{eq9-925} \\
+\intertext{Note that $\tilde{x}_2[n]$ and $W_N^{kn}$ are periodic with period
+$N$.}
+\sum_{n'=-m}^{N-1-m} \tilde{x}_2[n'] W_N^{k n'} &= \sum_{n'=-m}^{-1}
+\tilde{x}_2[n'] W_N^{k n'} + \sum_{n'=0}^{N-1-m} \tilde{X}_2[n'] W_{N}^{k n'}
+\zdtag \\
+&= \sum_{n'=-m}^{-1} \tilde{x}[n'+N] W_N^{k(n'+N)} + \sum_{n'=0}^{N-1-m}
+\tilde{x}_2[n'] W_N^{k n'} \zdtag \\
+& \stackrel{n''=n'+N}{=} \sum_{n''=N-m}^{N-1} \tilde{x}_2[n''] W_N^{k n''} +
+\sum_{n'=0}^{N-1-m} \tilde{x}_2[n'] W_N^{k n'}\zdtag  \\
+&= \sum_{n=0}^{N-1} \tilde{x}_2[n] W_N^{k n} \label{eq9-126} \\
+\intertext{Therefore Equation~(\ref{eq9-925} becomes})
+\tilde{X}_3[k] &= \tilde{X}_1[k] \tilde{X}_2[k] \label{eq9-127} \\
+\intertext{i.e.}
+\sum_{m=0}^{N-1} \tilde{x}_1[m]\tilde{x}_2[n-m] &\stackrel{DFS}{\fpair}
+\tilde{X}_1[k]\tilde{X}_2[k]
+\end{align}
+
+\begin{Rem}
+
+\begin{enumerate}
+\item The convolution sum is over the finite interval $0 \leqslant m \leqslant
+N-1$
+\item The values of $\tilde{x}_2[n-m]$ in the interval $0 \leqslant m
+\leqslant N-1$ repeat periodically for $m$ outside that interval.
+\end{enumerate}
+\end{Rem}
+
+\section{Sampling the Fourier Transform}	%2
+The aim of this section is to establish the general relationship between an
+aperiodic sequence with Fourier transform $X(e^{j\omega})$ and the periodic
+sequence for which the DFS coefficients corresponds to samples of
+$X(e^{j\omega})$ equally spaced in frequency.
+
+Given an aperiodic sequence $x[n]$ with Fourier transform $X(e^{j\omega})$, we
+may define 
+
+\begin{align}
+\tilde{X}[k] &= \left. X(z) \right|_{z=e^{j(\frac{2\pi}{N})k}}\zdtag \\
+&= \left. X(e^{j\omega})\right|_{\omega=\frac{2\pi}{N}k} \zdtag \\
+&= X(e^{j(\frac{2\pi}{N})k}) \label{eq9-921}
+\end{align}
+
+Note Equation~(\ref{eq9-921} is obtained by sampling $X(e^{j\omega}))$ at
+$\omega_k=\frac{2\pi}{N}$ and tje Fourier transform is equal to the
+z-transform evaluated on the unit circle.
+
+\begin{center}
+\input{pix/DFT/circle.eepic}
+\end{center}
+
+The $\tilde{X}[k]$ so defined in Equation~(\ref{eq9-921}) could be seen as the
+DFS coefficients of a periodic sequence $\tilde{x}[n]$, and
+
+\begin{align}
+\tilde{x}[n] &= \frac{1}{N} \sum_{k=0}^{N-1} \tilde{X}[k] W_N^{-k n} \\
+\intertext{Since}
+X(e^{j\omega}) &= \infsum{m} x[m]e^{-j\omega m} \\
+\tilde{x}[n] &= \frac{1}{N} \sum_{k=0}^{N-1} \left\{ X\left( e^{j
+(\frac{2\pi}{N})k} \right) \right\} W_N^{-k n} \zdtag \\
+&= \frac{1}{N} \sum_{k=0}^{N-1} \left\{ \infsum{m} x[m] e^{-j(\frac{2\pi}{N})
+k} \right\} W_N^{-k n} \zdtag \\
+&= \frac{1}{N} \infsum{m} x[m] \left\{ \sum_{k=0}^{N-1} W_N^{-k(n-m)} \right\}\\
+\intertext{Note that}
+\frac{1}{N} \sum_{k=0}^{N-1} W_N^{-k(n-m)} &= \infsum{r} \delta[n-m+rN] \\
+\intertext{Therefore}
+\tilde{x}[n] &= \infsum{m} x[m] \infsum{r} \delta[n-m+rN] \zdtag \\
+&= x[n] \ast \infsum{r} \delta[n+rN] \zdtag \\
+&= \infsum{r} x[n+rN]
+\end{align}
+
+Assume that the length of $X[n]$ is $M$ and the period of $\tilde{x}[n]$ is
+$N$. If $M \leqslant N$, $x[n]$ can be extracted from one period of
+$\tilde{x}[n]$. If $M>N$, then time-domain aliasing will occur.
+
+\section[The Discrete Fourier Transform of Finite-Duration Sequences]{The Discrete Fourier Transform of Finite-Duration Sequences}	%3
+
+Given a finite-duration sequence $x[n]$, the Discrete Fourier Transform (DFT)
+analysis and synthesis equations are defined as:
+
+\begin{equation}
+\mbox{Analysis Equation~:} \qquad\qquad X[k] = \sum_{n=0}^{N-1} x[n] W_N^{k n} 
+\end{equation}
+
+\begin{equation}
+\mbox{Synthesis Equation~:} \qquad\qquad x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]
+W_N^{-k n} \label{eq9-932}
+\end{equation}
+
+where $W_N=e^{-j\frac{2\pi}{N}}$.
+
+Note that $X[k]=0$ for $k$ outside the interval $0 \leqslant k \leqslant N-1$
+and $x[n]=0$ for $n$ outside the interval $0 \leqslant n \leqslant N-1$.
+
+\begin{equation}
+x[n] \stackrel{DFT}{\fpair} X[k]
+\end{equation}
+
+\begin{Rem}
+We are only interested in $x[n]$ for $0 \leqslant n \leqslant N-1$ as $x[n]=0$
+for values of $n$ outside the interval.
+
+We are only intertested in $X[k]$ for $0 \leqslant k \leqslant N-1$ as there
+are the values needed in Equation~(\ref{eq9-932}).
+\end{Rem}
+
+\begin{Exa}
+Given a finite-duration sequence $x[n]$ with length $N$, where $N=5$,
+\begin{align}
+\tilde{x}[n] &= \infsum{r} x[n+r N] \zdtag \\
+ &= \infsum{r} x[n+r 5] \label{eq9-934} \\
+ &= 1 \zdtag \\
+\intertext{The DFS of $\tilde{x}[n]$ is}
+\tilde{X}[k] &= \sum_{n=0}^{N-1} e^{-j\left(\frac{2\pi k}{N}\right)n}\zdtag \\
+&= \frac{1-e^{-j 2 \pi k}}{1-e^{-j \left( \frac{2\pi k}{N}\right) }} \zdtag \\
+&= \begin{cases}
+	N & \mbox{for $k=0, \pm N, \pm 2 N, \ldots$} \\
+	0 &	otherwise \\
+	\end{cases} \label{eq9-935} \\
+\intertext{The DFT of $x[n]$ is}
+X[k] &= \sum_{n=0}^{N-1} X[n] W_N^{kn} \zdtag \\
+&= \sum_{n=0}^{N-1} e^{-j\left( \frac{2\pi k}{N} \right) n } \zdtag \\
+&= \begin{cases}
+	N & \mbox{for $k=0$} \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \label{eq9-936} \\
+\intertext{The FT of $x[n]$ is}
+X\left(e^{j\omega}\right) &= \sum_{n=0}^{N-1} x[n] e^{-j\omega n} \zdtag \\
+&= \sum_{n=0}^{N-1} e^{-j\omega n} \label{eq9-937} \\
+&= \frac{1-e^{-j\omega N}}{1-e^{-j\omega}} \zdtag \\
+&= e^{-j\omega\left( \frac{N}{2}-\frac{1}{2} \right)} \frac{\sin\left(\omega
+\frac{N}{2} \right)}{\sin\left( \frac{\omega}{2} \right) } \zdtag
+\end{align}
+
+\begin{center}
+\begin{tabular}{ccccc}
+$X\left( e^{j\omega} \right) $&$ \stackrel{\omega_k=\frac{2\pi k}{N}}
+{\Rightarrow} $&$ \tilde{X}[k] $&$ \stackrel{\mbox{one period}}{\Rightarrow}
+$&$ X[k] $\\
+FT & & DFS & & DFT \\
+\end{tabular}
+\end{center}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Finite Length Sequence]{\input{pix/DFT/dfta.eepic}}
+\subfigure[Periodic sequence $\tilde{x}\lbrak n\rbrak$ formed from $x\lbrak
+n\rbrak$ with period $N=5$]{\input{pix/DFT/dftb.eepic}}
+\subfigure[Fourier series coefficients $\tilde{X}\lbrak k\rbrak$ for
+$\tilde{x}\lbrak n\rbrak$. To emphasise that the Fourier series coefficients
+are samples of the Fourier transform, $|X(e^{j\omega})|$ is also
+shown.]{\input{pix/DFT/dftc.eepic}}
+\subfigure[DFT of $x\lbrak n\rbrak$]{\input{pix/DFT/dftd.eepic}}
+\end{center}
+\caption{Illustration of the DFT\label{f9-illdft}}
+\end{figure}
+
+If we assume that $N=10$ for $x[n]$,
+\begin{align}
+X\left(e^{j\omega} \right) &= \frac{1-e^{-j\omega 10}}{1-e^{-j\omega}} \zdtag \\
+&= e^{-j\omega 4.5} \frac{\sin(5\omega)}{\sin\left( \frac{\omega}{2} \right)}
+\label{eq9-938} \\
+\tilde{X}[k] &= e^{-j\left(\frac{4\pi k}{10}\right)} \frac{\sin\left( \frac{\pi
+k}{2} \right)}{\sin\left(\frac{\pi k}{10} \right)} \label{eq9-939} \\
+X[k] &= \begin{cases}
+	\tilde{X}[k] & \mbox{for $k=0,1,\ldots,9$} \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \label{eq9-9310}
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Finite Length Sequence]{\input{pix/DFT/dft2a.eepic}}
+\subfigure[Periodic sequence $\tilde{x}\lbrak n\rbrak$ formed from $x\lbrak n\rbrak$ with period $N=10$]{\input{pix/DFT/dft2b.eepic}}
+\subfigure[DFT magnitude.]{\input{pix/DFT/dft2c.eepic}}
+\subfigure[DFT phase. ($\times$ indicate indeterminate value)]{\input{pix/DFT/dft2d.eepic}}
+\end{center}
+\caption{Illustration of the DFT\label{f9-illdft2}}
+\end{figure}
+\end{Exa}
+
+\section{Circular Convolution of Finite-Duration Sequences}	%4
+
+Given a finite-duration sequence $x[n]$ with length $N$, a periodic sequence
+$\tilde{x}[n]$ may be defined such that
+\begin{equation}
+\tilde{x}[n] = \infsum{r} x[n+r N] \label{eq9-941}
+\end{equation}
+Since there is no overlap between the terms $X[n+rN]$ for different values of
+$r$, Equation~(\ref{eq9-941}) can be written as
+\begin{equation}
+\tilde{x}[n] = x[((n))_N] \label{eq9-942}
+\end{equation}
+where the notation $((n))_N$ denoted $n$ modulo $N$.
+
+By the same token
+\begin{equation}
+\tilde{X}[k] = X[((k))_N] \label{eq9-943} 
+\end{equation}
+where $\tilde{X}[k]$ and $X[k]$ are the DFS of $\tilde{x}[n]$ and the DFT of
+$x[n]$ respectively.
+
+In summary,
+\begin{equation}
+\tilde{x}[n] = x[((n))_N] \stackrel{DFS}{\fpair} \tilde{X}[k]=X[((k))_N]
+\label{eq9-944}
+\end{equation}
+
+\begin{Def}
+The N-point circular convolution\index{convolution!circular}
+\index{circular convolution} of two finite-duration sequences $x_1[n]$ and
+$x_2[n]$ is defined as
+\begin{align}
+x_3[n] &= \sum_{m=0}^{N-1} x_1[m] x_2]((n-m))_N] \zdtag \\
+\intertext{or}
+X_3[n] &= X_1[n] \nconv X_2[n] \label{eq9-945}
+\end{align}
+
+Note that the sequence $x_2[n]$ is time-reversed and linear shifted in
+Equation~(\ref{eq9-945}).
+
+It can be shown that if $X_1[k]$ and $X_2[k]$ are DFTs of $x_1[n]$ and
+$x_2[n]$ respectively, the DFT of $x_3[n]$ is obtained by
+\begin{equation}
+X_3[k]=X_1[k]X_2[k] \label{eq9-946}
+\end{equation}
+\end{Def}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[]{\input{pix/DFT/nconva.eepic}}
+\subfigure[]{\input{pix/DFT/nconvb.eepic}}
+\subfigure[]{\input{pix/DFT/nconvc.eepic}}
+\end{center}
+\caption{N-point circular convolution of two constant sequences of length
+$N$\label{f9-nconv}}
+\end{figure}
+
+\begin{Rem}
+The linear convolution is done for all $m$, while the circular convolution is
+only done for $0 \leqslant m \leqslant N-1$.
+\end{Rem}
+
+\begin{Exa}
+\label{ex-941}
+Given
+\begin{equation}
+X_1[n]=X_2[n]=\begin{cases}
+	1 & 0 \leqslant n \leqslant L-1 \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \label{eq9-947}
+\end{equation}
+
+\begin{enumerate}
+\item if $N=L$, find
+\[ x_3[n]=\sum_{m=0}^{N-1} x_1[m]x_2[((n-m))_N] \]
+\item if $N=2L$, find 
+\[ x_3[n] \]
+\end{enumerate}
+Solution:
+\begin{enumerate}
+\item When $N=L$, the $N$-point DFTs are
+\begin{align}
+X_1[k] &= X_2[k] = \sum_{n=0}^{N-1} W_N^{k n} \zdtag \\
+&= \sum_{n=0}^{N-1} e^{-j \frac{2 \pi k}{N} n} \zdtag \\
+&= \begin{cases}
+	N & k=0 \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \label{eq9-948} \\
+\intertext{Therefore}
+X_3[k] &= X_1[k] X_2[k] \zdtag \\
+&= \begin{cases}
+	N^2 & k=0 \\
+	0 & \mbox{otherwise} \\
+	\end{cases} \label{eq9-949} \\
+\intertext{where $X_3[k]$ is the DFT of $x_3[n]$.}
+x_3[n] &= \frac{1}{N} \sum_{k=0}^{N-1} X_3[k] W_N^{-k n} \zdtag \\
+&= \frac{1}{N} N^2 W_N^0 = N \qquad 0 \leqslant n \leqslant N-1 \label{eq9-9410}
+\end{align}
+\item
+When $N=2L$, $x_1[n]$ and $x_2[n]$ are augmented by $L$ zeros. The result is
+shown in Figure~\ref{f9-lconv}.
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[]{\input{pix/DFT/lconva.eepic}}
+\subfigure[]{\input{pix/DFT/lconvb.eepic}}
+\subfigure[]{\input{pix/DFT/lconvc.eepic}}
+\subfigure[]{\input{pix/DFT/lconvd.eepic}}
+\subfigure[]{\input{pix/DFT/lconve.eepic}}
+\end{center}
+\caption{$2L$-point circular convolution of two constant sequences of length
+$L$ \label{f9-lconv}}
+\end{figure}
+
+\end{Exa}
+
+From the previous Example~\ref{ex-941}, it can also be seen that whether a
+circular convolution corresponding to the product of two $N$-point DFTs is the
+same as the linear convolution of the corresponding finite-length sequences
+depends on the length of the DFT in relation to the length of the two given
+finite-length sequences.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[The sequences $x_1 \lbrak n \rbrak$ and $x_2 \lbrak n \rbrak$ to be
+convolved]{\input{pix/DFT/convequiva.eepic}}
+\subfigure[The linear convolution of $x_1 \lbrak n \rbrak$ and $x_2 \lbrak n
+\rbrak$.]{\input{pix/DFT/convequivb.eepic}}
+\subfigure[$x_3 \lbrak n-N \rbrak$ for $N=6$]{\input{pix/DFT/convequivc.eepic}}
+\subfigure[$x_3 \lbrak n+N \rbrak$ for $N=6$]{\input{pix/DFT/convequivd.eepic}}
+\end{center}
+\caption{Illustration that circular convolution is equivalent to linear
+convolution followed by aliasing\label{f9-convequiv}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\setcounter{subfigure}{4}
+\subfigure[$x_1 \lbrak n \rbrak \bigcirc \hspace{-1em} 6 \; x_2 \lbrak n
+\rbrak $, which is equal to the sum of (b), (c) and (d) in the interval $0
+\leqslant n \leqslant 5$.]{\input{pix/DFT/convequive.eepic}}
+\subfigure[$x_1 \lbrak n \rbrak \bigcirc \hspace{-1.1em} {\scriptscriptstyle
+12} \; x_2 \lbrak n \rbrak $.]{\input{pix/DFT/convequivf.eepic}}
+\end{center}
+\caption{Illustration that circular convolution is equivalent to linear
+convolution followed by aliasing continued\label{f9-convequiv2}}
+\end{figure}
+
+\begin{Rem}
+Given
+\begin{align}
+x_{3l}[n]=x_1[n] \ast x_2[n] &\stackrel{FT}{\fpair} X_3 \left( e^{j\omega}
+\right) = X_1 \left( e^{j\omega} \right) X_2 \left( e^{j\omega} \right) \\
+\intertext{and}
+x_{3}[n]=x_1[n] \nconv x_2[n] &\stackrel{DFT}{\fpair} X_3[k] = X_1[k] X_2[k] 
+\end{align}
+if the length of the DFTs $N$ satisfies
+\[ N \geqslant L+P \ast 1 \qquad x_3[n]=x_{3l}[n]  \]
+Otherwise time aliasing in the circular onvolution may occur.
+\end{Rem}
+
+\section{Linear Convolution Using the DFT}	%5
+
+To implement a linear time-invariant system, a linear convolution is normally
+required.
+
+We have seen that
+
+\begin{equation}
+X_3[k]=X_1[k]X_2[k] \stackrel{DFT}{\Leftrightarrow} x_3[n]=x_1[n] \nconv x_2[n]
+\label{eq9-951}
+\end{equation}
+
+To obtain a linear convolution, we have to ensure that a circular convolution
+has the effect of linear convolution.
+
+\subsection{Linear convolution of two finite-length sequences}
+
+Given a sequence $x_1[n]$ with length $L$ and another $x_2[n]$ with length
+$P$, the linear convolution of $x_1[n]$ and $x_2[n]$ is defined as
+\begin{equation}
+x_3[n] = \infsum{m} x_1[m] x_2[n-m] \label{eq9-952} 
+\end{equation}
+
+It is obvious that the product
+\[ X_1[m]X_2[n-m] \]
+is zero for all $m$ whenever $n<0$ and $n>L+P-2$. That is $(L+P-1)$ is the
+maximum length of $x_3[n]$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Finite-length sequence $x_1 \lbrak n \rbrak$]{\input{pix/DFT/finitea.eepic}}
+\subfigure{\input{pix/DFT/finiteb.eepic}}
+\subfigure{\input{pix/DFT/finitec.eepic}}
+\setcounter{subfigure}{1}
+\subfigure[$x_2 \lbrak n - m \rbrak$ for several values of $n$]{\input{pix/DFT/finited.eepic}}
+\end{center}
+\caption[Example of linear convolution of two finite-length sequences]{
+Example of linear convolution of two finite-length sequences showing
+that the result is such that $x_3[n]=0$ for $ n\leqslant 1$ and for
+$n\geqslant L+P-1$\label{f9-2finite}}
+\end{figure}
+
+\section{Implementing Linear Time-Invariant Systems Using DFT}	%6
+
+Since linear time-invariant systems can be implemented by convolution,
+circular convolution can be used to implement the systems.
+
+Given an input sequence $x[n]$ with length $L$ and a $P$-point impulse
+response $h[n]$, the system response $y[n]$ has a length $(L+P-1)$.
+
+\begin{center}
+\input{pix/DFT/system.eepic}
+\end{center}
+
+In this case for $\nconv$ and $\ast$ operations to be identical, the length of
+$\nconv$ must be at least $(L+P-1)$, i.e. the length of DFTs must be $(L+P-1)$
+at least.
+
+To compute $(L+P-1)$-point DFTs, bith $x[n]$ and $h[n]$ must be augmented
+using zero padding. ($x[n]$, $P-1$ zeros; $h[n]$, $L-1$ zeros).
+
+\subsection{Block convolution}
+Given the impulse response $h[n]$ with length $P$, assume $x[n]$ is causal and
+has very long length,
+\begin{align}
+x[n] &= \sum_{r=0}^{\infty} x_r[n-rL] \\
+\intertext{where}
+x_r[n] &= \begin{cases}
+x[n+rL] & 0 \leqslant n \leqslant L-1 \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{Because convolution is a linear time-invariant operation it follows
+that}
+y[n] &= x[n] \ast h[n] = \sum_{r=0}^{\infty} y_r[n-rL] \\
+\intertext{where}
+y_r[n] &= x_r[n] \ast h[n] 
+\end{align}
+with length $(L+P-1)$.
+
+The linear convolution can be computed using N-point DFTs where $N \geqslant
+L+P-1.$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Finite length impulse response $h \lbrak n \rbrak$]{\input{pix/DFT/fir.eepic}}
+\subfigure[Indefinite length signal $x \lbrak n \rbrak$ to be filtered]{\input{pix/DFT/ils.eepic}}
+\end{center}
+\caption{Example signal for convolution\label{f9-egconv}}
+\end{figure}
+
+Since the nonzero points in the filtered sections overlaps by ($P-1$) points
+and these overlap samples must be added to obtain $y[n]$. Therefore this
+method of block linear convolution is called {\em the overlap-add
+method\/}.\index{overlap-add method}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure{ \input{pix/DFT/overadda.eepic} }
+\subfigure{ \input{pix/DFT/overaddb.eepic} }
+\subfigure[Decomposition of $x\lbrak n \rbrak$ in Figure~\ref{f9-egconv} into
+non-overlapping sections of length $L$]{ \input{pix/DFT/overaddc.eepic} }
+\end{center}
+\caption{Example of the overlap-add method\label{f9-overadd}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Result of convolving each section with $h \lbrak n \rbrak$]{ \input{pix/DFT/overaddd.eepic} }
+\end{center}
+\caption{Example of the overlap-add method continued\label{f9-overadd2}}
+\end{figure}
+
+\subsection{The overlap-save method}
+From the discussion on the circular convolution, it can be shown that if an
+L-point sequence is circularly convolved with a P-points sequence ($P<L$),
+then the first ($P-1$) points of the results are ``incorrect'' while the
+remaining points are identical to those that would be obtained had we
+implemented a linear convolution.
+
+If $x[n]$ is divided into sections with length L so that the input sections
+overlaps the preceeding section by ($P-1$) points, i.e.,
+\begin{align}
+x[n] &= \sum_{r=0}^{\infty} x[n+r(L-P+1) - P+1] \qquad 0 \leqslant n \leqslant
+L-1 \\
+\intertext{with ($P-1$) zeros added to the beginning of the original sequence,
+then}
+y[n] &= \sum_{r=0}^{\infty} y_r [n-r(L-P+1)+P-1] \\
+\intertext{where}
+y_r[n] &= \begin{cases}
+y_{rp}[n] & P-1 \leqslant n \leqslant L-1 \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{and}
+y_{rp}[n] &= x_r[n] \nconv h[n] 
+\end{align}
+
+The output section $0 \leqslant n \leqslant P-2$ (first ($P-1$) points) must
+be discarded (or ``saved''). Therefire the name of the method is {\em the 
+overlap-save method\/}.\index{overlap-save method}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Decomposition of $x \lbrak n \rbrak$ of Figure~\ref{f9-egconv} into
+overlapping sections of length $L$.]{ \input{pix/DFT/oversavea.eepic}}
+\end{center}
+\caption{Example of the overlap-save method\label{f9-oversave}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\setcounter{subfigure}{1}
+\subfigure[Result of convolving each section with $h \lbrak n \rbrak$. The
+portions of each filtered section to be discarded in forming the linear
+convolution are indicated.]{\input{pix/DFT/oversaveb.eepic}}
+\end{center}
+\caption{Example of the overlap-save method continued\label{f9-oversave2}}
+\end{figure}
+

@@ -1,0 +1,88 @@
+% $Id: outline.zd,v 1.1 1993/06/09 00:49:05 dwagon Exp $
+% $Header: /ccstaff2/edp/dwagon/signotes/RCS/outline.zd,v 1.1 1993/06/09 00:49:05 dwagon Exp $
+% $Log: outline.zd,v $
+% Revision 1.1  1993/06/09  00:49:05  dwagon
+% Initial revision
+%
+%
+\chapter{Outline of Subject}
+
+\begin{description}
+\item[Contact:] Two  1 hour lectures and 2 hours practical/tutorial work per
+week
+for two semesters.
+\item[Syllabus:] 
+Sampling of continuous-time signals and sampling rate conversion. Digital
+signal processign systems. Structures for discrete-time systems. Digital
+filter design techniques; discrete Fourier transform (DFT) and computation of
+DFTs. Discrete Hilbert transform and its applications. Quantisation effect in
+digital signal processing; Fourier analysis of signals using the DFT.
+Applications of digital signal processing. DSP implementation using, for
+example, the TMS320C25/C30 digital signal processor(s).
+\item[Evaluation:] \ \ 
+
+	\begin{tabular}{rl}
+		Practical & 40\% \\
+		Final Exam & 60\% \\
+	\end{tabular}
+
+All pracs are compulsory unless specified otherwise.
+
+Your performance of the practical work will be evaluated based on 
+\begin{itemize}
+	\item Attendance
+	\item Demonstration on request
+	\item Quality of the reports
+\end{itemize}
+
+Overdue reports will be penalized. Prac reports must be written on an
+individual basis.
+
+Excelent prac work will contribute to the overall evaluation of your
+performance in this subject.
+\item[Preliminary Reading:] \ \ 
+
+\begin{enumerate}
+\item E. W. Kamen ``Introduction to Signals and Systems'', MacMillan
+Publishers, 2nd Edition, 1990
+\item R. E. Ziemer, W.H. Tranter and D. R. Fannin ``Signals and Systems:
+Continuous and Discrete'', MacMillan Publishers 1990
+\end{enumerate}
+
+\item[Prescribed Texts:] \ \ 
+
+\begin{enumerate}
+\item A. Oppenheim and R. Schafer ``Discrete-Tiem Signal Processing'' 
+Prentice-Hall 1989
+\end{enumerate}
+
+\item[Recommended Reading:] \ \ 
+
+\begin{enumerate}
+\item J. G. Proakis and D. G. Manolakis ``Introduction to Digital Signal
+Processing'', MacMillan Publishers 1989
+\item G. B. Lockharat and B. M Cheetham ``BASIC Digital Signal Processing'',
+Butterworths
+\item T. W. Parks and C. S. Burrus ``Digital Filter Design'', John Wiley and
+Sons 1987
+\end{enumerate}
+
+\item[References:] \ \ 
+
+\begin{enumerate}
+\item L. R. Rabiner and B. Gold ``Theory and Application of Digital Signal
+Processing'', Prentice Hall 1975
+\item H. Baher ``Analog and Digital Signal Processing', John Wiley and Sons
+1990
+\item M. E. Van Valkenburg, ``Analog Filter Design'', Holt-Sanders
+International Editions, CBS College Publishing, 1982
+\item A. Bateman and W. Yates, ``Digital Processing Design'', Pitman
+Publishing 1988
+\item R. W. Hamming ``Digital Filters'', Prentice Hall International 3rd
+	Edition, 1989
+\item Texas Instruments, Linear Circuits Data Book, 1989
+\item Signal Processing Associates ``SPA-C25-1 Instruction Manual'' 1980
+\item Texas Instruments ``TMS320 Fixed Point DSP Assembly Language Tools
+User's Guide'' 1990
+\end{enumerate}
+\end{description}

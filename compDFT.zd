@@ -1,0 +1,1064 @@
+% $Id: compDFT.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp $
+% $Header: /ccstaff2/edp/dwagon/signotes/RCS/compDFT.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Computation of Discrete Fourier Transforms}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\minitoc
+
+``It has been said that the rediscovery of the Fast Fourier Transform (FFT)
+algorithm was one of the saviours of the IEEE Signal Processing Society and
+marked the beginning of modern digital signal processing.''
+
+\section{Introduction to Fast Algorithms}     %1
+An algorithm, like most engineering devices, can be described either by an
+input/output relationship or a detailed explanation of its internal
+construction.
+
+Algorithms for fast computations related to digital signal processing is our
+main concern.
+
+Fast algorithms have been designed for computations of:
+\begin{itemize}
+\item Digital Filtering
+\item DFTs
+\item Correlation
+\item Spectral Analysis etc.
+\end{itemize}
+
+Why do we need fast algorithms?
+
+\begin{Exa}
+Relative performance of some two dimensional Fourier transform algorithms are
+shown in Table~\ref{t10-relperf}.
+
+\begin{table}[hbtp]
+\begin{center}
+\begin{tabular}{lcc} 
+Algorithm & Multiplications/Pixel & Additions/Pixel \\ \hline
+Discrete Computation of & &  \\
+Discrete Fourier Transform & 8,000 & 4,000 \\
+$ 1000 \times 1000$ & & \\ \hline
+Basic Cooley-Tukey FFT & 40 & 60 \\
+$1024 \times 1024$ & & \\ \hline
+Hybrid Cooley-Tukey/ & & \\
+Winograd FFT & 40 & 72.8 \\
+$1000 \times 1000$ & & \\ \hline
+Winograd FFT & 6.2 & 91.6 \\
+$1008 \times 1008$ & & \\ \hline
+Nussbaumer-Quandalle FFT & 4.1 & 79 \\
+$1008 \times 1008 $ & & \\ \hline
+\end{tabular}
+\end{center}
+\caption{Relative performance of some two-dimensional Fourier Transform
+Algorithms\label{t10-relperf}}
+\end{table}
+\end{Exa}
+
+\begin{Def}[Fast Algorithms]
+\index{fast algorithms}
+A fast algorithm is a detailed description of a computation procedure that is
+not the obvious way to compute the required output from the input.
+
+A fast algorithm usually gives up a conceptually clear computation in favour
+of one that is computationally efficient.
+\end{Def}
+
+\begin{Exa}
+Compute a number $A$ given by
+\begin{equation}
+A = a c  + a d +  b c + b d \label{eq10.1-1}
+\end{equation}
+A direct implementation of Equation~\ref{eq10.1-1} requires 4 multiplications
+(mult.) and 3 additions (adds.)
+
+If we need to compute $A$ many times with different sets of date, an
+equivalent form can be found to reduce the number of multiplications and
+additions.
+\begin{equation}
+A = (a+b)(c+d) \label{eq10.1-2}
+\end{equation}
+Equation~\ref{eq10.1-2} only requires 1 multiplication and 2 additions.
+\end{Exa}
+
+\begin{Exa}
+Compute the complex product
+\begin{align}
+(e+j f) &= (a+j b)(c+j d)  \\
+\intertext{It can be written in terms of real multiplications and additions}
+e &= (a c - b d) \label{eq10.1-4} \\
+f &= (a d  + b c ) \label{eq10.1-5} \\
+\intertext{According to Equation~\ref{eq10.1-4} and~\ref{eq10.1-5} we
+need 4 multiplications and 2 additions to obtain 1 complex multiplication}
+\intertext{A more efficient ``algorithm'' is}
+e &= (a-b)d+a(c-d) \label{eq10.1-6} \\
+f &= (a-b)d + b(c+d) \label{eq10.1-7}  
+\end{align}
+whenever multiplication is harder than addition. It requires 3 multiplications
+and 5 additions.
+
+$\bullet$ Furthermore, if the complex number $(c+jd)$ is constant or $c$ and
+$d$ are constant for a series of complex multiplications such as FFT, the terms
+$(c-d)$ and $(c+d)$ are constants as well and they can be computed off-line.
+In this case using Equation~\ref{eq10.1-6} and~\ref{eq10.1-7}, we only need 3
+real multiplications and 3 real additions to compute one complex
+multiplication.
+
+We have traded 1 multiplication for 1 addition.
+\end{Exa}
+
+\begin{Exa}[Fast Algorithms and matrix decomposition]
+\index{matrix decomposition}
+A complex multiplication represented by
+\begin{align}
+(e+jf) &= (a+jb)(c+jd) \zdtag \\
+\intertext{can be written as a matrix product}
+\begin{bmatrix} e \\ f \end{bmatrix} &=
+\begin{bmatrix} c & -d  \\ d & c \end{bmatrix}
+\begin{bmatrix} a \\ b \end{bmatrix} 
+\end{align}
+where the vector $\begin{bmatrix} a \\ b \end{bmatrix}$ represents the complex
+number $(a+j b)$, the matrix $\begin{bmatrix} c & -d  \\ d & c \end{bmatrix}$
+represents the complex number $(c+j d)$ and the vector $\begin{bmatrix} e \\
+f \end{bmatrix}$ represents the complex number $(e+j f)$.
+
+The ``fast algorithm'' in the previous example can be expressed in matrix form
+as
+\begin{equation}
+\begin{bmatrix} e \\ f \end{bmatrix} =
+\underbrace{\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{bmatrix}}_{\text{post
+additions}}
+\underbrace{\begin{bmatrix} (c-d) & 0 & 0 \\ 0 & (c+d) & 0 \\
+0 & 0 & d \\ \end{bmatrix}}_{\stackrel{\text{diagonal matrix}}{\text{(multiplications)}}}
+\underbrace{\begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 1 & -1 \\
+\end{bmatrix}}_{\text{preadditions}}
+\begin{bmatrix} a \\ b \\ \end{bmatrix}
+\end{equation}
+
+The algorithm can be thought of as nothing more than the usual matrix
+factorization:
+\begin{align}
+\begin{bmatrix} c & -d \\ d & c \end{bmatrix} &= 
+\underbrace{\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{bmatrix}}_{B}
+\underbrace{\begin{bmatrix} (c-d) & 0 & 0 \\ 0 & (c+d) & 0 \\ 0 & 0 & d 
+\end{bmatrix}}_{D}
+\underbrace{\begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 1 & -1 \\ \end{bmatrix}}_{A} \\
+\intertext{and}
+\begin{bmatrix} e \\ f \\ \end{bmatrix} &=
+B D A \begin{bmatrix} a \\ b \\ \end{bmatrix}
+\end{align}
+\end{Exa}
+
+\begin{Rem}
+Many of the best computational procedures for convolution and for the
+discrete Fourier transform can be put into this form. These fast algorithms
+will have the structure of a batch of additions followed by a batch of
+multiplications followed by another batch of additions.
+\end{Rem}
+
+\section{Efficient Computation of the DFT}    %2
+The DFT of a finite-length sequence of length $N$ is defined as
+\begin{align}
+X[k] &= \sum_{n=0}^{N-1} x[n] W_{N}^{kn} \qquad k=0,1,\ldots,N-1
+\label{eq10.2-1}\\
+\intertext{where $W_n=e^{-j(2\pi/N)}$. The inverse DFT is defined as}
+x[n] &= \frac{1}{N} \sum_{k=0}^{N-1} X[k] W_{N}^{-kn} \qquad n=0,1,\ldots,N-1
+\label{eq10.2-2}
+\end{align}
+
+Both $x[n]$ and $X[k]$ may be complex. The only difference between
+Equation~\ref{eq10.2-1} and~\ref{eq10.2-2} are the signs of the exponent of
+$W_N$ and the scale factor
+\begin{equation}
+x[n] = \left( \frac{1}{N} \sum_{k=0}^{N-1} X^{\ast} [k] W_{N}^{k n}
+\right)^{\ast}
+\end{equation}
+
+The computational procedures for Equation~\ref{eq10.2-1} applies to
+Equation~\ref{eq10.2-2} with modifications and vice versa.
+
+Note:
+\begin{align}
+W_N &= e^{-j(2\pi/N)} \\
+&= \cos(2\pi/N)-j\sin(2\pi/N) \\
+(W_N)^\ast &= \left\{ e^{-j(2\pi/N)} \right\}^{\ast} \\
+&= \left\{ \cos (2\pi/N) - j \sin(2\pi/N) \right\}^{\ast} \\
+&= \cos(2\pi/N) + j\sin(2\pi/N) \\
+&= W_N^{-1} 
+\end{align}
+
+\subsection{Direct evaluation of the DFT}
+For each value $X[k]$ of the DFT, $N$ complex multiplications and ($N-1$)
+complex additions are required for the computation. Thus, to compute all $N$
+values of the DFT requires $N^2$ complex multiplications and $N(N-1)$ complex
+additions.
+
+In terms of real number operations we need $4N^2$ real multiplications and
+$N(4N-2)$ real additions, Since
+\begin{equation}
+\begin{split}
+X[k] = & \sum_{n=0}^{N-1} \left[ \left( \Re \left\{ x[n] \right\} \Re \left\{
+W_{N}^{k n} \right\} - \Im \left\{ x[n] \right\} \Im \left\{ W_{N}^{k n}
+\right\} \right) \right. \\
+& \phantom{\sum} + \left. j \left( \Re \left\{ x[n] \right\} \Im \left\{
+W_{N}^{k n} \right\} + \Im \left\{ x[n] \right\} \Re \left\{ W_{N}^{k n}
+\right\} \right) \right] \qquad k=0,1,\ldots,N-1 \label{eq10.2-4} \\
+\end{split}
+\end{equation}
+
+(Note: 1 complex multiplication $\Rightarrow$ 4 real multiplications and 2
+real additions\\
+and 1 complex addition $\Rightarrow$ 2 real additions.)
+
+The amount of computation is approximately proportional to $N^2$ or on the
+order $O(N^2)$.
+
+Most fast DFT algorithms exploit the symmetry and periodicity properties of
+$W_{N}^{k n}$.
+\begin{description}
+\item[Complex conjugate symmetry] $\wn{k[N-n]} = \wn{-kn} = \left( \wn{k n}
+\right)^{\ast}$
+\item[Periodicity in $n$ and $k$] $\wn{k n} = \wn{k(n+N)} = \wn{(k+N)n}$
+\end{description}
+
+For example, in Equation~\ref{eq10.2-4}
+\begin{equation}
+\begin{split}
+\phantom{=} &\Re \left\{ x[n] \right\} \Re \left\{ \wn{k n} \right\} + \Re
+\left\{ x[N-n] \right\} \Re \left\{ \wn{k[N-n]} \right\} \\
+= & \left( \Re \left\{ x[n] \right\} + \Re \left\{ x[N-n] \right\} \right) \Re
+\left\{ \wn{k n} \right\} \\
+\end{split}
+\end{equation}
+Note:
+\begin{equation}
+\Re \left\{ \wn{k n} \right\} = \Re \left\{ \left( \wn{k n} \right)^\ast
+\right\} 
+\end{equation}
+and symmetry property is used.
+\begin{equation}
+\begin{split}
+\phantom{=} &-\Im\left\{ x[n] \right\} \Im \left\{ \wn{k n} \right\} - \Im
+\left\{ x[N-n] \right\} \Im \left\{ \wn{k[N-n]} \right\}\\
+= &- \left( \Im \left\{ x[n] \right\} + \Im \left\{ x[N-n] \right\} \right) \Im
+\left\{ \wn{k n} \right\} \\
+\end{split}
+\end{equation}
+
+Also note that in $\wn{k n}$, some values of the product $k n$ will result in
+$\sin$ and $\cos$ functions taking on value 1 or 0, i.e., $\wn{k n}=\pm 1$ or
+$\pm j$. In these cases, we do not need multiplications at all.
+
+\section{The Goertzel Algorithm}    %3
+
+The Goertzel algorithm for the computation of the DFT is derived using the
+periodicity of the sequence $\wn{k n}$ to reduce computation.
+
+Note that
+\begin{align}
+\wn{-k N} &= e^{j(2\pi/N)N k} = e^{j2\pi k} = 1 \\
+X[k] &= \underbrace{\wn{-k_N N-1}}_{1} \sum_{r=0}^{N-1} x[r] \wn{k r} =
+\sum_{r=0}^{N-1} x[r] \wn{-k(N-r)} \label{eq10.3-2} \\
+\intertext{Equation~\ref{eq10.3-2} is equivalent to the DFT definition. If we
+define the sequence:}
+y_k[n] &= \infsum{r} x[r] \wn{-k(n-r)} u[n-r] \label{eq10.3-3}\\
+\intertext{it follows that}
+X[k] &= \left. y_k[n] \right|_{n=N} 
+\end{align}
+as $x[n]=0$ for $n<0$ and $n\geqslant N$.
+
+Equation~\ref{eq10.3-3} can be interpreted as a discrete convolution of
+$x[n]$, for $0 \leqslant n \leqslant N-1$ with $\wn{-k n} u[n]$.
+
+Consequently, $y_k[n]$ is the response of a system with $h[n]=\wn{-k n}u[n]$
+to a finite length input sequence $x[n]$. And $X[k]$ is the value of the
+output when $n=N$.
+
+\begin{center}
+\input{pix/compDFT/sfg1.eepic}
+\end{center}
+
+To compute $X[k]=y_k[N]$ we need $4N$ real multiplications and $4N$ real
+additions. To obtain
+\begin{equation}
+X[k] \qquad \mbox{for $k=0,1,\ldots, N-1$} 
+\end{equation}
+we need $4N^2$ real multiplications and $4N^2$ real additions.
+
+The system function is given by
+\begin{align}
+H_k[z] &= \frac{1}{1-\wn{-k} z^{-1}} \\
+\intertext{To achieve the fast algorithm, we note}
+H_z[z] &= \frac{1-\wn{k}z^{-1}}{(1-\wn{-k}z^{-1})( 1-\wn{k} z^{-1})} \\
+H_k[z] &= \frac{1-\wn{k} z^{-1}}{1-2\cos (2\pi k/N) z^{-1} + z^{-2}} 
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/sfg2.eepic}
+\end{center}
+\caption{SFG of DFT\label{f10-sfgdft}}
+\end{figure}
+
+$2N$ real multiplications and $4N$ additions for poles, and $4$ real
+multiplications and $4$ additions for the zero as shown in
+Figure~\ref{f10-sfgdft}.
+
+A total of $2(N+2)$ real multiplications and $4(N+1)$ real additions for the
+computation of $X[k]$.
+
+Therefore, for the computation of all $N$ values of the DFT using the
+Goertzel algorithm, we need $2N^2$ real additions and $N^2$ real
+multiplications.
+
+\section{Decimation-in-Time FFT Algorithms}    %4
+
+\begin{Def}
+Algorithms in which the decomposition of the DFT computation is based on
+decomposing the sequence $x[n]$ into successively smaller subsequences, are
+called decimation-in-time FFT algorithms.
+\end{Def}
+
+Assume that the 1-D N-points DFT $X[k]$ is defined as
+\begin{equation}
+X[k] = \sum_{n=0}^{N-1} s[n] \wn{n k} \label{eq10.4-1}
+\end{equation}
+where 
+\begin{equation}
+\wn=e^{-j \left( \frac{2\pi}{N} \right)}, \quad N=2^\nu, \quad k=0,1,
+\ldots, N-1 
+\end{equation}
+
+To separate $x[n]$ into its even-odd numbered points so that
+\begin{align}
+X[k] &= \sum_{\text{n even}} x[n] \wn{n k} + \sum_{\text{n odd}} x[n] \wn{n k}
+\label{eq10.4-5}\\
+\intertext{set}
+n &=n_1\times 2 + n_2 \qquad\mbox{(decimation with radix-2)} \label{eq10.4-3}
+\\
+\intertext{where  $n_1=0,1,\ldots, N/2-1$ and $n_2=0,1$.}
+\intertext{Substitute Equation~\ref{eq10.4-3} into Equation~\ref{eq10.4-1}}
+X[k] &= \sum_{n_1=0}^{N/2-1} \sum_{n_2=0}^{1} x[n_1 \times 2+n_2]
+\wn{(n_1\times 2+ n_2)k} \zdtag \\
+&= \sum_{n_1=0}^{N/2-1} x[2n_1] \wn{2n_1 k} + \sum_{n_1=0}^{N/2-1} x[2n_1+1]
+\wn{(2n_1+1)k} \label{eq10.4-4} \\
+X[k] &= \sum_{n_1=0}^{N/2-1} x[2n_1] \left( \wn{2} \right)^{n_1 k} + \wn{k}
+\sum_{n_1=0}^{N/2-1} x[2n_1+1] \left( \wn{2} \right)^{n_1 k} \zdtag \\
+&= \sum_{n_1=0}^{N/2-1} x[2n_1] W_{N/2}^{n_1k} + \wn{k} \sum_{n_1=0}^{N/2-1}
+x[2n_1+1] W_{N/2}^{n_1 k} \zdtag \\
+&= \underbrace{G[k]}_{\text{even}} + \underbrace{\wn{k} H[k]}_{\text{odd}} \\
+\intertext{note:}
+\wn{2} &= e^{-2j(2\pi/N)} = e^{-j2\pi/(N/2)} = W_{N/2}
+\end{align}
+and $G[k]$ and $H[k]$ are $N/2$-point or half-length DFTs.
+
+As well, $X[k]$ is periodic in $k$ with period $N$ and $G[k]$ and $H[k]$ are
+periodic in $k$ with period $N/2$.
+
+\begin{Rem}[Computational Complexity]
+
+If the ($N/2$)-points DFTs are computed using direct matrix multiplication
+method, we require $N+2(N/2)^2=N+N^2/2$ complex multiplications and
+approximately $N+2(N/2)^2=N+N^2/2$ complex additions.
+
+(Note: an N-points DFT using direct methods need $N^2$ complex multiplications
+and $N(N-1)$ complex additions.)
+\end{Rem}
+
+For $N>2$,
+\begin{align}
+N + N^2/2 &< N^2   \\
+\intertext{From Equation~\ref{eq10.4-5}, $G[k]$ and $H[k]$ are $N/2$-point
+DFTs and can be expressed as}
+G[k] &= \sum_{n_1=0}^{N/2-1} g[n_1] \whn{n_1k} \\
+\intertext{and}
+H[k] &= \sum_{n_1=0}^{N/2-1} h[n_1] \whn{n_1k}
+\end{align}
+where $g[n_1]=x[2 n_1]$, $h[n_1]=x[2n_1+1]$.
+
+Since $N$ is equal to a power of 2, further decimation can be conducted, i.e.,
+$N/2$-pont DFTs can be computed by $N/$-point DFTs. Set $N_1=n_{11}\times 2 +
+n_{12}$.
+\begin{align}
+G[k] &= \sum_{n_{11}=0}^{N/4-1} \sum_{n_{12}=0}^{1} g[2 n_{11} + n_{12} ]
+\whn{(2n_{11}+n_{12})k} \zdtag \\
+&= \sum_{n_{11}=0}^{N/4-1} g[2n_{11}] \whn{2n_{11} k} + \whn{k}
+\sum{n_{11}=0}^{N/4-1} g[2n_{11}+1] \whn{2n_{11}k} \zdtag \\
+&= \sum_{n_{11}=0}^{N/4-1} g[2n_{11}] W_{N/4}^{n_{11} k} + \whn{k}
+\sum_{n_{11}=0}^{N/4-1} g[2n_{11}+1] W_{N/4}^{n_{11} k} \\
+\intertext{and by the same token}
+H[k] &= \sum_{n_{11}=0}^{N/4-1} h[2n_{11}] W_{N/4}^{n_{11}k} + \whn{k}
+\sum_{n_{11}=0}^{N/4-1} h[2n_{11}+1] W_{N/4}^{n_{11} k }
+\end{align}
+
+This decimation is repeated until it comes down to a simple 2-point DFT
+computation.
+
+It is known that the computational complexity of $(N/4)$-point DFTs are
+\begin{equation}
+(N/4)^2 \mbox{multiplications and} N(N/4)^2 \mbox{additions} 
+\end{equation}
+\begin{align}
+N+2(N/2)^2 &= N+2 (N/2 + 2(N/4)^2) \\
+&= N+n+4(N/4)^2 
+\end{align}
+
+For $N=2^\nu$, this process can be at most done $\nu=\log_2 N$ times. Namely,
+the eventual numbers of complex multiplications will be $N\log_2 N$ and
+$\approx N\log_2 N$ additions.
+
+Note: Further reduction of multiplications can be achieved using
+\begin{align}
+\wn{N/2} &= e^{-j(2\pi/N) N/2} = e^{-j\pi} = -1 \\
+\intertext{or}
+\wn{r+N/2} &= \wn{N/2} \wn{r} = -\wn{r}
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft1.eepic}
+\end{center}
+\caption{SFG of decimation-in-time of N-point DFT into 2 N/2-points DFTs\label{f10-dftn}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft2.eepic}
+\end{center}
+\caption{SFG of decimation-in-time of N/2-point DFT into 2 N/4-points DFTs\label{f10-dftn2}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft3.eepic}
+\end{center}
+\caption{Result of Substituting Figure~\ref{f10-dftn} into
+Figure~\ref{f10-dftn2}\label{f10-dftn3}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft4.eepic}
+\end{center}
+\caption{SFG of complete DIT decomposition of an 8-point DFT
+computation}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft5.eepic}
+\end{center}
+\caption{SFG of complete DIT using butterfly computation\label{f10-dft5}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft6.eepic}
+\end{center}
+\caption{Rearrangement of Figure~\ref{f10-dft5} with input in normal order and
+output in bit-reversed order}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft7.eepic}
+\end{center}
+\caption{Rearrangement of Figure~\ref{f10-dft5} with both input and output in
+normal order}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\parbox{0.45\textwidth}{
+\subfigure[Flow graph of basic butterfly computation]{\input{pix/compDFT/BFa.eepic}}} \ \ 
+\parbox{0.45\textwidth}{ \subfigure[Flow graph of 2-point DFT]{\input{pix/compDFT/BFb.eepic}}}
+\subfigure[Flow graph of simplified butterfly computation requiring only one%
+complex multiplication]{\input{pix/compDFT/BFc.eepic}}
+\end{center}
+\caption{Butterfly computations}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dft8.eepic}
+\end{center}
+\caption[Rearrangement of Figure~\ref{f10-dft5} having the same geometry for
+each stage]{Rearrangement of Figure~\ref{f10-dft5} having the same geometry for
+each stage thereby permitting sequential data accessing and storage}
+\end{figure}
+
+\section{Decimation-in-Frequency FFT Algorithms}    %5
+
+\begin{Def}
+Algorithms in which the decomposition of the DFT computation is based on
+decomposing the sequence $X[k]$ into successively smaller subsequences, are
+called decimation-in-frequency FFT algorithms.
+\end{Def}
+
+Given the DFT $X[k]$
+\begin{align}
+X[k] &= \sum_{n=0}^{N-1} x[n] \wn{n k} \qquad \mbox{where $k=0,1,\ldots,N-1$} \\
+\intertext{Set $k=2\times k_1+k_2$ for $K_1=0,1,\ldots,N/2-1$ and $K_2=0,1$}
+\intertext{For $K_2=0$:}
+X[2k_1] &= \sum_{n=0}^{N-1} x[n] \wn{n(2k_1)} \zdtag \\
+&= \sum_{n=0}^{N/2-1} x[n] \wn{2 n k_1} + \sum_{n=N/2}^{N-1} x[n] \wn{2n k_1}
+\zdtag \\
+&= \sum_{n=0}^{N/2-1} x[n] \wn{2 n k_1} + \sum_{n'=0}^{N/2-1} x[n'+N/2]
+\wn{2(n'+N/2)k_1} \zdtag \\
+&= \sum_{n=0}^{N/2-1} x[n] \wn{2 n k_1} + \sum_{n=0}^{N/2-1} x[n+N/2] \wn{2 n
+nk_1} \wn{ N k_1} \zdtag \\
+&= \sum_{n=0}^{N/2-1} \left\{ x[n] + x[n+N/2] \right\} \whn{n k_1} \\
+\intertext{Note that}
+\wn{2} &= \whn \zdtag \\
+\intertext{And for $k_2=1$}
+X[2k_1+1] &= \sum_{n=0}^{N-1} x[n] \wn{n(2k_1+1)} \zdtag \\
+&= \sum_{n=0}^{N/2-1} x[n] \wn{n(2k_1+1)} + \sum_{n=N/2}^{N-1} x[n]
+\wn{n(2k_1+1)} \zdtag \\
+&= \sum_{n=0}^{N/2-1} x[n] \wn{n(2k_1+1)} + \sum_{n'=0}^{N/2-1} x[n'+N/2]
+\wn{(n'+N/2)(2k_1+1)} \zdtag \\
+&= \sum_{n=0}^{N/2-1} x[n] \wn{n(2k_1+1)} + \wn{N/2(2 k_1 + 1)}
+\sum_{n=0}^{N/2-1} x[n+N/2] \wn{n(2k_1+1)} \zdtag \\
+&= \sum_{n=0}^{N/2-1} \left\{ x[n] -x[n+N/2] \right\} \wn{n(2k_1+1)} \zdtag \\
+&= \sum_{n=0}^{N/2-1} \left\{ \left( x[n] - x[n+N/2] \right) \wn{n} \right\}
+\whn{n k_1}
+\end{align}
+
+Note that $\wn{2n k_1}=\whn{n k_1}$.
+
+The above decimation can be repeated until it reduces to 2-point DFTs.
+
+\begin{Rem}
+The DIF FFT algorithms are transposes of the DIT FFTs and vice versa.
+\end{Rem}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dif1.eepic}
+\end{center}
+\caption[SFG of decimation-in-frequency decomposition]{SFG of
+decimation-in-frequency decomposition of an N-point DFT computation into two
+N/2-point DFT computations (N=8)}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dif2.eepic}
+\end{center}
+\caption[SFG of decimation-in-frequency decomposition]{SFG of
+decimation-in-frequency decomposition of an 8-point DFT into two 4-point DFT computations}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dif3.eepic}
+\end{center}
+\caption[SFG of complete decimation-in-frequency decomposition]{SFG of
+complete decimation-in-frequency decomposition of an 8-point DFT}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dif4.eepic}
+\end{center}
+\caption[SFG of DFT using butterfly computation]{SFG of 8-point DFT using the
+butterfly computation}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dif5.eepic}
+\end{center}
+\caption{Rearrangement so both input and output in normal order}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/dif6.eepic}
+\end{center}
+\caption[Rearrangement so all phases similar geometry]{Rearrangement so that
+each stage has the same geometry thereby permitting sequential data accessing
+and storage}
+\end{figure}
+
+\section{Implementation of FFT Algorithms}    %6
+
+To implement FFT algorithms. the following issues have to be taken care of
+\begin{itemize}
+\item bit-reversed order or indexing
+\item in-place computation
+\item generation of coefficients (LUT or run-time)
+\item fixed-point arithmetic and real additions and real multiplications
+\end{itemize}
+
+When FFT algorithms are used in the FIR filter implementation, the convolution
+can be implemented using the forward and inverse transform pair as shown in
+Figure~\ref{f10-conv}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/tpair.eepic}
+\end{center}
+\caption{FFT implementation of convolution\label{f10-conv}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{verbatim}
+C   FORTRAN subroutine for decimation-in-time FFT algorithm
+C       X is an N=2**NU point complex array that initially
+C       contains the input and finally contains the DFT.
+
+    SUBROUTINE    DITFFT(X,NU)
+    COMPLEX X(1024),U,W,T
+    N=2**NU
+    NV2=N/2
+    NM1=N-1
+    PI=3.1415926538979
+C**********************************************************
+    J=1
+    DO 7 I=1,NV2
+        IF(I.GE.J) GO TO 5
+            T=X(J)
+            X(J)=X(I)
+            X(I)=T
+5       K=NV2
+6       IF(K.GE.J) GO TO 7
+        J=J-K
+        K=K/2
+        GO TO 6
+7   J=J+K
+C**********************************************************
+    DO 20 L=1,NU
+        LE=2**L
+        LE1=LE/2
+        U=(1.0,0.0)
+        W=CMPLX(COS(PI?FLOAT(LE1)),-SIN(PI/FLOAT(LE1)))
+            DO 20 J=1,LE1
+                DO 10 I=J,N,LE
+                    IP=I+LE1
+                    T=X(IP)*U
+                    X(IP)=X(I)-T
+10              X(I)=X(I)+T
+20      U=U*W
+C**********************************************************
+    RETURN
+    END
+\end{verbatim}
+\caption{FORTRAN program for decimation-in-time algorithm}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{verbatim}
+C   FORTRAN subroutine for decimation-in-frequency FFT algorithm
+C       X is an N=2**NU point complex array that initially
+C       contains the input and finally contains the DFT.
+
+    SUBROUTINE    DIFFFT(X,NU)
+    COMPLEX X(1024),U,W,T
+    N=2**NU
+    PI=3.1415926538979
+C**********************************************************
+    DO 20 L=1,NU
+    LE=2**(NU+1-L)
+    LE1=LE/2
+    U=(1.0,0.0)
+    W=CMPLX(COS(PI/FLOAT(LE1)),-SIN(PI/FLOAT(LE1)))
+        DO 20 J=1, LE1
+            DO 10 I=J,N,LE
+                IP=I+LE1
+                T=X(I)+X(IP)
+                X(IP)=(X(I)-X(IP))*U
+10          X(I)=T
+20      U=U*W
+C**********************************************************
+    NV2=N/2
+    NM1=N-1
+    J=1
+    DO 30 I=1,NM1
+        IF(I.GE.J) GO TO 25
+            T=X(J)
+            X(J)=X(I)
+            X(I)=T
+25      K=NV2
+26      IF(K.GE.J) GO TO 30
+            J=J-K
+            K=K/2
+        GO TO 26
+30  J=J+K
+C**********************************************************
+    RETURN
+    END
+\end{verbatim}
+\caption{FORTRAN program for decimation-in-frequency algorithm}
+\end{figure}
+
+\subsection{Implementation of the FFT BF with scaling}
+
+For an N-point DFT according to Parseval's Theorem
+\begin{align}
+\sum_{n=0}^{N-1} | x[n] |^2 &= \frac{1}{N} \sum_{k=0}^{N-1} | X[k] |^2 \\
+\intertext{where $x[n]$ is the input sequence and $X[k]$ is the DFT of $x[n]$.
+When $x[n]$ is real we have}
+\sum_{n=0}^{N-1} x^2[n] &= \frac{1}{N} \sum_{k=0}^{N-1} | X[k] |^2 \\
+\intertext{or}
+N \left\{ \frac{1}{N} \sum_{n=0}^{N-1} x^2[n] \right\} &= \left\{ \frac{1}{N}
+\sum_{k=0}^{N-1} | X[k] |^2 \right\} \label{eq10.6-3}
+\end{align}
+
+Equation~\ref{eq10.6-3} states that the mean-squared value of $X[k]$ is N
+times that of the input $x[n]$. Consequently, in computing the DFT of the 
+input sequence $x[n]$, overflow may occur when fixed-point arithmetic is used
+without appropriate scaling.
+
+Consider the general radix-2 butterfly in the $m$th stage of an N-point DIT
+FFT as shown in Figure~\ref{f10-bfly}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/compDFT/bfly.eepic}
+\end{center}
+\caption{General radix-2 butterfly\label{f10-bfly}}
+\end{figure}
+
+i.e.,
+\begin{equation}
+\begin{cases}
+P_{m+1} &= P_m+\wn{k}Q_m \\
+Q_{m+1} &= P_m-\wn{k}Q_m \\
+\end{cases}
+\label{eq10.6-4}
+\end{equation}
+where $P_m$, $Q_m$, $P_{m+1}$, $Q_{m+1}$ and $\wn{k}$ are in general complex.
+
+Assume that
+\begin{align}
+&\begin{cases}
+P_m &= P R + j P I \\
+Q_m &= Q R + j Q I \\
+\wn{k} &= e^{-j(2\pi/N)k} = \cos(X) - j\sin(X) \\
+\end{cases} \label{eq10.6-5} \\
+\intertext{Where $X=(2\pi/N)k$ and $j=\sqrt{-1}$.}
+\intertext{Substitute Equation~\ref{eq10.6-5} into Equation~\ref{eq10.6-4}}
+&\begin{cases}
+P_{m+1} &= \left\{ P R + Q R \cos(X) + Q I \sin(X) \right\} + j \left\{ P I +
+Q I \cos(X) - Q R \sin(X) \right\} \\
+Q_{m+1} &= \left\{ P R - Q R \cos(X) - Q I \sin(X) \right\} + j \left\{ P I -
+Q I \cos(X) + Q R \sin(X) \right\} \\
+\end{cases} \label{eq10.6-6}
+\end{align}
+
+Although $|P R|$, $|P I|$, $|Q R|$ or $|Q I| \leqslant 1$,
+\begin{align}
+max \left\{ |P R_{m+1}|, |P I_{m+1}| , |Q R_{m+1}|, |Q I_{m+1}| \right\}
+\zdtag \\
+&= 1 + 1\sin(45^\circ) + 1 \cos(45^\circ) \zdtag \\
+&= 2.414213562 
+\end{align}
+
+Each stage of the FFT is scaled down by a factor of 2 to avoid the possibility
+of overflow.
+
+For M stage FFTs, the output is scaled down by $2^M=N$, where $N$ is the
+length of the FFT.
+
+Even with scaling by 2, overflow is still possible as
+\begin{align}
+max\{ \cdot \} &= \half + \half \sin(45^\circ) + \half \cos(45^\circ) \\
+&= 1.207106781 = a 
+\end{align}
+
+If the input signal is further scaled down by $a$, the output of the last FFT
+stage by the same factor.
+
+If the input signal is real, the above additional scaling is not necessary as
+the above maximum value cannot be obtained.
+
+\section{Other fast algorithms for computation of DFT}    %7
+
+Other fast algorithms to compute DFTs include
+\begin{itemize}
+\item Radix-4, Radix-8, $\ldots$ algorithms
+\item Split-radix FFT algorithms
+\item Prime factor algorithms
+\item The Winograd\index{Winograd algorithm} Fourier transform algorithm
+(WFTA\index{WFTA}) - a benchmark
+\item The chirp transform algorithm
+\end{itemize}
+
+In the last two algorithms, convolution is used to compute the DFT.
+
+\begin{figure}[hbtp]
+\scriptsize
+\begin{verbatim}
+*********************************************************
+* TMS32020 code for a general radix-2 DIT FFT butterfly *
+*********************************************************
+*
+* Equates for the real and imaginary parts if Xm(P) and Xm(Q).
+* The locations PR, PI, QR, and QI are used both for the input
+* and the output data.
+*
+PR		EQU		0		Re(Pm) stored in location 0 in data memory
+PI		EQU		1		Im(Pm) stored in location 1 in data memory
+QR		EQU		2		Re(Qm) stored in location 2 in data memory
+QI		EQU		3		Im(Qm) stored in location 3 in data memory
+*
+* Equates for the real and imaginary parts of the twiddle factor
+*
+COSX	EQU		4		COS(X) stored in location 4 in data memory
+SINX	EQU		5		SIN(X) stored in location 5 in data memory
+*
+* Initialize system
+*
+		AORG	>20
+INIT	SPM		0		No shifts at output of P-register
+		SSXM			Select sign extension mode
+		ROVM			Reset overflow mode
+		LDPK	4		Choose data page 4
+*
+* Calculate (QR COS(X)+ QI SIN(X)); store result in QR.
+*
+BTRFLY	LT		QR		Load T-Register with QR
+		MPY		COSX	P-Register = (1/2) QR COS(X)
+		LTP		QI		ACC=(1/2) QR COS X ; Load T-Register with QI
+		MPY		SINX	P-Register = (1/2) QI SINX
+		APAC			ACC=(1/2)(QR COSX+QI SINX)
+		MPY		COSX	P-Register = (1/2) QI COSX
+		LT		QR		Load T-Register with AR
+		SACH	QR		AR=(1/2)(QR COSX+ QI SINX)
+*
+* Calculate (QI COS(X) - QR SIN(X)); Store result in QI
+*
+		PAC				ACC=(1/2) QI COSX
+		MPY		SINX	P-Register - (1/2) QR SINX
+		SPAC			ACC=(1/2)(QI COSX - QR SINX)
+		SACH	QI		QI=(1/2)(QI COSX - QR SINX)
+*
+* Calculate Re(Pm+1) and Re(Qm+1); Store result in PR and QR.
+*
+		LAC		PR,14	ACC=(1/4) PR
+		ADD		QR,15	ACC=(1/4)(PR+QR COSX + QI SINX)
+		SACH	PR,1	PR=(1/2)(PR+QR COSX + QI SINX)
+		SUBH	QR		ACC=(1/4)(PR-QR COSX - QI SINX)
+		SACH	QR,1	QI=(1/2)(QI COSX - QR SINX)
+*
+* Calculate Im[Pm+1] and Im[Qm+1]; Store result in PI and QI.
+*
+		LAC		PI,14	ACC=(1/4) PI
+		ADD		QI,15	ACC=(1/4)(PI + QI COSX - QR SINX)
+		SACH	PI,1	PI =(1/2)(PI + QI COSX - QR SINX)
+		SUBH	QI		ACC=(1/4)(PI - QI COSX + QR SINX)
+		SACH	QI,1	ACC=(1/2)(PI - QI COSX + QR SINX)
+*
+\end{verbatim}
+\caption{TMS32020 code for a general radix-2 DIT FFT butterfly}
+\end{figure}
+
+\subsection{The Chirp-z Transform Algorithm}
+
+The DFT can be viewed as the $z$-transform of $x[n]$ evaluated at $N$ equally
+spaced points on the unit circle in the $z$-plane. It can also be viewed as
+$N$ equally spaced samples of the Fourier transform of $x[n]$.
+
+Now consider the evaluation of $X(z)$ on other contours in the $z$-plane,
+including the unit circle.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[$R_0=r_0=1$,$\phi_0=\theta_0=0$]{\input{pix/compDFT/circa.eepic}}
+\subfigure[$R_0=1$,$r_0>1$,$\phi_0=\theta_0=0$]{\input{pix/compDFT/circb.eepic}}
+
+\subfigure[$R_0<1$]{\input{pix/compDFT/circc.eepic}}
+\subfigure[$R_0>1$]{\input{pix/compDFT/circd.eepic}}
+\end{center}
+\caption{Some examples of contours on which we may evaluate the $z$-transform}
+\end{figure}
+
+Compute the values of the $z$-transform of $x[n]$ at a set of points $\{ z_k
+\}$,
+\begin{equation}
+X(z_k) = \sum_{n=0}^{N-1} x[n] z_k^{-n} \qquad \mbox{where $k=0,1,\ldots,L-1$}
+\end{equation}
+
+If the contour is a circle of radius $r$ and the $z_k$ are $N$ equally spaced
+points them
+\begin{align}
+z_k &= r e^{j 2\pi k n/N} \qquad \mbox{$k=0,1,2,\ldots,N-1$} \zdtag \\
+X(z_k) &= \sum_{n=0}^{N-1} \left\{ x[n] r^{-n} \right\} e^{-j 2\pi k n/N}
+\end{align}
+
+In this case the FFT algorithm can be applied on the modified sequence $x[n]
+r^{-n}$.
+
+More generally, assume that $\{ z_k \}$ in the $z$-plane fall on an arc which
+begins at
+\begin{equation}
+z_0 = r_0 e^{j\theta_0} 
+\end{equation}
+and spirals wither in toward the origin or out away from the origin such that
+the points $\{ z_k \}$ are defined as
+\begin{align}
+z_k &= r_0 e^{j\theta_0} \left( R_0 e^{j\Phi_0} \right)^k \qquad
+\mbox{$k=0,1,\ldots,L-1$} \\
+\intertext{Define}
+V &= R_0 e^{j\phi_0} \\
+\intertext{the $z$-transform becomes}
+X(z_k) &= \sum_{n=0}^{N-1} x[n] z_k^{-n} \zdtag \\
+&= \sum_{n=0}^{N-1} x[n] \left( r_0 e^{j\theta_0}\right)^{-n} v^{-n k}
+\label{eq10.7-6} \\
+\intertext{Equation~\ref{eq10.7-6} can be expressed in the form of a
+convolution by substituting}
+n k &= \half \left[ n^2 + k^2 - (k-n)^2 \right] \\
+\intertext{into Equation~\ref{eq10.7-6}}
+X(z_k) &= V^{-k^2/2} \sum_{n=0}^{N-1} \left\{ x[n] \left( r_0 e^{j\theta_0}
+\right)^{-n} V^{-n^2/2} \right\} V^{(k-n)^2/2} \label{eq10.7-8} \\
+\intertext{Define a new sequence $g[n]$}
+g[n] &= x[n] \left( r_0 e^{j\theta_0} \right)^{-n} V^{-n^2/2} \qquad
+n=0,1,\ldots,N-1 \\
+\intertext{Equation~\ref{eq10.7-8} becomes}
+X(z_k) &= V^{-k^2/2} \sum_{n=0}^{N-1} g[n] V^{(k-n)^2/2} \label{eq10.7-10} 
+\end{align}
+
+Equation~\ref{eq10.7-10} may be interpreted as the convolution of $g[n]$ with
+the impulse response $h[n]$ of a filter where 
+\begin{equation}
+h[n] = V^{n^2/2}
+\end{equation}
+and a post-multiplication. OR,
+\begin{align}
+X(z_k) &= V^{-k^2/2} y[k] \zdtag \\
+&= \frac{y[k]}{h[k]} \qquad k=0,1,\ldots,L-1 \\
+\intertext{where $y[k]$ is the output of the filter}
+y[k] &= \sum_{n=0}^{N-1} g[n] h[k-n] \qquad k=0,1,\ldots,L-1 
+\label{eq10.7-13}
+\end{align}
+
+Note that both $g[n]$ and $h[n]$ are complex valued sequences.
+
+\begin{center}
+\input{pix/compDFT/cvs.eepic}
+\end{center}
+
+When $R_0=1$, the sequence
+\begin{align}
+h[n] &= V^{n^2/2} = \left( R_0 e^{j\phi_0} \right)^{n^2/2} \zdtag \\
+&= e^{j\phi_0 n^2/2} \zdtag \\
+&= e^{j(\phi_0 n/2)n} e^{j\omega n}
+\end{align}
+
+has a form of a complex exponential. The quantity $\omega=\phi_0 n/2$
+represents the frequency of the complex exponential signal which is
+increasing linearly with time ($n$). Such signals are used in radar systems
+and are called chirp signals\index{chirp signals}\index{signals!chirp}. Hence
+the $z$-transform evaluated as in Equation~\ref{eq10.7-10} is called the {\em
+chirp-z transform}.
+
+Equation~\ref{eq10.7-13} represents a linear convolution and it can most
+efficiently be computed using the FFT algorithm. In Equation~\ref{eq10.7-13},
+the new sequence $g[n]$ is of length $N$. Although $h[n]$ has infinite
+duration, only a portion of $h[n]$ is required to compute the $L$ values of
+$X(z_k)$. (i.e., $h[n]$ for $n=-(N-1),\ldots,(L-1)$.)
+
+The circular convolution of the N-point sequence $g[n]$ with an M-point
+section of $h[n]$, where $M>N$, will be used to compute the linear
+convolution in Equation~\ref{eq10.7-13} if the FFT is to apply.
+
+As it is known, the first $N-1$ points contain time aliasing when the circular
+convolution is used to compute a linear convolution, and the remaining $M-n+1$
+points are identical to the result that would be obtained from linear
+convolution of $h[n]$ with $g[n]$ (Note the order.) Therefore, we should
+select a DFT of size
+\begin{equation}
+M=L+N-1
+\end{equation}
+which would yield $L$ valid points and $N-1$ points corrupted by aliasing.
+$h[n]$, as it is is a noncausal sequence thus we define a new causal sequence
+of length $M$ as
+\begin{equation}
+h_1[n] = h[n-N+1] \qquad n=0,1,\ldots,M-1
+\end{equation}
+
+Computation Procedure:
+\begin{enumerate}
+\item Compute the $M$-point DFT of $h_1[n]$ using the FFT algorithm to obtain
+$H_1(k)$.
+\item Form $g[n]$ from $x[n]$ as 
+\begin{equation}
+g[n] = x[n] \left( r_0 e^{j\theta_0} \right)^{-n} V^{-n^2/2} \qquad
+n=0,1,\ldots,N-1
+\end{equation}
+and pad $g[n]$ with $L-1$ zeros.
+\item Compute the $M$-point DFT of $g[n]$ to yield $G(k)$.
+\item Find the product:
+\begin{equation}
+Y_1(k) = G(k) H_1(k)
+\end{equation}
+\item Calculate the IDFT of $Y_1(k)$ using the FFT algorithm to obtain the
+$M$-point sequence.
+\begin{equation}
+y_1[n] \qquad n=0,1,\ldots,M-1 
+\end{equation}
+(The first $(N-1)$ points are corrupted by aliasing and should be discarded.)
+\item The linear convolution
+\begin{equation}
+y[n] = y_1[n+N-1] \qquad n=0,1,\ldots,L-1
+\end{equation}
+\item Compute the complex values
+\begin{equation}
+X(z_k) = \frac{y[k]}{h[k]} \qquad k=0,1,\ldots,L-1 
+\end{equation}
+\end{enumerate}
+
+An alternative is to define a new sequence $h_2[n]$, as
+\begin{align}
+h_2[n] &= \begin{cases}
+h[n] & 0 \leqslant n \leqslant L-1 \\
+h[n-N-L+1] & L \leqslant n \leqslant M-1 \\
+\end{cases} \\
+\intertext{The $M$-point DFT of $h_2[n]$ is $H_2(k)$ and $Y_2(k)=G(k)
+H_2(k)$.}
+y_s[n] &= DFT^{-1} \{ Y_2(k) \} \qquad 0 \leqslant n \leqslant M-1 \\
+\intertext{and}
+y[n] &= y_2[n] \qquad 0 \leqslant n \leqslant L-1 
+\end{align}
+
+The rest is the same as the previous method.
+
+\begin{Rem}
+Computational complexity of the chirp-$z$ transform algorithm described above
+is of the order of $M\log_2 M$ complex multiplications where $M=N+L-1$.
+Compared with $N L$ when the computations are performed by direct evaluation
+of the $z$-transform, the chirp-$z$ transform algorithm is more efficient if
+$L$ is large.
+\end{Rem}
+
+Computation of DFT using the chirp-$z$ transform (CZT) method.
+
+Select $r_0=R_0=1$, $\theta_0=0$, $\phi_0=2\pi/N$ and $L=N$.
+
+Thus
+\begin{align}
+V^{-n^2/2} &= e^{-j\pi n^2/N} \zdtag \\
+&= \cos \frac{\pi n^2}{N} - j\sin\frac{\pi n^2}{N} \\
+\intertext{The chirp filter with impulse response}
+h[n] &= V^{n^2/2} \\
+&= \cos \frac{ \pi n^2}{N} + j\sin \frac{ \pi n^2}{N} \zdtag \\
+&= h_r[n] + jh_i[n] 
+\end{align}
+
+can be implemented as a pair of FIR filters with coefficients $h_r[n]$ and
+$h_i[n]$ respectively.
+
+Note that the premultiplications $V^{-n^2/2}$ and the postmultiplications
+$V^{-k^2/2}$ can be implemented by storing the cosine and sine sequences in
+ROM.
+
+\begin{Rem}
+If only the magnitude of the DFT is requires the postmultiplications are
+unnecessary as
+\begin{align}
+|X(z_k)| &= \left| V^{-k^2/2} y[k] \right| \zdtag \\
+&= \left| V^{-k^2/2} \right| |y[k] | \zdtag \\
+&= |y[k]| \\
+\intertext{where}
+V^{-k^2/2} &= \cos \frac{\pi k^2}{N} - j\sin \frac{\pi k^2}{N} 
+\end{align}
+\end{Rem}

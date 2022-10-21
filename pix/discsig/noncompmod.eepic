@@ -1,0 +1,9 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(222,43)(0,-10)
+\path(30,0)(190,0)
+\path(85,0)(110,0)
+\path(102.000,-2.000)(110.000,0.000)(102.000,2.000)
+\put(30,5){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $f[n]$}}}}}
+\put(190,5){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $g[n]$}}}}}
+\put(110,15){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $\frac{1}{1-a}$}}}}}
+\end{picture}

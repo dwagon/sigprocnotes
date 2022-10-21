@@ -1,0 +1,20 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(302,190)(0,-10)
+\path(209,95)(209,175)(89,175)
+	(89,95)(209,95)
+\put(148,155){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{Continuous}}}}}
+\put(148,137){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{Signals}}}}}
+\put(148,119){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{Systems}}}}}
+\path(7.000,43.000)(9.000,35.000)(11.000,43.000)
+\path(9,35)(9,75)(289,75)(289,35)
+\path(287.000,43.000)(289.000,35.000)(291.000,43.000)
+\path(149,95)(149,75)
+\path(29,25)(269,25)
+\path(261.000,23.000)(269.000,25.000)(261.000,27.000)
+\path(269,15)(29,15)
+\path(37.000,17.000)(29.000,15.000)(37.000,13.000)
+\put(9,15){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$f(t)$}}}}}
+\put(289,15){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$F(\omega)$}}}}}
+\put(149,30){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{Fourier Transform}}}}}
+\put(149,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{Inverse Fourier Transform}}}}}
+\end{picture}

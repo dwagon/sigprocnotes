@@ -1,0 +1,14 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(259,173)(0,-10)
+\path(23,20)(23,140)
+\path(25.000,132.000)(23.000,140.000)(21.000,132.000)
+\path(23,20)(243,20)
+\path(235.000,18.000)(243.000,20.000)(235.000,22.000)
+\path(63,20)(63,100)(23,100)
+	(23,20)(63,20)
+\put(23,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$0$}}}}}
+\put(63,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$T$}}}}}
+\put(18,100){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$1$}}}}}
+\put(23,145){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$h(t)$}}}}}
+\put(243,25){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$t$}}}}}
+\end{picture}

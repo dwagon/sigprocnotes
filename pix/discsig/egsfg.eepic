@@ -1,0 +1,42 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(347,112)(0,-10)
+\put(68,22){\blacken\ellipse{4}{4}}
+\put(68,22){\ellipse{4}{4}}
+\put(149,22){\blacken\ellipse{4}{4}}
+\put(149,22){\ellipse{4}{4}}
+\put(209,22){\blacken\ellipse{4}{4}}
+\put(209,22){\ellipse{4}{4}}
+\put(289,22){\blacken\ellipse{4}{4}}
+\put(289,22){\ellipse{4}{4}}
+\path(69,20)(289,20)
+\path(89,20)(129,20)
+\path(121.000,18.000)(129.000,20.000)(121.000,22.000)
+\path(229,20)(249,20)
+\path(241.000,18.000)(249.000,20.000)(241.000,22.000)
+\drawline(189,40)(189,40)
+\path(149,20)(169,40)(189,40)(209,20)
+\path(209,20)(189,0)(169,0)(149,20)
+\path(189,40)(179,40)
+\path(187.000,42.000)(179.000,40.000)(187.000,38.000)
+\path(169,0)(179,0)
+\path(171.000,-2.000)(179.000,0.000)(171.000,2.000)
+\path(68,25)(89,47)(109,62)
+	(130,72)(150,78)(169,81)
+	(189,80)(209,77)(230,70)
+	(250,59)(269,44)(289,21)
+\path(160,80)(173,81)
+\path(165.177,78.392)(173.000,81.000)(164.870,82.381)
+\path(189,20)(179,20)
+\path(187.000,22.000)(179.000,20.000)(187.000,18.000)
+\put(299,19){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$y[n]$}}}}}
+\put(299,1){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}sink node}}}}}
+\put(60,20){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$x[n]$}}}}}
+\put(60,2){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}source node}}}}}
+\put(184,86){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$d$}}}}}
+\put(182,46){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$a$}}}}}
+\put(180,23){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$b$}}}}}
+\put(180,3){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$c$}}}}}
+\put(144,0){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$w_1[n]$}}}}}
+\put(214,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$w_2[n]$}}}}}
+\put(244,25){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$e$}}}}}
+\end{picture}

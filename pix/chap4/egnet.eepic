@@ -1,0 +1,18 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(241,109)(0,-10)
+\path(135,60)(135,80)(75,80)
+	(75,60)(135,60)
+\path(15,70)(75,70)
+\path(135,70)(215,70)
+\path(15,0)(215,0)
+\path(165,40)(185,40)
+\path(165,35)(185,35)
+\path(175,35)(175,0)
+\path(175,40)(175,70)
+\put(100,85){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$1\ohm$}}}}}
+\put(135,35){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$1 F$}}}}}
+\put(215,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$v_0(t)$}}}}}
+\put(15,25){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$v_i(t)$}}}}}
+\put(0,65){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$+$}}}}}
+\put(225,65){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$+$}}}}}
+\end{picture}

@@ -1,0 +1,69 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(680,715)(0,-10)
+\path(10,580)(530,580)
+\path(522.000,578.000)(530.000,580.000)(522.000,582.000)
+\path(270,580)(270,700)
+\path(272.000,692.000)(270.000,700.000)(268.000,692.000)
+\path(10,440)(530,440)
+\path(522.000,438.000)(530.000,440.000)(522.000,442.000)
+\path(270,440)(270,560)
+\path(272.000,552.000)(270.000,560.000)(268.000,552.000)
+\path(10,300)(530,300)
+\path(522.000,298.000)(530.000,300.000)(522.000,302.000)
+\path(270,300)(270,420)
+\path(272.000,412.000)(270.000,420.000)(268.000,412.000)
+\path(10,160)(530,160)
+\path(522.000,158.000)(530.000,160.000)(522.000,162.000)
+\path(270,160)(270,280)
+\path(272.000,272.000)(270.000,280.000)(268.000,272.000)
+\path(10,20)(530,20)
+\path(522.000,18.000)(530.000,20.000)(522.000,22.000)
+\path(270,20)(270,140)
+\path(272.000,132.000)(270.000,140.000)(268.000,132.000)
+\path(210,580)(270,640)(330,580)
+\path(210,440)(270,500)(330,440)
+\path(30,440)(90,500)(150,440)
+\path(390,440)(450,500)(510,440)
+\path(30,300)(90,360)(150,300)
+\path(210,300)(270,360)(330,300)
+\path(390,300)(450,360)(510,300)
+\path(90,180)(180,160)(270,180)(360,160)
+\path(355,160)(450,180)(525,160)
+\path(90,180)(10,160)
+\path(270,60)(210,20)(150,60)
+	(90,20)(30,60)(10,45)
+\path(271,60)(331,20)(391,60)
+	(451,20)(511,60)(531,45)
+\put(530,560){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Omega$}}}}}
+\put(530,420){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Omega$}}}}}
+\put(530,280){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\omega=\Omega T$ }}}}}
+\put(530,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\omega=\Omega T'$ }}}}}
+\put(530,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Omega=\frac{\omega}{T'}$}}}}}
+\put(275,640){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$1$}}}}}
+\put(275,500){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{1}{T}$}}}}}
+\put(275,365){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{1}{T}$}}}}}
+\put(275,185){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{1}{M T}$}}}}}
+\put(275,65){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{1}{T'}$}}}}}
+\put(275,685){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$X_c(j\Omega)$}}}}}
+\put(275,545){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$X_s(j\Omega),X(e^{j\Omega T})$}}}}}
+\put(275,405){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$X(e^{j\omega})$}}}}}
+\put(275,265){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$X_d(e^{j\omega})$}}}}}
+\put(275,125){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$X_d(e^{j\Omega T'})$}}}}}
+\put(330,565){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Omega_N$}}}}}
+\put(330,420){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\Omega_N$}}}}}
+\put(450,420){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{2\pi}{T}$}}}}}
+\put(450,280){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$w\pi$}}}}}
+\put(450,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$2\pi$}}}}}
+\put(360,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\pi$}}}}}
+\put(210,560){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-\Omega_N$}}}}}
+\put(210,420){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-\Omega_N$}}}}}
+\put(210,280){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-\omega_N$}}}}}
+\put(330,280){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\omega_N$}}}}}
+\put(360,280){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\pi$}}}}}
+\put(90,420){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-\frac{2\pi}{T}$}}}}}
+\put(90,280){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-2\pi$}}}}}
+\put(90,140){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-2\pi$}}}}}
+\put(180,140){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-\pi$}}}}}
+\put(150,0){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-\frac{2\pi}{T'}$}}}}}
+\put(390,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{2\pi}{T'}$}}}}}
+\end{picture}

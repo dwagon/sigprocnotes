@@ -1,0 +1,61 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(520,295)(0,-10)
+\path(100,220)(100,280)(40,280)
+	(40,220)(100,220)
+\path(180,220)(180,280)(120,280)
+	(120,220)(180,220)
+\path(0,250)(40,250)
+\path(32.000,248.000)(40.000,250.000)(32.000,252.000)
+\path(100,250)(120,250)
+\path(112.000,248.000)(120.000,250.000)(112.000,252.000)
+\path(180,250)(220,250)
+\path(212.000,248.000)(220.000,250.000)(212.000,252.000)
+\put(0,255){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x[n]$}}}}}
+\put(220,255){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y[n]$}}}}}
+\put(70,240){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h_1[n]$}}}}}
+\put(150,240){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h_2[n]$}}}}}
+\put(110,180){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $y[n]=h_1[n]\ast h_2[n] \ast x[n]$}}}}}
+\path(480,220)(480,280)(340,280)
+	(340,220)(480,220)
+\path(300,250)(340,250)
+\path(332.000,248.000)(340.000,250.000)(332.000,252.000)
+\path(480,250)(520,250)
+\path(512.000,248.000)(520.000,250.000)(512.000,252.000)
+\path(100,40)(100,100)(40,100)
+	(40,40)(100,40)
+\path(180,40)(180,100)(120,100)
+	(120,40)(180,40)
+\path(0,70)(40,70)
+\path(32.000,68.000)(40.000,70.000)(32.000,72.000)
+\path(100,70)(120,70)
+\path(112.000,68.000)(120.000,70.000)(112.000,72.000)
+\path(180,70)(220,70)
+\path(212.000,68.000)(220.000,70.000)(212.000,72.000)
+\path(400,40)(400,100)(340,100)
+	(340,40)(400,40)
+\path(480,40)(480,100)(420,100)
+	(420,40)(480,40)
+\path(300,70)(340,70)
+\path(332.000,68.000)(340.000,70.000)(332.000,72.000)
+\path(400,70)(420,70)
+\path(412.000,68.000)(420.000,70.000)(412.000,72.000)
+\path(480,70)(520,70)
+\path(512.000,68.000)(520.000,70.000)(512.000,72.000)
+\put(250,240){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $\Leftrightarrow$}}}}}
+\put(305,255){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x[n]$}}}}}
+\put(520,255){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y[n]$}}}}}
+\put(425,180){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $y[n]=h[n]\ast x[n]$}}}}}
+\put(425,160){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm where $h[n]=h_1[n]\ast h_2[n]$}}}}}
+\put(410,240){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h[n]=h_1[n]\ast h_2[n]$}}}}}
+\put(0,75){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x[n]$}}}}}
+\put(220,75){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y[n]$}}}}}
+\put(70,60){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h_1[n]$}}}}}
+\put(150,60){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h_2[n]$}}}}}
+\put(110,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $y[n]=(h_1[n]\ast h_2[n]) \ast x[n]$}}}}}
+\put(250,75){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $\Leftrightarrow$}}}}}
+\put(300,75){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $x[n]$}}}}}
+\put(520,75){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y[n]$}}}}}
+\put(370,60){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h_2[n]$}}}}}
+\put(450,60){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $h_1[n]$}}}}}
+\put(410,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $y[n]=(h_2[n]\ast h_1[n])\ast x[n]$}}}}}
+\end{picture}

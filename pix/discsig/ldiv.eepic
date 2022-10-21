@@ -1,0 +1,17 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(288,193)(0,-10)
+\path(84,140)(84,160)(204,160)
+\path(84,120)(204,120)
+\path(104,80)(224,80)
+\path(144,40)(264,40)
+\put(79,140){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$1-0.8z^{-1}$}}}}}
+\put(89,165){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$1+0.8z^{-1}+0.64z^{-2}+\cdots$}}}}}
+\put(89,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$1$}}}}}
+\put(89,122){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$1-0.8z^{-1}$}}}}}
+\put(104,100){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$0.8z^{-1}$}}}}}
+\put(104,82){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$0.8z^{-1}-0.64z^{-2}$}}}}}
+\put(144,60){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$0.64z^{-2}$}}}}}
+\put(144,42){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$0.64z^{-2}-0.512z^{-3}$}}}}}
+\put(184,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$0.512z^{-3}$}}}}}
+\put(204,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\vdots$}}}}}
+\end{picture}

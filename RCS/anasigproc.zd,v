@@ -1,0 +1,2575 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	93.06.09.01.14.41;	author dwagon;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	93.04.20.04.58.33;	author dwagon;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	93.03.24.03.54.10;	author dwagon;	state Exp;
+branches;
+next	;
+
+
+desc
+@Analog Signal Processing Systems
+@
+
+
+1.3
+log
+@Fixed some equations, where newlines had been put in by mistake
+@
+text
+@% $Id: anasigproc.zd,v 1.2 1993/04/20 04:58:33 dwagon Exp dwagon $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/anasigproc.zd,v 1.2 1993/04/20 04:58:33 dwagon Exp dwagon $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Analog Signal Processing Systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{itemize}
+\item General system function of linear time-invariant analog systems;
+\item System stability
+\item Realization of system functions (analog);
+\item Analog filter design
+\end{itemize}
+
+\section{The System Function and its Stability}	%1
+A linear time-invariant system with excitatio $f(t)$ and response $g(t)$ can
+be represented by an ordinary linear differential equation with constant
+coefficients.
+\begin{equation}
+\sum_{i=0}^{m} a_i \frac{d^i}{dt^i} [f(t)] = \sum_{j=0}^{n} b_j
+\frac{d^j}{dt^j}[g(t)]  \label{eq5-511}
+\end{equation}
+where $a_i$ and $b_j$ are constants and $\frac{d^0}{dt^0}[f(t)]=f(t)$ and
+$\frac{d^0}{dt^0}[g(t)]=g(t)$.
+
+Assume the system is initially relaxed, i.e. all initial conditions are zero,
+and 
+\begin{align}
+\L[f(t)] &= F(s) \\
+\L[g(t)] &= G(s)
+\end{align}
+
+apply the Laplace transform on both sides of Equation~\ref{eq5-511} to obtain
+\begin{align}
+\sum_{i=0}^{m} a_i s^i F(s) &= \sum_{j=0}^{n} b_j s^j G(s) \\
+\intertext{which is an algebraic equation.}
+\intertext{It follows that}
+F(s) \sum_{i=0}^{m} a_i s^i &= G(s) \sum_{j=0}^{n} b_j s^j \\
+\intertext{And the Laplace transform of the system response due to the
+excitation is}
+G(s) &= \frac{\sum_{i=0}^{m} a_i s^i}{\sum_{j=0}^{n} b_j s^j} F(s) \\
+\intertext{The system function $H(s)$ is}
+H(s) = \frac{G(s)}{F(s)} &= \frac{\sum_{i=0}^{m} a_i s^i}{\sum_{j=0}^{n} b_j
+s^j}
+\end{align}
+
+\begin{center}
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(340,55)(0,-10)
+\path(100,0)(100,40)(40,40)
+	(40,0)(100,0)
+\put(69,14){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{$h(\cdot)$}}}}
+\path(0,20)(40,20)
+\path(32.000,18.000)(40.000,20.000)(32.000,22.000)
+\path(100,20)(140,20)
+\path(132.000,18.000)(140.000,20.000)(132.000,22.000)
+\put(35,25){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{$f(t)$}}}}
+\put(105,25){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$g(t)$}}}}
+\path(300,0)(300,40)(240,40)
+	(240,0)(300,0)
+\put(269,14){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{H(s)}}}}
+\path(200,20)(240,20)
+\path(232.000,18.000)(240.000,20.000)(232.000,22.000)
+\path(300,20)(340,20)
+\path(332.000,18.000)(340.000,20.000)(332.000,22.000)
+\put(235,25){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{$F(s)$}}}}
+\put(305,25){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$G(s)$}}}}
+\put(170,15){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{$\Leftrightarrow$}}}}
+\end{picture}
+\end{center}
+
+It is known that the impulse response of the system
+\begin{align}
+h(t) &= \L^{-1}[H(s)] \\
+\intertext{is}
+h(t) &= \L^{-1}[H(s) \cdot 1]
+\end{align}
+noticing $\L[\delta(t)]=1$.
+
+If $H(s)$ or $h(t)$ is known, the system response to any excitation can be
+determined.
+(The significance of the study of $H(s)$ or $h(t)$ therefore, becomes obvious.)
+
+\begin{Exa}
+Given the system function
+\begin{equation}
+H(s) = \frac{2}{(s+2)^3} 
+\end{equation}
+find the system response $g(t)$ to a unit step excitation $u(t)$.
+
+Solution:
+\begin{enumerate}
+\item \begin{align}
+f(t) &= U(t) \\
+F(s) &= \L[f(t)]=\L[U(t)] = \frac{1}{s} 
+\end{align}
+\item \begin{align}
+G(s) &= H(s) \cdot F(s) \\
+&= \frac{2}{(s+2)^3} \cdot \frac{1}{s}
+\end{align}
+\item Partial fraction expansion
+\begin{align}
+G(s) &= \frac{A}{s}+\frac{B_0}{(s+2)^3} + \frac{B_1}{(s+2)^2} +
+\frac{B_2}{s+2} \\
+A &= \lim_{s\rightarrow 0} s \frac{2}{(s+2)^3} \cdot \frac{1}{s} = \lim_{s\rightarrow 0} \frac{2}{(s+2)^3} = \frac{1}{4} = 0.25 \\
+\Phi(s) &= (s+2)^3 G(s) = \frac{2}{s} \Rightarrow B_0=\Phi(-2)=-1 \\
+\Phi'(s) &= -\frac{2}{s^2} \Rightarrow B_1=\frac{1}{1!} \Phi'(-2) =
+-\frac{1}{2} = -0.5 \\
+\Phi''(s) &= \frac{4}{s^3} \Rightarrow B_2=\frac{1}{2!} \Phi''(-2) =
+-\frac{1}{4} = -0/25 \\
+\intertext{Thus}
+g(t) &= \L^{-1} [G(s)] \\
+&= 0.25 U(t) - 0.25 e^{-2t}U(t) - 0.5t e^{-2t}U(t) - 0.5t^2 e^{-2t}U(t) \\
+&= 0.25\left(1-e^{-2t}-2t e^{-2t} -2t^2 e^{-2t}\right) U(t)
+\end{align}
+\end{enumerate}
+(Note: \begin{align}
+\L[t^n] &= \frac{n!}{s^{n+1}} \\
+\L\left[ e^{\alpha t} f(t) \right] &= F(s-\alpha)
+\end{align}
+)
+\end{Exa}
+
+\subsection{System Stability}
+Intuitively speaking, it is not desirable to have a system output growing
+unbounded or uncontrollable. 
+
+For example an integrator
+\begin{center}
+\input{pix/anasigproc/integ.eepic}
+\end{center}
+
+\begin{equation}
+H(s)=-\frac{K}{s} \qquad \mbox{where $K=\frac{1}{RC}$} 
+\end{equation}
+Input and output waveforms of an integrator are shown in Figure~\ref{f5-integ}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\begin{tabular}{cc}
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-1:1]
+set yrange [0:1.1]
+set arrow from -1,0 to 1,0
+set arrow from 0,-0.1 to 0,1.1
+set label "$\delta(t)$" at  0.1,1.1
+set size 0.6,0.5
+plot abs(x)<0.01?1:0
+%#
+&
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set size 0.6,0.5
+set nozeroaxis
+set xrange [-0.5:1]
+set yrange [0:1.1]
+set arrow from -0.5,0 to 1,0
+set arrow from 0,-0.1 to 0,1.1
+set label "$U(t)$" at  0.1,1.1
+plot x>0?1:0
+%#
+\\
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-.1:5]
+set yrange [-1.1:1.1]
+set size 0.6,0.5
+set arrow from -.1,0 to 5,0
+set arrow from 0,-1.1 to 0,1.1
+set label "$\sin(t)$" at  0.1,1.1
+plot sin(x)
+%#
+&
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-0.1:5]
+set yrange [-1.1:1.1]
+set size 0.6,0.5
+set arrow from -0.1,0 to 5,0
+set arrow from 0,-1.1 to 0,1.1
+set label "$\cos(t)$" at  0.1,1.1
+plot cos(x)
+%#
+\\
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-.1:5]
+set yrange [0:1.1]
+set size 0.6,0.5
+set arrow from -.1,0 to 5,0
+set arrow from 0,-0.1 to 0,1.1
+set label "$U(t)$" at  0.1,1.1
+plot x>0?1:0
+%#
+&
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-0.1:1.1]
+set yrange [0:1.1]
+set size 0.6,0.5
+set arrow from -0.1,0 to 1.1,0
+set arrow from 0,-0.1 to 0,1.1
+plot x
+%#
+\\
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-.1:5]
+set yrange [0:4.1]
+set size 0.6,0.5
+set arrow from -.1,0 to 5,0
+set arrow from 0,-0.1 to 0,4.1
+set label "$\sin(t)+K U(t)$" at  0.1,4.1
+plot sin(x)+(x>0?1:0)
+%#
+&
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set xrange [-.1:50]
+set yrange [-50:50]
+set size 0.6,0.5
+set arrow from -.1,0 to 50,0
+set arrow from 0,-51 to 0,51
+plot x*cos(x)
+%#
+\\
+\end{tabular}
+\end{center}
+\caption{Stability of an integrator\label{f5-integ}}
+\end{figure}
+
+The pole of the integrator is at the origin of the s-plane. (We are on the
+edge of a stable/unstable system).
+
+Notice that in the partial fraction expansion, all the poles of the system
+function have corresponding terms and will contribute to the system response
+(or output of the system) after the inverse Laplace transform. This is why the
+system stability can be defined or determined in the s-plane.
+
+\begin{Def}[Wide-Sense Stable and Strictly Stable]
+\index{stability!wide-sense}\index{stability!strict}\index{strict stability}
+\index{wide-sense stability}
+
+A system is said to be wide-sense stable if all lthe poles of the system
+function $H(s)$ lie in the closed left-half plane ($\Re[s]\leqslant 0$) with
+those on the $j\omega$ axis being simple.
+
+The system is said to be strictly stable if the poles on the $j\omega$ axis
+are excluded, i.e. all the poles of $H(s)$ occur only in the open left-half
+plane ($\Re[s]<0$).
+\end{Def}
+
+Assume the system is causal and 
+\begin{align}
+h(t) &= 0 \qquad \mbox{for $t<0$} \\
+\intertext{and}
+H(s) &= \frac{\sum_{i=0}^{m} a_i s^i}{\sum_{j=0}^{n} a_j s^j} =
+\frac{N_m(s)}{D_n(s)}
+\end{align}
+
+Strict stability requires that $H(s)$ has only poles with negative real parts
+excluding poles on the $j\omega$ axis and at infinity, i.e.
+\begin{align}
+m &\leqslant n \\
+D(s) &\neq 0 \qquad \mbox{for $\Re[s]\geqslant 0$}
+\end{align}
+
+
+The impulse response is
+\begin{equation}
+h(t) = \L^{-1}[H(s)] = \L^{-1} \left[\underbrace{k_0}_{m=n} +
+\underbrace{\sum_{r=1}^{n_1} \frac{k_r}{s-s_r}}_{\mbox{real poles}} +
+\underbrace{\sum_{r=1}^{n_2} \frac{A_rs+B_r}{(s-a_r)^2+b_r^2}}_{\mbox{ complex
+pole pairs}} \right]
+\end{equation}
+where $n=n_1+2n_2$, $s_r<0$, $a_r<0$, $b_r>0$.
+So that
+\begin{equation}
+h(t)=k_0\delta(t)+ \sum_{r=1}^{n_1} E_r e^{s_r t} + \sum_{r=1}^{n_2} C_r
+e^{a_r t} \sin(b_r t+ \theta_r) \label{eq5-519}
+\end{equation}
+
+From Equation~\ref{eq5-519}, strict stability in the time domain means that
+apart from a possible impulse $k_0\delta(t)$, the impulse response of the
+system is a bounded function, i.e.
+\begin{equation}
+\int_{0}^{\infty} |h(t)| dt < \infty 
+\end{equation}
+
+The strict stability is also referred to as Bounded Input-Bouded Output (or
+BIBO\index{BIBO}\index{Bounded Input-Bounded Ouput}). It can be proven that
+\begin{align}
+|g(t)| &= \left| \int_{0}^{t} h(\tau) f(t-\tau) d\tau \right| \zdtag \\
+&= \left| \int_{0}^{\infty} h(\tau) f(t-\tau) d\tau \right| \zdtag \\
+&\leqslant \int_{0}^{\infty} |h(\tau)| |f(t-\tau)| d\tau \zdtag \\
+&\leqslant K \int_{0}^{\infty} | h(\tau)| d\tau
+\end{align}
+
+If the input is bounded
+\begin{equation}
+|f(t)|<K<\infty \qquad \mbox{for all $t$} 
+\end{equation}
+and the system is strictly stable, i.e.
+\begin{equation}
+\int_{0}^{\infty} | h(t)| dt < M < \infty \qquad \mbox{for all $t$} 
+\end{equation}
+$|g(t)|\leqslant K M$ and the output is bounded.
+
+Wide-sense stability:
+\begin{enumerate}
+\item \begin{equation}
+\frac{1}{s} \fpair \mbox{unit step} 
+\end{equation}
+\item \begin{equation}
+\frac{1}{s^2+\omega_0^2} \fpair \sin(\omega_0 t) or \cos(\omega_0 t) 
+\end{equation}
+\item \begin{equation}
+s \fpair \delta(t) 
+\end{equation}
+\end{enumerate}
+
+\begin{Rem}
+A system function $H(s)$ which has multiple poles on $j\omega$-axis is not
+stable. For example 
+\begin{align}
+\L^{-1}\left[ \frac{1}{(s^2+\omega_0^2)^2}\right] &= \frac{t}{\omega_0}
+\sin(\omega_0 t) \\
+\L^{-1}\left[ \frac{1}{s^2} \right] &= t
+\end{align}
+ 
+If the system response possesses these terms in its partial fraction
+expansion, the output signal will not be a bounded one.
+\end{Rem}
+
+\section{A Stability Test --- Hurwitz Polynomials}	%2
+A simple method using Hurwitz Polynomials can be used to determine whether a
+system is stable or not.
+
+\begin{Def}
+A real polynomial $Q(s)$ is termed a Hurwitz\index{Hurwitz polynomial}
+polynomial if all its zeros lie
+in the closed left half-plane ($\Re[s]\leqslant 0$) with those on the
+imaginary axis being simple. $Q(s)$ is said to be strictly Hurwitz if
+$j\omega$-axis zeros are also excluded, i.e. all the zeros occur only in the
+left-half plane ($\Re[s]<0$).
+\end{Def}
+
+\begin{Rem} \ \ 
+\begin{enumerate}
+\item If a system is wide-sense stable, the denominator of its system function
+$H(s)$ must be a Hurwitz polynomial.
+\item If a system is to be strictly stable (or BIBO stable), the denominator
+of $H(s)$ must be a strictly Hurwitz polynomial.
+\end{enumerate}
+\end{Rem}
+
+Testing procedure for checking the Hurwitz character of a given polynomial:
+\begin{enumerate}
+\item Given \begin{align}
+Q(s) &= a_n s^n + a_{n-1}s^{n-1} + a_{n-2}s^{n-2}+ \cdots a_1 s + a_0 \zdtag \\
+&= \sum_{i=0}^{n} a_i s^i 
+\end{align}
+\item Seperate the even and odd parts of $Q(s)$. \begin{align}
+Q(s) &= M(s) + N(s) \\
+M(s) &= a_n s^n + a_{n-2}s^{n-2} + \cdots \\
+N(s) &= a_{n-1}s^{n-1}+a_{n-3}s^{n-3}+\cdots 
+\end{align}
+where \begin{itemize}
+\item for $n$ even, $M(s)$ is all even and $N(s)$ is all odd
+\item for $n$ odd, $M(s)$ is odd, and $N(s)$ is even
+\end{itemize}
+\item Use successive division and inversion method to represent
+$\frac{M(s)}{N(s)}$ in the following form
+\begin{equation}
+\frac{M(s)}{N(s)} = \alpha_1 s + \cfrac{1}{\alpha_2 s +
+                                 \cfrac{1}{\alpha_3 s +
+                                 \cfrac{1}{\alpha_4 s + 
+								 \cfrac{1}{\ddots_{\alpha_n s}}}}}
+								 \label{eq5-514}
+\end{equation}
+\item The necessary and sufficient conditions for $Q(s)=M(s)+N(s)$ to be
+strictly Hurwitz is that all the $n$ quotients in the continued fraction
+expansion (Equation~\ref{eq5-514}) be strictly positive, i.e.
+\begin{equation}
+\alpha_i>0 \qquad \mbox{for $i=1,2,\ldots,n$} 
+\end{equation}
+
+If all the quotients $\alpha_i$ after $\alpha_k$ ($k<n$) are zero, $M(s)$ and
+$N(s)$ have an even polynomial $E(s)$ which cannot be strictly Hurwitz.
+
+To test whether or not $E(s)$ possesses only simple pure imaginary zeros, in
+which case $Q(s)$ is Hurwitz, we form a new polynomial
+\begin{equation}
+E(s)+E'(s) 
+\end{equation}
+where
+\begin{equation}
+E'(s)=\frac{d}{ds} E(s) 
+\end{equation}
+which is an odd polynomial.
+
+If $E(s)+E'(s)$ is strictly Hurwitz, $E(s)$ possesses only simple pure
+imaginary zeros and $Q(s)$ is Hurwitz.
+\end{enumerate}
+
+\begin{Exa}
+Test the system stability of a system represented by the system function 
+\begin{equation}
+H(s) = \frac{s^3+5}{s^5+s^4+6s^3+4s^2+8s+3} 
+\end{equation}
+Solution:
+\begin{enumerate}
+\item Use the Hurwitz polynomial method, the denominator of $H(s)$ is subject
+ot test.
+\begin{align}
+D(s) &= s^5+s^4+6s^3+4s^2+8s+3 \\
+&= M(s)+N(s) \\
+\intertext{where}
+M(s)=s^5+6s^3+8s \\
+\intertext{and}
+N(s)=s^4+4s^2+3
+\end{align}
+\item Use successive division and inversion
+\begin{center}
+\input{pix/anasigproc/ldiv1.eepic}
+\end{center}
+i.e.
+\begin{equation}
+\frac{M(s)}{N(s)} = s+ \cfrac{1}{\frac{1}{2}s+
+						  \cfrac{1}{\frac{4}{3}s+
+						  \cfrac{1}{\frac{3}{2}s+
+						  \cfrac{1}{\frac{1}{3}s}}}} 
+						  \end{equation}
+\item All five quotients are positive, therefore $D(s)$ is strictly Hurwitz,
+the system is BIBO stable.
+\end{enumerate}
+\end{Exa}
+
+\begin{Exa}
+Test the stability of a system that has a system function $H(s)$.
+\begin{equation}
+H(s) = \frac{s^5+6s^2+s+1}{s^8+3s^7+10s^6+24s^5+35s^4+57s^3+50s^2+36s+24} 
+\end{equation}
+Solution:
+\begin{enumerate}
+\item \begin{align}
+D(s) &= s^8+3s^7+10s^6+24s^5+35s^4+57s^3+50s^2+36s+24 \\
+M(s) &= s^8+10s^6+35s^4+50s^2+24 \\
+N(s) &= 3s^7+24s^5+57s^3+36s 
+\end{align}
+\item \ 
+\begin{center}
+\input{pix/anasigproc/ldiv2.eepic}
+\end{center}
+
+$D(s)$ is no strict Hurwitz, and $M(s)$ and $N(s)$ have an even polynomial
+$2s^6+16s^4+38s^2+24$ and $D(s)$ has an even factor
+\begin{equation}
+E(s)=s^6+8s^4+19s^2+12 
+\end{equation}
+\item \begin{equation}
+E'(s)=6s^5+32s^3+38s 
+\end{equation}
+\item $\frac{E(s)}{E'(s)}$ has positive partial quotients $\frac{1}{6}s$,
+$\frac{9}{4}s$, $\frac{16}{21}s$, $\frac{49}{60}s$, $\frac{15}{7}s$ and
+$\frac{1}{10}s$. Therefore $E(s)+E'(s)$ is strict Hurwitz, $D(s)$ is Hurwitz
+and the system is wide-sense stable.
+\end{enumerate}
+\end{Exa}
+
+\section{Realization of System Functions}	%3
+The process of finding the fundamental block-diagram representation for a
+given system function $H(s)$ is called the simulation of the system or the
+realization of the system function.
+
+Find a realization for the second order transfer function:
+\begin{equation}
+H(s) =\frac{b_2s^2+b_1s+b_0}{a_2s^2+a_1s+1}
+\end{equation}
+
+\begin{equation}
+\begin{array}{ccc}
+H(s) = & (b_2s^2+b_1s+b_0) \cdot & \frac{a}{a_2s^2+a_1s+1} \\
+& \Updownarrow & \Updownarrow \\
+& H_1(s) & H_2(s) \\
+\end{array}
+\end{equation}
+
+Assume
+\begin{equation}
+H_1(s)=\frac{G_1(s)}{F_1(s)} 
+\end{equation}
+and
+\begin{equation}
+H_2(s)=\frac{G_2(s)}{F_2(s)} 
+\end{equation}
+
+\begin{align}
+G_1(s) &= H_1(s)F_1(s) = (b_2s^2+b_1s+b_0)F_1(s) \zdtag \\
+	   &= b_2s^2F_1(s)+b_1sF_1(s)+b_0F_1(s)
+\end{align}
+
+A realization of $H_1(s)$ is
+\begin{center}
+\input{pix/anasigproc/realh1.eepic}
+\end{center}
+
+\begin{align}
+G_2(s) &= H_2(s)F_2(s)=\frac{F_2(s)}{a_2s^2+a_1s+1} \\
+G_2(s)+a_1sG_2(s)+a_2s^2G_2(s) &= F_2(s) \\
+G_2(s) &= F_2(s)-a_1sG_2(s)-a_2s^2G_2(s) 
+\end{align}
+
+A realization of $H_2(s)$ is
+\begin{center}
+\input{pix/anasigproc/realh2.eepic}
+\end{center}
+
+If 
+\begin{equation}
+H_1(s)H_2(s) = \frac{G_1(s)}{F_1(s)} \cdot \frac{G_2(s)}{F_2(s)} 
+\end{equation}
+make 
+\begin{equation}
+G_2(s) = F_1(s) \qquad F_2(s)=F(s) \qquad G_1(s)=G(s) 
+\end{equation}
+\begin{equation}
+H(s) = H_1(s)\cdot H_2(s) = \frac{G(s)}{F(s)} 
+\end{equation}
+and
+\begin{align}
+G(s) &= (b_2s^2+b_1s+b_0)G_2(s) \\
+G_2(s) &= F(s)-a_1sG(s)-a_2s^2G(s) 
+\end{align}
+
+A realization of $H(s)$ is
+\begin{center}
+\input{pix/anasigproc/realh.eepic}
+
+\input{pix/anasigproc/realizeh.eepic}
+\end{center}
+
+In the realization diagram for $H(s)$, all the elementary operations:
+\begin{center}
+\begin{tabular}{cc}
+\input{pix/anasigproc/adder.eepic}  & Adder \\
+\input{pix/anasigproc/multip.eepic}  & Multiplier \\
+\input{pix/anasigproc/different.eepic}  & Differentiator \\
+\end{tabular}
+\end{center}
+can be implemented using active circuits.
+
+\begin{center}
+\input{pix/anasigproc/active.eepic}
+\end{center}
+
+In general, a system transform function
+\begin{equation}
+H(s)=\frac{b_ns^n+b_{n-1}s^{n-q}+ \cdots + b_2s^2+b_1s+b_0}{a_ns^n +
+a_{n-1}s^{n-1} + \cdots + a_2s^2+a_1s+1} 
+\end{equation}
+can be simulated or realized by the following diagram:
+\begin{center}
+\input{pix/anasigproc/gensim.eepic}
+\end{center}
+
+Since the system transfer function $H(s)$ may be also represented in the
+following form,
+\begin{equation}
+H(s)=\frac{b_n+b_{n-1}s^{n-1}+ \cdots + b_0s^{-n}} {a_n+a_{n-1}s^{-1}\cdots +
+s^{-n}}
+\end{equation}
+
+another system realization is shown as follows.
+\begin{center}
+\input{pix/anasigproc/gensim2.eepic}
+\end{center}
+
+Each $\frac{1}{s}$ represents an integrator.
+
+Since the realization and implementation of first and second order transfer
+functions are comparatively easy, the system transfer function $H(s)$ can be
+factorized as the product of second order factos with a possible first order
+factor for an odd degree function i.e.
+\begin{equation}
+H(s)=\prod_{k=1}^{r} H_k(s)
+\end{equation}
+
+Therefore a realization of $H(s)$ is
+\begin{center}
+\input{pix/anasigproc/real3.eepic}
+\end{center}
+
+If the partial fraction expansion is used for $H(s)$,
+\begin{equation}
+H(s)=\sum_{k=1}^{r} H_k(s)
+\end{equation}
+
+Therefore, a parallel realization of $H(s)$ is
+\begin{center}
+\input{pix/anasigproc/parallel.eepic}
+\end{center}
+
+From the above realizations of system functions it can be seen that the first
+order and second order transfer functions or filters are the basic building
+blocks or sub-systems. This is probably the reason why the majority of filter
+design and implementation has been directed to first and second order
+filters.
+
+\section{Introduction to analog filter design}	%4
+\begin{Def}[Filter]
+A filter\index{filter!definition} is a signal processing system whose response
+differs from the excitation in a prescribed manner. It is a frequency
+selective system or network which accepts an input singal with a certain
+spectrum, and attenuates certain frequenct components while passing the rest
+of the spectrum without change.
+\end{Def}
+
+\subsection{Ideal Filters and Types of Filters}
+Consider a system
+\begin{center}
+\begin{tabular}{ccc}
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(220,75)(0,-10)
+\path(160,0)(160,60)(60,60)
+	(60,0)(160,0)
+\path(0,30)(60,30)
+\path(52.000,28.000)(60.000,30.000)(52.000,32.000)
+\path(160,30)(220,30)
+\path(212.000,28.000)(220.000,30.000)(212.000,32.000)
+\put(0,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$f(t)$}}}}
+\put(90,20){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$h(\cdot)$}}}}
+\put(185,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$g(t)$}}}}
+\end{picture}
+& $\Leftrightarrow$ &
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(220,75)(0,-10)
+\path(160,0)(160,60)(60,60)
+	(60,0)(160,0)
+\path(0,30)(60,30)
+\path(52.000,28.000)(60.000,30.000)(52.000,32.000)
+\path(160,30)(220,30)
+\path(212.000,28.000)(220.000,30.000)(212.000,32.000)
+\put(0,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$F(j\omega)$}}}}
+\put(90,20){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$H(j\omega)$}}}}
+\put(185,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$G(j\omega)$}}}}
+\end{picture}
+\end{tabular}
+\end{center}
+
+The frequency response transfer function is given by
+\begin{equation}
+H(j\omega)=\frac{G(j\omega)}{F(j\omega)}=|H(j\omega)| e^{j\Psi(\omega)}
+\end{equation}
+
+where $|H(j\omega)|$ is the amplitude response and $\Psi(\omega)$ is the phase
+response.
+
+For example, consider a low-pass filter the specifications of which may be
+given as shown in Figure~\ref{f5-spec}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/lpfilt.eepic}
+\end{center}
+\caption{Specification for a low-pass filter\label{f5-spec}}
+\end{figure}
+
+The tolerance scheme shown in Figure~\ref{f5-spec} is such that in the passband
+and stopband the repsonse lies within the shaded area.
+\begin{description}
+\item[Pass-band] $0<\omega<\omega_0$
+\item[Transition-band] $\omega_0<\omega<\omega_s$
+\item[Stop-band] $\omega>\omega_s$
+\end{description}
+
+It is desirable to make the transition band $\Delta\omega=\omega_s-\omega_0$
+as small as possible in order to approximate the ideal low-pass filter.
+
+As we discussed previously, if $H(s)=H_1(s)H_2(s)H_3(s)$ the frequency
+response $H(j\omega)$ of the filter may be obtained by superpositioning the
+frequency repsonses $H_1(j\omega)$, $H_2(j\omega)$ and $H_3(j\omega)$ as shown
+in Figure~\ref{f5-superpos}.
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set nokey
+set xrange [0:2]
+set yrange [0:3]
+set noxtics
+set noytics
+set nozeroaxis
+set noborder
+set size 1.2,1.1
+set arrow from 0,0 to 2,0
+set arrow from 0,0 to 0,3
+set label "$1$" at -0.1,1
+set label "$\omega_0$" at 0.75,-0.1
+set label "$\omega$" at 2.1,0
+set label "$|H_1|$" at 0.5,2.5
+set label "$|H_2|$" at 1.0,2.5
+set label "$|H_3|$" at 1.5,2.5
+set label "$|H_1||H_2||H_3|$" at 0.4,0.2
+set arrow from 0.5,2.4 to 0.5,1.84
+set arrow from 1.0,2.4 to 1.0,0.54
+set arrow from 1.5,2.4 to 1.5,0.73
+set arrow from 0.35,0.1 to 0.7,1.42
+plot sin(2*x)+1,cos(x),cos(x/2),(sin(2*x)+1)*cos(x)*cos(x/2),(x<1)?0.75:0
+%#
+\end{center}
+\caption{Superposition of frequency response\label{f5-superpos}}
+\end{figure}
+
+If the design specifications are given by the magnitude frequency response
+(as shown in Figure~\ref{f5-filtdes}), to find the system transfer function
+becomes a cut and try excersise.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/filtdes.eepic}
+\end{center}
+\caption{Filter Design\label{f5-filtdes}}
+\end{figure}
+
+\begin{equation}
+H(j\omega)= 100 \frac{\left( \frac{j\omega}{\omega_2}+1 \right)} {\left(
+\frac{j\omega}{\omega_1}+1 \right) \left( \frac{j\omega}{\omega_3}+1 \right)^2
+} 
+\end{equation}
+
+A similar design approach may also be used for filter design based on the
+phase response.
+
+\subsection{Amplitude-Oriented Design}
+
+
+Specifications of a filter required may be given by a magnitude function
+$|H(j\omega)|$ or a magnitude squared function $|H(j\omega)|^2$, or by a boss
+function 
+\begin{equation}
+\alpha(\omega)=20 \log \frac{1}{|H(j\omega)|} dB 
+\end{equation}
+as mentioned previously.
+
+\begin{Def}
+The gain\index{gain} of the system defined by $H(j\omega)$ is given as 
+\begin{equation}
+A=20\log |H(j\omega)| dB 
+\end{equation}
+\end{Def}
+
+\begin{Def}
+The loss\index{loss} of a system described by $H(j\omega)$ is defined as
+\begin{align}
+\alpha &= 20 \log \frac{1}{|H(j\omega)|} \zdtag \\
+&= -20 \log |H(j\omega)| dB 
+\end{align}
+$\alpha$ is also called the attenuation function of the filter.
+\end{Def}
+
+Filters are classified according to their amplitude response as low-pass,
+high-pass, band-pass and band-stop (or notch) filters. 
+
+Amplitude characterstics for the ideal filters are shown in
+Figure~\ref{f5-idealfilter}.
+
+{ \addtolength{\textwidth}{30pt}
+\begin{figure}[hbtp]
+\begin{center}
+\parbox[c]{0.45\textwidth}{ \subfigure[Low Pass]{
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set size 0.55,0.6
+set xrange [0:10]
+set yrange [0:1.3]
+set arrow from 0,0 to 10,0
+set arrow from 0,0 to 0,1.3
+set label "$|H(j\omega)|$" at 0.2,1.3
+set label "$1$" at -0.4,1
+set label "$0$" at -0.2,-0.1
+set label "$\omega_0$" at 5,-0.1
+set label "$\omega$" at 11,-0.1
+plot x<5?1:0
+%#
+}}
+\parbox[c]{0.45\textwidth}{ \subfigure[High Pass]{
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nozeroaxis
+set nokey
+set size 0.55,0.6
+set xrange [0:10]
+set yrange [0:1.3]
+set arrow from 0,0 to 10,0
+set arrow from 0,0 to 0,1.3
+set label "$|H(j\omega)|$" at 0.2,1.3
+set label "$1$" at -0.4,1
+set label "$0$" at -0.2,-0.1
+set label "$\omega_0$" at 5,-0.1
+set label "$\omega$" at 11,-0.1
+plot x>5?1:0
+%#
+}}
+
+\parbox[c]{0.45\textwidth}{ \subfigure[Band Pass]{
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set nozeroaxis
+set noytics
+set nokey
+set size 0.55,0.6
+set xrange [0:10]
+set yrange [0:1.3]
+set arrow from 0,0 to 10,0
+set arrow from 0,0 to 0,1.3
+set label "$|H(j\omega)|$" at 0.2,1.3
+set label "$1$" at -0.4,1
+set label "$0$" at -0.2,-0.1
+set label "$\omega_1$" at 2.5,-0.1
+set label "$\omega_2$" at 7.5,-0.1
+set label "$\omega$" at 11,-0.1
+plot abs(x-5)<2.5?1:0
+%#
+}}
+\parbox[c]{0.45\textwidth}{ \subfigure[Band Stop]{
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nozeroaxis
+set size 0.55,0.6
+set nokey
+set xrange [0:10]
+set yrange [0:1.3]
+set arrow from 0,0 to 10,0
+set arrow from 0,0 to 0,1.3
+set label "$|H(j\omega)|$" at 0.2,1.3
+set label "$1$" at -0.4,1
+set label "$0$" at -0.2,-0.1
+set label "$\omega_1$" at 2.5,-0.1
+set label "$\omega_2$" at 7.5,-0.1
+set label "$\omega$" at 11,-0.1
+plot abs(x-5)<2.5?0:1
+%#
+}}
+\end{center}
+\caption{Ideal filter amplitude characteristics\label{f5-idealfilter}}
+\end{figure}
+}
+
+Filters can also be characterized according to their phase response. For
+instance an all-pass filter is a phase-shifting filter, since its amplitude is
+unchanged while its phase may be varied or shifted by changing the frequency.
+
+An ideal linear phase-shifting filter is given by 
+\begin{equation}
+\Psi(\omega)=-\tau \omega 
+\end{equation}
+where $\tau$ is a constant.
+
+The ideal low-pass filter's phase response is given in Figure~\ref{f5-lp-phase}.
+It is a linear phase-shifting filter.
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set noborder
+set noxtics
+set noytics
+set nokey
+set nozeroaxis
+set xrange [0:10]
+set yrange [0:10]
+set arrow from 0,0 to 10,0
+set arrow from 0,0 to 0,10
+set label "$0$" at -0.2,-0.2
+set label "$\omega$" at 11,-0.2
+set label "$-\Psi(\omega)$" at -0.2,11
+set label "$k\omega$" at 11,11
+plot x
+%#
+\end{center}
+\caption{Ideal low-pass filter phase characteristic\label{f5-lp-phase}}
+\end{figure}
+
+\begin{Def}
+The time delay\index{time delay} $T(\omega)$ of a filter is defined to be the
+negative of the slope of the phase response, i.e.
+\begin{equation}
+T(\omega) = \frac{d}{d\omega} \Psi(\omega) 
+\end{equation}
+\end{Def}
+
+\begin{Rem}
+The more non-linear the phase response, the more distorted will be the output
+signal.
+
+Unfortunately, as the amplitude response improves (approaches the ideal case),
+the phase response deteriorates, and vice versa. Thus filter design involves a
+compromise between good amplitude response and good phase response. (Prac \#
+3).
+\end{Rem}
+
+The ideal filter characteristics cannot be obtained (or implemeted) using
+realizable (causal) transfer functions and must, therefore, be approximated.
+
+\begin{Exa}
+Given an ideal low-pass filter defined as 
+\begin{equation}
+H(j\omega) = \begin{cases}
+e^{-jk\omega} & 0 \leqslant |\omega| \leqslant \omega_0 \\
+0 & |\omega|> \omega_0 
+\end{cases} 
+\end{equation}
+
+the impulse response of the filter can be obtained by taking the inverse
+Fourier transform of $H(j\omega)$.
+
+\begin{align}
+h(t) &= \F^{-1} [H(j\omega)] = \frac{1}{2\pi} \infint H(j\omega)e^{j\omega t}
+d\omega \\
+&= \frac{1}{2\pi} \int_{-\omega_0}^{\omega_0} e^{-j k \omega} e^{j\omega t}
+d\omega \\
+&= \frac{1}{2\pi} \int_{-\omega_0}^{\omega_0} e^{j(t-k)\omega} d\omega \\
+&= \left. \frac{1}{2\pi} \cdot \frac{1}{j(t-k)} e^{j(t-k) \omega}
+\right|_{-\omega_0}^{\omega_0} \\
+&= \frac{1}{2\pi j (t-k)} \left[ e^{j (t-k) \omega_0}-e^{-j (t-k) \omega_0}
+\right] \\
+&= \frac{1}{2\pi j(t-k)} \left\{ 2j\sin((t-k)\omega_0) \right\} \\
+&= \frac{\sin((t-k)\omega_0)}{\pi(t-k)} \qquad \mbox{for all $t$} \\
+&= \frac{\omega_0}{\pi} \cdot \frac{\sin(\omega_0(t-k))}{\omega_0(t-k)} =
+\frac{\omega_0}{\pi} \frac{\sin\left( 2\omega_0 \frac{t'}{2} \right)}
+{2\omega_0 \frac{t'}{2} } \qquad \mbox{where $t'=t-k$}
+\end{align}
+
+\parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set size 0.55,0.6
+set noxtics
+set noytics
+set xrange [-4:4]
+set yrange [0:1.2]
+set arrow from -4,0 to 4,0
+set arrow from 0,0 to 0,1.2
+set label "$1$" at 0.2,1.1
+set label "$|H(j\omega)|$" at -0.2,1.3
+set label "$-\omega_0$" at -2,-0.1
+set label "$\omega_0$" at 2,-0.1
+set label "$\omega$" at 4.1,-0.1
+plot abs(x)<2?1:0
+%#
+}
+$\Leftrightarrow$ \parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set size 0.55,0.6
+set xrange [-8:8]
+set yrange [-0.4:1.2]
+set noxtics
+set noytics
+set arrow from -8,0 to 8,0
+set arrow from 0,-0.4 to 0,1.2
+set label "$\frac{\omega_0}{\pi}$" at 0.2,1.1
+set label "$h(t')$" at -0.5,1.3
+set label "$-\frac{\pi}{\omega_0}$" at -4,-0.3
+set label "$\frac{\pi}{\omega_0}$" at 4,-0.3
+set label "$t'$" at 8.1,-0.1
+plot sin(x)/x
+%#
+}
+
+\parbox{0.45\textwidth}{
+Because $h(t)$ is not causal, therefore, cannot be implemented using analog
+devices in practice.} \parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set noborder
+set size 0.55,0.6
+set nokey
+set noxtics
+set noytics
+set xrange [-2:14]
+set yrange [-0.4:1.2]
+set arrow from -2,0 to 14,0
+set arrow from 0,-0.4 to 0,1.2
+set label "$\frac{\omega_0}{\pi}$" at 7,1.1
+set label "$h(t)$" at -2,1.3
+set label "$k-\frac{\pi}{\omega_0}$" at 2,-0.5
+set label "$k+\frac{\pi}{\omega_0}$" at 9,-0.5
+set label "$t$" at 14.1,-0.1
+set label "$k$" at 7,-0.2
+plot sin(x-7)/(x-7)
+%#
+}
+\end{Exa}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/desproc.eepic}
+\end{center}
+\caption{Basic design procedure of a filter\label{f5-desproc}}
+\end{figure}
+
+\section{Design Method using the Bode Diagrams}	%5
+The asymptotic Bode diagrams\index{bode diagrams!asymptotic}:
+\subsubsection{Simple first order (real) zero}
+
+See Figure~\ref{f5-sfoz}.
+\begin{align}
+H_1(j\omega) &= \frac{j\omega}{\omega_0}+1=|H_1(j\omega)|e^{j\Psi_1(\omega)} \\
+A_1 &= 20\log | H_1(j\omega)| = 20 \log \sqrt{1+\left(\frac{\omega}{\omega_0}
+\right)^2 }
+\end{align}
+To draw the asymptotic Bode diagram for $A_1$:
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item
+\begin{equation}
+\frac{\omega}{\omega_0} \ll 1, \qquad  A_1=20\log\sqrt{1} = 0 dB  
+\end{equation}
+\item
+\begin{equation}
+\frac{\omega}{\omega_0} \gg 1, \qquad A_1=20\log \sqrt{\left( \frac{\omega}{\omega_0} \right)^2} = 20\log \frac{\omega}{\omega_0} dB 
+\end{equation}
+\item
+Noticing $\omega_0$ is the break frequency.
+\end{enumerate}
+
+To draw the asymptotic Bode phase plot $\Psi_1(\omega)=\tan^{-1} \frac{\omega}{\omega_0} $
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi}')}
+\item
+\begin{align}
+\omega=0 \qquad & \Psi_1(\omega)=0 \\
+\omega=\frac{\omega_0}{10} \qquad & \Psi_1(\omega)=\tan^{-1} 0.1 = 5.7^{\circ}
+\approx 0^{\circ} 
+\end{align}
+\item
+\begin{align}
+\omega=\omega_0 \qquad & \Psi_1(\omega)=\tan^{-1} 1 = 45^{\circ}
+\end{align}
+\item
+\begin{align}
+\omega=\infty \qquad & \Psi_1(\omega)=\tan^{-1} \infty = 90^{\circ} \\
+\omega=10\omega_0 \qquad & \Psi_1(\omega)=\tan^{-1} 10 = 84.3^{\circ} \approx
+90^{\circ} 
+\end{align}
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/sfoz.eepic}
+\end{center}
+\caption{Simple first order zero\label{f5-sfoz}}
+\end{figure}
+
+\subsubsection{Simple first order (real) poles}
+See Figure~\ref{f5-sfop}.
+\begin{align}
+H_2(j\omega) &= \frac{1}{j\frac{\omega}{\omega_0}+1}=\frac{1}{|H_2(j\omega)|
+e^{j\Psi_2(\omega)}} = | H_2(j\omega)| e^{j\Psi_2(\omega)} \\
+A_2 &= 20\log | H_2(j\omega)| = 20\log \left| \frac{1}{j\frac{\omega}{\omega_0}
++1} \right| = -20 \log \sqrt{\left(\frac{\omega}{\omega_0} \right)^2 +1 }
+\end{align}
+To draw the asymptotic Bode diagram for $A_2$:
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item
+\begin{align}
+\frac{\omega}{\omega_0} \ll 1, \qquad & A_2=-20\log\sqrt{1} = 0 dB  \\
+\frac{\omega}{\omega_0} = 0.1, \qquad & A_2=-20\log\sqrt{1.1} = 0.8 \approx 0 dB
+\end{align}
+\item
+\begin{align}
+\frac{\omega}{\omega_0} \gg 1, \qquad & A_2 \approx -20\log\sqrt{\left(
+\frac{\omega}{\omega_0} \right)^2 } = 20\log\frac{\omega}{\omega_0} \\
+\frac{\omega}{\omega_0} = 10, \qquad & A_2 \approx -20\log 10 = -20 dB
+\end{align}
+\item
+Noticing $\omega_0$ is the corner frequency.
+\end{enumerate}
+
+To draw the asymptotic Bode phase plot $\Psi_2$
+\begin{equation}
+\Psi_2(\omega) = -\Psi_2(\omega) = -\tan^{-1} \left(
+\frac{\omega}{\omega_0} \right) 
+\end{equation}
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi}')}
+\item
+\begin{align}
+\omega=0 \qquad & \Psi_2(\omega)=-\tan^{-1} 0 = 0^{\circ} \\
+\omega=\frac{\omega_0}{10} \qquad & \Psi_2(\omega)=-\tan^{-1} 0.1 = -5.7^{\circ}
+\approx 0^{\circ} 
+\end{align}
+\item
+\begin{align}
+\omega=\omega_0 \qquad & \Psi_2(\omega)=-\tan^{-1} 1 = -45^{\circ}
+\end{align}
+\item
+\begin{align}
+\omega=\infty \qquad & \Psi_2(\omega)=-\tan^{-1} \infty = -90^{\circ} \\
+\omega=10\omega_0 \qquad & \Psi_2(\omega)=-\tan^{-1} 10 = -84.3^{\circ} \approx
+-90^{\circ} 
+\end{align}
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/sfop.eepic}
+\end{center}
+\caption{Simple first order pole\label{f5-sfop}}
+\end{figure}
+
+\subsubsection{Simple second order zero}
+See Figure~\ref{f5-ssoz}.
+\begin{align}
+H_3(s) &= H_3(0) \left[ \left(\frac{s}{\omega_0} \right)^2 +
+\frac{\alpha}{\omega_0}s+1 \right] \\
+H_3(j\omega) &= H_3(0)\left[ \left( \frac{j\omega}{\omega_0} \right)^2 +
+\frac{\alpha}{\omega_0}(j\omega)+1 \right] = H_3(0) \left[ \alpha j
+\frac{\omega}{\omega_0}+1-\left( \frac{\omega}{\omega_0} \right)^2 \right] \\
+\intertext{Assume $H_3(0)=1$}
+A_3 &= 20\log | H_3(j\omega)| = 20 \log \sqrt{ \left\{ 1- \left(
+\frac{\omega}{\omega_0} \right)^2 \right\}^2 + \left( \frac{\alpha}{\omega_0}
+\omega \right)^2 }
+\end{align}
+To draw the asymptotic Bode diagram for $A_3$:
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item
+\begin{align}
+\frac{\omega}{\omega_0} \ll 1, \qquad & A_3\approx 20\log\sqrt{1} = 0 dB 
+\end{align}
+\item
+\begin{align}
+\frac{\omega}{\omega_0} \gg 1, \qquad A_3 &\approx 20\log\sqrt{\left( \frac{\omega}{\omega_0} \right)^4} = 20\log\left(\frac{\omega}{\omega_0} \right)^2 \\
+& = 40 \log \frac{\omega}{\omega_0} dB
+\end{align}
+\item
+Noticing $\omega_0$ is the corner frequency.
+\end{enumerate}
+
+To draw the asymptotic Bode phase diagram  for $\Psi_3$
+\begin{equation}
+\Psi_3(\omega)=\tan^{-1} \frac{\alpha \frac{\omega}{\omega_0}}{1-\left(
+\frac{\omega}{\omega_0} \right)^2} 
+\end{equation}
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi}')}
+\item
+\begin{equation*}
+\omega=0, \qquad \Psi_3=\tan^{-1} 0 = 0^{\circ}
+\end{equation*}
+\item
+\begin{equation}
+\omega=\omega_0, \qquad \Psi_3=\tan^{-1} \frac{\alpha}{0^+}=90^{\circ} 
+\end{equation}
+\item
+\begin{equation}
+\omega\rightarrow\infty, \qquad \Psi_3=\tan^{-1} \frac{
+\alpha\frac{\infty}{\omega_0}}{1-\left(\frac{\infty}{\omega_0}\right)^2} =
+180^{\circ} 
+\end{equation}
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/ssoz.eepic}
+\end{center}
+\caption{Simple second order zero\label{f5-ssoz}}
+\end{figure}
+
+\subsubsection{Second Order Pole}
+\begin{align}
+H_4(s) &= \frac{H(0)}{\left(\frac{s}{\omega_0}\right)^2 +
+\frac{\alpha}{\omega_0} j\omega +1 } \\
+H_4(j\omega) &= \frac{H(0)}{\left(\frac{j\omega}{\omega_0}\right)^2 +
+\frac{\alpha}{\omega_0} j\omega+1} \\
+&= |H_4(j\omega)| e^{j\Psi_4(\omega)}
+\end{align}
+Use $A_4=-A_3$ and $\Psi_4(\omega)=-\Psi_3(\omega)$. The asymptotic Bode
+diagrams are shown in Figure~\ref{f5-sop}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/sop.eepic}
+\end{center}
+\caption{Second order pole\label{f5-sop}}
+\end{figure}
+
+\subsubsection{General Transfer Function $H(s)$}
+
+\begin{align}
+H(s) &= \frac{ \left( \frac{s}{\omega_1}+1 \right) \left( \frac{s}{\omega_3}+1
+\right) \left( \left( \frac{s}{\omega_5} \right)^2 + \frac{\alpha_5}{\omega_5}
+s+1 \right)}{ \left( \frac{s}{\omega_2} +1 \right) \left( \frac{s}{\omega_4}
++1 \right) \left( \left( \frac{s}{\omega_6} \right)^2 +
+\frac{\alpha_6}{\omega_6}s +1 \right)} \\
+\intertext{Define}
+H_1(s) &= \frac{s}{\omega_1}+1 \\
+H_2(s) &= \frac{s}{\omega_2}+1 \\
+H_3(s) &= \frac{s}{\omega_3}+1 \\
+H_4(s) &= \frac{s}{\omega_4}+1 \\
+H_5(s) &= \left[ \left( \frac{s}{\omega_5} \right)^2 +
+\frac{\alpha_5}{\omega_5}s + 1 \right] \\
+H_6(s) &= \left[ \left( \frac{s}{\omega_6} \right)^2 +
+\frac{\alpha_6}{\omega_6}s + 1 \right] \\
+\intertext{Thus}
+H(s) &= \frac{H_1(s) H_3(s) H_5(s)}{H_2(s) H_4(s) H_6(s)} \\
+H(j\omega) &= |H(j\omega)| e^{j\Psi(\omega)} \\
+\intertext{and}
+H_i(j\omega) &= |H_i(j\omega)| e^{j\Psi_i(\omega)} \\
+\intertext{Therefore}
+H(j\omega) &= | H(j\omega)| e^{j\Psi(\omega)} \\
+&= \frac{|H_1(j\omega)|e^{j\Psi_1(\omega)} |
+|H_3(j\omega)|e^{j\Psi_3(\omega)} |
+|H_5(j\omega)|e^{j\Psi_5(\omega)} |}
+{|H_2(j\omega)|e^{j\Psi_2(\omega)} |
+|H_4(j\omega)|e^{j\Psi_4(\omega)} |
+|H_6(j\omega)|e^{j\Psi_6(\omega)} |} \\
+&= \frac{|H_1| |H_3| |H_5|}{|H_2| |H_4| |H_6|} e^{j\left\{\Psi_1+\Psi_2+\Psi_3+\Psi_4+\Psi_5+\Psi_6\right\}} \\
+\intertext{i.e.}
+|H(j\omega)| &= \frac{ |H_1(j\omega)| |H_3(j\omega)| |H_5(j\omega)| }
+{ |H_2(j\omega)| |H_4(j\omega)| |H_6(j\omega)| } \\
+\intertext{and}
+\Psi(\omega) &= \overbrace{\Psi_1(\omega)+\Psi_3(\omega)+\Psi_5(\omega)}^{ \mbox{zeros}}-
+\overbrace{\Psi_2(\omega)-\Psi_4(\omega)-\Psi_6(\omega)}^{ \mbox{poles}} \\
+A &= 20 \log |H(j\omega)| = 20 \log \frac{|H_1||H_3||H_5|}{|H_2||H_4||H_6|} \\
+&= 20\log|H_1|+20\log|H_3|+20\log|H_5|-20\log|H_2|-20\log|H_4|-20\log|H_6| \\
+\intertext{i.e.}
+A &= \underbrace{A_1+A_3+A_5}_{\mbox{zeros}} - \underbrace{A_2-A_4-A_6}_{\mbox{
+poles}}
+\end{align}
+Assume $\omega_1<\omega_2<\omega_3<\omega_4<\omega_5<\omega_6$.
+
+The frequency response $H_1(j\omega)$,$H_2(j\omega)$, and $H_3(j\omega)$ may
+be implemented using second order low-pass filters by carefully choosing $Q$
+(Quality Factor).
+
+\section{Quality Factor and its importance}	%6
+
+For a given RLC circuit shown in Figure~\ref{f5-rlc}, the transfer function
+can be obtained as 
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/rlc.eepic}
+\end{center}
+\caption{RLC circuit\label{f5-rlc}}
+\end{figure}
+
+\begin{align}
+H(s) &= \frac{ \frac{1}{sC} }{ Ls + R + \frac{1}{sC} } \\
+ &= \frac{ \frac{1}{LC} }{s^2+\left(\frac{R}{L}\right)s+ \frac{1}{LC} }
+\end{align}
+If $R=0$ (the circuit is lossless), the pole positions may be determined:
+\begin{align}
+s^2+\frac{1}{LC} &= 0 \\
+\intertext{or}
+s_1,s_2 &= \pm j\sqrt{\frac{1}{LC}} = \pm j\omega_0
+\end{align}
+where $\omega_0=\sqrt{\frac{1}{LC}}$, the natural frequency.
+
+If $R\neq 0$ (lossy coils), the Quality factor $Q$ is defines, in this case,
+as 
+\begin{equation}
+Q=\frac{\omega_0 L}{R} = \frac{1}{R} \sqrt{\frac{L}{C}} 
+\end{equation}
+which is the ratio of reactance at the frequency $\omega_0$ to resistance.
+
+The transfer function $H(s)$ now may be represented 
+\begin{equation}
+H(s) = \frac{ \omega_0^2 }{s^2+\left(\frac{\omega_0}{Q}\right)s+\omega_0^2}
+= \frac{N(s)}{D(s)} 
+\end{equation}
+The pole posistions in the s-plane are
+\begin{equation}
+s_1,s_2 = -a\pm j b 
+\end{equation}
+Thus
+\begin{align}
+D(s) &= (s+a+jb)(s+a-jb) \\
+&= s^2+2as+(a^2+b^2).
+\end{align}
+
+The relationship between $a$, $b$ and $\omega_0$,$Q$ is 
+\begin{equation}
+\begin{cases}
+	a=\frac{\omega_0}{2Q} \\
+	b=\omega_0\sqrt{1-\frac{1}{4Q^2}} \\
+	\end{cases}
+\end{equation}
+or
+\begin{equation}
+\begin{cases}
+	Q=\frac{\omega_0}{2a} \\
+	\omega_0^2=a^2+b^2 \\
+	\end{cases}
+\end{equation}
+
+These relationships are shown in the s-plane in Figure~\ref{f5-splane}.
+The angle $\Psi$ with respect to the negative real axis is
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/splane.eepic}
+\end{center}
+\caption{Quality factor relationships\label{f5-splane}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\parbox{.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set nokey
+set logscale x
+set xrange [0.001:100]
+set size 0.6,0.8
+set noxtics
+set noytics
+set nozeroaxis
+set noborder
+set arrow from 0.001,0 to 110,0
+set arrow from 0.001,0 to 0.001,1.2
+set label "$1$" at 0.0012,1.1 
+set label "$\omega$" at 105,0.1
+set label "$1$" at 1,0.1
+set label "$\omega_{peak}=\sqrt{1-(1/2Q^2)}\approx 1$" at 0.2,1.5
+set label "$|H(j\omega)|$" at 0.001,1.3
+plot 1/(sqrt((1-x**2)**2+(x/1)**2))
+%#
+} \parbox{0.45\textwidth}{
+%# gnuplot
+set terminal eepic
+set nokey
+set logscale x
+set yrange [-2:0.5]
+set xrange [0.001:100]
+set noxtics
+set noytics
+set nozeroaxis
+set noborder
+set size 0.60,0.8
+set arrow from 0.001,-2 to 110,-2
+set arrow from 0.001,-2 to 0.001,0.5
+set label "$\omega$" at 110,-2
+set label "$1$" at 1,-2
+set label "$\theta$" at 0.001,1.3
+set label "$0^\circ$" at 0.002,0.1
+set label "$-90^\circ$" at 0.002,-1
+set label "$-180^\circ$" at 0.002,-1.6
+plot -atan(2*x)
+%#
+}
+\end{center}
+\caption{Bode plot of quality factor\label{f5-bodeq}}
+\end{figure}
+
+\begin{equation}
+\Psi=\cos^{-1}\left(\frac{Q}{\omega_0}\right)=\cos^{-1}\left(\frac{1}{2Q}
+\right) 
+\end{equation}
+Assume that $\omega_0=1$
+\begin{align}
+H(j\omega) &= \frac{1}{1-\omega^2+j\omega/Q} \\
+|H(j\omega)| &= \frac{1}{\sqrt{(1-\omega^2)^2+(\omega/Q)^2}} \\
+\intertext{and}
+\theta &= -\tan^{-1} \left( \frac{\omega/Q}{1-\omega^2} \right). 
+\end{align}
+\begin{equation}
+|H(j0)|=1, \qquad |H(j1)|=Q, \qquad |H(j\infty)|\rightarrow 0 
+\end{equation}
+For large $\omega$, 
+\begin{equation}
+|H(j\omega)| \approx \frac{1}{\omega^2} 
+\end{equation}
+\begin{equation}
+\theta(j0)=0^{\circ}, \qquad \theta(j1)=-90^{\circ}, \qquad \theta(j\infty)
+\rightarrow -180^{\circ} 
+\end{equation}
+The importance of $Q$ may be seen in Figure~\ref{f5-qimp}
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set nokey
+set logscale x
+set logscale y
+set xlabel "$\omega$"
+set ylabel "$A (dB)$"
+set size 1.1,1.1
+set xrange [0.1:50]
+plot 1/(sqrt((1-x**2)**2+(x/5)**2)), 1/(sqrt((1-x**2)**2+(x/2)**2)), 1/(sqrt((1-x**2)**2+(x/1)**2)), 1/(sqrt((1-x**2)**2+(x/0.5)**2)), 1/(sqrt((1-x**2)**2+(x/0.2)**2)), 1/(sqrt((1-x**2)**2+(x/0.1)**2)), 1/(sqrt((1-x**2)**2+(x/10)**2))
+%#
+
+%# gnuplot
+set terminal eepic
+set nokey
+set logscale x
+set xlabel "$\omega$"
+set ylabel "$\theta$"
+set size 1.1,1.1
+set xrange [0.1:50]
+plot -atan((x/5)/(1-x**2)), -atan((x/2)/(1-x**2)), -atan((x/1)/(1-x**2)), -atan((x/0.5)/(1-x**2)), -atan((x/0.2)/(1-x**2)), -atan((x/0.1)/(1-x**2)), -atan((x/10)/(1-x**2))
+%#
+\end{center}
+\caption{Importance of quality factor $Q$\label{f5-qimp}}
+\end{figure}
+
+Generally speaking, the higher the order of the transfer funtion, the more
+accurate the approximation of a filter to the ideal filter.
+
+The amplitude squared function of the filter may be represented as
+\begin{equation}
+|H(j\omega)|^2 = \frac{\sum_{i=0}^{m} a_i\omega^{2i}}{1+ \sum_{j=0}^{n}
+b_j\omega^{2j}} 
+\end{equation}
+
+\section{Butterworth Low-Pass filter}	%7
+
+The Butterworth response of a low-pass filter is given by
+\begin{equation}
+|H(j\omega)|^2 = \frac{1}{1+\omega^{2n}} 
+\end{equation}
+where $n$ is the degree of the filter and the half power frequency occurs at
+$\omega=1$ for all $n$. To determine the poles of the transfer function, we
+recall that
+\begin{equation}
+|H(j\omega)|^2 = H(s)H(-s)|_{s=j\omega}
+\end{equation}
+using $\omega=s/j$
+\begin{equation}
+H_n(s)H_n(-s) = \frac{1}{1+(s/j)^{2n}} = \frac{1}{1+(-1)^ns^{2n}}
+\end{equation}
+
+The poles of the above equation are the roots of the equation
+\begin{equation}
+B_n(s) B_n(-s) = 1+ (-1)^n S^{2n} = 0 
+\end{equation}
+where $B_n(s)$ is the Butterworth polynomial.
+
+Notice also that poles of the Butterworth filter are located on the unit
+circle, in the s-plane.
+
+\subsubsection{$n=1$}
+\begin{equation}
+B_n(s) B_n(-s) = 1-s^2 = (1+s)(1-s)=0
+\end{equation}
+The roots are $s=\pm 1$. However $s=1$ corresponds to an unstable system which
+is not desirable. So,
+\begin{equation}
+B_1(s)=s+1, \qquad \mbox{or} \qquad H_1(s)=\frac{1}{s+1}
+\end{equation}
+
+\subsubsection{$n=2$}
+\begin{equation}
+B_n(s) B_n(-s) = 1+s^4 = 0
+\end{equation}
+or
+\begin{align}
+s^4 = -1 &= e^{j(180^{\circ}+k360^{\circ})}, \qquad\mbox{$k$ being an
+integer} \\
+s &= e^{j(180^{\circ}+k360^{\circ})/4}
+\end{align}
+
+It is obvious that there are four roots due to four different angles within
+$360^{\circ}$ (with $k=0,1,2,3$).
+\begin{equation}
+\frac{180^{\circ}+k360^{\circ}}{4}=45^\circ,135^\circ,225^\circ,315^\circ 
+\end{equation}
+\parbox{0.7\textwidth}{
+\begin{align}
+s_1 &= e^{j45^\circ} = \cos 45^\circ+j\sin 45^\circ=0.707+j0.707 \\
+s_2 &= e^{j135^\circ} = \cos 135^\circ+j\sin 135^\circ=-0.707+j0.707 \\
+s_3 &= e^{j225^\circ} = \cos 225^\circ+j\sin 225^\circ=-0.707-j0.707 \\
+s_4 &= e^{j315^\circ} = \cos 315^\circ+j\sin 315^\circ=0.707-j0.707
+\end{align}
+}\parbox{0.25\textwidth}{
+\input{pix/anasigproc/circn2.eepic}
+}
+
+Again, two poles in the right s-plane are not stable. Therefore
+\begin{equation}
+B_2(s)=(s+0.707-j0.707)(s+0.707+j0.707)=s^2+\sqrt{2}s+1
+\end{equation}
+or
+\begin{equation}
+H_s(s)=\frac{1}{s^2+\sqrt{2}s+1}
+\end{equation}
+
+\subsubsection{$n=3$}
+
+\begin{align}
+1-s^6 &= 0 \\
+s^6 &= 1 = e^{j k 360^\circ} 
+\end{align}
+
+\begin{equation}
+s=e^{j\frac{k 360^\circ}{6}}, \qquad (k=0,1,2,3,4,5,6)
+\end{equation}
+
+There are six roots:
+
+\parbox{0.7\textwidth}{
+\begin{align}
+s_1 = e^{j 0^\circ} &= \cos 0^\circ + j\sin 0^\circ \\
+s_2 = e^{j 60^\circ} &= \cos 60^\circ + j\sin 60^\circ \\
+s_3 = e^{j 120^\circ} &= \cos 120^\circ + j\sin 120^\circ \\
+s_4 = e^{j 180^\circ} &= \cos 180^\circ + j\sin 180^\circ \\
+s_5 = e^{j 240^\circ} &= \cos 240^\circ + j\sin 240^\circ \\
+s_6 = e^{j 300^\circ} &= \cos 300^\circ + j\sin 300^\circ
+\end{align}
+}\parbox{0.25\textwidth}{
+\input{pix/anasigproc/circn6.eepic}}
+
+Leave out the roots in the right half s-plane.
+
+\begin{align}
+B_3(s) &= (s-\cos 180^\circ -j\sin 180^\circ)(s-\cos 120^\circ - j\sin
+120^\circ)(s-\cos 240^\circ-j \sin 240^\circ) \zdtag\\
+&= (s+1)(s+\half-j\frac{\sqrt{3}}{2})(s+\half+j\frac{\sqrt{3}}{2}) \zdtag\\
+&= (s+1)(s^2+s+1) = (s+1)(s^2+2\cos 60^\circ s+1) \\
+\intertext{or}
+H_3(s) &= \frac{1}{(s+1)(s^2+s+1)} 
+\end{align}
+
+To simplify the process of determining the poles for the Butterworth filter,
+we define an angle $\Psi_k$ with respect to the negative real axis.
+
+If $n$ is odd,
+\begin{equation}
+s^{2n}=1 \rightarrow s=e^{\frac{j k 360^\circ}{2n}} = e^{\frac{j k
+180^\circ}{n}} 
+\end{equation}
+\begin{equation}
+\Psi_k= \frac{k 180^\circ}{n}-180^\circ = \frac{(k-n)180^\circ}{n}
+\end{equation}
+when $k=n$, $\Psi_k=0$.
+
+If $n$ is even
+\begin{equation}
+s^{2n}=-1 \rightarrow s=e^{\frac{j\pm 180^\circ+k 360^\circ}{2n}} =
+e^{j\left( \frac{90^\circ}{n}+\frac{k 180^\circ}{n}\right)} 
+\end{equation}
+\begin{equation}
+\Psi_k=\frac{\pm 90^\circ+k 180^\circ}{n}-180^\circ = \frac{\pm90^\circ+(k-n)
+180^\circ}{n}
+\end{equation}
+when $k=n$, $\Psi_k= \pm 90^\circ/n$.
+Furthermore, for any $n$, poles are separated by $180^\circ/n$.
+
+In summary, for $n$ being odd
+\begin{equation}
+B_n=(s+1) \prod_k (s^2+2\cos \Psi_k \cdot s+1)
+\end{equation}
+
+Poles of $H_n(s)$ are separated by $180^\circ/n$, equally spaced with respect
+to $\Psi=0$, and
+\begin{equation}
+-90^\circ < \Psi_k < 90^\circ 
+\end{equation}
+
+For $n$ begin even,
+\begin{equation}
+B_n=\prod_k (s^2+s\cos \Psi_n \cdot s+1)
+\end{equation}
+
+Poles of $H_n(s)$ are separated by $180^\circ/n$, starting frlom $\Psi=\pm
+90^\circ/n$.
+
+\begin{Exa}
+Design the fifth-order Butterworth low-pass filter with cut-off frequency
+equal to 1 rad/s.
+
+Solution: \\
+\begin{enumerate}
+\item $n=5$ (odd), one pole is at $\Psi=0$ and others are separated from it by
+multiples of $180^\circ/5=36^\circ$.
+\begin{equation}
+\Psi_k=0,\pm 36^\circ, \pm 72^\circ 
+\end{equation}
+\item The pole locations are 
+\begin{align}
+p_i,\overline{p}_i &= -\cos \Psi_k \pm j\sin \Psi_k \\
+\intertext{or}
+p_o &= -\cos 0^\circ = -1 \\
+p_1, \overline{p}_1 &= -\cos 36^\circ \pm j\sin 36^\circ = -0.8090170 \pm j
+0.5877852 \\
+p_2, \overline{p}_2 &= -\cos 72^\circ \pm j\sin 72^\circ = -0.3090170 \pm j
+0.9510565
+\end{align}
+\item The fifth-order Butterworth function is
+\begin{equation}
+B_5(s) = (s+1)(s^2+2\cos 36^\circ \cdot s+1)(s^2+2\cos 72^\circ \cdot
+s+1) 
+\end{equation}
+or the fifth-order Butterworth low-pass filter is given by the transfer
+function
+\begin{equation}
+H_5(s) = \frac{1}{(s+1)(s^2+2\cos 36^\circ \cdot s+1)(s^2+2\cos 72^\circ
+\cdot s+1)}
+\end{equation}
+\item The quality factor 
+\begin{equation}
+Q=\frac{1}{2\cos \Psi} 
+\end{equation}
+which gives
+\begin{equation}
+Q_0=0.5, \qquad Q_1=0.618, \quad \mbox{and} \quad Q_2=1.618 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+Another important issue in the low-pass filter design is to determine the
+minimum order of the filter under a group of specifications.
+
+Given the nth-order low-pass Butterworth filter
+\begin{equation}
+|H(j\omega)=\frac{1}{\sqrt{1+\left(\frac{\omega}{\omega_0}\right)^{2n}}}
+\end{equation}
+recall that the gain $A$ is defined as 
+\begin{equation}
+A=20\log |H(j\omega)| dB 
+\end{equation}
+and the attenuation $\alpha$ is defined as
+\begin{align}
+\alpha &= 20\log \frac{1}{|H(j\omega)|} \zdtag \\
+&= 20\log \sqrt{1+\left( \frac{\omega}{\omega_0} \right)^{2n}} \zdtag \\
+&= 10\log \left[ 1+\left( \frac{\omega}{\omega_0} \right)^{2n} \right]  dB
+\label{eq5-5720}
+\end{align}
+
+Assume that \\
+\parbox{0.6\textwidth}{
+Maximum passband attenuation $=\alpha_p$, for $\omega \leqslant \omega_p$ \\
+Minimum stopband attenuation $=\alpha_s$, for $\omega > \omega_s$ \\
+} \parbox{0.35\textwidth}{
+\input{pix/anasigproc/lpfig.eepic}}
+
+Dividing both sides of Equation~\ref{eq5-5720} and finding the antilogarithm
+gives
+\begin{align}
+\left(\frac{\omega}{\omega_0}\right)^{2n}+1 &= 10^{\alpha/10} \zdtag \\
+\intertext{To determine $n$}
+\left(\frac{\omega_p}{\omega_0}\right)^{2n}+1 &= 10^{0.1\alpha_p}-1 \\
+\intertext{and}
+\left(\frac{\omega_s}{\omega_0}\right)^{2n}+1 &= 10^{0.1\alpha_s}-1 \\
+\intertext{Dividing the above two equations, we obtain}
+\left( \frac{\omega_2}{\omega_p} \right)^{2n} &= \frac{10^{0.1
+\alpha_s}-1}{10^{0.1\alpha_p}-1} \\
+\intertext{Take the log,}
+2n\log \left( \frac{\omega_s}{\omega_p} \right) &= \log \left[
+\frac{10^{0.1\alpha_s}-1}{10^{0.1\alpha_p}-1} \right] \zdtag \\
+n &= \frac{\log \left[ \frac{10^{0.1\alpha_s}-1}{10^{0.1\alpha_p}-1}
+\right]}{2\log \left( \frac{\omega_s}{\omega_p} \right) } 
+\end{align}
+
+However $n$ must be an integer so that the $n$ chosen can be obtained by
+assigning the next greater intege to $n$.
+
+Using this $n$, all specifications cannot be met exactly, the cut-off
+frequency may be calculated by
+\begin{equation}
+\omega_0 = \frac{\omega}{\left[ 10^{0.1\alpha}-1 \right]^{\half n}}
+\end{equation}
+\begin{enumerate}
+\item
+\begin{equation}
+\omega_0 = \frac{\omega_p}{\left[ 10^{0.1\alpha_p}-1 \right]^{\half n}}
+\end{equation}
+\item
+\begin{equation}
+\omega_0 = \frac{\omega_s}{\left[ 10^{0.1\alpha_s}-1 \right]^{\half n}}
+\end{equation}
+\end{enumerate}
+
+The results obtained frlom the above equations are compared. The one that
+offers the advantage will be used.
+
+\begin{Exa}
+Realize the following specification with a Butterworth response:
+\begin{align}
+\alpha_p=0.5 dB \qquad & \qquad \alpha_s=20 dB \\
+\omega_p=1000 rad/s \qquad & \qquad \omega_s=2000 rad/s 
+\end{align}
+
+Solution:\\
+\begin{enumerate}
+\item 
+\begin{align}
+n &= \frac{ \log \left[ \frac{10^{0.1\times 20}-1}{10^{0.1\times 0.5}-1}
+\right]}{2\log \left( \frac{2000}{1000} \right)} \\
+&= \frac{ \log \left[ \frac{10^2-1}{1.1220185-1} \right]}{2\log (2)} \\
+&= \frac{\log[811.35]}{2\log 2} \\
+&= 4.83209 
+\end{align}
+Take $n=5$.
+\item Calculate $\omega_0$:
+\begin{align}
+\omega_0 &= \frac{\omega_p}{\left[ 10^{0.1\times 0.5}-1
+\right]^{\frac{1}{10}}} = 1234 rad/s \\
+\intertext{or}
+\omega_0 &= \frac{\omega_s}{\left[ 10^{0.1\times 20}-1
+\right]^{\frac{1}{10}}} = 1263 rad/s
+\end{align}
+\item The fifth-order Butterworth low-pass filter with cut-off at $\omega=1$,
+\begin{equation}
+H_5(s)=\frac{1}{(s+1)(s^2+2\cos 36^\circ \cdot s+1)(s^2+s\cos 72^\circ
+\cdot s+1)} 
+\end{equation}
+\item Transform the cut-off frequency to $\omega_0=1263 rad/s$, by replacing
+$s$ by $\frac{s}{\omega_0}$.
+\begin{equation}
+H_5(s)=\frac{1}{ \left( \left( \frac{s}{\omega_0} \right)+1 \right) \left(
+\left( \frac{s}{\omega_0} \right)^2+2\cos 36^\circ \cdot \left(
+\frac{s}{\omega_0} \right) +1 \right) \left( \left( \frac{s}{\omega_0}
+\right)^2+ \left( \frac{s}{\omega_0} \right) \cos 72^\circ \cdot \left(
+\frac{s}{\omega_0} \right) +1\right)} 
+\end{equation}
+\item \begin{equation}
+\alpha(1000)=10 \log \left[ \left( \frac{1000}{1263} \right)^{10} +1
+\right] = 0.4001 dB 
+\end{equation}
+which is less than the specified $0.5 dB$.
+\end{enumerate}
+\end{Exa}
+
+\subsection{Properties of the Butterworth response}
+Since 
+\begin{equation}
+|H_n(j\omega)| = \frac{1}{\sqrt{1+\omega^{2n}}} 
+\end{equation}
+\begin{enumerate}
+\item \begin{equation}
+|H_n(j0)|=1 \qquad \mbox{for all $n$ when $\omega_0=1$} 
+\end{equation}
+\item 
+\begin{equation}
+|H_n(j1)|=\frac{1}{\sqrt{2}} \approx 0.707 \qquad \mbox{for all $n$} 
+\end{equation}
+\item $|H_n(j\omega)|$ exhibits n-pole roll off, when $\omega\rightarrow 0$
+\item The derivatives of $|H_n(j\omega)|$ for small $\omega$. Using a Taylor
+series
+\begin{align}
+|H_n(j\omega)| &= \frac{1}{\sqrt{1+\omega^{2n}}} = 1-\half \omega^{2n} +
+\frac{3}{8} \omega^{4n}- \cdots \\
+\intertext{it follows that}
+\left.\frac{d^k}{d\omega^k} | H_n(j\omega)|\right|_{\omega=0} &=0 \qquad
+\mbox{for $k=1,2,\ldots,2n-1$} \\
+\intertext{while}
+\left.\frac{d^{2n}}{d\omega^{2n}} | H_n(j\omega)|\right|_{\omega=0} &=
+-\half(2n)!
+\end{align}
+For this reason, the Butterworth response is also known as maximally
+flat\index{maximally flat}.
+\end{enumerate}
+
+\section{The Chebyshev Response}	%8
+It is noticed that the Butterworth response (of a low-pass filter) has a
+magnitude-squared form
+\begin{align}
+|H_n(j\omega)|^2 &= \frac{1}{1+\omega^{2n}} \\
+\intertext{or}
+&= \frac{1}{1+[\omega^n]^2} \zdtag
+\end{align}
+
+A generalization of this response may be written as
+\begin{equation}
+|H_n(j\omega)|^2= \frac{1}{1+[F_n(\omega)]^2}
+\end{equation}
+
+The question now is to find the suitable function $F_n(\omega)$ to provide the
+required response. 
+
+If the required $|H_n(j\omega)|^2$ is defined by 
+\begin{center}
+\input{pix/anasigproc/chebyresp.eepic}
+\end{center}
+$\varepsilon\leqslant1$, $\varepsilon T_n(\omega)$ may be used for
+$F_n(\omega)$ where $T_n(\omega)$ is the Chebyshev polynomial of the first
+kind.
+
+And
+\begin{equation}
+|H_n(j\omega)|^2 = \frac{1}{1+\varepsilon^2T_n^2(\omega)}
+\end{equation}
+where 
+\begin{equation}
+T_n(\omega) = \cos[n\cos^{-1}(\omega)], \qquad \mbox{for $|\omega|\leqslant
+1$} 
+\end{equation}
+known as the Lissajous function or Chebyshev function. Since the inverse
+cosine function becomes imaginary for $\omega>1$
+\begin{align}
+\cos^{-1} \omega &=  j z \\
+\intertext{or}
+\cos j z &= \frac{e^{j(jz)}+e^{-j(jz)}}{2}=\frac{e^{-2}+e^2}{2} = \cosh z =
+\omega \\
+\intertext{or equally}
+z &= \cosh^{-1} \omega \\
+\intertext{Thus}
+\cos^{-1} &= j\cosh^{-1} \omega \\
+\intertext{Therefore:}
+T_n(\omega) &= \cos[n\cos^{-1}(\omega)] \zdtag \\
+&= \cos[n j \cosh^{-1}(\omega)] \zdtag \\
+&= \cosh[n \cosh^{-1}(\omega)] \qquad \mbox{for $\omega>1$}
+\end{align}
+
+In summary
+\begin{align}
+|H_n(j\omega)| &= \frac{1}{1+\varepsilon^2T_n^2(\omega)} \\
+\intertext{where $\varepsilon\leqslant 1$ and}
+T_n(\omega) &= \begin{cases}
+	\cos[n\cos^{-1}(\omega)] & \mbox{for $|\omega|\leqslant 1$} \\
+	\cosh[n\cosh^{-1}(\omega)] & \mbox{for $|\omega| > 1$}
+	\end{cases}
+\end{align}
+is defined as the Chebyshev response\index{Chebyshev response}.
+
+\subsection{The properties of the Chebyshev response}
+\begin{enumerate}
+\item Since
+\begin{equation}
+T_n^2(0) = 0 \qquad \mbox{for $n$ being odd} 
+\end{equation}
+\begin{equation}
+T_n^2(0) = 1 \qquad \mbox{for $n$ being even} 
+\end{equation}
+\begin{align}
+|H_n(j0)| &= 1 \qquad \mbox{for $n$ being odd} \\
+\intertext{and}
+|H_n(j0)| &= \frac{1}{\sqrt{1+\varepsilon^2}} \qquad\mbox{for $n$ being even}
+\end{align}
+\item Since
+\begin{align}
+T_n^2(1) &= 1 \qquad \mbox{for all $n$} \\
+|H_n(j1)| &= \frac{1}{\sqrt{1+\varepsilon^2}} \qquad \mbox{for all $n$}
+\end{align}
+\item The minima of $|H_n|$ occurs when $T_n^2=1$ and the maxima of $|H_n|$
+occurs when $T_n^2=0$. Since the $|H_n|$ is even, there will be $n$
+half-ripples or half-cycles in the range from $\omega=0$ to $\omega=1$.
+\item The attenuation for the nth order Chebyshev response is 
+\begin{align}
+\alpha_n &= -20\log|H_n(j\omega)| = -20\log \frac{1}{\sqrt{1+\varepsilon^2
+T_n^2(\omega)}} \zdtag \\
+&= 10 \log [ 1+\varepsilon^2 T_n^2(\omega)] dB
+\end{align}
+\item In the pass band
+\begin{align}
+\alpha_p &= 10\log(1+\varepsilon^2) \\
+\intertext{thus}
+\varepsilon &= \sqrt{10^{0.1 \alpha_p}-1} 
+\end{align}
+\item The half power frequency $\omega_{h[}$ may be obtained when
+$\alpha=3.01$ or 
+\begin{align}
+|H_n(j\omega)| &= \frac{1}{\sqrt{1+\varepsilon^2 T_n^2(\omega)}} =
+\frac{1}{\sqrt{2}} \zdtag \\
+\intertext{or}
+\varepsilon^2T_n^2(\omega) &= 1 \zdtag \\
+\intertext{or}
+T_n(\omega) &=\frac{1}{\varepsilon} =\cosh[n\cosh^{-1}(\omega_{hp})] \zdtag\\
+n\cosh^{-1}(\omega_{hp})=\cosh^{-1} \left( \frac{1}{\varepsilon} \right)
+\zdtag \\
+\omega_{hp} &= \cosh \left[ \frac{1}{n} \cosh^{-1} \left(
+\frac{1}{\varepsilon} \right) \right] \zdtag \\
+&= \cosh \left[ \frac{1}{n} \cosh^{-1} \left( 10^{0.1\alpha_p}-1
+\right)^{-\frac{1}{2}} \right]
+\end{align}
+since $0<\varepsilon<1$, $\omega_{hp}>1$.
+\item If a Chebyshev response is specified by $\alpha_p$, $\alpha_s$ and
+$\omega_s$ where $\alpha_p$ is the pass-band attenuation ( $\alpha(\omega)
+\leqslant \alpha_p$ for $0\leqslant \omega \leqslant 1$), $\alpha_s$ is the
+stop-band attenuation ($\alpha(\omega) \geqslant \alpha_s$ for $\omega
+\geqslant \omega_s$) the order $n$ of the Chebyshev filter may be obtained by
+the following equation
+\begin{align}
+\alpha_s=\alpha(\omega_s) &= 10\log[1+\varepsilon^2 T_n^2(\omega_s)] \zdtag\\
+\varepsilon^2\cosh^2(n\cosh^{-1}\omega_s) &= 10^{0.1 \alpha_s}-1 \zdtag\\
+\cosh^2(n\cosh^{-1} \omega_s) &= \frac{10^{0.1
+\alpha_s}-1}{10^{0.1\alpha_p}-1} \zdtag \\
+\intertext{(Note: $\varepsilon^2=10^{0.1\alpha_p}-1$)}
+n &= \frac{\cosh^{-1} \left[ \frac{10^{0.1\alpha_s}-1}{10^{0.1\alpha_p} -1}
+\right]^{\half}}{\cosh^{-1} \omega_s} 
+\end{align}
+\end{enumerate}
+
+\begin{Exa}
+Given the following specification for a Chebyshev low-pass filter, find
+$\varepsilon$, half power frequency $\omega_{hp}$ and mimum order $n$ of the
+filter.
+\begin{equation}
+\omega_p=1 rad/s, \quad \omega_s=2.33 rad/s, \quad \alpha_p=0.5 dB, \quad
+\alpha_s=22 dB 
+\end{equation}
+
+Solution:\\
+\begin{enumerate}
+\item
+\begin{align}
+\varepsilon &=\sqrt{10^{0.1\alpha_p}-1} \\
+&= \sqrt{10^{0.05}-1} = 0.3493 
+\end{align}
+\item
+\begin{align}
+n &=\frac{\cosh^{-1} \left[ \frac{10^{0.1\times 22}-1}{10^{0.1\times 0.5}-1}
+\right]^{\half}}{\cosh^{-1}[2.33]} \\
+&= \frac{\cosh^{-1} (35.926) }{\cosh^{-1}(2.33)} \\
+&= \frac{4.274}{1.489} = 2.87 \\
+&\approx 3 \qquad \mbox{(round up to 3)}
+\end{align}
+\item
+\begin{align}
+\omega_{hp} &= \cosh \left[ \frac{1}{3} \cosh^{-1} \left( 10^{0.1 \times 0.5}
+-1 \right)^{\half} \right] \\
+&= \cosh \left[ \frac{1}{3} \cosh^{-1} \frac{1}{0.3493} \right] \\
+&= \cosh \left[ \frac{1}{3} 1.7129 \right] \\
+&= 1.167 rad/s 
+\end{align}
+Comparing with a Butterworth filter that meets the same specifications:
+\begin{align}
+n &= \frac{ \log \left[ \frac{10^{0.1 \alpha_s}-1}{10^{0.1\alpha_p}-1}
+\right]}{2\log \left( \frac{\omega_s}{\omega_p} \right)} \\
+&= \frac{ \log \left[ \frac{10^{0.1 \times 22}-1}{10^{0.1\times 0.5}-1}
+\right]}{2\log 2.33} \\
+&= \frac{\log 1290.7008}{2\log 2.33} = 4.234 \\
+&\approx 5 \qquad \mbox{(round upto 5)}
+\end{align}
+\end{enumerate}
+Hence a fifth-order Butterworth response is required to meet the
+specifications that led to a third-order Chebyshev.
+\end{Exa}
+
+\subsection{Location of the Chebyshev Poles}
+From
+\begin{align}
+H_n(s) H_n(-s) |_{s=j\omega} &= |H_n(j\omega)|^2 \zdtag \\
+\intertext{or}
+H_n(s)H_n(-s) &= \frac{1}{1+\varepsilon^2T_n^2(s/j)} \zdtag \\
+\intertext{the poles of the $H_n(s)$ can be obtained from}
+1+\varepsilon^2T_n^2\left(\frac{s}{j} \right) &= 0 \zdtag \\
+T_n \left( \frac{s}{j} \right) &= 0 \pm j \frac{1}{\varepsilon} \zdtag \\
+\intertext{For $\omega<1$}
+T_n(s/j) &= \cos \left[ n\cos^{-1} \left( \frac{s}{j} \right) \right] = \cos n
+w \\
+\intertext{where $w$ is a complex number:}
+w &= \cos^{-1} \left( \frac{s}{j} \right) u+j v \label{eq5-5816}\\
+\cos(n w) &= \cos(n u+j n v) \zdtag \\
+&= \cos(n u) \cosh (n v) - j\sin(n u) \sinh(n v) \zdtag \\
+&= 0 \pm j \frac{1}{\varepsilon} \\
+\intertext{That is}
+\cos(n u)\cosh(n v) &= 0 \label{eq5-5818a} \\
+\sin(n u)\sinh(n v) &= \pm \frac{1}{\varepsilon} \label{eq5-5818b}\\
+\intertext{Since $\cosh(n v) \geqslant 1$, to make Equation~\ref{eq5-5818a}
+stand}
+\cos(n u) &=0 \zdtag \\
+\intertext{or}
+u_k &= \frac{\pi}{2n} ( sk+1) \qquad \mbox{$k=0,1,\ldots,2n-1$} \zdtag \\
+\intertext{For these values of $u_k$}
+\sin(n u_n) &= \pm 1 \\
+\intertext{substituted into Equation~\ref{eq5-5818b}, we have}
+v_k &= \pm \frac{1}{n} \sinh^{-1} \left( \frac{1}{\varepsilon} \right) = \pm a
+\\
+\intertext{Take $u_k$ and $v_k$ into Equation~\ref{eq5-5816}}
+s_k &= j\cos w_k = j\cos \left[ \frac{\pi}{2n} (2k+1)+j a \right] \\
+&= \sigma_k+j w_k \\
+\sigma_k &= \pm \sinh a \sin \left( \frac{2k+1}{2n} \pi \right) \label{eq5-5822a}\\
+w_k &= \cosh a \cos \left( \frac{2k+1}{2n}\pi \right) \label{eq5-5822b}
+\end{align}
+
+Those $s_k$ which are in the left s-plane will be used as the poles of
+the Chebyshev filter $H_n(s)$.
+
+From Equations~\ref{eq5-5822a} and~\ref{eq5-5822b}, we have
+\begin{equation}
+\left( \frac{\sigma_k}{\sinh a} \right)^2 + \left( \frac{w_k}{\cosh a}
+\right)^2 = 1
+\end{equation}
+
+which represents an ellipse. 
+
+\parbox{0.45\textwidth}{
+$\cosh a$ is the major semiaxis\\
+$\sinh a$ is the minor semiaxis\\
+foci are at $\pm j 1$. } \parbox{0.45\textwidth}{
+\input{pix/anasigproc/ellipse.eepic}}
+
+\begin{Exa}
+Given $n=3$ and $\alpha_p=1$, determine the location of the Chebyshev poles.
+
+Solution:\\
+
+\begin{enumerate}
+\item \begin{equation}
+a= \frac{1}{3} \sinh^{-1} \left( 10^{0.1\times 1}-1 \right)^{-\half}
+= 0.476 
+\end{equation}
+\item \begin{equation}
+\cosh a = 1.115 \quad \mbox{and} \quad  \sinh a= 0.494 
+\end{equation}
+\item Using Equations~\ref{eq5-5822a} and~\ref{eq5-5822b} $k=0,1,2$
+\begin{align}
+k=0 \quad & \quad s_1=-0.247 +j 0.966 \\
+k=1 \quad & \quad s_2=-0.494 \\
+k=2 \quad & \quad s_3=-0.247 -j 0.966 
+\end{align}
+\end{enumerate}
+
+That is:
+\begin{equation}
+H_n(s) = \frac{1}{(s+0.494)(s^2+0.494s+0.994)} 
+\end{equation}
+\end{Exa}
+
+\subsection{Guillemin's Algorithm}
+If $\Psi_k$ are the Butterworth angles for an nth order filter, the location
+of the Chebyshev poles (of the same order) is given by
+\begin{equation}
+s_k = \sigma_k \pm j w_k 
+\end{equation}
+\begin{equation}
+\begin{cases}
+	-\sigma_k = \sinh a cos \Psi_k \\
+	\pm w_k = \cosh a \sin \Psi_k 
+	\end{cases} 
+	\end{equation}
+where
+\begin{equation}
+a= \frac{1}{n} \sinh^{-1} \left( 10^{0.1\alpha_p}-1 \right)^{\half} 
+\end{equation}
+
+\begin{Exa}
+Given $n=5$ and $\alpha_p=0.5$ dB, find the locations of the Chebyshev poles.
+
+Solution:\\
+\begin{enumerate}
+\item 
+\begin{equation}
+a= \frac{1}{5} \sinh^{-1} \left( 10^{0.1\times 0.5}-1 \right)^{\half} =
+0.3548 
+\end{equation}
+\item
+\begin{align}
+\sinh a &= 0.3623 \\
+\intertext{and}
+\cosh a &= 1.0636
+\end{align}
+\item The Butterworth angles are
+\begin{equation}
+\Psi_k = 0^\circ, 36^\circ \mbox{and} 72^\circ \qquad ( 180^\circ/5
+\mbox{  apart}) 
+\end{equation}
+\item The Chebyshev poles
+\begin{align}
+\mbox{for} \Psi=0^\circ,\qquad p_1 &= -0.3623 \\
+\mbox{for} \Psi=36^\circ,\qquad p_2,p_3 &= -0.2931 \pm j 0.6252 \\
+\mbox{for} \Psi=72^\circ,\qquad p_4,p_5 &= -1120 \pm j 1.0116
+\end{align}
+\end{enumerate}
+
+That is
+\begin{equation}
+H_n(s) \frac{k}{(s+0.3623)(s^2+0.5863s+0.4768)(s^2+0.2240s+1.0359)} 
+\end{equation}
+Assume $H_n(0)=1$, $K=0.1789$.
+\end{Exa}
+
+\section{Elliptic Function Response (Caver Response)}	%9
+In the previous sections, we have found that for a given order $n$, the
+Chebyshev response presents a sharper cut-off characteristic that the
+Butterworth response (smaller $\Delta\omega=\omega_s-\omega_p$); or for the
+same group of specifications $\omega_s/\omega_p$, $\alpha_p$ and $\alpha_s$,
+the Chebyshev response requires a smaller value of $n$ than the Butterworth.
+
+This suggests that a new response with equal ripple in both the pass band and
+the stop band would be superior to even the Chebyshev response. This new
+response involves Jacobian elliptic integrals and elliptic functions, hence
+the name elliptic filters. It was dirst demonstrated by Wilhelm Cauer who had
+studied mathematics under Hilbert at Goettingen and had been famliar with
+elliptic functions and their applications.
+
+For example, with a given group of specification $\omega_s/\omega_p=1.5$,
+$\alpha_p=0.5$ dB and $\alpha_s=50$ dB, it is necessary that $n=17$ for a
+Butterworth response; that $n=8$ for a Chebyshev response; and it is necessary
+only that $n=5$ for an elliptic response which is a significant improvement.
+
+A typical response of the elliptic response with $n=4$ is shown as follows.
+
+\typeout{4th order elliptic response here}
+
+Unfortunately, the design procedure for the elliptic filter is not as simple
+as it was for Butterworth and Chebyshev. A commonly used method is the
+``cut-and-try'' method using the extensive tables available in the design
+handbooks.
+\begin{enumerate}
+\item Select a trivial value for $n$.
+\item Find a group of approximate coefficients for the given specifications
+$\alpha_p$, $\omega_p/\omega_s$.
+\item Check $\alpha_s$ to see if it meets the specifications, if not, take a
+higher value of $n$.
+
+With the filter design software, this design process is made less tedious.
+\end{enumerate}
+\section{Frequency Transformation}	%10
+\subsection{Low-pass to Low-pass Transformation}
+If the transfer function for a low-pass filter is designed with the cut-off
+frequency normalized to $\omega=1$, the transfer function of a low-pass filter
+with an arbitrary cut-off frequency $\omega_0$ is obtained by using the
+following transformation:
+\begin{align}
+\omega & \rightarrow \omega/\omega_0 \zdtag \\
+\intertext{or}
+s & \rightarrow s/\omega_0 
+\end{align}
+
+\subsection{Low-pass to High-pass Transformation}
+Using the following transformation
+\begin{align}
+\omega &\rightarrow \omega_0/\omega \zdtag \\
+\intertext{or}
+s &\rightarrow \omega_0/s 
+\end{align}
+in the transfer function of a low-pass filter with the normalized cut-off
+frequency at $\omega=1$ may result in a high pass response with a passband
+edge at $\omega_0$ as shown in Figure~\ref{f5-low2hi}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/low2hi.eepic}
+\end{center}
+\caption{Low-pass to High-pass Transformation\label{f5-low2hi}}
+\end{figure}
+
+\subsection{Low-pass to Band-pass Transformation}
+When the negative frequency side is included, the low-pass filter with the
+normalized cut-off frequency $\omega=1$ is represented as shown in
+Figure~\ref{f5-low2bp}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/doublelow.eepic}
+\end{center}
+\caption{Double sided low-pass filter\label{f5-doublelow}}
+\end{figure}
+
+To find a transformation to a band-pass response with passband extenfing from
+$\omega_1$ to $\omega_2$ as shown in Figure~\ref{f5-low2bp}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/low2bp.eepic}
+\end{center}
+\caption{Double sided low-pass filter\label{f5-low2bp}}
+\end{figure}
+
+Let
+\begin{align}
+\omega & \rightarrow \beta \left( \frac{\omega}{\omega_0} -
+\frac{\omega_0}{\omega} \right) \zdtag \\
+\intertext{or}
+s & \rightarrow \beta \left( \frac{\omega}{\omega_0} +
+\frac{\omega_0}{\omega} \right)
+\end{align}
+
+where $\beta$ and $\omega_0$ are to be determined.
+
+Impose the following conditions
+\begin{equation}
+\begin{cases}
+-1 = \beta \left( \frac{\omega_1}{\omega_0} = \frac{\omega_0}{\omega_1}
+\right) \\
+1 = \beta \left( \frac{\omega_2}{\omega_0} = \frac{\omega_0}{\omega_2}
+\right) 
+\end{cases}
+\end{equation}
+to solve $\beta$ and $\omega_0$.
+
+We have
+\begin{align}
+&\begin{cases}
+-\omega_0\omega_1 = \beta(\omega_1^2-\omega_0^2) \\
+\omega_0\omega_2=\beta(\omega_2^2-\omega_0^2) 
+\end{cases} \\
+-\frac{\omega_1}{\omega_2} &=
+\frac{\omega_1^2-\omega_0^2}{\omega_2^2-\omega_0^2} \\
+-\omega_1(\omega_2^2-\omega_0^2) &= \omega_2(\omega_1^2-\omega_0^2) \\
+(\omega_2+\omega_1) \omega_0^2 &= \omega_2\omega_1 (\omega_2+\omega_1) \\
+\omega_0^2 &= \omega_1\omega_2 \\
+\intertext{Therefore}
+\omega_0 &= \sqrt{\omega_1\omega_2} \\
+\omega_0(\omega_2|\omega_1) &= \beta ( \omega_2^2 - \omega_1^2) \\
+&= \beta ( \omega_2+\omega_1)(\omega_2-\omega_1) \\
+\beta ( \omega_2-\omega_1) &= \omega_0 \\
+\beta &= \frac{\omega_0}{\omega_2-\omega_1} 
+\end{align}
+
+In summary
+\begin{equation}
+\begin{cases}
+\omega+0 = \sqrt{\omega_1\omega_2} \\
+\beta = \frac{\omega_0}{\omega_2-\omega_1}
+\end{cases} \label{eq5-51012}
+\end{equation}
+where $\omega_0$ is referred to as the band centre. The band-pass response so
+derived has {\em geometric symmetry around $\omega_0$.}
+
+For example, if the low-pass Chebyshev response is given by
+\begin{equation}
+|H_l(j\omega)|^2 = \frac{1}{1+\varepsilon T_n^2 ( \omega) } 
+\end{equation}
+the band-pass Chebyshev response will be
+\begin{equation}
+|H_b(j\omega)|^2 = \frac{1}{1+\varepsilon^2T_n^2 \left[ \beta \left (
+\frac{\omega}{\omega_0}- \frac{\omega_0}{\omega} \right) \right] } 
+\end{equation}
+where $\omega_0$ and $\beta$ are shown in Equation~\ref{eq5-51012} and
+$\omega_1$ is the lower stop band edge and $\omega_2$ is the upper stop band
+edge.
+
+\begin{Exa}
+Find the transfer function of a Butterworth low-pass with the following
+specifications: \\
+passband: 0 to 1 kHz, $\alpha_p \leqslant 3$ dB \\
+stopband edge : 1.5 kHz, $\alpha_s \geqslant 40$ dB \\
+
+Solution: \\
+\begin{enumerate}
+\item
+Determine the order of required filter
+\begin{align}
+n &\geqslant \frac{ \log \left[ \frac{10^{0.1 \alpha_s} -1}{10^{0.1\alpha_p}
+-1} \right]}{2 \log \omega_s/omega_p} \\
+&= 11.36 
+\end{align}
+
+Take $n=12$, and work out 12 order Butterworth low-pass filter with the
+normalized cut-off frequency $\omega=1$.
+\item Substitute $\omega/\omega_0$ into the transfer function obtained, where
+$\omega_0=1000$ rad/s.
+\end{enumerate}
+\end{Exa}
+
+\subsection{Low-pass to Band-stop Transformation}
+The transformation which converts the low-pass to band-stop response is shown
+in Figure~\ref{f5-low2bs} and as follows:
+\begin{align}
+\omega & \rightarrow \frac{1}{\beta \left( \frac{\omega}{\omega_0} -
+\frac{\omega_0}{\omega} \right) } \zdtag \\
+\intertext{or}
+s & \rightarrow \frac{1}{\beta \left( \frac{s}{\omega_0}+ \frac{\omega_0}{s}
+\right) }
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/low2bs.eepic}
+\end{center}
+\caption{Low pass to band stop transformation\label{f5-low2bs}}
+\end{figure}
+
+\section{Phase Oriented Design}	%11
+
+One of the basic operations in signal processing is time delay which can be
+approximated by a delay filter.
+
+The ideal delay filter can be depicter as shown in Figure~\ref{f5-delfilt}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/delayfilt.eepic}
+\end{center}
+\caption{Ideal delay filter\label{f5-delfilt}}
+\end{figure}
+
+or
+\begin{equation}
+v_2(t) = v_1(t-D)
+\end{equation}
+
+The transfer functions of such a system can be written as
+\begin{equation}
+H(s) = \frac{v_2(s)}{v_1(s)} = e^{-Ds}
+\end{equation}
+
+Its frequency responses are given as shown in Figure~\ref{f5-delayfreq}.
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/anasigproc/delayfreq.eepic}
+\end{center}
+\caption{Ideal delay filter\label{f5-delayreq}}
+\end{figure}
+
+As we have proven, $H(s)=e^{-Ds}$ cannot be realized. Therefore the best thing
+we can do is to approximate.
+
+(Note: Laplace transform pair:
+
+If 
+\begin{align}
+\L [f(t)] &= F(s) \\
+f(t-\alpha) U(t-\alpha) &\stackrel{\L}{\fpair} e^{-\alpha s}F(s) \\
+\intertext{As a result}
+\delta(t-D) &\stackrel{\L}{\fpair} e^{-Ds}
+\end{align}
+$\delta(t-D)$ function cannot be physically implemented.)
+
+For a given transfer funtion $H(s)$ or
+\begin{equation}
+H(j\omega) = \Re H(j\omega)+j\Im H(j\omega) = | H(j\omega)|
+e^{j\Psi(\omega)} 
+\end{equation}
+the {\em phase delay\/}\index{phase delay} $\theta$ is defined as
+\begin{equation}
+\theta = \tan^{-1} \frac{\Im [ H(j\omega) ] }{\Re [ H(j\omega) ] } =
+\Psi(\omega)
+\end{equation}
+
+The {\em group delay\/}\index{group delay} $T_g(\omega)$ is defined as 
+\begin{align}
+T_g(\omega) &= -\frac{d\theta}{d\omega} = - \frac{d\Psi(\omega)}{d\omega}
+\zdtag \\
+&= \frac{ -\Re[H] \frac{d}{d\omega} \Im[H] + \Im[H] \frac{d}{d\omega} \Re[H]
+}{ \{ \Re[H(j\omega)] \}^2 + \{ \Im [ H(j\omega)] \}^2}
+\end{align}
+
+The group delay is also known as signal delay\index{signal delay} or envelope
+delay\index{envelope delay}. Sometimes it is simply called or referred to as
+delay.
+
+For instance, 
+\begin{align}
+H(s) &=e^{-DS} \\
+e^{-D j \omega} &= \cos(D\omega) - j \sin(D\omega) \\
+\theta &= \tan^{-1} \left( \frac{-\cos(D\omega)}{\cos(D\omega)} \right) =
+\tan^{-1} [ -\tan(D\omega) ] \\
+&= -D\omega \qquad \mbox{Phase Delay} \\
+T_g(\omega) &= -\frac{d\theta}{d\omega} = - (-D\omega)' = D \qquad \mbox{Group
+Delay}
+\end{align}
+
+A simple approach to approximate the ideal time delay transfer funtion was
+introduced by L.\ Storch.
+
+\begin{align}
+H(s) &= e^{-s} = \frac{1}{e^s} \\
+\intertext{Since}
+e^s &= \frac{e^s-e^{-s}}{2}+\frac{e^s+e^{-s}}{2} \zdtag \\
+&= \sinh s + \cosh s \\
+H(s) &= \frac{1}{\sinh s+ \cosh s} = \frac{\frac{1}{\sinh s}}{1+\coth s} \\
+\intertext{The series expansions of the hyperbolic functions of concern are:}
+\cosh s &= 1+\frac{s^2}{2!}+\frac{s^4}{4!}+\frac{s^6}{6!}+ \cdots \\
+\sinh s &= s+\frac{s^3}{3!}+\frac{s^5}{5!}+\frac{s^7}{7!}+ \cdots \\
+\intertext{Using the continued fraction expansion method}
+\frac{\cosh s}{\sinh s} &= \coth s = \frac{1}{s} + \cfrac{1}{\frac{3}{s}+
+\cfrac{1}{\frac{5}{s}+ \cfrac{1}{\frac{7}{s}+ \ddots \cfrac{1}{ \frac{(2n-1)}{s} + \ddots }}}}
+\end{align}
+
+In the Storch approach, the continued fraction is simply truncated after $n$
+terms to approximate the ideal delay transfer function $e^{-s}$.
+Storch showed that this truncation gave maximally flat delay at $\omega=0$, no
+matter where the continued fraction is truncated. Further he was the first to
+associate the denominator polynomial thus obtained with a class of Bessel
+polynomials. This is the reason why the filter so derived is called the Bessel
+Filter.
+
+Using the continued fraction expansion $\frac{N(s)}{D(s)}$ to approximate
+$\frac{\cosh s}{\sinh s}$ is to use $N(s)+D(s)$ to approximate $\sinh s+ \cosh
+s=e^s$. So follow the Storch approach to find the $n=2$ Bessel function.
+
+We only use two terms from the continued fraction expansion of $\coth s$.
+\begin{align}
+\coth s &= \frac{1}{s} + \frac{1}{\frac{3}{s}} = \frac{3+s^2}{3s} =
+\frac{N_s(s)}{D_2(s)} \\
+\intertext{To approximate $e^s=\sinh s + \cosh s$ using}
+N_s(s)+D_2(s) &= s^2+3s+3 = \B_2(s) \\
+\intertext{Similarly, for $n=3$}
+\coth s &= \frac{1}{s} + \frac{1}{\frac{3}{s}+ \frac{1}{\frac{5}{s}}} \zdtag \\
+&= \frac{6s^2+15}{s^3+15s} = \frac{N_3(s)}{D_3(s)} \zdtag \\
+\B_3(s) &= N_3(s)+D_3(s) = s^3+6s^2+15s+15 
+\end{align}
+
+A recursive formula may be used to generate the Bessel polynomial for any
+value of $n$.
+
+\begin{equation}
+\B_n(s) = (sn-1) \B_{n-1}(s) + s^2 \B_{n-2}(s) \label{eq5-51114}
+\end{equation}
+
+To form the transfer function of the Bessel-Thomson response
+
+\begin{equation}
+H_n(s) = \frac{\B_n(0)}{\B_n(s)}
+\end{equation}
+
+in which $H_n(j 0)=1$, and $n$ is the order of the filter.
+
+It is called the Bessel-Thomson response because W.\ E.\ Thomson was one of
+the first to use this approach.
+
+The Bessel polynomials that can be computed using Equation~\ref{eq5-51114} are
+listed below upto $n=4$.
+
+\begin{align}
+\B_0 = 1 \qquad & \B_0(0)=1  \\
+\B_1 = s+1 \qquad & \B_1(0)=1  \\
+\B_2 = s^2+3s+3 \qquad & \B_2(0)=3 \\
+B_3 = s^3+6s^2+15 s+15 \qquad & \B_3(0)=15 \\
+B_4 = s^4+10s^3+45s^2+105s+105 \qquad & \B_4(0)=105
+\end{align}
+
+Unlike for the Butterworth and Chebyshev responses, there is no simple rule to
+determine the roots of $\B_n(s)=0$, which are the poles of the Bessel-Thomson
+response. However, they can be ound by computer methods.
+
+\begin{align}
+\B_1(s) &= s+1 \\
+\B_2(s) &= s^2+3s+3 \\
+\B_3(s) &= (s^2+3.67782s+6.45944)(s+2.32219) \\
+\B_4(s) &= (s^2+5.79242s+9.14013)(s^2+4.207585+11.4878)
+\end{align}
+
+A cut-and-try method has to be used for the Bessel-Thomson filter design,
+based on, normally, the specifications of the group delay.
+
+\begin{Rem}
+\begin{enumerate}
+\item From the formation procedure of the Bessel polynomial (hence the filter)
+using the Storch method, namely, the continued fraction expansion, the Bessel
+polynomial is strictly Hurwitz. Thus the filter is stable.
+\item Since the Bessel filter is designed based on the delay response, the
+magnitude response of the filter will be poor compared with other types of
+filter.
+\item The low-pass to low-pass transformation can be used to adjust the
+cut-off to arbitrary value. However, none of the other transformations; to
+high-pass, band-pass or band-stop are valid since these transformations will
+distort the delay characteristics.
+\end{enumerate}
+\end{Rem}
+@
+
+
+1.2
+log
+@Fixed up some problems with the Hurwitz polynomial section
+@
+text
+@d1 2
+a2 2
+% $Id: anasigproc.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/anasigproc.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+a962 1
+
+d967 1
+a968 1
+\end{equation}
+a1350 1
+
+a1357 1
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+% $Id$
+% $Header$
+d384 1
+a384 1
+left-half planet ($\Re[s]<0$).
+d387 1
+a387 1
+\begin{Rem}
+d481 1
+a481 1
+H(s) = \frac{s^5+6s^2+s+1}{s^8+3s^7+10s^5+35s^4+57s^3+50s^2+36s+24} 
+@

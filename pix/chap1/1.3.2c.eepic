@@ -1,0 +1,24 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(297,144)(0,-10)
+\path(175,34)(175,39)
+\path(170,34)(180,34)
+\path(175,30)(175,35)
+\path(166,20)(166,80)(226,50)(166,20)
+\path(168,70)(178,70)
+\path(106,70)(76,70)(76,60)
+	(106,60)(106,70)
+\path(6,65)(76,65)
+\path(106,65)(166,65)
+\path(136,65)(136,105)(176,105)
+\path(226,50)(286,50)
+\path(181,105)(246,105)(246,50)
+\path(166,35)(126,35)(126,10)(126,5)
+\path(116,5)(136,5)
+\path(121,0)(131,0)
+\path(176,115)(176,95)
+\path(181,115)(181,95)
+\put(0,21){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $f(t)$}}}}}
+\put(277,22){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $g(t)$}}}}}
+\put(86,75){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $R$}}}}}
+\put(176,120){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $C$}}}}}
+\end{picture}

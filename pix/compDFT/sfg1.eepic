@@ -1,0 +1,26 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(236,133)(0,-10)
+\put(32,100){\ellipse{4}{4}}
+\put(72,100){\ellipse{4}{4}}
+\put(152,100){\ellipse{4}{4}}
+\put(192,100){\ellipse{4}{4}}
+\put(152,40){\ellipse{4}{4}}
+\path(32,100)(192,100)
+\path(72,100)(72,40)(152,40)(152,100)
+\path(37,100)(52,100)
+\path(44.000,98.000)(52.000,100.000)(44.000,102.000)
+\path(102,100)(112,100)
+\path(104.000,98.000)(112.000,100.000)(104.000,102.000)
+\path(167,100)(172,100)
+\path(164.000,98.000)(172.000,100.000)(164.000,102.000)
+\path(152,80)(152,70)
+\path(150.000,78.000)(152.000,70.000)(154.000,78.000)
+\path(117,40)(112,40)
+\path(120.000,42.000)(112.000,40.000)(120.000,38.000)
+\put(192,105){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $y_k[n]$}}}}}
+\put(32,105){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $x[n]$}}}}}
+\put(157,60){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $z^{-1}$}}}}}
+\put(112,20){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $\wn{-k}$}}}}}
+\put(112,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm 4 mults+2 adds (real)}}}}}
+\put(72,105){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm 2 real adds}}}}}
+\end{picture}

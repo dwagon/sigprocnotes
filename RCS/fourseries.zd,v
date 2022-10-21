@@ -1,0 +1,789 @@
+head	1.2;
+access;
+symbols;
+locks
+	dwagon:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	93.06.09.01.50.35;	author dwagon;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	93.03.24.03.54.10;	author dwagon;	state Exp;
+branches;
+next	;
+
+
+desc
+@Fourier series in spectral analysis and function approximation
+@
+
+
+1.2
+log
+@Fixed problems with newlines in some equations
+@
+text
+@% $Id: fourseries.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/fourseries.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[Fourier Series in Spectral Analysis]{The Fourier Series in Spectral Analysis and Function Approximation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+According to Baher, the Fourier integral is at ``the heart of the discipline
+of signal processing.''
+
+Large volumes of research publications in the area of signal processing
+contribute to computation of Fourier co-efficients with {\em high speed},
+{\em accuracy} and {\em efficiency}.
+
+\section{Fundamentals} 							%1
+\begin{Def}
+The Fourier series of $f(\theta)$ defined over the interval $[-\pi,\pi]$ are
+given by the following equations:
+\begin{equation}
+f(\theta)=\frac{a_0}{2}+\sum_{k=1}^{\infty} (a_k\cos k\theta + b_k\sin
+(k\theta)) 
+\end{equation}
+with
+\begin{align}
+a_k &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(\theta)\cos(k\theta d\theta) \\
+b_k &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(\theta)\sin(k\theta d\theta)
+\end{align}
+\end{Def}
+
+\begin{Exa}
+Find the Fourier Series for the train of rectangular pulses.
+
+\input{pix/fourseries/2.1-1.latex}
+
+{\raggedright Solution:\\}
+\begin{enumerate}
+\item Find expression of $f(t)$ using maths equations.
+	\begin{equation}
+	f(t)=\begin{cases}
+		1 & \mbox{for $0<t<t_0$} \\
+		0 & \mbox{for $t_0<t<T$} 
+		\end{cases}
+	\end{equation}
+
+The interval for integration is $[0,T]$.
+\item Use the definition to calculate the coefficients 
+\begin{align}
+a_0 &= \frac{2}{T}\int_{0}^{t_0} dt=\frac{2t_0}{T} \\
+a_k &= \frac{2}{T}\int_{0}^{t_0} \cos k\omega_0 t dt \\
+&= \frac{2}{T}\int_{0}^{t_0} \cos \frac{2\pi k}{T} t dt \\
+&= \frac{2}{T}\frac{T}{2\pi k}\int_{0}^{t_0} \cos \frac{2\pi k}{T} t d(\frac{2\pi k}{T}t) \\
+&= \left.\frac{1}{\pi k}\sin(\frac{2\pi k}{T})\right|_0^{t_0} \\
+&= \frac{1}{\pi k}\sin(\frac{2\pi k}{T}t_0) \\
+&= \frac{1}{\pi k}\sin(k\omega_0 t_0)\\
+b_k &= \frac{2}{T}\int_{0}^{t_0} \sin(k\omega_0 t) dt \\
+&= \frac{2}{T}\int_0^{t_0}\sin(\frac{2\pi k}{T}t)dt \\
+&= \frac{-1}{\pi k}\left( \cos \frac{2\pi k}{T}t_0-1 \right) \\
+&= \frac{1}{\pi k} \left(1-\cos k\omega_0 t_0 \right)
+\end{align}
+
+\item Fourier series of $f(t)$ is
+\begin{equation}
+f(t)=\frac{t_0}{T}+\frac{1}{\pi}\sum_{k=1}^{\infty}\left(\frac{\sin(k\omega_0 t_0)}{k}\right) \cos k\omega_0 t + \frac{1}{\pi}\sum_{k=1}^{\infty}\frac{\left(1-\cos k\omega_0 t_0\right)}{k}\sin(k\omega_0 t)
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+Alternatively,
+\begin{align}
+f(\theta) &=\frac{d_0}{2}+\sum_{k=1}^{\infty}d_k\cos(k\theta+\Phi_k) \\
+\intertext{or}
+f(\theta) &=\frac{d_0}{2}+\sum_{k=1}^{\infty}d_k\sin(k\theta+\psi_k) \\
+\intertext{where}
+d_k &=(a_k^2+b_k^2)^{1/2} \\
+\Phi_k &=-\tan^{-1}(b_k/a_k) \\
+\psi_k &=\Phi_k+\frac{\pi}{2}
+\end{align}
+
+If Fourier Series are used to represent functions of time $f(t)$, the following
+definition applies:
+
+\begin{Def}
+\begin{align}
+f(t) &=\frac{a_0}{2}+\sum_{k=1}^{\infty} (a_k\cos k\omega_0t+b_k\sin k\omega_0t) \\
+\intertext{where}
+a_k &=\frac{2}{T}\int_{-T/2}^{T/2}f(t)\cos k\omega_0 t dt \\
+b_k &=\frac{2}{T}\int_{-T/2}^{T/2}f(t)\sin k\omega_0 t dt \\
+\intertext{Note:}
+\theta &=\omega_0 t \\
+f(t) &=f(t\pm rT) \qquad\mbox{for $r=1,2,\ldots$} \\
+\omega_0 &=\frac{2\pi}{T} \qquad\mbox{Fundamental Radian Frequency} 
+\end{align}
+\end{Def}
+
+\section{Applications of the Fourier series}	%2
+Two main applications of FS are
+\begin{itemize}
+\item Harmonic analysis and synthesis
+\item Filtering
+\end{itemize}
+
+They are closely related to each other in real signal processing applications.
+See Figure~\ref{f2-image} for an example of Fourier series filtering.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Unfiltered Picture]{\psfig{figure=eps/CompA.eps}}
+
+\subfigure[Picture]{\psfig{figure=eps/CompB.eps}}
+
+\subfigure[Fourier Filter]{\psfig{figure=eps/CompFilt.eps}}
+\end{center}
+\caption{Example of filtering images\label{f2-image}}
+\end{figure}
+
+\subsection{Harmonic analysis and synthesis}
+\begin{Def}
+The process of finding the FS representation for a signal is called harmonic
+analysis.
+\end{Def}
+
+The harmonic analysis is used for the understanding of signals (what frequency
+components they have); noise isolation; or preprocessing for filtering of
+signals.
+
+For a linear time-invariant system, if the input is a sinlge sinusoid
+$d_k\sin(k\omega_0 t+psi_k)$, the output is also a sinusoid with the same
+frequency $k\omega_0$ but with difference amplitude and phase, of the form
+$e_k\sin(k\omega_0 t+x_k)$ as shown in Figure~\ref{f2-lti}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[with sinusoidal input]{
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(40.00,50.00){\vector(1,0){30.00}}
+\put(220.00,50.00){\vector(1,0){30.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{Linear time-invariant system}}
+\put(0.00,50.00){\makebox(0,0)[cc]{$d_k\sin(k\omega_0t+\psi_k)$}}
+\put(290.00,50.00){\makebox(0,0)[cc]{$e_k\sin(k\omega_0t+x_k)$}}
+\end{picture}
+}
+
+\subfigure[with arbitrary periodic signal input]{
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(60.00,50.00){\vector(1,0){10.00}}
+\put(220.00,50.00){\vector(1,0){10.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{Linear time-invariant system}}
+\put(0.00,50.00){\makebox(0,0)[cc]{$\frac{d_0}{2}+\sum_{k=1}^{\infty}d_k\sin(k\omega_0t+\psi_k)$}}
+\put(300.00,50.00){\makebox(0,0)[cc]{$\frac{e_0}{2}+\sum_{k=1}^{\infty}e_k\sin(k\omega_0t+x_k)$}}
+\end{picture}
+}
+
+\end{center}
+\caption{A linear system\label{f2-lti}}
+\end{figure}
+
+If the input is an arbitrary periodic signal $f(t)$ $(\triangleq f(\omega_0
+t)\triangleq f(\omega))$, it can be expanded in a FS of the following form:
+\begin{equation}
+f(t)=\frac{d_0}{2}+\sum_{k=1}^{\infty}d_k\sin (k\omega_0t+\psi_k) 
+\end{equation}
+Assume that the system response of the input $\frac{d_0}{2}$ is
+$\frac{e_0}{2}$ and the output due to each sinusoid
+$d_k\sin(k\omega_0t+\psi k)$ is $e_k\sin(k\omega_0 t+x_k)$.
+
+Superposition can be applied because the system in linear to obtain the
+system output $g(t)$ due to the input signal $f(t)$.
+\begin{equation}
+g(t)=\frac{e_0}{2}+\sum_{k=1}^{\infty}e_k\sin(k\omega_0 t+x_k) 
+\end{equation}
+
+\begin{Def}
+The process of constructing a signal from its Fourier series is called harmonic (or spectral) synthesis.
+\end{Def}
+
+Harmonic synthesis is used to construct signlas with desired frequency
+components for signal generation, identification, noise cancellation; for
+post filtering (or signal processing).
+
+An example is shown in Figure~\ref{f2-harmsynth}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Illustrating harmonic (spectral) analysis and synthesis] {
+\input{pix/fourseries/harmsynth.eepic}
+}
+
+\subfigure[General system]{
+\unitlength=1.0pt
+\begin{picture}(300.00,100.00)
+\put(40.00,50.00){\vector(1,0){30.00}}
+\put(220.00,50.00){\vector(1,0){30.00}}
+\put(70.00,25.00){\framebox(150.00,50.00)[cc]{System described by $H(\theta)$}}
+\put(0.00,50.00){\makebox(0,0)[cc]{$f(\theta)$}}
+\put(290.00,50.00){\makebox(0,0)[cc]{$g(\theta)$}}
+\end{picture}
+}
+\end{center}
+\caption{Harmonic Synthesis\label{f2-harmsynth}}
+\end{figure}
+
+In the practical situation, only finite terms of the FS. are used to
+represent signals. ie.
+\begin{align}
+_n(t) &=\frac{d_0}{2}+\sum_{k=1}^{n}d_k \sin(k\omega_0 t+\psi_k) \\
+f(t) &=f_n(t)+\Delta_n \\
+\intertext{where}
+\Delta_n=\sum_{k=n+1}^{\infty}d_k\sin(k\omega_0 t+\psi_k)
+\end{align}
+being the error. $f_n(t)$ is used to approximate $f(t)$. i.e.
+\begin{equation}
+f_n(t) \sim f(t) 
+\end{equation}
+
+Ideally we should like to approximate $f(t)$ by $f_n(t)$ using as small an $n$
+as possible to give a small $\Delta_n$ (error). Hence, the convergence
+considerations. (Convergent? Convergence rate or fast?)
+
+\subsection{Filtering of signals}
+In general, a system input-output relation can be represented by 
+\begin{equation}
+\hat{g}(\theta)=\hat{H}(\theta)f(\theta) 
+\end{equation}
+where $f(\theta)$ and $\hat{g}(\theta)$ are the input and output of the system
+represented by $\hat{H}(\theta)$.
+\begin{equation}
+\hat{H}(\theta)=\frac{a_0}{w}+\sum_{k=1}^{\infty}a_k\cos k\theta+\sum_{k=1}^{\infty}b_k\sin k\theta 
+\end{equation}
+
+In practice, we would like to approximate $\hat{H}(\theta)$ by $H(\theta)$
+which only has a finite number of terms of $\hat{H}(\theta)$.
+\begin{align}
+H(\theta) &=\frac{a_0}{2}+\sum_{k=1}^{n}a_n\cos k\theta+\sum_{k=1}^{n}b_k\sin
+k\theta \\
+\intertext{so that}
+H(\theta) &\sim \hat{H}(\theta) \\
+\intertext{and}
+g(\theta) &\sim \hat{g}(\theta) \\
+\intertext{where}
+g(\theta) &= H(\theta)f(\theta)
+\end{align}
+Yet again, the convergence is a very important issue.
+
+\begin{Exa}
+Approximate the function $\hat{H}(\theta)$ as shown in Figure~\ref{f2-hhat} by a
+truncated Fourier Series.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/fourseries/hhat.eepic}
+\end{center}
+\caption{Function $\hat{H}(\theta)$\label{f2-hhat}}
+\end{figure}
+
+{\raggedright Solution:\\}
+\begin{enumerate}
+\item \begin{equation}
+\hat{H}(\theta)=\begin{cases}
+	1 & \mbox{for $0\leqslant|\theta|\leqslant\theta_0$} \\
+	0 & \mbox{for $\theta_0<|\theta|<\pi$} \\
+	\end{cases} 
+	\end{equation}
+
+Even function.
+\item
+\begin{align}
+ b_k &=0 \qquad\mbox{(as $\hat{H}(\theta)$ even)} \\
+ a_0 &=\frac{2}{\pi}\int_0^{\pi} \hat{H}(\theta)d\theta \\
+  &=\frac{2}{\pi}\int_{0}^{\theta_0} d\theta =\frac{2}{\pi}\theta_0 \\
+\intertext{and}
+ a_k &=\frac{2}{\pi}\int_0^{\pi} \hat{H}(\theta)\cos k\theta d\theta \\
+  &=\frac{2}{\pi}\int_{0}^{\theta_0} \cos k\theta d\theta \\
+  &=\frac{2}{\pi k}\int_{0}^{\theta_0} \cos k\theta d(k\theta) \\
+  &=\frac{2}{\pi k}\sin \theta_0
+\end{align}
+where $k=0,1,2,\ldots$
+\item
+\begin{equation}
+\hat{H}(\theta)=\frac{\theta_0}{\pi}+\frac{2\theta_0}{\pi}\sum_{k=1}^{\infty}\frac{\sin(k\theta_0)}{(k\theta_0)}\cos(k\theta) 
+\end{equation}
+\item Approximate $\hat{H}(\theta)$ by $H_n(\theta)$.
+\begin{align}
+H_n(\theta) &=\frac{\theta_0}{\pi}+\frac{2\theta_0}{\pi}\sum_{k=1}{n}\frac{\sin(k\theta_0)}{(k\theta_0)}\cos(k\theta) \\
+\intertext{Assume $\theta_0=\frac{\pi}{2}$}
+H_0(\theta) &=\frac{1}{2}+\frac{\sin(\frac{\pi}{2})}{\frac{\pi}{2}}\cos(
+k\theta) \\
+ &=\frac{1}{2}+\frac{2}{\pi}\cos(\theta) \\
+H_3(\theta) &=\frac{1}{2}+\frac{\sin(\frac{\pi}{2})}{\frac{\pi}{2}}\cos(
+\theta)+\frac{\sin(\pi)}{\pi}\cos(2\theta)+\frac{\sin(
+\frac{3\pi}{2})}{3\frac{\pi}{2}} \cos(3\theta)\\
+&=\frac{1}{2}+\frac{2}{\pi}\cos(\theta)+0+\left(-\frac{2}{3\pi}\right)\cos(3\theta) \\
+ &=H_1(\theta)-\frac{2}{3\pi}\cos(3\theta) \\
+H_5(\theta) &=H_3(\theta)+\frac{2}{5\pi}\cos(5\theta)
+\end{align}
+\centerline{\vdots}
+
+They are shown in Figure~\ref{f2-approx} in graphic forms. Each harmonic is
+shown individually in Figure~\ref{f2-harmon}.
+\end{enumerate}
+\end{Exa}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[n=1]{
+%# gnuplot
+set terminal eepic
+set xrange [-pi:pi]
+set arrow from -pi-0.5,-0.5 to pi+0.5,-0.5
+set arrow from 0,-0.7 to 0,1.1
+set nokey
+set noborder
+set nozeroaxis
+set size 1,0.7
+set samples 500
+set noytics
+set noxtics
+set label "$H_1(\theta)$" at 0.1,1.1
+set label "$\frac{\pi}{2}$" at pi/2,-0.6
+set label "$\pi$" at pi,-0.6
+set label "$-\pi$" at -pi,-0.6
+set label "$-\frac{\pi}{2}$" at -pi/2,-0.6
+set label "$0$" at 0.1,-0.6
+plot 1/2+(2/pi)*cos(x) , abs(x)<(pi/2)?0.5:-0.5 with lines
+%#
+}
+
+\subfigure[n=3]{
+%# gnuplot
+set terminal eepic
+set xrange [-pi:pi]
+set arrow from -pi-0.5,-0.5 to pi+0.5,-0.5
+set arrow from 0,-0.7 to 0,1.1
+set size 1,0.7
+set nokey
+set noborder
+set nozeroaxis
+set samples 500
+set noytics
+set label "$H_3(\theta)$" at 0.1,1.1
+set label "$\frac{\pi}{2}$" at pi/2,-0.6
+set label "$-\frac{\pi}{2}$" at -pi/2,-0.6
+set label "$0$" at 0.1,-0.6
+set label "$\pi$" at pi,-0.6
+set label "$-\pi$" at -pi,-0.6
+set noxtics
+plot (1/2+(2/pi)*cos(x))-(2/(3*pi))*cos(3*x),abs(x)<(pi/2)?0.5:-0.5 with lines
+%#
+}
+
+\subfigure[n=5]{
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set nozeroaxis
+set xrange [-pi:pi]
+set label "$H_5(\theta)$" at 0.1,1.1
+set arrow from -pi-0.5,-0.5 to pi+0.5,-0.5
+set arrow from 0,-0.7 to 0,1.1
+set label "$\frac{\pi}{2}$" at pi/2,-0.6
+set label "$-\frac{\pi}{2}$" at -pi/2,-0.6
+set label "$\pi$" at pi,-0.6
+set label "$-\pi$" at -pi,-0.6
+set label "$0$" at 0.1,-0.6
+set size 1,0.7
+set samples 500
+set noytics
+set noxtics
+plot ((1/2+(2/pi)*cos(x))-(2/(3*pi))*cos(3*x))+(2/(5*pi))*cos(5*x) , abs(x)<(pi/2)?0.5:-0.5 with lines
+%#
+}
+\end{center}
+\caption{Examples of function approximation\label{f2-approx}}
+\end{figure}
+
+{\raggedright Note:\\}
+\begin{enumerate}
+\item Approximate fairly well using only a few terms (or harmonics)
+\item The basic magnitude and shape can be formed by using low frequency
+harmonics whilst the sharp changes like the edge of the functions waveform is
+represented by high frequency harmonics.
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set xrange [-pi+0.5:2*pi]
+set samples 1000
+set noytics
+set noxtics
+set noborder
+set nozeroaxis
+set arrow from -pi,0 to 2*pi+0.3,0
+set arrow from 0,-0.7 to 0,1.2
+set label "$f(t)$" at -0.1,1.2
+set label "$t$" at 2*pi+0.4,0.2
+set nokey
+plot ((0.53+(2/pi)*cos(x))-(2/(3*pi))*cos(3*x))+(2/(5*pi))*cos(5*x),(2/pi)*cos(x) with dots 1,-(2/(3*pi))*cos(3*x) with dots 2,(2/(5*pi))*cos(5*x) with dots 3
+%#
+\end{center}
+\caption{Harmonic content of a square wave\label{f2-harmon}}
+\end{figure}
+
+\section{Dirichlet's Conditions}				%3
+For the Fourier Series representation of a given function $f(\theta)$ to be
+valid, $f(\theta)$ must satisfy certain conditions.
+
+Sufficient conditions for the convergence of the F.S. to the function
+$f(\theta)$ given by Dirichlet (1837) accommondate all the functions generated
+or encountered in engineering and applied physics.
+
+For a real periodic function $f(\theta)$ of the real variable $\theta$ with
+period $2\pi$ to satisfy Dirichlet's conditions, it either:
+\begin{enumerate}
+\renewcommand{\theenumi}{\Alph{enumi}}
+\item is bounded in the period $[-\pi,\pi]$ and has at most a finite number of
+maxima, and a finite number of minima, and a finite number of discontinuities.
+\item has a finite number of isolated points in $[-\pi,\pi]$ at which the
+function becomes infinite, but when the arbitrarily small neighbourhoods of
+these points are excluded $f(\theta)$ satisfies condition A in the remainder
+of the interval. Furthermore, the integral of $f(\theta)$ over a period must
+be absolutely convergent, namely
+\begin{equation}
+\int_{-\pi}^{\pi}|f(\theta)|d\theta \qquad\mbox{is finite} 
+\end{equation}
+\end{enumerate}
+
+\section{The complex fourier series}			%4
+A more compact form of F.S. of a given function $f(\theta)$ is defined by
+\begin{align}
+f(\theta) &=\sum_{k=-\infty}^{\infty} C_k e^{j k \theta} \\
+\intertext{where}
+e^{j k \theta} &=\cos k\theta+j\sin k\theta \\
+C_k &=\frac{1}{2\pi}\int_{-\pi}^{\pi} f(\theta)e^{-jk \theta} d\theta
+\end{align}
+
+\begin{Exa}
+Given a periodic function $f(\theta)$ with $2\pi$ period and
+\begin{equation}
+f(\theta)=\begin{cases}
+	A & 0<\theta<\pi \\
+	-A & -\pi<\theta<0\\
+	\end{cases} 
+	\end{equation}
+Find the complex Fourier coefficients.
+
+{\raggedright Solution:\\}
+\begin{align}
+C_0 &=\frac{1}{2\pi}\left\{ \int_{-\pi}^{0}(-A)d\theta+\int_0^{\pi}A d\theta \right\} \\
+ &= 0 \\
+\int_{-\pi}^{0}(-A)d\theta &=\int_0^{\pi}(-A)d\theta' \\
+\theta' &=\theta+\pi \\
+C_k &=\frac{1}{2\pi} \left\{ \int_{-\pi}^{0}(-A)e^{-jk\theta}d\theta+\int_{0}^{\pi}A e^{-jk \theta}d\theta\right\} \\
+ &=\frac{1}{2\pi}\left\{\frac{A}{jk}\int_{-\pi}^{0}e^{-jk\theta}d(-jk\theta)+\frac{-A}{j k}\int_{0}^{\pi}e^{-jk\theta}d(-jk\theta)\right\} \\
+ &=\frac{A}{2jk\pi}\left\{\left. e^{-jk\theta}\right|_{-\pi}^{0}-\left.e^{-jk\theta}\right|_{0}^{\pi}\right\} \\
+ &=\frac{A}{2jk\pi}\left\{1-e^{jk\pi}+1-e^{-jk\pi}\right\}
+\end{align}
+If $k$ is even, $e^{\pm jk\pi}=1$ then $C_k=0$;
+if $k$ is odd, $e^{\pm jk\pi}=-1$ then $C_k=+\frac{2A}{jk\pi}=-\frac{2jA}{k\pi}$
+\end{Exa}
+
+Whe the function is given as a function of time $t$, it is assumed that
+\begin{equation}
+\theta=\omega_0 t 
+\end{equation}
+where $\omega_0$ is the fundamental radian frequency.
+
+Periodic function is defined as
+\begin{equation}
+f(t)=f(t\pm rT) \mbox{for $r=0,1,\ldots$} 
+\end{equation}
+and
+\begin{equation}
+w_0=\frac{2\pi}{T} 
+\end{equation}
+
+The complex Fourier Series takes the form
+\begin{align}
+f(t) &=\sum_{k=-\infty}^{\infty}C_ke^{jk\omega_0 t} \\
+\intertext{with}
+C_k &=\frac{1}{T}\int_{-T/2}^{T/2}f(t)e^{-j\frac{2\pi k}{T}t} dt \\
+\intertext{or}
+ &=\frac{\omega_0}{2\pi}\int_{-\pi/\omega_0}^{\pi/\omega_0} f(t)e^{-jk\omega_0t} dt \\
+\intertext{Define}
+\omega_k &=k\omega_0 \qquad\mbox{$k^{\mbox{th}}$ harmonic}\\
+C_k &=\frac{\omega_0}{2\pi} \int_{-\pi/\omega_0}^{\pi/\omega_0} f(t)e^{-j\omega_k t} dt
+\end{align}
+
+Notice that
+
+\begin{tabular}{rcl}
+time domain & $f(t)$ & continuous time function \\
+discrete frequency domain & $C_k$ & complex function of discrete frequency
+variable \\
+\end{tabular}
+
+As $C_k$ is complex,
+\begin{equation}
+C_k=|C_k|e^{j\phi_k} 
+\end{equation}
+where
+\begin{equation}
+\phi_k=\tan^{-1}\frac{\Im(C_k)}{\Re(C_k)} 
+\end{equation}
+
+The plots of $|C_k|$ against $\omega_k=k\omega_0$ and $\phi_k$ against
+$\omega_k$ are called the amplitude spectrum\index{amplitude
+spectrum}\index{spectrum!amplitude} and the phase spectrum\index{phase
+spectrum}\index{spectrum!phase}
+respectively. Often, $|C_k|^2$ is used in the place of $|C_k|$ and the plot is
+called the {\em power spectrum\index{power spectrum}}.
+
+\subsection{Bessel's inequality and its meaning (or implementation)}
+
+Bessel's inequality states that 
+\begin{equation}
+\sum_{k=-n}^{n}|C_k|^2<\frac{1}{2\pi}\int_{-\pi}^{\pi}[f(\theta)]^2d\theta 
+\end{equation}
+
+It means that if $f(\theta)$ is bounded (or at least its square-integral is
+finite), the sum of the magnitudes of the Fourier coefficients is bounded.
+
+Since the right-hand side of inequality is independant of $n$, each
+coefficient magnitude must have a limit as $n\rightarrow\infty$. Thus
+\begin{equation}
+\lim_{k\rightarrow\infty}|C_k|=0 
+\end{equation}
+
+\section{The Gibb's Phenomenon and Windowing Functions}	%5
+
+The Gibb's phenomenon occurs whenever Fourier series is used to approoximate a
+discontinuous function. (As shown in the cases of a square wave function and a
+saw-tooth function in Figure~\ref{f2-gibbs}.)
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[Square Wave]{
+%# gnuplot
+set terminal eepic
+set samples 500
+set nokey
+set noborder
+set nozeroaxis
+set arrow from -pi-0.5,0 to pi+0.5,0
+set arrow from 0,-0.8 to 0,0.7
+set label "$0$" at -0.1,-0.1
+set label "$f(t)$" at -0.1,0.8
+set noxtics
+set noytics
+set xrange [-pi:pi]
+plot ((1/2+(2/pi)*cos(x))-(2/(3*pi))*cos(3*x))+(2/(5*pi))*cos(5*x)-(2/(7*pi))*cos(7*x)+(2/(9*pi))*cos(9*x)-(2/(11*pi))*cos(11*x)+(2/(13*pi))*cos(13*x)-(2/(15*pi))*cos(15*x)+(2/(17*pi))*cos(17*x)
+%#
+}
+
+\subfigure[Saw-Tooth Wave]{
+%# gnuplot
+set terminal eepic
+set samples 500
+set nokey
+set noborder
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -pi-0.5,0 to pi+0.5,0
+set arrow from 0,-0.8 to 0,0.7
+set label "$0$" at -0.1,-0.1
+set label "$f(t)$" at -0.1,0.8
+set xrange [-pi:pi]
+plot (2/(2*pi))*sin(2*x)-(2/(4*pi))*sin(4*x)+(2/(6*pi))*sin(6*x)-(2/(8*pi))*sin(8*x)+(2/(10*pi))*sin(10*x)
+%#
+}
+\end{center}
+\caption{Illustration of Gibb's phenomena\label{f2-gibbs}}
+\end{figure}
+
+Since the ideal filter characteristics always contain discontinuities and the
+approximating series must be finite in order to be practical, methods must be
+found to suppress the Gibb's phenomenon when the truncated Fourier series is
+used.
+
+Using a truncated Fourier Series $f_n(\theta)$ to approximate the original
+function $f(\theta)$ represented by Fourier Series is equivalent to applying
+{\em a rectangular window} to the Fourier coefficients.
+
+\begin{align}
+f(\theta)&=\sum_{k=-\infty}^{\infty}C_ke^{jk\theta} \zdtag \\
+f_n(\theta)&=\sum_{k=-n}^{n}C_ke^{jk\theta} \zdtag \\
+&=\sum_{k=-\infty}^{\infty}W_kC_ke^{jk\theta} \zdtag \\
+\intertext{where}
+W_k=\begin{cases}
+	1 & |k|\leqslant n \\
+	0 & |k|>n\\
+	\end{cases}
+	\label{eq2-window}
+\end{align}
+
+\begin{align}
+\{C_k\} &=\{\ldots,C_{-n-1},C_{-n},C_{-n+1},\ldots,C_0,\ldots,C_n,C_{n+1}, \ldots \} \\
+\{W_k\} &=\{\underline{0,\ldots,0}|\overline{1,1,\ldots,1,1}|\underline{0,\ldots}\} \\
+\{W_kC_k\} &=\{0,\ldots,0,C_{-n},C_{-n+1},\ldots,C_0,\ldots,C_n,0,\ldots,0 \}
+\end{align}
+
+The function $w_k$ defined by Equation~\ref{eq2-window} is called a rectangular
+window.
+(A window on the fourier coefficients)
+
+To understand the effects caused by $W_k$ in the original domain, {\em the
+fourier sereies of the convolution of the two functions} has to be discussed.
+
+If
+\begin{equation}
+f_1(\theta)=\sum_{k=-\infty}^{\infty}W_ke^{jk\theta} 
+\end{equation}
+\begin{equation}
+f_2(\theta)=\sum_{k=-\infty}^{\infty}C_ke^{jk\theta} 
+\end{equation}
+and the convolution of $f_1(\theta)$ with $f_2(\theta)$ is defined as
+\begin{align}
+g(\theta) &= \frac{1}{2\pi}\int_{-\pi}^{\pi}f_1(\theta-\psi)f_2(\psi)d\psi \\
+&= \frac{1}{2\pi}\int_{-\pi}^{\pi}\sum_{k=-\infty}^{\infty}W_ke^{jk(\theta-\psi)}f_2(\psi)d\psi \\
+&= \sum_{k=-\infty}^{\infty}W_ke^{jk\theta} \frac{1}{2\pi} \underbrace{\int_{-\pi}^{\pi}f_2(\psi)e^{-jk\psi}d\psi}_{C_k} \\
+&= \sum_{k=-\infty}^{\infty}W_kC_ke^{jk\theta} 
+\end{align}
+
+In other words, applying a rectangular window on FS. is equivalent to
+convolution of the original function $f(\theta)$ with a window function.
+
+The rectangular window $W_k$ (in FS domain) can be represented in the original
+domain as Dirichlet's kernel.
+
+\begin{align}
+C_n(\theta)&=\sum_{k=-n}{n} e^{jk\theta} \\
+&= \frac{\sin (n+\frac{1}{2})\theta}{\sin \frac{\theta}{2}}
+\end{align}
+
+The convolution of $C_n(\theta)$ with the square wave within one period is
+shown in Figure~\ref{f2-conv}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure[$C_n$ convoluted with square wave]{
+%# gnuplot
+set terminal eepic
+set nokey
+set noytics
+set noxtics
+set size 1,0.7
+set nozeroaxis
+set arrow from -30,0 to 32,0
+set arrow from -30,0 to -30,1
+set noborder
+set samples 300
+set xrange [-30:30]
+plot sin(x/2)/(x/2),abs(x-10)<4?1:0
+%#
+}
+
+\subfigure[$C_n$ convoluted with square wave]{
+%# gnuplot
+set terminal eepic
+set nokey
+set noytics
+set noxtics
+set size 1,0.7
+set nozeroaxis
+set arrow from -30,0 to 32,0
+set arrow from -30,0 to -30,1
+set noborder
+set samples 300
+set xrange [-30:30]
+plot sin(x/2)/(x/2),abs(x)<4?1:0
+%#
+}
+
+\subfigure[Partial sum showing Gibb's phenomenon]{
+%# gnuplot
+set terminal eepic
+set nokey
+set noytics
+set noxtics
+set size 1,0.7
+set nozeroaxis
+set arrow from -30,0 to 32,0
+set arrow from -30,0 to -30,1
+set noborder
+set samples 300
+set xrange [-30:30]
+plot (sin(x+10)/(x+10))+(sin(x+5)/(x+5))+(sin(x)/x)+(sin(x-5)/(x-5))+(sin(x-10)/(x-10))
+%#
+}
+\end{center}
+\caption{Interpretation of the partial sum as the convolution of $C_n(\theta)$
+with the function\label{f2-conv}}
+\end{figure}
+
+A lot of effort has been made to design different windows from the rectangular
+window to suppress the Gibb's phenomenon. The improvement is shown in
+Figure~\ref{f2-window}.
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=eps/Windows.eps}}
+\caption[Illustration of the various types of windows]{Illustration of the various types of windows --- Someone\label{f2-window}}
+\end{figure}
+
+Some of the commonly used windows are listed as follows. ($W_k=0$ for $|k|>n$)
+
+\begin{enumerate}
+\renewcommand{\theenumi}{\roman{enumi}}
+\item The rectangular window
+	\begin{equation}
+	W_k=1 
+	\end{equation}
+\item the Fejer\index{window!Fejer}\index{Fejer window} window
+	\begin{equation}
+	W_k=1-k/n 
+	\end{equation}
+\item The Lanczos\index{window!Lanczos}\index{Lanczos window}
+	\begin{equation}
+	W_k=\frac{\sin \frac{k\pi}{n}}{k\frac{\pi}{n}} 
+	\end{equation}
+\item The von Hann\index{window!von Hann}\index{von Hann window} window
+	\begin{equation}
+	W_k=0.5[1+\cos\frac{k\pi}{n} 
+	\end{equation}
+\item The Hamming\index{window!Hamming}\index{Hamming window} window
+	\begin{equation}
+	W_k=0.54+0.46\cos\frac{k\pi}{n} 
+	\end{equation}
+\item The Kaiser\index{window!Kaiser}\index{Kaiser window} window
+	\begin{equation}
+	W_k= \frac{I_0 \{ \beta 
+		[ 1- ( \frac{k}{n})^2]
+		^{\frac{1}{2}}
+		\} }
+				{I_0 \beta } 
+				\end{equation}
+	where $\beta$ is a parameter, $I_0$ is the zero-order modified Bessel
+	function of the first kind, which is given by
+	\begin{equation}
+	I_0(x)= 1+\sum_{r=1}^{\infty} \left[ \frac{1}{r!} \left( \frac{x}{2} \right)^r \right]^2 
+	\end{equation}
+	$r=15\sim 20$ are sufficient.
+\end{enumerate}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+% $Id$
+% $Header$
+a41 1
+	
+@

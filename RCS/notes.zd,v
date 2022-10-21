@@ -1,0 +1,287 @@
+head	1.4;
+access;
+symbols;
+locks
+	dwagon:1.4; strict;
+comment	@# @;
+
+
+1.4
+date	93.06.09.01.52.10;	author dwagon;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	93.06.09.00.48.39;	author dwagon;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	93.06.07.03.24.50;	author dwagon;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	93.03.24.03.54.10;	author dwagon;	state Exp;
+branches;
+next	;
+
+
+desc
+@Master control file for sigproc notes
+.,
+@
+
+
+1.4
+log
+@Include all chapters
+@
+text
+@% $Id: notes.zd,v 1.3 1993/06/09 00:48:39 dwagon Exp dwagon $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/notes.zd,v 1.3 1993/06/09 00:48:39 dwagon Exp dwagon $
+\documentstyle[monlogos,%
+	amstex,%
+	subfigure,%
+	makeidx,%
+	fancyheadings,%
+	a4,%
+	12pt,%
+	verbatim,%
+	theorem,%
+	righttag,%
+	psfig,%
+	epic,%
+	eepic,%
+	figstuff%
+	]{report}
+\input{amssym.def}
+\input{amssym}
+\pagestyle{headings}
+\theoremstyle{plain}
+\theoremheaderfont{\sc}
+\newtheorem{Def}{Definition}[section]
+\newtheorem{Exa}{Example}[section]
+\newtheorem{Thm}{Theorem}[section]
+\newtheorem{Rem}{Remark}[section]
+\addtolength{\textwidth}{21pt}
+\newcommand{\fpair}{\leftrightarrow}
+\newcommand{\B}{\cal B}
+\newcommand{\E}{\cal E}
+\newcommand{\F}{\cal F}
+\renewcommand{\L}{\cal L}
+\newcommand{\Z}{\cal Z}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ev}{\operatorname{Ev}}
+\newcommand{\Od}{\operatorname{Od}}
+\newcommand{\infint}{\int_{-\infty}^{\infty}}
+\newcommand{\infsum}[1]{\sum_{#1=-\infty}^{\infty}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\zdtag}{}	% If you dont want tags define this as notag
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\wn}[1]{W_{N}^{#1}}	% N-point DFT weighting factor
+\newcommand{\whn}[1]{W_{N/2}^{#1}}	% N/2-point DFT weighting factor
+\renewcommand{\theequation}{\thesection-\arabic{equation}}
+\renewcommand{\theDef}{\thesection-\arabic{Def}}
+\renewcommand{\theExa}{\thesection-\arabic{Exa}}
+\renewcommand{\theThm}{\thesection-\arabic{Thm}}
+\renewcommand{\theRem}{\thesection-\arabic{Rem}}
+\newcommand{\tenrm}{\rm}
+\newcommand{\twlrm}{\rm}
+\newcommand{\ohm}{\Omega}
+\newcommand{\nconv}{\bigcirc\hspace{-1em}n\;} % N-point convolution symbol
+\newcommand{\lbrak}{[} % Added to stop subfigure barfing when ] used in
+\newcommand{\rbrak}{]} % [caption] causing it to think end of caption
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\def\subfigtopskip{-2pt}
+\def\subfigcapskip{-2pt}
+\makeindex
+\pssilent
+\psdraftbox
+\psdraft
+
+\begin{document}
+\title{\largemonash\\RDT3600 Signal Processing\\Monash University\\Clayton Campus}
+\author{Dr. Henry Wu
+%\\ $\cal A$\kern-.1667em\lower.5ex\hbox{$\cal
+%M$}\kern-.125em$\cal S$-\LaTeX\ by Dougal Scott
+}
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\setcounter{chapter}{-1}
+\include{outline}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+% 1
+\include{intro}
+% 2
+\include{fourseries}
+% 3
+\include{fourtrans}
+% 4
+\include{laptrans}
+% 5
+\include{anasigproc}
+% 6
+\include{digitanalog}
+% 7
+\include{discsig}
+% 8
+\include{filterdes}
+% 9
+\include{DFT}
+% 10
+\include{compDFT}
+\printindex
+\end{document}
+@
+
+
+1.3
+log
+@Converted the course outline to a new chapter input file
+@
+text
+@d1 2
+a2 2
+% $Id: notes.zd,v 1.2 1993/06/07 03:24:50 dwagon Exp dwagon $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/notes.zd,v 1.2 1993/06/07 03:24:50 dwagon Exp dwagon $
+d81 1
+a81 1
+\input{outline}
+d84 11
+a94 1
+\include{introduction}
+d96 1
+d98 1
+d100 1
+d102 2
+@
+
+
+1.2
+log
+@Changed chapter filenames to correspond with chapter names not numbers
+@
+text
+@d1 2
+a2 2
+% $Id: notes.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp $
+% $Header: /nelstaff/edp/dwagon/signotes/RCS/notes.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp $
+d81 1
+a81 83
+\chapter{Outline of Subject}
+
+\begin{description}
+\item[Contact:] Two  1 hour lectures and 2 hours practical/tutorial work per
+week
+for two semesters.
+\item[Syllabus:] 
+Sampling of continuous-time signals and sampling rate conversion. Digital
+signal processign systems. Structures for discrete-time systems. Digital
+filter design techniques; discrete Fourier transform (DFT) and computation of
+DFTs. Discrete Hilbert transform and its applications. Quantisation effect in
+digital signal processing; Fourier analysis of signals using the DFT.
+Applications of digital signal processing. DSP implementation using, for
+example, the TMS320C25/C30 digital signal processor(s).
+\item[Evaluation:] \ \ 
+
+	\begin{tabular}{rl}
+		Practical & 40\% \\
+		Final Exam & 60\% \\
+	\end{tabular}
+
+All pracs are compulsory unless specified otherwise.
+
+Your performance of the practical work will be evaluated based on 
+\begin{itemize}
+	\item Attendance
+	\item Demonstration on request
+	\item Quality of the reports
+\end{itemize}
+
+Overdue reports will be penalized. Prac reports must be written on an
+individual basis.
+
+Excelent prac work will contribute to the overall evaluation of your
+performance in this subject.
+\item[Preliminary Reading:] \ \ 
+
+\begin{enumerate}
+\item E. W. Kamen ``Introduction to Signals and Systems'', MacMillan
+Publishers, 2nd Edition, 1990
+\item R. E. Ziemer, W.H. Tranter and D. R. Fannin ``Signals and Systems:
+Continuous and Discrete'', MacMillan Publishers 1990
+\end{enumerate}
+
+\item[Prescribed Texts:] \ \ 
+
+\begin{enumerate}
+\item A. Oppenheim and R. Schafer ``Discrete-Tiem Signal Processing'' 
+Prentice-Hall 1989
+\end{enumerate}
+
+\item[Recommended Reading:] \ \ 
+
+\begin{enumerate}
+\item J. G. Proakis and D. G. Manolakis ``Introduction to Digital Signal
+Processing'', MacMillan Publishers 1989
+\item G. B. Lockharat and B. M Cheetham ``BASIC Digital Signal Processing'',
+Butterworths
+\item T. W. Parks and C. S. Burrus ``Digital Filter Design'', John Wiley and
+Sons 1987
+\end{enumerate}
+
+\item[References:] \ \ 
+
+\begin{enumerate}
+\item L. R. Rabiner and B. Gold ``Theory and Application of Digital Signal
+Processing'', Prentice Hall 1975
+\item H. Baher ``Analog and Digital Signal Processing', John Wiley and Sons
+1990
+\item M. E. Van Valkenburg, ``Analog Filter Design'', Holt-Sanders
+International Editions, CBS College Publishing, 1982
+\item A. Bateman and W. Yates, ``Digital Processing Design'', Pitman
+Publishing 1988
+\item R. W. Hamming ``Digital Filters'', Prentice Hall International 3rd
+	Edition, 1989
+\item Texas Instruments, Linear Circuits Data Book, 1989
+\item Signal Processing Associates ``SPA-C25-1 Instruction Manual'' 1980
+\item Texas Instruments ``TMS320 Fixed Point DSP Assembly Language Tools
+User's Guide'' 1990
+\end{enumerate}
+\end{description}
+\newpage
+
+a88 1
+%\include{compDFT}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 2
+% $Id$
+% $Header$
+d166 6
+a171 6
+\include{chap1}
+\include{chap6}
+\include{chap7}
+\include{chap8}
+\include{chap9}
+\include{chap10}
+@

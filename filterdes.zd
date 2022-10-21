@@ -1,0 +1,1368 @@
+% $Id: filterdes.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+% $Header: /ccstaff2/edp/dwagon/signotes/RCS/filterdes.zd,v 1.1 1993/03/24 03:54:10 dwagon Exp dwagon $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Filter Design Techniques}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\minitoc
+
+\begin{Def}
+\index{filter}
+Any system which modifies certain frequencies relative to others is called a
+filter.
+\end{Def}
+
+Our main emphasis is on the design of frequency-selective filters which are
+linear, time-invariant, causal and stable systems.
+
+Since discrete-time signals to be processed are generally represented in
+digital forms and discrete-time systems (filters) are often implemented with
+digital computation, discrete-time filters are commonly referred to as digital
+filters.
+
+Digital filter design involves the following three stages:
+\begin{enumerate}
+\item the specification of the desired properties of the system --- typically
+given in the frequency domain. 
+\item the approximation of the specifications using a causal discrete-time
+system.
+\item the realization of the system --- different forms and structures.
+\end{enumerate}
+
+\section[Designing IIR Filters from Continuous-Time Filters]{Design of Discrete Time IIR Filters from Continuous-Time Filters}	%1
+
+The design procedure for the discrete-time filter by transforming a prototype
+continuous-time analog filter begins with a set of discrete-time
+specifications and includes the following steps:
+
+\begin{enumerate}
+\item Obtain the specifications on the continuous-time filter by a
+transformation of the specifications for the desired discrete-time filter.
+\item Acquire the system function $H_c(s)$ or the impulse response $h_c(t)$ of
+the continuous-time filter using the established approximation methods.
+\item Transform the system function $H_c(s)$ is the s-plane or impulse
+response $h_c(t)$ in the continuous-time domain into the system function
+$H(z)$ in the $z$-plane, or impulse response $h[n]$ in the discrete-time
+domain.
+\end{enumerate}
+
+\begin{Rem}
+In the above transformation, the essential properties of the continuous-time
+frequency response must be preserved in the frequency response of the
+resulting discrete-time filter. (eg. stability)
+\end{Rem}
+
+Three design methods for IIR will be discussed:
+\begin{enumerate}
+\item design by impulse invariance.
+\item design using bilinear transformation.
+\item algorithmic technique --- computer aided design.
+\end{enumerate}
+
+\subsection{Filter design by impulse invariance}
+
+An equivalent discrete-time system to a continuous-time linear
+time-invariant system can be described in Figure~\ref{f8-bandlimit} for
+bandlimited inputs.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/filterdes/bandlimit.eepic}
+\end{center}
+\caption{Equivalent systems for bandlimited inputs\label{f8-bandlimit}}
+\end{figure}
+
+Our objective is to establish the relationship between $h_c(t)$ and $h[n]$ or
+$H_c(j\Omega)$ and $H(e^{j\omega})$.
+
+Since
+\begin{equation}
+x[n] = x_c(nT) \label{eq8-1.1}
+\end{equation}
+the Fourier transform of $x[n]$ is related to the Fourier transform,
+$X_c(j\Omega)$ of $x_c(t)$ as 
+\begin{equation}
+X(e^{j\omega}) = \frac{1}{T} \infsum{k} X_c \left( j \frac{\omega}{T} -
+j\frac{2\pi k}{T} \right) \label{eq8-1.2}
+\end{equation}
+where $\omega=\Omega T$ according to previous discussion.
+
+Since the discrete-time system in Figure~\ref{f8-bandlimit} is LTI
+\begin{equation}
+Y(e^{j\omega}) = H(e^{j\omega}) X(e^{j\omega}) \label{eq8-1.3}
+\end{equation}
+where $H(e^{j\omega})$ is the frequency response of the system, or
+equivalently, the Fourier transform of the unit sample response, and
+$X(e^{j\omega})$ and $Y(e^{j\omega})$ are Fourier transforms of the input
+$x[n]$ and output, $y[n]$, respectively.
+
+Note that the frequency response of the ideal reconstruction filter in an
+ideal reconstruction system (D/C) is given by
+\begin{align}
+H_r(j\Omega) &= \begin{cases}
+T & |\Omega| < \pi/T \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{Therefore}
+Y_r(j\Omega) &= H_r(j\Omega) Y(j\Omega) \zdtag \\
+&= \begin{cases}
+T Y(j\Omega) & |\Omega|< \pi/T \\
+0 & \mbox{otherwise} \\
+\end{cases} \label{eq8-1.5} \\
+\intertext{Combining Equations~\ref{eq8-1.2}, \ref{eq8-1.3} and~\ref{eq8-1.5}
+we obtain}
+Y_r(j\Omega) &= H_r(j\Omega) H(e^{j\Omega T}) X(e^{j\Omega T}) \zdtag \\
+&= H_r(j\Omega) H(e^{j\Omega T}) \left\{ \frac{1}{T} \infsum{k} X_c \left(
+j\Omega - j \frac{2\pi k}{T} \right) \right\} \label{eq8-1.6}
+\end{align}
+
+If $X_c(j\Omega)=0$ for $|\Omega|\geqslant \pi/T$ (the input is bandlimited),
+then the ideal lowpass reconstruction filter $H_r(j\Omega)$ cancels the factor
+$1/T$ and selects only the term in Equation~\ref{eq8-1.6} for $k=0$, i.e.,
+\begin{equation}
+Y_r(j\Omega) = \begin{cases}
+H(e^{j\Omega T}) X_c (j\Omega) & \mbox{for} |\Omega| < \frac{\pi}{T} \\
+0 & \mbox{for} |\Omega| \geqslant \frac{\pi}{T} \\
+\end{cases} \label{eq8-1.7}
+\end{equation}
+
+The Equation~\ref{eq8-1.7} states that if $X_c(j\Omega)$ is bandlimited and
+the sampling rate is above the Nyquist rate, the overall continuous-time
+system is equivalent to a linear time-invariant system whose effective
+frequency response is defined as
+\begin{align}
+H_{eff}(j\Omega) &= \begin{cases}
+H(e^{j\Omega T}) & |\Omega|< \frac{\pi}{T} \\
+0 & |\Omega| \geqslant \frac{\pi}{T} \\
+\end{cases} \label{eq8-1.8} \\
+\intertext{and the input-output relation is of the form}
+Y_r(j\Omega) &= H_{eff} (j\Omega) X_c(j\Omega) \label{eq8-1.9} \\
+\intertext{To make two systems equivalent for bandlimited inputs is to make}
+H_{eff}(j\Omega) &= H_c(j\Omega) \label{eq8-1.10} \\
+\intertext{or equivalently, according to Equation~\ref{eq8-1.8}}
+H(e^{j\omega}) &+ H_c\left( \frac{j\omega}{T} \right) \qquad |\omega|< \pi
+\label{eq8-1.11} \\
+\intertext{where $T$ is chosen such that}
+H_c(j\Omega) &= 0 \qquad \mbox{for} |\Omega| \geqslant \frac{\pi}{T}
+\label{eq8-1.11b} \\
+\intertext{Recall that if we choose}
+h[n] &= h_c(nT) \label{eq8-1.12} \\
+\intertext{then the relation between the Fourier transform of $h[n]$ and that
+of $h_c(nT)$ is}
+H(e^{j\omega}) &= \frac{1}{T} \infsum{k} H_c \left( j \frac{\omega}{T} - j
+\frac{2\pi k}{T} \right) \label{eq8-1.13} \\
+\intertext{Which is the frequency domain representation of the sampling. Since
+$H_c(j\frac{\omega}{T})$ is bandlimited}
+H(e^{j\omega}) &= \frac{1}{T} H_c\left( j \frac{\omega}{T} \right)
+\label{eq8-1.14} 
+\end{align}
+where $|\omega| < \pi$.
+
+To make two systems equivalent as shown by Equation~\ref{eq8-1.11} we have to
+require that the relationship between the discrete-time impulse response
+$h[n]$ and the continuous-time impulse response $h_c(t)$ satisfy the following
+equation
+\begin{equation}
+h[n] = T h_c(nT)
+\end{equation}
+
+In summary, for the continuous-time LTI system and the system consisting of a
+discrete-time LTI system to be equivalent, the following equations must be
+satisfied
+\begin{align}
+h[n] &= T h_c(nT) \label{eq8-1.16} \\
+\intertext{and}
+H(e^{j\omega}) &= H_c \left( j \frac{\omega}{T} \right) \label{eq8-1.17} 
+\end{align}
+where $h[n]$ and $H(e^{j\omega})$ are the discrete-time impulse response and
+the frequency response of the discrete system respectively; $h_c(t)$ and
+$H_c(j\Omega)$ are the continuous-time impulse response and the frequency
+response of the continuous time system respectively.
+
+When $h[n]$ and $h_c(t)$ are related through Equation~\ref{eq8-1.16}, the
+discrete-time system is called an impulse-invariant\index{impulse invariance}
+version of the continuous-time system.
+
+In the impulse invariance design procedure for transforming continuous-time
+filters into discrete-time filters.
+\begin{equation}
+h[n] = T_d h_c(nT_d) \label{eq8-1.18}
+\end{equation}
+where $T_d$ represents a sampling interval.
+
+Since the design begins with the discrete-time filter specifications, $T_d$
+cancels in the impulse invariance procedure. The design sampling period $T_d$
+need not be the same as the sampling period $T$ which is associated with the
+C/D and D/C conversion. $T_d$ is usually chosen to be $1$ so that
+$\omega=\Omega T_d=\Omega$ or any other convenient value.
+
+As a result, in the frequency domain the frequency response of the
+discrete-time filter obtained from Equation~\ref{eq8-1.18} is related to the
+frequency response of the continuous-time filter by
+\begin{align}
+H(e^{j\omega}) &= \infsum{k} H_c \left( j \frac{\omega}{T_d} + j
+\frac{2\pi}{T_d} k \right)  \\
+\intertext{If the continuous-time filter is bandlimited so that}
+H_c(j\Omega) &= 0 \qquad \mbox{for} |\Omega| \geqslant \frac{\pi}{T_d} \\
+\intertext{recalling that the sampling rate $\Omega_s=\frac{2\pi}{T_d}$ rad/s,
+no aliasing will occur, then}
+H(e^{j\omega}) &= H_c \left( j \frac{\omega}{T_d} \right) \qquad \mbox{for
+$|\omega| \leqslant \pi$}
+\end{align}
+
+Assume that $\Omega_c$ is the cutoff frequency for $H_c(j\Omega)$, as shown in
+Figure~\ref{f8-bandl2}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/filterdes/bandl2.eepic}
+\end{center}
+\caption{Aliasing in bandlimited filters\label{f8-bandl2}}
+\end{figure}
+
+Unfortunately, any practical continuous-time filter cannot be exactly
+bandlimited and aliasing will occur in $H(e^{j\omega})$. And in this case, the
+``sampling'' period $T_d$ cannot be used (reduced) to control aliasing. This
+is due to the fact that the specifications are in terms of discrete-time
+frequency ($\omega$). If the sampling rate is increased (i.e., $T_d$ is made
+smaller) then the cut-off frequency of the continuous-time filter
+($\Omega_c=\frac{\omega_c}{T_d}$) must increase in proportion.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/filterdes/bandl3.eepic}
+\end{center}
+\caption{Aliasing in bandlimited filters\label{f8-bandl3}}
+\end{figure}
+
+The best that we can do, in this case, is to make the continuous-time filter
+approach zero at high frequencies so that the aliasing may be negligibly
+small and a useful discrete-time filter can result from the sampling of the
+impulse response of a continuous-time filter. In practice, to compensate for
+aliasing that might occur in the transformation from $H_c(s)$ to $H(z)$, the
+continuous time filter may be somewhat overdesigned, i.e., designed to exceed
+the specifications, particularly in the stopband.
+
+The direct relationship between the system function $H_c(s)$ of the
+continuous-time filter and the of $H(z)$, the desired discrete-time filter can
+be established as follows.
+
+Assume that $H_c(s)$ is expressed in terms of a partial fraction expansion
+\begin{align}
+H_c(s) &= \sum_{k=1}^{N} \frac{A_k}{s-s_k} \label{eq8-1.21} \\
+\intertext{where $s_k$ are the single poles of the $H_c(s)$. The corresponding
+impulse response is}
+h_c(t) &= \begin{cases}
+\sum_{k=1}^{N} A_k e^{s_k t} & t \geqslant 0 \\
+0 & t<0 \\
+\end{cases} \\
+\intertext{The impulse response of the discrete-time filter obtained by
+sampling $T_dh_c(t)$ is}
+h[n] &= T_d h_c(n T_d) = \sum_{k=1}^{N} T_d A_k e^{s_k n T_d} u[n] \zdtag \\
+&= \sum_{k=1}^{N} T_d A_k \left( e^{s_k T_d} \right)^n u[n] \\
+\intertext{where $u[n]$ is the unit step function. Therefore the system
+function of the corresponding discrete-time filter is}
+H(z) &= \sum_{k=1}^{N} \frac{ T_d A_k } {1 - e^{s_k T_d} z^{-1}}
+\label{eq8-1.24}
+\end{align}
+
+Comparing Equation~\ref{eq8-1.21} and Equation~\ref{eq8-1.24} it is seen that a
+pole at $s=s_k$ in the s-plane transforms to a pole at $z=e^{s_k T_d}$ in the
+$z$-plane. Therefore if $H_c(s)$ is stable ($\Re s_k < 0$ for all $k$), $H(z)$
+is also stable ($|e^{s_k T_d}|<1$ for all $k$).
+
+\begin{Exa}
+Given the specifications for a desired discrete-time low pass filter as shown
+in Figure~\ref{f8-eglowpass-a} with $\delta_1=0.10875$, $\delta_2=0.17783$,
+$\omega_p=0.2\pi$ and $\omega_s=0.3\pi$, design a low-pass discrete-time
+filter by applying impulse invariance to an appropriate Butterworth continuous
+time filter.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/filterdes/egdiglp.eepic}
+\end{center}
+\caption{Discrete-time low-pass filter specification\label{f8-eglowpass-a}}
+\end{figure}
+
+Solution: \\
+
+In general the specifications for the analog filter to be designed then
+transformed by impulse invariance are as shown in Figure~\ref{f8-eglowpass-b}.
+Since $T_d$ cancels in the impulse invariance procedure, $T_d$ is chosen to be
+1 so that $\omega=\Omega$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/filterdes/eganallp.eepic}
+\end{center}
+\caption{Low-pass analog filter specification\label{f8-eglowpass-b}}
+\end{figure}
+
+From the given specification,
+\begin{align}
+0.89125 & \leqslant H(e^{j\omega}) \leqslant 1 \qquad 0 \leqslant |\omega|
+\leqslant 0.2\pi \zdtag \\
+| H(e^{j\omega})| &\leqslant 0.17783 \qquad 0.3\pi \leqslant |\omega|
+\leqslant \pi \\
+\intertext{we have specifications for the analog Butterworth filter to be
+designed as}
+0.89125 & \leqslant | H_c(j\Omega)| \leqslant 1 \qquad 0 \leqslant |\Omega|
+\leqslant 0.2\pi \zdtag \\
+H_c(j\Omega) &\leqslant 0.17783 \qquad 0.3\pi \leqslant |\Omega| \leqslant \pi
+\\
+\intertext{and}
+\alpha_p &= -20\log_{10} (1-0.10875) \doteqdot 1 \mbox{ dB} \qquad 0 \leqslant |
+\Omega| \leqslant 0.2\pi \zdtag \\
+\alpha_s &= -20\log_{10} (0.17783) \doteqdot 15 \mbox{ dB} \qquad 0.3 \leqslant |
+\Omega| \leqslant \pi \zdtag 
+\end{align}
+
+The standard analog Butterworth filter design formulas and procedure can be
+used to calculate the minimum order $N$ can the cutoff frequency $\Omega_c$ as
+well as the system function $H_c(s)$. In this example, $N=5.8858$ and
+corresponding $\Omega_c=0.70474$. Since $N$ must be an integer, we choose
+$N=6$ and corresponding $\Omega_c=0.7032$ and the system function is given by
+\begin{align}
+H_c(s) &= \frac{0.1209}{(s^2+0.3640s+0.4945) (s^2+0.9945s+0.4945) (s^2+1.3585s
++ 0.4945)} \\
+\intertext{Express $H_c(s)$ as a partial fraction expansion and then transform
+$H_c(s)$ to obtain}
+H(z) &= \frac{ 0.2871-0.4466z^{-1}}{ 1 -1.2971z^{-1} + 0.6949 z^{-2}} + \frac{
+-2.1428+1.1455z^{-1}}{1-1.0691z^{-1}+0.3699z^{-2}} + \ldots \zdtag \\
+& \quad \ldots \frac{1.8557 - 0.6303 z^{-1}}{1-0.9972z^{-1}+0.2570z^{-2}}
+\end{align}
+The frequency response of the discrete-time system can be calculated and
+plotted to see if the specifications are met.
+\end{Exa}
+
+\begin{Rem} \ 
+
+\begin{itemize}
+\item If the resulting discrete-time filter fails to meet the specifications
+because of aliasing, there is NO alternative with impulse invariance but to
+try again with a higher-order filter or a different adjustment of the filter
+parameters, holding the order fixed.
+\item Impulse invariance can be extended to waveform invariance to preserve
+the output waveshape for a variety of inputs. (Step invariance, for
+instance).
+\item In the impulse invariance design procedure, the relationship between
+$H_c(j\Omega)$ and $H(e^{j\omega})$ is linear; as a result, the shape of the
+frequency response is preserved.
+\item  The impulse invariance technique is only appropriate for bandlimited
+filters.
+\end{itemize}
+\end{Rem}
+
+\subsection{IIR filter design by bilinear transformation}
+
+A discrete-time IIR filter $H(z)$ can be obtained from a corresponding analog
+IIR filter by using the bilinear transformation defined as
+\begin{align}
+s &= \frac{2}{T_d} \left( \frac{1-z^{-1}}{1+z^{-1}}\right) \label{eq8-1.27} \\
+\intertext{that is}
+H(z) &= H_c \left[ \frac{2}{T_d} \left( \frac{1-z^{-1}}{1+z^{-1}}\right)
+\right] 
+\end{align}
+where $T_d$ is the ``sampling period''.
+
+Since the specifications on $H(e^{j\omega})$ are given in the discrete-time
+domain, the effects of $T_d$ will cancel when these specifications are mapped
+to continuous-time specifications and then the analog filter is mapped back to
+a digital filter.
+
+(Note that the former corresponds to 
+\begin{equation}
+z= \frac{ 1+ (T_d/2) s}{1-(T_d/2) s} 
+\end{equation}
+and the later to Equation~\ref{eq8-1.27}. Therefore, any convenient value of
+$T_d$ can be chosen and used in the designing procedure.)
+
+\begin{equation}
+z = \frac{1+\sigma T_d/2 + j \Omega T_d/2}{1 -\sigma T_d/2 - j\Omega T_d/2}
+\label{eq8-1.30}
+\end{equation}
+
+Substituting $s=\sigma+j\Omega$ into Equation~\ref{eq8-1.30}, the following
+properties of the bilinear transformation can be seen.
+
+\begin{enumerate}
+\item if $\sigma<0$, $|z|<1$ for all $\Omega$
+\item if $\sigma>0$, $|z|>1$ for all $\Omega$
+\item if $\sigma=0$, $|z|=1$ for all $\Omega$
+\end{enumerate}
+
+Recall that $z=r e^{j\omega}$, if $r=1$ then $|z|=1$.
+
+Therefore
+\begin{align}
+e^{j\omega} &= \frac{ 1+ j\Omega T_d/2}{1 -j\Omega T_d/2} \label{eq8-1.31} \\
+\intertext{or}
+j\Omega &= \frac{2}{T_d} \left\{ \frac{1- e^{-j\omega}}{1+e^{j\omega}}
+\right\} \zdtag \\
+&= \frac{2}{T_d} \left\{ \frac{ e^{-j\omega/2} \left( e^{j\omega/2} -
+e^{-j\omega/2} \right)}{ e^{-j\omega/2} \left( e^{j\omega/2} + e^{-j\omega/2}
+\right)} \right\} \zdtag \\
+&= \frac{2}{T_d} \left\{ \frac{2 j \sin (\omega/2) }{2 \cos ( \omega/2) }
+\right\} \zdtag \\
+&= \frac{2}{T_d} j \tan \left( \omega/2 \right) \\
+\intertext{That is}
+\Omega &= \frac{2}{T_d} \tan \left( \omega/2 \right) \label{eq8-1.33} \\
+\intertext{or}
+\omega &= 2 \arctan \left( \frac{ \Omega T_d }{2} \right) \label{eq8-1.34}
+\end{align}
+
+From Equation~\ref{eq8-1.33} and Equation~\ref{eq8-1.34} it can be seen that the
+entire $j\Omega$-axis of the s-plane maps onto the unit circle in the
+$z$-plane. When $z=re^{j\omega}$ is in its polar form $-\infty < \Omega <
+\infty$ maps to $-\pi < \omega < \pi$.
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure{\input{pix/filterdes/s-zplane.eepic}}
+\subfigure{
+%# gnuplot
+set terminal eepic
+set nokey
+set noborder
+set noxtics
+set noytics
+set arrow from -10,0 to 10,0
+set arrow from 0,-1.7 to 0,1.7
+set label "$\omega$" at 0.2,1.7
+set label "$\pi$" at 0.2,1.5
+set label "$-\pi$" at 0.2,-1.5
+set label "$\Omega$" at 10,0.1
+set label "$\omega=2\arctan \left( \frac{\Omega T_d }{2} \right)$" at 6,1
+set arrow from 5.9,1 to 3.2,1
+plot atan(x/2)
+%#
+}
+\end{center}
+\caption{Conversion from $j\Omega$ to $z$-plane\label{f8-s-zplane}}
+\end{figure}
+
+Consequently, the bilinear transformation avoids the aliasing problems which
+occurs when the impulse invariance is used to design IIR filters. However, this
+time the relationship between $\omega$ and $\Omega$ is nonlinear.
+
+Since 
+\begin{equation}
+|H(z)| = | \left.H_c(s)\right|_{s=\frac{2}{T_d} \left( \frac{1-z^{-1}}{
+1+z^{-1}} \right)} | 
+\end{equation}
+if the corner frequencies of the analog filter $H_c(j\Omega)$ are prewarped
+using
+\begin{equation}
+\Omega=\frac{2}{T_d} \tan (\omega/2) \label{eq8-1.36}
+\end{equation}
+then the digital filter ($H(e^{j\omega})$) will meet the desired
+specifications when the analog filter is transformed to the digital filter
+using
+\begin{equation}
+H(z) = H_c \left[ \frac{2}{T_d} \left( \frac{1-z^{-1}}{1+z^{-1}} \right)
+\right]
+\end{equation}
+
+\begin{Rem}
+A linear phase digital lowpass filter can not be obtained by applying the
+bilinear transformation to a linear phase lowpass analog filter due to the
+frequency warping represented by Equation~\ref{eq8-1.36}.
+\begin{equation}
+e^{-j\Omega\alpha} \rightarrow e^{-j\alpha\frac{2}{T_d} \tan (\omega/2)} 
+\end{equation}
+\end{Rem}
+
+\begin{Exa}
+Given the specifications for the desired digital filter as
+\begin{align}
+0.89125 & \leqslant | H(e^{j\omega})| \leqslant 1 \qquad 0 \leqslant \omega \leqslant
+0.2\pi \\
+|H(e^{j\omega}) & \leqslant 0.17783 \qquad 0.3\pi \leqslant \omega \leqslant
+\pi
+\end{align}
+design the filter and find its $H(z)$.
+
+Solution:\\
+\begin{enumerate}
+\item Prewarp the corner frequencies for the corresponding analog filter.
+\begin{align}
+0.89125 & \leqslant | H_c(j\Omega)| \leqslant 1 \qquad 0 \leqslant \Omega \leqslant
+\frac{2}{T_d} \tan \left( \frac{0.2\pi}{2} \right) \\
+|H_c(j\Omega) & \leqslant 0.17783 \qquad \frac{2}{T_d} \tan \left(
+\frac{0.3\pi}{2} \right) \leqslant \Omega \leqslant \infty
+\end{align}
+\item For convenience choose $T_d=1$, and use the Butterworth response.
+\item Find the minimum order for the Butterworth filter.
+
+Since the Butterworth filter has a monotonic magnitude response, it follows
+that it requires
+\begin{align}
+\left| H_c(j2\tan (0.1\pi)) \right| &\geqslant 0.89125 \\
+\intertext{and}
+\left| H_c ( j2\tan (0.15\pi)) \right| &\leqslant 0.17783 \\
+\intertext{The magnitude response of the Butterworth filter satisfies}
+\left| H_c(j\Omega) \right|^2 &= \frac{1}{1+\left( \frac{\Omega}{\Omega_c}
+\right)^{2N}} \\
+\intertext{It follows that}
+1 + \left( \frac{2\tan (0.1\pi)}{\Omega_c} \right)^{2N} &= \left( \
+frac{1}{0.89125} \right)^2 \\
+\intertext{and}
+1 + \left( \frac{2\tan (0.15\pi)}{\Omega_c} \right)^{2N} &= \left( \
+frac{1}{0.17783} \right)^2 
+\end{align}
+Solve for $N$ and $\Omega_c$ in the above equations.
+\begin{align}
+N &= \frac{ \log \left[ \left( \left( \frac{1}{0.17783} \right)^2 -1 \right) /
+\left( \left( \frac{1}{0.89125} \right)^2 - 1 \right) \right]}{ 2\log \left[
+\frac{\tan(0.15\pi)}{\tan(0.1\pi)}\right]} \\
+& \doteqdot 5.30466
+\end{align}
+Choose $N=6$, $\Omega_c=0.76622$.
+\item The system function of the analog filter is
+\begin{equation}
+H_c(s) = \frac{0.20238}{(s^2 + 0.3966s + 0.5871) ( s^2 + 1.0836s + 0.5871 )
+( s^2+1.4802s + 0.5871 )} 
+\end{equation}
+\item Convert $H_c(s)$ to $H(z)$ using the bilinear transformation
+\begin{equation}
+H(z) = \frac{ 0.0007378 ( 1+z^{-1})^6}{ (1 - 0.9044z^{-1} + 0.2155 z^{-2}) 
+( 1 - 1.2686 z^{-1} + 0.7051 z^{-2}) ( 1 - 1.0106z^{-1} + 0.3583 z^{-2})} 
+\end{equation}
+\end{enumerate}
+\end{Exa}
+
+\section{Frequency Transformation of Low Pass IIR Filters}	%2
+
+To design an IIR filter other than lowpass, a similar approach to the
+traditional analog frequency-selective filter design method can be taken.
+
+If the bilinear transformation is used for the conversion from analog to
+digital filters, we may follow the following steps.
+\begin{enumerate}
+\renewcommand{\theenumi}{\Roman{enumi}}
+\item \ 
+
+\begin{center}
+\input{pix/filterdes/FTL.eepic}
+\end{center}
+
+\item \ 
+
+\begin{center}
+\input{pix/filterdes/FTL2.eepic}
+\end{center}
+
+\end{enumerate}
+
+If the impulse invariance is used, then procedure I cannot be used because of
+the aliasing that results from sampling.
+
+\section{Design of FIR filters by windowing}
+\subsection{Frequency response of FIR linear phase systems}
+
+$\bullet$ zero phase response, linear phase response and generalized linear
+phase response.
+
+The ideal low pass filter has a magnitude response
+\begin{align}
+H_{lp}(e^{j\omega}) &= \begin{cases}
+1 & |\omega| < \omega_c \\
+0 & \omega_c < |\omega| \leqslant \pi
+\end{cases} \\
+\intertext{where $\omega_c$ is the cutoff frequency. Its phase response is
+assumed to be zero, i.e.,}
+\measuredangle H_{lp} (e^{j\omega}) &= 0 \\
+\intertext{However, because its impulse response is}
+h_{lp}[n] &= \frac{\sin \omega_c n }{\pi n} \qquad -\infty < n < \infty 
+\end{align}
+which is noncausal, it is not computationally realizable.
+
+The impulse response of the ideal highpass filter is also noncausal. It can be
+shown as follows:
+
+The ideal highpass filter is defined to have a frequency response
+\begin{align}
+H_{hp}(e^{j\omega}) &= \begin{cases}
+0 & |\omega| < \omega_c \\
+1 & \omega_c < |\omega| \leqslant \pi \\
+\end{cases} \\
+\intertext{and}
+\measuredangle H_{hp} ( e^{j\omega}) &= 0 
+\end{align}
+
+To obtain its impulse response, apply the inverse Fourier transform
+\begin{align}
+h_{hp}[n] &= \frac{1}{2\pi} \int_{-\pi}^{\pi} H_{hp} (e^{j\omega})
+e^{j\omega n} d\omega \\
+&= \frac{1}{2\pi} \left\{ \int_{-\pi}^{-\omega_c} e^{j\omega n} d\omega +
+\int_{\omega_c}^{\pi} e^{j\omega n} d\omega \right\} \zdtag \\
+&= \frac{1}{2\pi} \left\{ \left. \frac{1}{j n} e^{j \omega n}
+\right|_{-\pi}^{-\omega_c} + \left. \frac{1}{j n} e^{j \omega n} 
+\right|_{\omega_c}^{\pi} \right\} \zdtag \\
+&= \frac{1}{2\pi j n} \left\{ \left[ e^{-j\omega_c n} - e^{-j n \pi} \right] +
+\left[ e^{j \pi n} - e^{j\omega_c n} \right] \right\} \zdtag \\
+&= \frac{1}{2\pi j n} \left[ e^{j n \pi} - e^{-j n \pi} \right]  +
+\frac{1}{2\pi j n} \left[ e^{--j \omega_c n} - e^{j\omega_c n} \right] \zdtag
+\\
+&= \delta[n] + \frac{1}{2\pi j n} \left\{ \cos(-\omega_c n) - j\sin(\omega_c n
+) - \cos(\omega_c n ) - j\sin(\omega_c n) \right\} \zdtag \\
+&= \delta[n] - \frac{\sin(\omega_c n)}{n\pi} 
+\end{align}
+
+Note:
+\begin{align}
+\lim_{n\rightarrow 0} \frac{ \left\{ e^{j n \pi} - e^{-j n \pi} \right\} }{ j 2
+\pi n} &= \lim_{n\rightarrow 0} \frac{j \pi \left\{ e^{j n \pi} + e^{-j n \pi}
+\right\}}{j 2 \pi n} = \frac{2}{2} = 1 \zdtag \\
+\intertext{and}
+h_{hp}[n] &= \delta[n] - h_{lp}[n]
+\end{align}
+
+Causal approximations to ideal frequency-select filters must have nonzero
+phase response.
+
+Linear phase response is our next best choice, since it corresponds to
+shifting the sequence in time.
+
+\begin{Exa}
+Given the impulse response of an ideal delay system
+\begin{align}
+h_{id}[n] &= \delta[n-n_d] \\
+\intertext{its frequency response is}
+H_{id}(e^{j\omega}) &= e^{-j\omega n_d} \\
+\intertext{i.e.,}
+|H_{id}(e^{j\omega})| &= 1 \\
+\intertext{and}
+\measuredangle H_{id}(e^{j\omega}) &= -\omega n_d 
+\end{align}
+where $n_d$ is the delay in time and $|\omega|<\pi$. Therefore its group delay
+is a constant
+\begin{align}
+\tau(\omega) &= -\frac{d}{d\omega} \left\{ \arg [ H(e^{j\omega}) ] \right\}
+\zdtag \\
+&= -\frac{d}{d\omega} \left\{ -\omega n_d \right\} \zdtag \\
+&= n_d 
+\end{align}
+
+Hence the ideal lowpass filter with linear phase response is used in the
+design for the approximations. The frequency response is defined
+\begin{align}
+H_{lp}(e^{j\omega}) &= \begin{cases}
+e^{-j\omega n_d} & |\omega| < \omega_c \\
+0 & \omega_c < |\omega| \leqslant \pi \\
+\end{cases} \\
+\intertext{and its impulse response is}
+h_{lp}[n] &= \frac{\sin \omega_c (n-n_d) }{\pi (n-n_d)} \qquad -\infty < n <
+\infty
+\end{align}
+
+Although $h_{lp}[n]$ is still noncausal, its magnitude and phase response can
+be approximated by a causal system.
+\end{Exa}
+
+\begin{Def}
+If the frequency response of a system can be expressed in the form
+\begin{equation}
+H(e^{j\omega}) = A(e^{j\omega}) e^{-j\alpha \omega + j\beta}
+\end{equation}
+where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is a real
+function of $\omega$, this system is a generalized linear phase
+system\index{generalized linear phase system}.
+\end{Def}
+
+\begin{Exa}
+Given the impulse response of the moving average system
+\begin{equation}
+h[n]= \begin{cases}
+\frac{1}{M+1} & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases} 
+\end{equation}
+its frequency response is
+\begin{align}
+H(e^{j\omega}) &= \infsum{n} h[n] e^{-j\omega n} \\
+&= \frac{1}{M+1} \sum_{n=0}^{M} e^{-j\omega n} \zdtag \\
+&= \frac{1}{M+1} \frac{1-e^{-j\omega(M+1)}}{1-e^{-j\omega}} \zdtag \\
+&= \frac{1}{M+1} \frac{e^{-j\frac{\omega(M+1)}{2}}}{e^{-j\frac{\omega M}{2}}}
+\frac{ e^{j\frac{\omega(M+1)}{2}}- e^{j\frac{\omega(M+1)}{2}}}{
+e^{j\frac{\omega}{2}} - e^{-j\frac{\omega}{2}}} \zdtag \\
+&= \frac{1}{M+1} e^{ -j\frac{\omega M}{2}} \frac{ 2j \sin \left[
+\frac{\omega(M+1)}{2} \right]}{2j \sin \left( \frac{\omega}{2} \right) }
+\zdtag \\
+&= \frac{1}{M+1} \frac{ \sin \left[ \omega \frac{M+1}{2} \right]}{ \sin \left(
+\frac{\omega}{2} \right) } e^{-j\omega M/2} 
+\end{align}
+Therefore, the moving average system is a generalized linear phase system.
+(Due to the fact that at frequencies for which the factor 
+\begin{equation}
+\frac{1}{M+1} \frac{ \sin \left[ \omega \frac{M+1}{2} \right]}{ \sin \left(
+\frac{\omega}{2} \right) }  
+\end{equation}
+is negative, an additional phase of $\pi$ radians is added to the total phase.)
+
+Note that the moving average system is given by
+\begin{equation}
+y[n] = \frac{1}{M+1} \sum_{k=0}^{M} x[n-k] 
+\end{equation}
+\end{Exa}
+
+\begin{Rem}
+Many of the advantages of linear phase systems apply to generalized linear
+phase systems.
+\begin{enumerate}
+\renewcommand{\theenumi}{\Roman{enumi}}
+\item If the impulse response of the system is defined as
+\begin{equation}
+h[n] = \begin{cases}
+h[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+(causal, symmetric about $M/2$), the frequency response is
+\begin{equation}
+H(e^{j\omega}) = A_e(e^{j\omega}) e^{-j M/2 \omega }
+\end{equation}
+where $A_e(e^{j\omega})$ is a real, even, periodic function of $\omega$. (With
+generalized linear phase response).
+\item If (causal, antisymmetric about $M/2$)
+\begin{align}
+h[n]  &= \begin{cases}
+-h[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{then}
+H(e^{j\omega}) &= j A_0 (e^{j\omega}) e^{-j \omega M/2}  \zdtag \\
+&= A_0(e^{j\omega}) e^{-j\omega M/2 + j\pi/2}
+\end{align}
+where $A_0(e^{j\omega})$ is a real, odd, periodic function of $\omega$.
+\end{enumerate}
+\end{Rem}
+
+There are four types of FIR generalized linear phase systems:
+\subsubsection{Type I FIR linear phase systems}
+A type I system has a symmetric impulse response
+\begin{align}
+h[n] &= h[M-n] \qquad 0 \leqslant n \leqslant M \\
+\intertext{where $M$ is an even integer. The frequency response is}
+H(e^{j\omega}) &= \sum_{n=0}^{M} h[n] e^{-j\omega n} \zdtag \\
+&= \sum_{n=0}^{M/2-1} h[n] e^{-j\omega n} + h[M/2] e^{-j\omega M/2} +
+\sum_{n=M/2+1}^{M} h[n] e^{-j\omega n} \zdtag \\
+&= \sum_{n=0}^{M/2-1} h[n] e^{-j\omega n} + h[M/2]e^{-j\omega M/2} +
+\sum_{k=0}^{M/2-1} h[m-k] e^{-j\omega(M-k)} \zdtag \\
+&= \left\{ \sum_{k=0}^{M/2-1} h[k] e^{j\omega (M/2-k)} + h[M/2] +
+\sum_{k=0}^{M/2-1} h[k] e^{-j\omega (M/2-k)} \right\} e^{-j\omega M/2} \zdtag
+\\
+&= \left\{ h[M/2] + \sum_{k=0}^{M/2-1} h[k] 2\cdot \cos [ ( M/2 - k) \omega ]
+\right\} e^{-j\omega M/2}  \\
+\intertext{Let $k'=M/2-k$}
+k=0 & \Rightarrow k'=M/2 \zdtag \\
+k=M/2-1 & \Rightarrow k'=1 \zdtag \\
+k=M/2 & \Rightarrow k'=0 \zdtag \\
+\intertext{thus}
+H(e^{j\omega}) &= e^{-j\omega M/2} \left\{ h[M/2] \cos(0) + \sum_{k'=1}^{M/2}
+2 h[M/2 - k'] \cos(k'\omega) \right\} \zdtag \\
+&= e^{-j\omega M/2} \sum_{k=0}^{M/2} a[k] \cos(k\omega) \\
+\intertext{where}
+a[k] &= \begin{cases}
+h[M/2] & \mbox{for $k=0$} \\
+2h[(M/2)-k] & \mbox{for $k=1,2,\ldots,M/2$} \\
+\end{cases}
+\end{align}
+
+That is that is is a generalized linear phase system with a delay $M/2$ which
+is an integer. ($\beta=0$ or $\pi$).
+
+\subsubsection{Type II FIR linear phase systems}
+
+A type II system has a symmetric impulse response
+\begin{align}
+h[n] &= h[M-n] \qquad 0 \leqslant n \leqslant M \\
+\intertext{where $M$ is an odd integer. It can be shown that}
+H(e^{j\omega}) &= e^{-j\omega M/2} \left\{ \sum_{k=1}^{(M+1)/2} b[k] \cos
+\left[ \omega \left( k-\half \right) \right] \right\} \\
+\intertext{where}
+b[k] &= 2 h[(M+1)/2-k] \qquad k=1,2,\ldots,(M+1)/2 
+\end{align}
+
+This is also a generalized linear phase system with a delay M/2 which is an
+integer plus one-half. ($\beta=0$ or $\pi$).
+
+\subsubsection{Type III FIR linear phase systems}
+
+A type III system has an antisymmetric impulse response.
+\begin{align}
+h[n] &= -h[M-n] \qquad 0 \leqslant n \leqslant M \\
+\intertext{where $M$ is an even integer, and it has a frequency response in
+the form of}
+H(e^{j\omega}) &= j e^{-j\omega M/2} \left\{ \sum_{k=1}^{M/2} C[k] \sin \omega
+k \right\} \\
+\intertext{where}
+C[k] &= 2 h[ (M/2) - k ] \qquad k=1,2,\ldots,M/2 
+\end{align}
+It has a delay $M/2$ which is an integer. ($\beta=\pi/2$ or $3\pi/2$).
+
+\subsubsection{Type IV FIR linear phase systems}
+
+A type IV system has an antisymmetric impulse response.
+\begin{align}
+h[n] = -h[M-n] \qquad 0 \leqslant n \leqslant M \\
+\intertext{where $M$ is an odd integer, and its $H(e^{j\omega})$ is}
+H(e^{j\omega}) &= j e^{-j\omega M/2} \left\{ \sum_{k=1}^{(M+1)/2} d[k]
+\sin[\omega ( k - \half) ] \right\} \\
+\intertext{where}
+d[k] &= 2 h [(M+1) /2 -k ] \qquad k=1,2,\ldots,(M+1)/2
+\end{align}
+
+It has a delay $M/2$. ($\beta=\pi/2$ or $3\pi/2$).
+
+\subsection{Properties of symmetrical FIR linear phase systems}
+If $h[n]$ is symmetrical (Type I and II)
+
+\begin{align}
+H(z) &= \sum_{n=0}^{M} h[n] z^{-n} \zdtag  \\
+&= \sum_{n=0}^{M} h[M-n] z^{-n} \zdtag \\
+&= \sum_{k=0}^{M} h[k] z^k z^{-M} \zdtag \\
+&= z^{-M} \sum_{k=0}^{M} h[k] (z^{-1})^{-k} \zdtag \\
+&= z^{-M} H(z^{-1}) \label{eq8-3.32} \\
+\intertext{Therefore, if $z_0$ is a zero of $H(z)$}
+H(z_0) &= z_{0}^{-M} H(z_{0}^{-1}) =0 \\
+\intertext{i.e.,}
+\intertext{If $z_{0}=r e^{j\theta}$ is a zero of $H(z)$}
+z_{0}^{-1} &= r^{-1} e^{-j\theta} \quad\mbox{is also a zero of $H(z)$} \zdtag\\
+\intertext{If $h[n]$ is real}
+H^{\ast} (z) &= \left( \sum_{n=0}^{M} h[n] z^{-n} \right)^{\ast} =
+\sum_{n=0}^{M} h^{\ast} \left( z^{\ast} \right)^{-n} \zdtag \\
+&= \sum_{n=0}^{M} h[n]  \left( z^{\ast} \right)^{-n} \zdtag \\
+&= H(z^{\ast}) \\
+\intertext{Thus}
+H(z_0) &= 0 \Rightarrow H^{\ast}(z_0)=0 \zdtag \\
+& \Rightarrow H(z_{0}^{\ast}) = 0 \zdtag 
+\end{align}
+
+i.e., \\
+if $z_0$ is a zero of $H(z)$, $z_0^\ast = r e^{-j\theta}$ is also a zero of
+$H(z)$ and, $(z_0^\ast)^{-1} = r^{-1} e^{j\theta}$ is a zero of $H(z)$ as
+well.
+
+In summary, if $h[n]$ is real, each complex zero that is not on the unit
+circle will be part of a set of four conjugate reciprocal zeros of the form
+\begin{equation}
+(1-r e^{j\theta} z^{-1})(1- r e^{-j\theta} z^{-1} ) (1 - r^{-1} e^{j\theta}
+z^{-1} ) ( 1-r^{-1} e^{-j\theta} z^{-1} )  \label{eq8-3.34}
+\end{equation}
+
+\begin{enumerate}
+\item If a zero of $H(z)$ is on the unit circle Equation~\ref{eq8-3.34}
+reduces to
+\begin{equation}
+(1-e^{j\theta} z^{-1} ) ( 1 - e^{-j\theta} z^{-1} ) 
+\end{equation}
+as $r=r^{-1}$.
+\item If a zero of $H(z)$ is real but not on the unit circle
+Equation~\ref{eq8-3.34} reduces to
+\begin{equation}
+(1\pm r z^{-1})(1\pm r^{-1} z^{-1})
+\end{equation}
+as $e^{jk\pi} = e^{-jk\pi}$ ($k$ is an integer).
+\item If a zero of $H(z)$ is as $z=\pm 1$, Equation~\ref{eq8-3.34} reduces to
+\begin{equation}
+(1\pm z^{-1})
+\end{equation}
+\item When $z=-1$, Equation~\ref{eq8-3.32} requires that
+\begin{equation}
+H(-1) = (-1)^M H(-1) \label{eq8-3.37}
+\end{equation}
+
+If $M$ is odd, $H(-1)$ must be zero as Equation~\ref{eq8-3.37} requires
+\begin{equation}
+H(-1) = -H(-1) 
+\end{equation}
+\end{enumerate}
+Since $z=-1$ corresponds to $\omega=\pi$ and the frequency response of type II
+FIR is constrained to be zero, it cannot be used to approximate a highpass or
+bandstop filter.
+
+\subsection{Properties of antisymmetrical FIR linear phase systems}
+If $h[n]$ is antisymmetrical (Types III and IV)
+\begin{equation}
+H(z) = - z^{-M} H(z^{-1}) \label{eq8-3.39b}
+\end{equation}
+
+\begin{enumerate}
+\item The zeros of $H(z)$ are constrained in the same way as those for the
+symmetric case.
+\item However, if $z=1$, Equation~\ref{eq8-3.39b} becomes
+\begin{equation}
+H(1) = -H(1) 
+\end{equation}
+i.e., $H(z)$ must have a zero at $z=1$ for both $M$ even and $M$ odd.
+\item If $z=-1$
+\begin{equation}
+H(-1) = (-1)^{M+1} H(-1) \label{eq8-3.41}
+\end{equation}
+Equation~\ref{eq8-3.41} requires that if $M$ is even (Type III) $H(z)$ must have a zero
+at $z=-1$.
+\end{enumerate}
+
+Types III and IV are not used to approximate low filters and type IV is not
+used to approximate the high-pass or band-stop filters.
+
+\begin{figure}[hbtp]
+\begin{center}
+\parbox{0.4\textwidth}{
+\subfigure[Type I]{\input{pix/filterdes/linphaseI.eepic}}}
+\hspace{4em}
+\parbox{0.4\textwidth}{
+\subfigure[Type II]{\input{pix/filterdes/linphaseII.eepic}}}
+
+\parbox{0.4\textwidth}{
+\subfigure[Type III]{\input{pix/filterdes/linphaseIII.eepic}}}
+\hspace{4em}
+\parbox{0.4\textwidth}{
+\subfigure[Type IV]{\input{pix/filterdes/linphaseIV.eepic}}}
+\end{center}
+\caption{Typical zero locations for linear phase systems}
+\end{figure}
+
+\subsection{Design of FIR filters by windowing}
+Design techniques for FIR filters are based on directly approximating the
+desired frequency response of the discrete-time system.
+
+They assume a linear phase constraint.
+
+\subsubsection{Window method}
+Given an ideal desired frequency range
+\begin{equation}
+H_d(e^{j\omega}) = \infsum{n} h_d[n] e^{-j\omega n} \label{eq8-3.42}
+\end{equation}
+where $h_d[n]$ is the corresponding impulse response sequence which can be
+expressed using the inverse Fourier transform
+\begin{equation}
+h_d[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} H_d(e^{j\omega}) e^{j\omega n}
+d\omega
+\end{equation}
+
+Many idealized systems have impulse responses that are non-causal and
+infinitely long due to discontinuities at the boundaries between bands.
+
+Therefore, truncation of ideal response will be applied to obtain a causal
+FIR approximation.
+
+Equation~\ref{eq8-3.42} can be thought of as a Fourier series representation
+of the periodic frequency response $H_d(e^{j\omega})$ with $h_d[n]$ being the
+Fourier coefficients. Thus, the approximation of an ideal filter by truncation
+of the ideal response is identical to the issue of convergence of Fourier
+series. (Gibb's phenomenon.)
+
+Using the rectangular window $w[n]$ -
+\begin{equation}
+w[n] = \begin{cases}
+1 & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+a causal FIR filter with impulse response $h[n]$ can be obtained from
+$h_d[n]$
+\begin{align}
+h[n] &= h_d[n] w[n] \zdtag \\
+&= \begin{cases}
+h_d[n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{The frequency response $H(e^{j\omega})$ of the new FIR filter can
+be obtained from the windowing theorem.}
+H(e^{j\omega}) &= \frac{1}{2\pi} \int_{-\pi}^{\pi} H_d(e^{j\theta})
+W(e^{j(\omega-\theta)} d\theta \\
+\intertext{where $W(e^{j\omega}$ is the Fourier transform of $w[n]$.}
+W(e^{j\omega}) &= \sum_{n=0}^{\infty} e^{-j\omega n}  = \frac{1 -
+e^{-j\omega(M+1)}}{1-e^{-j\omega}} \zdtag \\
+&= e^{-j\omega M/2} \frac{ \sin[ \omega (M+1)/2 ]}{ \sin (\omega/2) }
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+%# gnuplot
+set terminal eepic
+set noborder
+set nokey
+set noxtics
+set noytics
+set nozeroaxis
+set arrow from -5,0 to 5,0
+set arrow from 0,0 to 0,2
+set label "$\omega$" at 4.5,0.1
+set label "$M+1$" at 0.2,1.6
+set label "$\left|\frac{\sin[\omega(M+1)/2]}{\sin(\omega/2)}\right|$" at 0.1,1.8
+set label "peak sidelobe" at 2,0.6
+set arrow from 1.98,0.58 to 1.5,0.35
+set label "$-\frac{2\pi}{(M+1)}$" at -1.2,-0.1
+set label "$\frac{2\pi}{(M+1)}$" at 0.8,-0.1
+set label "$\Delta \omega_m$" at -0.1,-0.3
+set arrow from -2,-0.3 to -1,-0.3
+set arrow from 2,-0.3 to 1,-0.3
+set label "main lobe width" at 2.05,-0.3
+set xrange [-4:4]
+plot abs(sin(x*3)/(x*2))
+%# 
+\end{center}
+\caption{Frequency response of rectangular window\label{f8-rectwind}}
+\end{figure}
+
+Note: $\Delta \omega_M= \frac{4\pi}{M+1}$ \\
+If $M$ increases, $\Delta \omega_m$ decreases and
+$\left|\frac{\sin[\omega(M+1)/2]}{\sin(\omega/2)}\right|$ increases.
+
+In the extreme case, $w[n]=1$ for all $n$
+\begin{equation}
+W(e^{j\omega}) = \infsum{k} 2\pi \delta (\omega + 2\pi k ) 
+\end{equation}
+which is a periodic impulse train with period $2\pi$.
+\begin{align}
+H(e^{j\omega}) &= \frac{1}{2\pi} \int_{-\pi}^{\pi} H_d(e^{j\theta}) 2\pi
+\delta (\omega-\theta) d\theta \zdtag \\
+&= H_d(e^{j\omega}) 
+\end{align}
+
+From the view point of the accuracy of the approximation, the narrower the
+$\Delta \omega_m$ of $W(e^{j\omega})$ the better, i.e., $W(e^{j\omega})
+\rightarrow 2\pi \delta(\omega)$, $H(e^{j\omega}) \rightarrow
+H_d(e^{j\omega})$. This normally requires the increase of $M$, the length of
+the FIR filter.
+
+From the implementation point of view, we would like to have $w[n]$ as short
+as possible in duration so as to minimize computation.
+
+\subsubsection{Other window in the FIR filter design}
+The Gibbs phenomenon can be moderated by tapering the window smoothly to zero
+at both ends. As a result, the mainlobe will become wider, and so will the
+transition at the discontinuity. 
+The magnitude spectrums of various windows is shown in Figures~\ref{f8-rect}
+to~\ref{f8-kais3}.
+%A plot of the following windows $w[n]$ values
+%can be seen in Figure~\ref{f8-window}, their Fourier spectra can be seen in
+%Figure~\ref{f8-fourwindow}.
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/rectwind.eps}}
+\caption{Rectangular Window length M=33\label{f8-rect}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/hammwind.eps}}
+\caption{Hamming Window length M=33\label{f8-hamm}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/hamm64wind.eps}}
+\caption{Hamming Window length M=64\label{f8-hamm64}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/hannwind.eps}}
+\caption{Hanning Window length M=33\label{f8-hann}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/bartwind.eps}}
+\caption{Bartlett Window length M=33\label{f8-bart}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/blackwind.eps}}
+\caption{Blackman Window length M=33\label{f8-black}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/chebywind.eps}}
+\caption{Chebychev Window length M=33\label{f8-cheby}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/kaiswind1.eps}}
+\caption{Kaiser Window length M=129. $\beta=0,1$.\label{f8-kais1}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/kaiswind2.eps}}
+\caption{Kaiser Window length M=129. $\beta=3,6$.\label{f8-kais2}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centerline{\psfig{figure=pix/chap8/kaiswind3.eps}}
+\caption{Kaiser Window length M=129. $\beta=10,20$.\label{f8-kais3}}
+\end{figure}
+
+\begin{description}
+\item[Rectangular Window]
+\index{rectangular window}\index{window!rectangular}
+\begin{equation}
+w[n] = \begin{cases}
+1 & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+\item[Bartlett (triangular) Window]
+\index{Bartlett window}\index{window!Bartlett}
+\index{triangular window}\index{window!triangular}
+\begin{equation}
+w[n] = \begin{cases}
+2n/M & 0 \leqslant n \leqslant M/2 \\
+2-2n/M & M/2 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} 
+\end{cases}
+\end{equation}
+\item[Hanning Window]
+\index{Hanning window}\index{window!Hanning}
+\begin{equation}
+w[n] = \begin{cases}
+0.5 - 0.5\cos (2\pi n/M) & 0 \leqslant n \leqslant M \\
+0 \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+\item[Hamming Window]
+\index{Hamming window}\index{window!Hamming}
+\begin{equation}
+w[n] = \begin{cases}
+0.54 -0.46 \cos(2\pi n/M) & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} 
+\end{cases}
+\end{equation}
+\item[Blackman Window]
+\index{Blackman window}\index{window!Blackman}
+\begin{equation}
+w[n] = \begin{cases}
+0.42-0.5\cos(2\pi n/M) + 0.08 \cos (4\pi n/M) & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+\item[Kaiser Window]
+\index{Kaiser window}\index{window!Kaiser}
+\begin{equation}
+w[n] = \begin{cases}
+\frac{I_0 \left[ \beta \left( 1 - \left[ \left( n-\alpha \right) / \alpha
+\right]^2 \right)^{\half} \right] }{I_0(\beta)} & 0
+\leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+where $I_0(\cdot)$ is the zeroth-order modified Bessel function of the first
+kind, $\alpha=M/2$, when $\beta=0$ the Kaiser window reduces to the
+rectangular window.
+\end{description}
+
+\begin{table}[hbtp]
+\begin{center}
+\begin{tabular}{lccccc}
+& & & Peak & & Transition \\
+& Peak & & Approximation & Equivalent & Width \\
+& Sidelobe & Approximate & Error & Kaiser & of Equivalent \\
+Window & Amplitude & Width of & $20\log_{10}\delta$ & Window & Kaiser \\
+Type & (Relative) & Mainlobe & (dB) & $\beta$ & Window  \\ \hline
+Rectangular & $-13$ & $4\pi/(M+1)$ & $-21$ & $0$ & $1.81\pi/M$ \\
+Bartlett & $-25$ & $8\pi/M$ & $-25$ & $1.33$ & $2.37\pi/M$ \\
+Hanning & $-31$ & $8\pi/M$ & $-44$ & $3.86$ & $5.01\pi/M$ \\
+Hamming & $-41$ & $8\pi/M$ & $-53$ & $4.86$ & $6.27\pi/M$ \\
+Blackman & $-57$ & $12\pi/M$ & $-74$ & $7.04$ & $9.19\pi/M$ \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Comparison of commonly used windows\label{t8-windows}}
+\end{table}
+
+All the above mentioned windows are symmetric about the point $M/2$, i.e.,
+\begin{equation}
+w[n] = \begin{cases}
+W[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise}  \\
+\end{cases}
+\end{equation}
+and causal as well.
+
+Therefore they possess generalized linear phase response.
+\begin{equation}
+W(e^{j\omega}) = W_e ( e^{j\omega}) e^{-j\omega M/2}
+\end{equation}
+where $W_e ( e^{j\omega})$ is a real and even function of $\omega$.
+
+If the desired impulse response $h_d[n]$ is also symmetric about $M/2$
+\begin{equation}
+h_d[n] = \begin{cases}
+h_d[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+then the windowed impulse response is also symmetric about $M/2$.
+\begin{align}
+h[n] &= h_d[n] w[n] \zdtag \\
+&= \begin{cases}
+h_d[M-n] w[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases} \zdtag \\
+&= \begin{cases}
+h[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise}\\
+\end{cases} \\
+\intertext{The resulting frequency response will also have generalized linear
+phase, i.e.,}
+H(e^{j\omega}) &= A_e(e^{j\omega}) e^{-j\omega M/2} 
+\end{align}
+where $A_e(e^{j\omega})$ is a real and even function of $\omega$.
+
+If the desired impulse response is antisymmetric about $M/2$,
+\begin{align}
+h_d[n] &= \begin{cases}
+-h_d [M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{then the windowed impulse response is also antisymmetric provided
+that $w[n]$ is symmetric about $M/2$.}
+h[n] &= h_d[n] w[n] \zdtag \\
+&= \begin{cases}
+-h_d[M-n] w[M-n] \\
+0 \\
+\end{cases} \zdtag \\
+&= \begin{cases}
+-h_d[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases} 
+\end{align}
+
+\begin{Exa}[FIR approximation of the ideal lowpass filter using windows]
+Assume that
+\begin{align}
+H_{lp}(e^{j\omega}) &= \begin{cases}
+e^{-j\omega M/2} & |\omega|<\omega_c \\
+0 & \omega_c < |\omega| \leqslant \pi \\
+\end{cases} \\
+\intertext{The impulse response is}
+h_{lp}[n] &= \frac{1}{2\pi} \int_{-\omega_c}^{\omega_c} e^{-j\omega M/2}
+d\omega \zdtag \\
+&= \frac{ \sin [\omega_c (n-M/2) ] }{\pi(n-M/2)} \qquad \mbox{for $-\infty < n
+< \infty$} \\
+h_{lp}[M-n] &= \frac{ \sin [\omega_c (M-n-M/2)]}{\pi( M-n-M/2)} \zdtag \\
+&= \frac{ \sin [ \omega_c (M/2-n)]}{ \pi (M/2-n)} \zdtag \\
+&= \frac{ -\sin [ \omega_c (M/2- n)]}{-\pi (n-M/2)} \zdtag \\
+&= h_{lp}[n] 
+\end{align}
+
+i.e., $h_{lp}[n]$ is symmetric about $M/2$. When a symmetric window is used
+the windowed impulse response
+\begin{equation}
+h[n] = \frac{ \sin[ \omega_c (n-M/2) ] } { \pi (n-M/2)} w[n] 
+\end{equation}
+will have a linear phase.
+\end{Exa}
+
+\begin{Rem} \ 
+\begin{enumerate}
+\item This method applies accurately when $\omega_c$ is not close to zero or
+to $\pi$ and when the width of the mainlobe ($\Delta \omega_m$) is smaller
+than $2\omega_c$.
+\item The windows with the smaller sidelobes yield better approximations at a
+discontinuity of the ideal response.
+\item Increasing $M$ will produce a narrower transition region.
+\end{enumerate}
+\end{Rem}
+
+\begin{Exa}[FIR approximation of the ideal highpass filter using windows]
+The ideal highpass filter with generalized phase is given by
+\begin{align}
+H_{hp}(e^{j\omega}) &= \begin{cases}
+0 & 0 \leqslant |\omega| \leqslant \omega_c \\
+e^{-j\omega M/2} & \omega_c < |\omega| \leqslant \pi \\
+\end{cases} \\
+&= e^{-j\omega M/2} - H_{lp}(e^{j\omega}) \\
+\intertext{The corresponding impulse response is}
+h_{lp}[n] &= \frac{1}{2\pi} \int_{-\pi}^{\pi} H_{hp}(e^{j\omega})
+d\omega \zdtag \\
+&= \frac{1}{2\pi} \left\{ \int_{-\pi}^{-\omega_c} e^{-j\omega M/2} e^{j\omega
+n} d\omega + \int_{\omega_c}^{\pi} e^{-j\omega M/2} e^{j\omega n} d\omega
+\right\} \zdtag \\
+&= \frac{1}{2\pi j (n-M/2)} \left\{ \left. e^{-j\omega(M/2-n)}
+\right|_{-\pi}^{-\omega_c} + \left. e^{-j\omega (M/2-n)}
+\right|_{\omega_c}^{\pi} \right\} \zdtag \\
+&= \frac{1}{2\pi j (n-M/2)} \left\{ e^{-j\omega_c (M/2-n)} - e^{j\pi (M/2-n)}
++ e^{-j\pi (M/2-n)} - e^{-j\omega_c (M/2-n)} \right\} \zdtag \\
+&= \frac{1}{2\pi j (n-M/2)} \left\{ -2j \sin [ \pi (M/2-n)] + 2j\sin [
+\omega_c (M/2-n)] \right\} \zdtag \\
+&= \frac{1}{\pi(n-M/2)} \left\{ \sin [ \pi(n-M/2)] - \sin[\omega_c (n-M/2)]
+\right\}  \\
+\intertext{the windowed impulse response is}
+h[n] &= \frac{1}{\pi(n-M/2)} \left\{ \sin [  \pi (n-M/2) ] - \sin [ \omega_c
+(n-M/2) ] \right\} w[n]  \\
+\intertext{It is to prove that $h_{hp}[n]$ is symmetric about $M/2$, i.e.,}
+h[n] &= \begin{cases}
+h[M-n] & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{align}
+if $w[n]$ is symmetric.
+
+Note that $M$ has to be even since if $M$ is odd, its system function $H(z)$
+has a zero at $z=-1$ ($\omega=\pi$).
+\end{Exa}
+
+\subsection{The Kaiser window filter design method}
+When the Kaiser Window is used to design FIR filters, a set of empirical
+formulas can be used to determine the $\beta$ and the required filter length
+$M$.
+
+Given the passband and stopband edge frequencies $\omega_p$ and $\omega_s$ at
+which the peak approximation error is $\delta$,
+\begin{align}
+\beta &= \begin{cases}
+0.1102 (A-8.7) & A> 50 \\
+0.5842 (A-21)^{0.4} + 0.07886(A-21) & 21 \leqslant A \leqslant 50 \\
+0.0  & A < 21 \\
+\end{cases} \\
+\intertext{and}
+M &= \frac{A-8}{2.285 \Delta\omega} \\
+\intertext{where}
+\Delta\omega &= \omega_s - \omega_p \\
+\intertext{(for lowpass filter) and}
+A &= -20\log_{10} \delta 
+\end{align}
+
+\begin{Exa}[Design lowpass FIR filter using Kaiser window]
+Given the passband edge frequency $\omega_p=0.4\pi$ at which $\delta_1=0.01$
+and the stopband edge frequency $\omega_s=0.6\pi$ at which $\delta_2=0.001$,
+determine $\beta$, $M$ and $h[n]$ for the Kaiser windowed FIR filter.
+
+Solution: \\
+\begin{enumerate}
+\item Since FIR filters designed by the window method inherently have
+$\delta_1=\delta_2$, we must set $\delta=\delta_2=0.001$.
+\item Due to the symmetry of the approximation at the discontinuity of
+$H_d(e^{j\omega})$
+\begin{align}
+\omega_c &= \frac{\omega_p + \omega_s}{2} = \frac{0.4\pi + 0.6\pi}{2} = 0.5\pi
+\\
+\intertext{and}
+\Delta\omega &= \omega_s-\omega_p = 0.2\pi \\
+A &= -20\log_{10} \delta = 60 
+\end{align}
+\item 
+\begin{align}
+\beta &= 0.1102 (A-8.7) \\
+&= 5.653 \\
+\intertext{since $A>50$}
+\intertext{And,}
+M &= \frac{60-8}{2.285 \times 0.2\pi} = 37 
+\end{align}
+\item The impulse response of the filter is obtained as
+\begin{align}
+h[n] &= h_d[n] w[n] \zdtag \\
+&= \begin{cases}
+\frac{ \sin \omega_c (n-\alpha)}{\pi(n-\alpha)} \cdot 
+\frac{I_0 \left[ \beta \left( 1 - \left[ \left( n-\alpha \right) / \alpha
+\right]^2 \right)^{\half} \right] }{I_0(\beta)} & 0 \leqslant n \leqslant M
+\\
+0 & \mbox{otherwise}  \\
+\end{cases} \label{eq8-3.71}
+\end{align}
+where $\alpha=M/2=37/2=18.5$.
+
+Note that Equation~\ref{eq8-3.71} is a linear phase type II system since
+$h[n]$ is symmetric about $M/2$ and $M$ is odd.
+\end{enumerate}
+\end{Exa}

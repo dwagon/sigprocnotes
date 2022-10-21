@@ -1,0 +1,12 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(246,55)(0,-10)
+\path(136,0)(136,40)(96,40)
+	(96,0)(136,0)
+\put(116,14){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $z^{-1}$}}}}}
+\path(36,20)(96,20)
+\path(88.000,18.000)(96.000,20.000)(88.000,22.000)
+\path(136,20)(196,20)
+\path(188.000,18.000)(196.000,20.000)(188.000,22.000)
+\put(31,20){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $f[n]$}}}}}
+\put(201,20){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $f[n-1]$}}}}}
+\end{picture}

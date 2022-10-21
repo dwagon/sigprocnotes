@@ -1,0 +1,31 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(485,135)(0,-10)
+\path(140,60)(140,120)(60,120)
+	(60,60)(140,60)
+\path(0,90)(60,90)
+\path(52.000,88.000)(60.000,90.000)(52.000,92.000)
+\path(140,90)(200,90)
+\path(192.000,88.000)(200.000,90.000)(192.000,92.000)
+\path(280,90)(340,90)
+\path(332.000,88.000)(340.000,90.000)(332.000,92.000)
+\path(420,90)(485,90)
+\path(477.000,88.000)(485.000,90.000)(477.000,92.000)
+\path(100,20)(100,60)
+\path(102.000,52.000)(100.000,60.000)(98.000,52.000)
+\path(280,60)(280,120)(200,120)
+	(200,60)(280,60)
+\path(420,60)(420,120)(340,120)
+	(340,60)(420,60)
+\path(200,40)(205,30)(415,30)(420,40)
+\path(310,30)(310,25)
+\put(100,86){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm C/D}}}}}
+\put(100,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm $T$}}}}}
+\put(170,70){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm $x[n]$}}}}}
+\put(0,70){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $x_a(t)$}}}}}
+\put(310,70){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm $\hat{x}[n]$}}}}}
+\put(480,65){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm $\hat{x}_b[n]$}}}}}
+\put(380,86){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm Coder}}}}}
+\put(240,95){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm Q}}}}}
+\put(240,77){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm (quantizer)}}}}}
+\put(310,0){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm A/D converter}}}}}
+\end{picture}

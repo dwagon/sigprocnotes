@@ -1,0 +1,22 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(465,57)(0,-10)
+\path(140,0)(140,40)(60,40)
+	(60,0)(140,0)
+\put(84,14){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$H_1(s)$}}}}}
+\path(260,0)(260,40)(180,40)
+	(180,0)(260,0)
+\put(204,14){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$H_2(s)$}}}}}
+\path(420,0)(420,40)(340,40)
+	(340,0)(420,0)
+\put(365,14){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$H_r(s)$}}}}}
+\path(0,20)(60,20)
+\path(52.000,18.000)(60.000,20.000)(52.000,22.000)
+\path(140,20)(180,20)
+\path(172.000,18.000)(180.000,20.000)(172.000,22.000)
+\path(420,20)(460,20)
+\path(452.000,18.000)(460.000,20.000)(452.000,22.000)
+\dashline{4.000}(260,20)(340,20)
+\path(332.000,18.000)(340.000,20.000)(332.000,22.000)
+\put(0,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm F(s)}}}}}
+\put(440,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm G(s)}}}}}
+\end{picture}

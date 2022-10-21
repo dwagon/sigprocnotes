@@ -1,0 +1,9 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(201,33)(0,-10)
+\path(36,0)(96,0)
+\path(88.000,-2.000)(96.000,0.000)(88.000,2.000)
+\path(96,0)(156,0)
+\put(91,5){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$a$}}}}}
+\put(31,5){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$f[n]$}}}}}
+\put(161,5){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$a f[n]$}}}}}
+\end{picture}

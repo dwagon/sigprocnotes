@@ -1,0 +1,26 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(277,308)(0,-10)
+\put(132,140){\ellipse{120}{200}}
+\put(132,200){\blacken\ellipse{6}{6}}
+\put(132,200){\ellipse{6}{6}}
+\put(132,80){\blacken\ellipse{6}{6}}
+\put(132,80){\ellipse{6}{6}}
+\path(132,0)(132,285)
+\path(134.000,277.000)(132.000,285.000)(130.000,277.000)
+\path(32,140)(232,140)
+\path(224.000,138.000)(232.000,140.000)(224.000,142.000)
+\path(54.000,132.000)(52.000,140.000)(50.000,132.000)
+\path(52,140)(52,40)
+\path(50.000,48.000)(52.000,40.000)(54.000,48.000)
+\path(140.000,22.000)(132.000,20.000)(140.000,18.000)
+\path(132,20)(192,20)
+\path(184.000,18.000)(192.000,20.000)(184.000,22.000)
+\dottedline{5}(32,40)(132,40)
+\dottedline{5}(192,140)(192,15)
+\put(142,280){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$j\omega$}}}}}
+\put(142,200){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$j$}}}}}
+\put(142,80){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-j$}}}}}
+\put(152,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\sinh a$}}}}}
+\put(47,80){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\cosh a$}}}}}
+\put(232,145){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\sigma$}}}}}
+\end{picture}

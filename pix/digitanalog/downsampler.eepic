@@ -1,0 +1,16 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(360,93)(0,-10)
+\path(240,18)(240,78)(120,78)
+	(120,18)(240,18)
+\path(240,48)(360,48)
+\path(352.000,46.000)(360.000,48.000)(352.000,50.000)
+\path(0,48)(120,48)
+\path(112.000,46.000)(120.000,48.000)(112.000,50.000)
+\put(180,43){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$\downarrow M$}}}}}
+\put(350,53){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$x_d[n]=x[n M]$}}}}}
+\put(350,18){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}Sampling}}}}}
+\put(350,0){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}period $T'=M T$}}}}}
+\put(20,53){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$x[n]$}}}}}
+\put(20,18){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Sampling}}}}}
+\put(20,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}period $T$}}}}}
+\end{picture}

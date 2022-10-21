@@ -1,0 +1,44 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(555,190)(0,-10)
+\path(390,105)(390,175)(320,175)
+	(320,105)(390,105)
+\put(355,134){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Synthesis}}}}}
+\put(39,153){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Specifications}}}}}
+\put(39,135){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}on Filter}}}}}
+\put(40,117){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}response}}}}}
+\path(80,105)(80,175)(0,175)
+	(0,105)(80,105)
+\put(147,143){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Approximation}}}}}
+\put(147,125){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}problem}}}}}
+\path(190,105)(190,175)(105,175)
+	(105,105)(190,105)
+\put(254,155){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Realizable}}}}}
+\put(254,137){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}filter transfer}}}}}
+\put(254,119){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}function}}}}}
+\path(295,105)(295,175)(215,175)
+	(215,105)(295,105)
+\put(444,145){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Test \&}}}}}
+\put(444,127){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Modify}}}}}
+\path(470,105)(470,175)(415,175)
+	(415,105)(470,105)
+\put(524,143){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Required}}}}}
+\put(525,125){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Filter}}}}}
+\path(555,105)(555,175)(495,175)
+	(495,105)(555,105)
+\put(144,33){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Realizability}}}}}
+\put(145,15){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}Conditions}}}}}
+\path(185,0)(185,60)(105,60)
+	(105,0)(185,0)
+\path(145,60)(145,105)
+\path(147.000,97.000)(145.000,105.000)(143.000,97.000)
+\path(80,135)(105,135)
+\path(97.000,133.000)(105.000,135.000)(97.000,137.000)
+\path(190,135)(215,135)
+\path(207.000,133.000)(215.000,135.000)(207.000,137.000)
+\path(295,135)(320,135)
+\path(312.000,133.000)(320.000,135.000)(312.000,137.000)
+\path(390,135)(415,135)
+\path(407.000,133.000)(415.000,135.000)(407.000,137.000)
+\path(470,135)(495,135)
+\path(487.000,133.000)(495.000,135.000)(487.000,137.000)
+\end{picture}

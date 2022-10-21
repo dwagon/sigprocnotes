@@ -1,0 +1,28 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(383,77)(0,-10)
+\path(100,25)(100,45)(40,45)
+	(40,25)(100,25)
+\path(200,25)(200,45)(140,45)
+	(140,25)(200,25)
+\path(340,25)(340,45)(280,45)
+	(280,25)(340,25)
+\path(0,35)(40,35)
+\path(100,35)(140,35)
+\path(200,35)(220,35)
+\path(260,35)(280,35)
+\path(340,35)(380,35)
+\dottedline{5}(220,35)(260,35)
+\path(0,35)(20,35)
+\path(12.000,33.000)(20.000,35.000)(12.000,37.000)
+\path(220,5)(380,5)
+\path(372.000,3.000)(380.000,5.000)(372.000,7.000)
+\path(160,5)(0,5)
+\path(8.000,7.000)(0.000,5.000)(8.000,3.000)
+\put(60,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$Z_1(s)$}}}}}
+\put(160,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$Z_2(s)$}}}}}
+\put(300,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$Z_n(s)$}}}}}
+\put(15,50){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$I(s)$}}}}}
+\put(175,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$V(s)$}}}}}
+\put(0,10){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$+$}}}}}
+\put(375,15){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$-$}}}}}
+\end{picture}

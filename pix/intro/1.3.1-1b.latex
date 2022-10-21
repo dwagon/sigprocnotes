@@ -1,0 +1,43 @@
+\setlength{\unitlength}{0.0125in}%
+\begin{picture}(531,193)(36,575)
+\put(280,750){\line( 0,-1){ 20}}
+\put(285,750){\line( 0,-1){ 20}}
+\put( 80,680){\framebox(60,20){}}
+\put( 95,686){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$25 k\Omega$}}}
+\put(180,680){\framebox(60,20){}}
+\put(198,686){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$1 k\Omega$}}}
+\put(349,691){\line( 0,-1){  5}}
+\put(344,691){\line( 1, 0){ 10}}
+\put(349,695){\line( 0,-1){  5}}
+\put( 40,580){\line( 1, 0){520}}
+\put( 40,690){\line( 1, 0){ 40}}
+\put(140,690){\line( 1, 0){ 40}}
+\put(240,690){\line( 1, 0){100}}
+\put(280,690){\line( 0,-1){ 45}}
+\put(280,635){\line( 0,-1){ 55}}
+\put(270,645){\line( 1, 0){ 20}}
+\put(270,635){\line( 1, 0){ 20}}
+\put(160,690){\line( 0, 1){ 50}}
+\put(160,740){\line( 1, 0){120}}
+\put(285,740){\line( 1, 0){155}}
+\put(440,740){\line( 0,-1){ 65}}
+\put(400,675){\line( 1, 0){160}}
+\put(320,600){\framebox(10,30){}}
+\put(325,600){\line( 0,-1){ 20}}
+\put(380,630){\framebox(30,10){}}
+\put(325,630){\line( 0, 1){ 25}}
+\put(325,655){\line( 1, 0){ 15}}
+\put(325,635){\line( 1, 0){ 55}}
+\put(440,675){\line( 0,-1){ 40}}
+\put(440,635){\line(-1, 0){ 30}}
+\put(340,705){\line( 0,-1){ 60}}
+\put(340,645){\line( 2, 1){ 60}}
+\put(400,675){\line(-2, 1){ 60}}
+\put(342,655){\line( 1, 0){ 10}}
+\put( 39,631){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$f(t)$}}}
+\put(561,622){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$g(t)$}}}
+\put(274,759){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$0.02 \mu F$}}}
+\put(262,633){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{$0.02 \mu F$}}}
+\put(336,597){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$10 k\Omega$}}}
+\put(400,612){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$10 k\Omega$}}}
+\end{picture}

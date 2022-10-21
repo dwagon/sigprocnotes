@@ -1,0 +1,30 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(168,149)(0,-10)
+\put(80,38){\ellipse{2}{2}}
+\put(73,37){\ellipse{2}{2}}
+\put(65,35){\ellipse{2}{2}}
+\put(56,36){\ellipse{2}{2}}
+\put(50,41){\ellipse{2}{2}}
+\put(44,48){\ellipse{2}{2}}
+\put(42,55){\ellipse{2}{2}}
+\put(44,63){\ellipse{2}{2}}
+\put(49,69){\ellipse{2}{2}}
+\put(55,73){\ellipse{2}{2}}
+\put(62,72){\ellipse{2}{2}}
+\put(68,67){\ellipse{2}{2}}
+\put(70,60){\ellipse{2}{2}}
+\spline(80,38)
+(60,33)(45,43)
+	(40,58)(50,73)(60,73)
+	(70,68)(70,58)
+\put(60,60){\ellipse{80}{80}}
+\path(60,0)(60,120)
+\path(62.000,112.000)(60.000,120.000)(58.000,112.000)
+\path(0,60)(120,60)
+\path(112.000,58.000)(120.000,60.000)(112.000,62.000)
+\path(115,95)(95,85)
+\path(101.261,90.367)(95.000,85.000)(103.050,86.789)
+\put(120,100){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Unit Circle}}}}}
+\put(60,125){\makebox(0,0)[b]{\smash{{{\SetFigFont{9}{10.8}{rm}$\Im z$}}}}}
+\put(125,60){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$\Re z$}}}}}
+\end{picture}

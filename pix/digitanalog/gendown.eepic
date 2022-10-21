@@ -1,0 +1,28 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(500,149)(0,-10)
+\put(137,99){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}LP Filter}}}}}
+\put(141,81){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Gain=1}}}}}
+\put(122,63){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Cutoff=$\pi/M$}}}}}
+\path(240,34)(240,134)(80,134)
+	(80,34)(240,34)
+\path(400,54)(400,114)(340,114)
+	(340,54)(400,54)
+\path(240,84)(340,84)
+\path(332.000,82.000)(340.000,84.000)(332.000,86.000)
+\path(0,84)(80,84)
+\path(72.000,82.000)(80.000,84.000)(72.000,86.000)
+\path(400,84)(500,84)
+\path(492.000,82.000)(500.000,84.000)(492.000,86.000)
+\put(370,79){\makebox(0,0)[b]{\smash{{{\SetFigFont{12}{14.4}{rm}$\downarrow$ M}}}}}
+\put(0,54){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$x[n]$}}}}}
+\put(0,36){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}sampling }}}}}
+\put(0,18){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}period $T$}}}}}
+\put(490,54){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\tilde{x}_d[n]=\tilde{x}[n M]$}}}}}
+\put(490,36){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}Sampling}}}}}
+\put(490,18){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}Period}}}}}
+\put(490,0){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$T'=M T$}}}}}
+\put(260,54){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\tilde{x}[n]$}}}}}
+\put(260,36){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Sampling}}}}}
+\put(260,18){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}Period}}}}}
+\put(260,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$T$}}}}}
+\end{picture}

@@ -1,0 +1,24 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(328,164)(0,-10)
+\put(215.000,117.500){\arc{25.000}{2.4981}{6.9267}}
+\put(235.000,117.500){\arc{25.000}{2.4981}{6.9267}}
+\put(195.000,117.500){\arc{25.000}{2.4981}{6.9267}}
+\path(195.045,43.246)(195.000,35.000)(198.920,42.255)
+\put(159.167,44.167){\arc{73.974}{2.7485}{6.5336}}
+\put(40,45){\ellipse{30}{30}}
+\path(140,100)(140,120)(80,120)
+	(80,100)(140,100)
+\path(40,60)(40,110)(80,110)
+\path(140,110)(185,110)
+\path(245,110)(300,110)(300,60)
+\path(290,60)(310,60)
+\path(290,55)(310,55)
+\path(40,30)(40,0)(300,0)(300,55)
+\put(155,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$i(t)$}}}}}
+\put(320,50){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$C$}}}}}
+\put(210,140){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$L$}}}}}
+\put(110,130){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$R$}}}}}
+\put(0,35){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$v(t)$}}}}}
+\put(40,32){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{$-$}}}}}
+\put(37,48){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$+$}}}}}
+\end{picture}

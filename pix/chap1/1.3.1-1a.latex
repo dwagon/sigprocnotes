@@ -1,0 +1,15 @@
+\setlength{\unitlength}{0.0125in}%
+\begin{picture}(200,95)(60,710)
+\put(140,770){\framebox(60,20){}}
+\put( 80,780){\line( 1, 0){ 60}}
+\put(200,780){\line( 1, 0){ 60}}
+\put(220,780){\line( 0,-1){ 30}}
+\put(210,750){\line( 1, 0){ 20}}
+\put(210,745){\line( 1, 0){ 20}}
+\put( 80,710){\line( 1, 0){180}}
+\put(220,745){\line( 0,-1){ 35}}
+\put( 60,744){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$f(t)$}}}
+\put(260,744){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$g(t)$}}}
+\put(195,746){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$C$}}}
+\put(160,796){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{$R$}}}
+\end{picture}

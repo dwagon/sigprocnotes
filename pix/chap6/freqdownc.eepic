@@ -1,0 +1,18 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(507,155)(0,-10)
+\path(160,20)(220,80)(280,20)
+\path(0,20)(435,20)
+\path(427.000,18.000)(435.000,20.000)(427.000,22.000)
+\path(220,20)(220,140)
+\path(222.000,132.000)(220.000,140.000)(218.000,132.000)
+\path(20,20)(80,80)(140,20)
+\path(300,20)(360,80)(420,20)
+\put(225,85){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{1}{T}$}}}}}
+\put(225,125){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$X(e^{j\omega})$}}}}}
+\put(160,0){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-\omega_N$}}}}}
+\put(280,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\omega_N$}}}}}
+\put(310,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\pi$}}}}}
+\put(80,0){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$-2\pi$}}}}}
+\put(360,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$w\pi$}}}}}
+\put(400,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\omega=\Omega T$ }}}}}
+\end{picture}

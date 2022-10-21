@@ -1,0 +1,25 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(264,196)(0,-10)
+\put(135,85){\ellipse{120}{120}}
+\put(95,85){\ellipse{10}{10}}
+\put(55,85){\ellipse{10}{10}}
+\put(96,131){\ellipse{10}{10}}
+\put(95,40){\ellipse{10}{10}}
+\put(175,85){\ellipse{10}{10}}
+\put(165,125){\ellipse{10}{10}}
+\put(165,45){\ellipse{10}{10}}
+\put(215,85){\ellipse{10}{10}}
+\put(75,85){\blacken\ellipse{10}{10}}
+\put(75,85){\ellipse{10}{10}}
+\put(195,165){\ellipse{10}{10}}
+\put(195,5){\ellipse{10}{10}}
+\path(35,85)(235,85)
+\path(227.000,83.000)(235.000,85.000)(227.000,87.000)
+\path(135,5)(135,165)
+\path(137.000,157.000)(135.000,165.000)(133.000,157.000)
+\path(25,160)(80,115)
+\path(72.542,118.518)(80.000,115.000)(75.075,121.614)
+\put(235,90){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Re$}}}}}
+\put(135,170){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Im$}}}}}
+\put(55,165){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm Unit Circle}}}}}
+\end{picture}

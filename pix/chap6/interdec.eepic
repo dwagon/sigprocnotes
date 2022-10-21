@@ -1,0 +1,46 @@
+\setlength{\unitlength}{0.0094in}
+\begin{picture}(690,247)(0,-10)
+\path(115,100)(115,160)(55,160)
+	(55,100)(115,100)
+\put(85,120){\makebox(0,0)[b]{\smash{{{\SetFigFont{9}{10.8}{rm}$\uparrow$ L}}}}}
+\path(595,100)(595,160)(535,160)
+	(535,100)(595,100)
+\put(565,125){\makebox(0,0)[b]{\smash{{{\SetFigFont{9}{10.8}{rm}$\downarrow$ M}}}}}
+\put(196,143){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Lowpass Filter}}}}}
+\put(208,125){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Gain $=L$}}}}}
+\put(198,107){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Cutoff $=\pi/L$}}}}}
+\path(295,80)(295,180)(175,180)
+	(175,80)(295,80)
+\put(389,125){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Gain $=1$}}}}}
+\put(376,107){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Cutoff $=\pi/M$}}}}}
+\put(376,143){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Lowpass Filter}}}}}
+\path(475,80)(475,180)(355,180)
+	(355,80)(475,80)
+\dashline{4.000}(315,60)(315,200)(15,200)
+	(15,60)(315,60)
+\dashline{4.000}(615,60)(615,200)(335,200)
+	(335,60)(615,60)
+\path(0,130)(55,130)
+\path(47.000,128.000)(55.000,130.000)(47.000,132.000)
+\path(115,130)(175,130)
+\path(167.000,128.000)(175.000,130.000)(167.000,132.000)
+\path(295,130)(355,130)
+\path(347.000,128.000)(355.000,130.000)(347.000,132.000)
+\path(475,130)(535,130)
+\path(527.000,128.000)(535.000,130.000)(527.000,132.000)
+\path(595,130)(630,130)
+\path(622.000,128.000)(630.000,130.000)(622.000,132.000)
+\put(155,220){\makebox(0,0)[b]{\smash{{{\SetFigFont{9}{10.8}{rm}Interpolator}}}}}
+\put(475,220){\makebox(0,0)[b]{\smash{{{\SetFigFont{9}{10.8}{rm}Decimator}}}}}
+\put(15,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}Sampling Period:}}}}}
+\put(15,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$T$}}}}}
+\put(135,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$\frac{T}{L}$}}}}}
+\put(315,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$\frac{T}{L}$}}}}}
+\put(495,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$\frac{T}{L}$}}}}}
+\put(605,20){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$\frac{T M}{L}$}}}}}
+\put(20,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$x[n]$}}}}}
+\put(120,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$x_e[n]$}}}}}
+\put(305,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$x_i[n]$}}}}}
+\put(485,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$\tilde{x}_i[n]$}}}}}
+\put(600,140){\makebox(0,0)[lb]{\smash{{{\SetFigFont{9}{10.8}{rm}$\tilde{x}_d[n]$}}}}}
+\end{picture}

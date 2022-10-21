@@ -1,0 +1,22 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(456,173)(0,-10)
+\path(91,120)(91,140)(191,140)
+\path(91,100)(191,100)
+\path(211,85)(211,100)(311,100)
+\path(211,60)(311,60)
+\path(331,40)(331,60)(431,60)
+\path(331,20)(451,20)
+\put(91,120){\makebox(0,0)[rb]{\smash{{{\SetFigFont{12}{14.4}{rm}$6\lambda^2+15$ }}}}}
+\put(96,145){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{1}{6} \lambda$}}}}}
+\put(96,120){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\lambda^3+15\lambda$}}}}}
+\put(96,102){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\lambda^3+\frac{5}{2}\lambda$}}}}}
+\put(131,80){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{25}{2}\lambda$}}}}}
+\put(216,80){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$6\lambda^2+15$}}}}}
+\put(216,62){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$6\lambda$}}}}}
+\put(216,105){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{12}{25}\lambda$}}}}}
+\put(271,40){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$15$}}}}}
+\put(336,65){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{25}{30}\lambda$}}}}}
+\put(336,40){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{25}{2}\lambda$}}}}}
+\put(336,25){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$\frac{25}{2}\lambda$}}}}}
+\put(371,0){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}$0$}}}}}
+\end{picture}

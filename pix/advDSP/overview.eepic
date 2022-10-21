@@ -1,0 +1,144 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(575,635)(0,-10)
+\put(95,493){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Digital }}}}}
+\put(95,478){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Filtering}}}}}
+\path(135,460)(135,520)(55,520)
+	(55,460)(135,460)
+\put(475,600){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Two}}}}}
+\put(475,585){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Dimensional}}}}}
+\put(475,570){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Processing}}}}}
+\path(515,560)(515,620)(435,620)
+	(435,560)(515,560)
+\put(475,493){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Spectrum}}}}}
+\put(475,478){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Analysis}}}}}
+\path(515,460)(515,520)(435,520)
+	(435,460)(515,460)
+\put(55,273){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Synthesis of}}}}}
+\put(55,258){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm FIR Filters}}}}}
+\path(95,240)(95,300)(15,300)
+	(15,240)(95,240)
+\put(155,273){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Synthesis of}}}}}
+\put(155,258){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm IIR Filters}}}}}
+\path(195,240)(195,300)(115,300)
+	(115,240)(195,240)
+\put(472,393){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Fast Fourier}}}}}
+\put(472,378){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Transform}}}}}
+\path(515,360)(515,420)(435,420)
+	(435,360)(515,360)
+\put(295,393){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Theory of}}}}}
+\put(295,378){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Quantization}}}}}
+\path(335,360)(335,420)(255,420)
+	(255,360)(335,360)
+\put(535,300){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Statistical }}}}}
+\put(535,285){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm spectrum}}}}}
+\put(535,270){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm analysis}}}}}
+\path(575,260)(575,320)(495,320)
+	(495,260)(575,260)
+\put(415,300){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Filtering}}}}}
+\put(415,285){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm by FFT}}}}}
+\put(415,270){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm methods}}}}}
+\path(455,260)(455,320)(375,320)
+	(375,260)(455,260)
+\put(305,35){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Applications}}}}}
+\path(355,0)(355,80)(255,80)
+	(255,0)(355,0)
+\put(285,600){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Theory of Discrete Time LTI}}}}}
+\put(285,585){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Systems and the Discrete}}}}}
+\put(285,570){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Fourier Transform (DFT)}}}}}
+\path(375,560)(375,620)(195,620)
+	(195,560)(375,560)
+\put(50,400){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Approximation}}}}}
+\put(50,385){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm problem for}}}}}
+\put(50,370){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm FIR filters}}}}}
+\path(95,360)(95,420)(5,420)
+	(5,360)(95,360)
+\put(160,400){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Approximation}}}}}
+\put(160,385){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm problem for}}}}}
+\put(160,370){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm IIR Filters}}}}}
+\path(205,360)(205,420)(115,420)
+	(115,360)(205,360)
+\put(47,160){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Implementation }}}}}
+\put(47,145){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm of }}}}}
+\put(47,130){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm FIR Filters}}}}}
+\path(95,120)(95,180)(0,180)
+	(0,120)(95,120)
+\put(162,160){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Implementation}}}}}
+\put(162,145){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm of}}}}}
+\put(162,130){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm IIR Filters}}}}}
+\path(210,120)(210,180)(115,180)
+	(115,120)(210,120)
+\put(475,200){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Implementation }}}}}
+\put(475,185){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm of spectrum}}}}}
+\put(475,170){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm analyzers}}}}}
+\path(525,160)(525,220)(425,220)
+	(425,160)(525,160)
+\put(322,200){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Hardware,}}}}}
+\put(322,185){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Computer architecture}}}}}
+\put(322,170){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\ninrm Programming}}}}}
+\path(394,160)(394,220)(251,220)
+	(251,160)(394,160)
+\path(375,590)(435,590)
+\path(427.000,588.000)(435.000,590.000)(427.000,592.000)
+\path(515,590)(555,590)
+\path(547.000,588.000)(555.000,590.000)(547.000,592.000)
+\path(55,360)(55,300)
+\path(53.000,308.000)(55.000,300.000)(57.000,308.000)
+\path(55,240)(55,180)
+\path(53.000,188.000)(55.000,180.000)(57.000,188.000)
+\path(155,240)(155,180)
+\path(153.000,188.000)(155.000,180.000)(157.000,188.000)
+\path(155,360)(155,300)
+\path(153.000,308.000)(155.000,300.000)(157.000,308.000)
+\path(93.000,528.000)(95.000,520.000)(97.000,528.000)
+\path(95,520)(95,540)(475,540)(475,520)
+\path(473.000,528.000)(475.000,520.000)(477.000,528.000)
+\path(285,560)(285,540)
+\path(95,460)(95,440)
+\path(53.000,428.000)(55.000,420.000)(57.000,428.000)
+\path(55,420)(55,440)(155,440)(155,420)
+\path(153.000,428.000)(155.000,420.000)(157.000,428.000)
+\path(55,120)(55,70)(255,70)
+\path(247.000,68.000)(255.000,70.000)(247.000,72.000)
+\path(155,120)(155,100)(305,100)(305,80)
+\path(303.000,88.000)(305.000,80.000)(307.000,88.000)
+\path(250,210)(105,210)(105,150)(95,150)
+\path(103.000,152.000)(95.000,150.000)(103.000,148.000)
+\path(395,190)(425,190)
+\path(417.000,188.000)(425.000,190.000)(417.000,192.000)
+\path(475,240)(475,220)
+\path(473.000,228.000)(475.000,220.000)(477.000,228.000)
+\path(335,390)(435,390)
+\path(427.000,388.000)(435.000,390.000)(427.000,392.000)
+\path(475,460)(475,420)
+\path(473.000,428.000)(475.000,420.000)(477.000,428.000)
+\path(295,360)(295,270)(195,270)
+\path(203.000,272.000)(195.000,270.000)(203.000,268.000)
+\path(275,360)(275,340)(105,340)
+	(105,270)(95,270)
+\path(103.000,272.000)(95.000,270.000)(103.000,268.000)
+\path(415,260)(415,240)(535,240)(535,260)
+\path(475,360)(475,340)
+\path(413.000,328.000)(415.000,320.000)(417.000,328.000)
+\path(415,320)(415,340)(535,340)(535,320)
+\path(533.000,328.000)(535.000,320.000)(537.000,328.000)
+\path(475,160)(475,70)(355,70)
+\path(363.000,72.000)(355.000,70.000)(363.000,68.000)
+\path(415,50)(355,50)
+\path(363.000,52.000)(355.000,50.000)(363.000,48.000)
+\path(415,30)(355,30)
+\path(363.000,32.000)(355.000,30.000)(363.000,28.000)
+\path(415,10)(355,10)
+\path(363.000,12.000)(355.000,10.000)(363.000,8.000)
+\path(195,30)(255,30)
+\path(247.000,28.000)(255.000,30.000)(247.000,32.000)
+\path(195,10)(255,10)
+\path(247.000,8.000)(255.000,10.000)(247.000,12.000)
+\path(250,190)(230,190)(230,150)(210,150)
+\path(218.000,152.000)(210.000,150.000)(218.000,148.000)
+\put(565,585){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm ?}}}}}
+\put(420,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm Communications}}}}}
+\put(420,25){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm Speech}}}}}
+\put(420,5){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm Seismology}}}}}
+\put(190,25){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm Radar Theory}}}}}
+\put(190,5){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\ninrm Sonar Theory}}}}}
+\end{picture}

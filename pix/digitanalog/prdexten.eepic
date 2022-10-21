@@ -1,0 +1,89 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(558,533)(0,-10)
+\path(23,231)(23,311)
+\path(25.000,303.000)(23.000,311.000)(21.000,303.000)
+\path(0,231)(113,231)
+\path(105.000,229.000)(113.000,231.000)(105.000,233.000)
+\path(12,231)(12,250)
+\path(14.000,242.000)(12.000,250.000)(10.000,242.000)
+\path(23,231)(23,248)
+\path(25.000,240.000)(23.000,248.000)(21.000,240.000)
+\path(34,231)(34,251)
+\path(36.000,243.000)(34.000,251.000)(32.000,243.000)
+\path(45,231)(45,260)
+\path(47.000,252.000)(45.000,260.000)(43.000,252.000)
+\path(56,231)(56,272)
+\path(58.000,264.000)(56.000,272.000)(54.000,264.000)
+\path(68,231)(68,274)
+\path(70.000,266.000)(68.000,274.000)(66.000,266.000)
+\path(79,231)(79,271)
+\path(81.000,263.000)(79.000,271.000)(77.000,263.000)
+\path(90,231)(90,268)
+\path(92.000,260.000)(90.000,268.000)(88.000,260.000)
+\put(113,234){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\sevrm $t$}}}}}
+\put(23,316){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\sevrm $x_s(nT)$}}}}}
+\put(34,220){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\sevrm $T$}}}}}
+\put(56,220){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\sevrm $3T$}}}}}
+\put(79,220){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\sevrm $5T$}}}}}
+\path(170,35)(510,35)
+\path(502.000,33.000)(510.000,35.000)(502.000,37.000)
+\path(330,35)(330,135)
+\path(332.000,127.000)(330.000,135.000)(328.000,127.000)
+\path(290,35)(310,75)(330,65)
+	(350,75)(370,35)
+\path(170,215)(490,215)
+\path(482.000,213.000)(490.000,215.000)(482.000,217.000)
+\path(330,215)(330,315)
+\path(332.000,307.000)(330.000,315.000)(328.000,307.000)
+\path(290,215)(310,255)(330,245)
+	(350,255)(370,215)
+\path(211,215)(231,255)(251,245)
+	(271,255)(291,215)
+\path(370,215)(390,255)(410,245)
+	(430,255)(450,215)
+\path(230,35)(250,75)(270,65)
+	(290,75)(310,35)
+\path(350,35)(370,75)(390,65)
+	(410,75)(430,35)
+\path(170,35)(190,75)(210,65)
+	(230,75)(250,35)
+\path(412,35)(432,75)(452,65)
+	(472,75)(492,35)
+\drawline(165,240)(165,240)
+\path(280,395)(280,370)
+\path(380,395)(380,370)
+\path(170,395)(490,395)
+\path(482.000,393.000)(490.000,395.000)(482.000,397.000)
+\path(330,395)(330,495)
+\path(332.000,487.000)(330.000,495.000)(328.000,487.000)
+\path(290,395)(310,435)(330,425)
+	(350,435)(370,395)
+\path(190,395)(210,435)(230,425)
+	(250,435)(270,395)
+\path(392,395)(412,435)(432,425)
+	(452,435)(472,395)
+\put(145,265){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $\stackrel{\F}{\fpair}$}}}}}
+\put(330,145){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X(\Omega)$}}}}}
+\put(295,15){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $-\Omega_N$}}}}}
+\put(365,15){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega_N$}}}}}
+\put(330,325){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X(\Omega)$}}}}}
+\put(295,195){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $-\Omega_N$}}}}}
+\put(365,195){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega_N$}}}}}
+\put(490,220){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega$}}}}}
+\put(240,195){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $-\Omega_s$}}}}}
+\put(405,195){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega_s$}}}}}
+\put(510,40){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega$}}}}}
+\put(390,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega_s$}}}}}
+\put(270,0){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $-\Omega_s$}}}}}
+\put(310,100){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $\Omega_s < 2\Omega_N$}}}}}
+\put(310,460){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $\Omega_s > 2\Omega_N$}}}}}
+\put(315,295){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $\Omega_s = 2\Omega_N$}}}}}
+\put(330,505){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $X(\Omega)$}}}}}
+\put(490,400){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega$}}}}}
+\put(430,375){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega_s$}}}}}
+\put(230,375){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $-\Omega_s$}}}}}
+\put(355,375){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $\Omega_N$}}}}}
+\put(290,375){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $-\Omega_N$}}}}}
+\put(280,355){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $-\frac{\Omega_N}{2}$}}}}}
+\put(380,355){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\shortstack{{\twlrm $\frac{\Omega_N}{2}$}}}}}
+\end{picture}

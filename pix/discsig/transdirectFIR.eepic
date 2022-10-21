@@ -1,0 +1,46 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(307,73)(0,-10)
+\path(95,40)(55,40)(55,0)(95,0)
+\path(70,40)(75,40)
+\path(67.000,38.000)(75.000,40.000)(67.000,42.000)
+\path(135,40)(95,40)(95,0)(135,0)
+\path(110,40)(115,40)
+\path(107.000,38.000)(115.000,40.000)(107.000,42.000)
+\path(235,40)(195,40)(195,0)(235,0)
+\path(210,40)(215,40)
+\path(207.000,38.000)(215.000,40.000)(207.000,42.000)
+\path(135,40)(135,0)
+\path(135,0)(145,0)
+\path(135,40)(145,40)
+\path(185,40)(195,40)
+\path(185,0)(195,0)
+\dashline{4.000}(145,40)(185,40)
+\dashline{4.000}(145,0)(185,0)
+\path(235,40)(235,0)
+\path(235,25)(235,15)
+\path(233.000,23.000)(235.000,15.000)(237.000,23.000)
+\path(15,0)(55,0)
+\path(235,40)(275,40)
+\path(55,15)(55,20)
+\path(57.000,12.000)(55.000,20.000)(53.000,12.000)
+\path(95,25)(95,30)
+\path(97.000,22.000)(95.000,30.000)(93.000,22.000)
+\path(195,25)(195,30)
+\path(197.000,22.000)(195.000,30.000)(193.000,22.000)
+\path(80,0)(85,0)
+\path(77.000,-2.000)(85.000,0.000)(77.000,2.000)
+\path(110,0)(115,0)
+\path(107.000,-2.000)(115.000,0.000)(107.000,2.000)
+\path(220,0)(225,0)
+\path(217.000,-2.000)(225.000,0.000)(217.000,2.000)
+\put(275,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $g[n]$}}}}}
+\put(95,15){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $h[M-1]$}}}}}
+\put(200,15){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $h[1]$}}}}}
+\put(240,15){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $h[0]$}}}}}
+\put(215,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $z^{-1}$}}}}}
+\put(105,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $z^{-1}$}}}}}
+\put(65,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $z^{-1}$}}}}}
+\put(30,5){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $f[n]$}}}}}
+\put(55,25){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $h[M]$}}}}}
+\put(135,5){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\ninrm $h[M-2]$}}}}}
+\end{picture}

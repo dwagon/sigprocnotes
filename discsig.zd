@@ -1,0 +1,2583 @@
+% $Id: discsig.zd,v 1.2 1993/06/07 03:08:15 dwagon Exp dwagon $
+% $Header: /ccstaff2/edp/dwagon/signotes/RCS/discsig.zd,v 1.2 1993/06/07 03:08:15 dwagon Exp dwagon $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Discrete Signals and Systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\minitoc
+
+\section{Introduction}	%1
+
+\begin{Def}[Discrete System]
+\index{discrete systems}
+A discrete system is one which has discrete input and output signals.
+\end{Def}
+
+As a majority part of discrete systems involves finite-word-length operations,
+whether it is using the fixed-point or the floating-point arithmetic, digital
+systems are our major concern.
+
+The advantages of the digital signal processing systems over analog ones are
+as follows:
+\begin{itemize}
+\item allowing flexibility in reconfiguring;
+\item providing better control of accuracy requirements;
+\item storing digital signals on magnetic media without deterioration or loss
+of signal fidelity beyond that introduced in the A/D conversion;
+\item allowing for the implementation of more sophisticated signal processing
+algorithms;
+\item allowing multidimensional signal processing which has no equivalent in
+the analog form.
+\end{itemize}
+
+\section{Properties of Discrete Systems}	%2
+
+Given a discrete system
+\begin{center}
+\input{pix/discsig/discsys.eepic}
+\end{center}
+where $f[n]$ is the input and $g[n]$ is the output.
+\begin{equation}
+g[n]=H(f[n])
+\end{equation}
+
+\subsection{Linearity}
+If two output signals $g_1[n]$ and $g_2[n]$ are response signals of the system
+to the input signals $f_1[n]$ and $f_2[n]$ respectively, the system is linear
+if
+\begin{align}
+H(a_1f_1[n]+a_2f_2[n]) = a_1g_1[n] + a_2g_2[n] \zdtag \\
+\intertext{where $a_1$ and $a_2$ are constants.}
+\intertext{In general, the system is linear if}
+g_i[n] &= H(f_i[n]) \qquad \mbox{for $i=0,1,\ldots,m$} \zdtag \\
+\intertext{and}
+H \left( \sum_{i=0}^{m} a_i f_i[n] \right) &= \sum_{i=0}^{m} a_ig_i[n]
+\end{align}
+where $a_i$ ($i=0,1,\ldots,m$) are constants.
+
+\subsection{Time-Invariant or Shift-Invariant}
+If $g[n]=H(f[n])$,
+\begin{equation}
+H(f[n-n_0]) = g[n-n_0] 
+\end{equation}
+where $n_0$ is a constant time delay, the system ($H$) is time-invariant.
+
+\subsection{Causality}
+A system is causal if the output of the system at any time $n$, $g[n]$ depends
+ONLY on present and past inputs, $f[n],f[n-1],f[n-2],\ldots$ but does not
+depend on the future inputs $f[n+1],f[n+2],\ldots$.
+\begin{equation}
+g[n]=H(f[n],f[n-1],\ldots)
+\end{equation}
+where $H(\cdot)$ is some arbitrary function.
+
+\subsection{Static or Dynamic Systems}
+A discrete-system is called static\index{static system} or 
+memory-less\index{memory-less system} if its output at any instant depends
+at most on the input sample at the same time, but not on past or future
+samples of the input. Otherwise the system is said to be
+dynamic\index{dynamic systems} or to have memory\index{memory systems}.
+
+\subsection{Stability}
+A system is stable in the Bounded-Input Bounded-Output (BIBO) sense if and
+only if {\em every\/} bounded input sequence produces a bounded output
+sequence.
+
+Namely, for every input sequence $f[n]$ such that 
+\begin{equation}
+|f[n]| \leqslant M_f < \infty \qquad \mbox{for all $n$} 
+\end{equation}
+where $M_f$ is a fixed positive finite value, there exists a finite fixed
+positive value $M_g$ such that
+\begin{equation}
+|g[n]| \leqslant M_g < \infty \qquad \mbox{for all $n$} 
+\end{equation}
+where $g[n]$ is the output sequence or the system response to the input
+$f[n]$.
+
+\begin{Exa}
+Determine the properties of a given system, assuming  $g[n]$ is the output
+sequence and $f[n]$ is the input sequence.
+
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\renewcommand{\theenumii}{\roman{enumii}}
+\item Static or Dynamic?
+\begin{enumerate}
+\item $g[n]=a f[n]$, where $a$ is a constant.
+\item $g[n]=n x[n] + b x^3[n]$ where $b$ is a constant.
+\item $g[n]=x[n]+3 x[n-1]$
+\item $g[n] = \sum_{k=0}^{N} x[n-k]$ where $N=0$ or $N$ is a finite number but
+not zero
+\end{enumerate}
+\item Time-variant or time-invariant
+\begin{enumerate}
+\item $g[n]=H(f[n])=f[n]-f[n-1]$
+\item $g[n]=H(f[n])=n f[n]$
+\item $g[n]=H(f[n])=f[-n]$
+\item $g[n]=H(f[n])=f[n]\cos(\omega_0 n)$
+\end{enumerate}
+\item Linear or nonlinear?
+\begin{enumerate}
+\item $g[n]=H(f[n])=n f[n]$
+\item $g[n]=H(f[n])=f[n^2]$
+\item $g[n]=H(f[n])=f^2[n]$
+\item $g[n]=H(f[n])=A f[n]+B$, ($A$, $B$ constants)
+\item $g[n]=H(f[n])=e^{f[n]}$
+\end{enumerate}
+\item Causal or noncausal?
+\begin{enumerate}
+\item $g[n]= f[n]-f[n-1]$
+\item $g[n]= \sum_{k=-\infty}^{n} f[k]$
+\item $g[n]= a f[n]$
+\item $g[n]= f[n] + 3 f[n+4]$
+\item $g[n]= f[n^2]$
+\item $g[n]= f[2n]$
+\item $g[n]= f[-n]$
+\end{enumerate}
+\end{enumerate}
+
+Solutions:\\
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\renewcommand{\theenumii}{\roman{enumii}}
+\item Static or Dynamic?
+\begin{enumerate}
+\item Static
+\item Static
+\item Dynamic
+\item $N=0$ Static \\
+$N\neq 0$ Dynamic 
+\end{enumerate}
+\item Time-variant or time-invariant
+\begin{enumerate}
+\item $g[n]=H(f[n])=f[n]-f[n-1].$
+If the input is delayed by $n_0$ units in time and applied to the system, the
+output is 
+\begin{equation}
+g[n,n_0]=f[n-n_0]-f[n-n_0-1].
+\end{equation}
+On the other hand, from the given condition
+\begin{equation}
+g[n-n_0]=f[n-n_0]-f[(n-n_0)-1] 
+\end{equation}
+i.e.
+\begin{equation}
+g[n,n_0]=g[n-n_0].
+\end{equation}
+The system is time-invariant.
+\item $g[n]=H(f[n])=n f[n].$
+If the input is delayed by $n_0$ units and applied to the system, the response
+to $f[n-n_0]$ is 
+\begin{align}
+g[n,n_0] &=n f[n-n_0] \\
+\intertext{On the other hand, from the given condition}
+g[n-n_0] &= (n-n_0) f[n-n_0] \\
+&= n f[n-n_0] - n_0 f[n-n_0] \\
+\intertext{i.e.}
+g[n,n_0] &\neq g[n-n_0]
+\end{align}
+The system is time-variant.
+\item $g[n]=H(f[n])=f[-n].$
+The system response to $f[n-n_0]$ is 
+\begin{equation}
+g[n,n_0]=f[-n-n_0] 
+\end{equation}
+(which is $f[-n]$ delayed by $n_0$ units.)
+However,
+\begin{align}
+g[n-n_0] &= f[-(n-n_0)] \\
+&= f[-n+n_0] \\
+\intertext{The system is time-variant, since}
+g[n,n_0] &\neq g[n-n_0]
+\end{align}
+\item $g[n]=H(f[n])=f[n]\cos(\omega_0 n).$
+The system response to $f[n-n_0]$ is
+\begin{equation}
+g[n,n_0]=f[n-n_0] \cos(\omega_0 n) 
+\end{equation}
+On the other hand,
+\begin{equation}
+g[n-n_0]=f[n-n_0] \cos ( \omega_0 [ n-n_0] ) 
+\end{equation}
+The system is time-variant.
+\end{enumerate}
+\item Linear or nonlinear?
+\begin{enumerate}
+\item $g[n]=H(f[n])=n f[n]$
+\begin{align}
+g_1[n] &= n f_1[n] \\
+g_2[n] &= n f_2[n] \\
+g_3[n] &= H \left( a_1 f_1[n] + a_2 f_2[n] \right) \\
+&= n \left\{ a_1 f_1[n] + a_2 f_2[n] \right\} \\
+&= a_1 n f_1[n] + a_2 n f_2[n] \\
+&= a_1g_1[n] + a_2g_2[n]
+\end{align}
+Linear.
+\item $g[n]=H(f[n])=f[n^2]$
+\begin{align}
+g_1[n] &= f_1[n^2] \\
+g_2[n] &= f_2[n^2] \\
+g_3[n] &= H \left( a_1 f_1[n] +a_2 f_2[n] \right) \\
+&= a_1 f_1[n^2] + a_2 f_2[n^2] \\
+&= a_1 g_1[n] + a_2 g_2[n]
+\end{align}
+Linear.
+\item $g[n]=H(f[n])=f^2[n]$
+\begin{align}
+g_1[n] &= f_1^2[n] \\
+g_2[n] &= f_2^2[n] \\
+g_3[n] &= H \left( a_1 f_1[n] + a_2 f_2[n] \right) \\
+&= \left( a_1f_1[n] + a_2f_2[n] \right)^2 \\
+& \neq a_1 f_a^2[n] + a_2 f_2^2[n]
+\end{align}
+Nonlinear.
+\item $g[n]=H(f[n])=A f[n]+B$, ($A$, $B$ constants)
+\begin{align}
+g_1[n] &= A f_1[n] + B \\
+g_2[n] &= A f_2[n] + B \\
+g_3[n] &= H ( a_1f_1[n] + a_2 f_2[n] ) \\
+&= A \left\{ a_1 f_1[n] + a_2 f_2[n] \right\} + B \\
+&= a_1 A f_1[n] + a_2 A f_2[n] + B  \\
+& \begin{cases}
+B=0 & \mbox{Linear} \\
+B \neq 0 & \mbox{Nonlinear} \\
+\end{cases}
+\end{align}
+\item $g[n]=H(f[n])=e^{f[n]}$
+Nonlinear.
+\end{enumerate}
+\item Causal or noncausal?
+\begin{enumerate}
+\item Causal
+\item Causal
+\item Causal
+\item Noncausal
+\item Noncausal
+\item Noncausal
+\item Noncausal
+Since $n=-1$, $g[-1]=f[1]$, with respect to $-1$, $1$ is two steps into the
+future.
+\end{enumerate}
+\end{enumerate}
+\end{Exa}
+
+\begin{Exa}
+Consider the system referred to as an accumulator and defined by the relation
+\begin{equation}
+g[n] = \sum_{k=-\infty}^{n} f[k] 
+\end{equation}
+where $f[k]$ is the input sequence and $g[n]$ is the output sequence.
+
+Is this system stable? (BIBO?)
+
+Solution:\\
+Choose $f[n] = u[n]$, where $u[n]$ is the unit step sequence defined as
+\begin{equation}
+u[n] = \begin{cases}
+1 & n \geqslant 0 \\
+0 & n<0 \\
+\end{cases} 
+\end{equation}
+Obviously, $u[n]$ is a bounded input as
+\begin{equation}
+|u[n]|=1 < \infty \qquad \mbox{for all $n$} 
+\end{equation}
+However, for this input to the accumulator, the output is
+\begin{equation}
+g[n] = \sum_{k=-\infty}^{n} u[n] = \begin{cases}
+0 & n<0 \\
+(n+1) & n \geqslant 0 \\
+\end{cases} 
+\end{equation}
+
+Although this response is finite if $n$ is finite, it is nevertheless
+unbounded, i.e., there is no fixed positive value $M_g$ such that $(n+1)
+\leqslant M_g < \infty$ for ALL $n$.
+
+\end{Exa}
+
+\section{Discrete Unit Impulse and Impulse Response of the System}	%3
+
+\begin{Def}
+\index{unit impulse}
+The discrete unit impulse is defined as the sequence
+\begin{equation}
+\delta[n] = \begin{cases}
+1 & \mbox{for $n=0$} \\
+0 & \mbox{otherwise} \\
+\end{cases} 
+\end{equation}
+\end{Def}
+
+$\delta[n]$ is also known as the unit sample sequence. In contrast to the
+analog unit impulse function $\delta[t]$ which is infinite at $t=0$, zero
+everywhere else and has unit area. $\delta[n]$ is one at $n=0$ and zero
+elsewhere.
+
+Using the unit sample sequence, a sequence $f[n]$ can be expressed as a sum of
+shifted impulses
+\begin{equation}
+f[n] = \infsum{m} f[m] \delta[n-m]
+\end{equation}
+
+Assume that the impulse response of the system ($H$) to a unit impulse is the
+sequence $h[n]$:
+\begin{equation}
+h[n] = H(\delta[n])
+\end{equation}
+
+If the system is {\em time-invariant\/} (or shift invariant) it follows that
+\begin{equation}
+h[n-m]=H(\delta[n-m])
+\end{equation}
+
+Furthermore, if the system is also {\em linear\/}, the system response to the
+input signal $f[n]$ is
+\begin{align}
+g[n] &= H(f[n]) \zdtag \\
+&= H\left( \infsum{m} f[m] \delta[n-m] \right) \zdtag \\
+&= \infsum{m} f[m] H(\delta[n-m]) \zdtag \\
+&= \infsum{m} f[m] h[n-m] \zdtag \\
+& \triangleq h[n] \ast f[n]  \label{eq7-734}
+\end{align}
+
+where $\ast$ stands for the convolution of two sequences.
+
+From Equation~(\ref{eq7-734}), it can be seen that a linear time-invariant
+system is completely defined by its impulse response.
+
+If the system is {\em causal\/}, i.e.
+\begin{equation}
+h[n]=0 \qquad \mbox{for $n<0$} 
+\end{equation}
+Equation~(\ref{eq7-734}) becomes
+\begin{equation}
+g[n]= \sum_{m=0}^{\infty} h[m] f[n-m] \label{eq7-735}
+\end{equation}
+
+\begin{equation}
+\left( \mbox{Note:} \quad \infsum{m} h[m] f[n-m] = \infsum{m} f[m] h[n-m]
+\right) 
+\end{equation}
+
+\begin{Rem}
+All linear time-invariant (or LTI) systems are described by the convolution
+sum of Equation~(\ref{eq7-734}).
+\end{Rem}
+
+\subsection{Sufficient and necessary condition for BIBO stability of LTI
+systems}
+
+Linear time-invariant systems are stable if and only if (iff) the impulse
+response is absolutely summable, i.e., if
+\begin{equation}
+S=\infsum{m} | h[m] | < \infty  \label{eq7-736}
+\end{equation}
+
+Proof:\\
+\begin{enumerate}
+\item To prove that Equation~(\ref{eq7-736}) is a sufficient condition for BIBO
+stability, we assume that $g[n]$ and $f[n]$ are the output and input sequences
+of the LTI system respectively. It follows that, from Equation~(\ref{eq7-735})
+\begin{align}
+|g[n]| &= \left| \infsum{m} h[m] f[n-m] \right| \zdtag \\
+&\leqslant \infsum{m} | h[m] || f[n-m] | \\
+\intertext{If $f[n]$ is bounded such that}
+& | f[n]| \leqslant M_f < \infty \zdtag \\
+\intertext{then}
+& |g[n]| \leqslant M_f \infsum{m} |h[m]| \label{eq7-738}
+\end{align}
+
+Thus $g[n]$ is bounded if Equation~(\ref{eq7-736}) holds, i.e.,
+Equation~(\ref{eq7-736}) is a sufficient condition for BIBO stability.
+\item To show that Equation~(\ref{eq7-736}) is also a necessary condition, we
+must show that if $S=\infty$, a bounded input can be found that will cause an
+unbounded output. Consider the input sequence with values
+\begin{equation}
+f[n] = \begin{cases}
+\frac{h^\ast[-n]}{|h[-n]|} & h[n] \neq 0 \\
+0 & h[n] = 0 \\
+\end{cases}
+\end{equation}
+where $h^\ast[n]$ is the complex conjugate of $h[n]$. $f[n]$ is clearly
+bounded by unity. However, the value of the output sequence at $n=0$ is
+\begin{align}
+g[0] &= \infsum{m} h[m] f[-m] \zdtag \\
+&= \infsum{m} h[m] \frac{h^\ast[m]}{|h[m]|} \zdtag \\
+&= \infsum{m} \frac{|h[m]|^2}{|h[m]|}=S \label{eq7-7310}
+\end{align}
+
+Thus, if $S=\infty$, it is possible for a bounded input sequence to produce an
+unbounded output sequence. Therefore Equation~(\ref{eq7-736}) is a necessary
+condition for BIBO stability.
+\end{enumerate}
+
+\begin{Exa}[Stability test for LTI systems] \ \ 
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item Given the ideal delay system defined by
+\begin{equation}
+g[n] = f[n-n_d] \qquad -\infty < n < \infty
+\end{equation}
+where $n_d$ is a fixed positive integer called the delay of the system.
+\item Given the general moving average system defined by
+\begin{align}
+g[n] &= \frac{1}{M_1+M_2+1} \sum_{m=-M_1}^{M_2} f[n-m] \zdtag \\
+&= \frac{1}{M_1+M_2+1} \left\{ f[n+M_1]+f[n+M_1-1] + \cdots \right.\notag  \\
+& \left. \phantom{ = } +f[n]+f[n-1] +\cdots +f[n-M_2] \right\} \label{eq7-7312}
+\end{align}
+
+This system computes the $n^{th}$ sample of the output sequence as the average
+of $(M_1+M_2+1)$ samples of the input sequence around the $n^{th}$ sample.
+\item  Given the accumulator system defined by
+\begin{equation}
+g[n] = \sum_{k=-\infty}^{n} f[k]
+\end{equation}
+\item Given the forward difference system defined by
+\begin{equation}
+g[n] = f[n+1]-f[n]
+\end{equation}
+\item Given the backward difference system defined by
+\begin{equation}
+g[n] = f[n]-f[n-1]
+\end{equation}
+\end{enumerate}
+
+Using the iff condition for BIBO stability determine whether the above systems
+are stable.
+
+Solution:\\
+Follow these two steps to solve the problem:
+\begin{enumerate}
+\item Find the impulse response of the system by computing the response of the
+system to $\delta[n]$; using the defining relationship for the system
+\item Compute the sum
+\begin{equation}
+S=\infsum{n} | h[n] | 
+\end{equation}
+and see if $S<\infty$.
+\end{enumerate}
+
+\begin{enumerate}
+\renewcommand{\theenumi}{(\alph{enumi})}
+\item The impulse response of the ideal delay system is
+\begin{equation}
+h[n] = \delta[n-n_d]
+\end{equation}
+where $n_d$ is a positive fixed integer.
+\begin{equation}
+S=\infsum{n} \delta[n-n_d] = 1 < \infty 
+\end{equation}
+since
+\begin{equation}
+\delta[n-n_d] = \begin{cases}
+1 & \mbox{for $n=n_d$} \\
+0 & \mbox{otherwise} \\
+\end{cases} 
+\end{equation}
+It is BIBO stable.
+\item The impulse response of the moving average system
+\begin{align}
+h[n] &= \frac{1}{M_1+M_2+1} \sum_{m=-M_1}^{M_2} \delta[n-m] \zdtag \\
+&= \begin{cases}
+\frac{1}{M_1+M_2+1} & \mbox{for $-M_1 \leqslant n \leqslant M_2$} \\
+0 & \mbox{otherwise} \\
+\end{cases} \\
+\intertext{Then}
+S &= \infsum{n} | h[n]| = \sum_{n=-M_1}^{M_2} \frac{1}{M_1+M_2+1} \zdtag \\
+&= 1 < \infty
+\end{align}
+It is stable.
+\item The impulse response of the accumulator:
+\begin{align}
+h[n] &= \sum_{k=-\infty}^{n} \delta[k] = \begin{cases} 
+1 & n \geqslant 0 \\
+0 & n < 0 \\
+\end{cases} \zdtag \\
+&= u[n] 
+\end{align}
+
+\begin{equation}
+\left( \mbox{Note:} \quad \delta[k] = \begin{cases} 
+1 & \mbox{for $k=0$} \\
+0 & \mbox{otherwise} \\
+\end{cases} \qquad
+\right) 
+\end{equation}
+\begin{equation}
+S=\infsum{n} | h[n]| = \infsum{n} u[n] \rightarrow \infty 
+\end{equation}
+It is unstable.
+\item The impulse response of the forward difference system:
+\begin{align}
+h[n] &= \delta[n+1]-\delta[n] \\
+S &= \infsum{n} |h[n]| = \infsum{n} | \delta[n+1] - \delta[n] | \zdtag \\
+&= 1+1=2<\infty
+\end{align}
+\begin{equation}
+\left( \mbox{Note:} \quad \left| \delta[n+1]-\delta[n] \right|_{n=-1} +
+\left| \delta[n+1] - \delta[n] \right|_{n=0} \qquad \right)
+\end{equation}
+It is stable.
+\item The impulse response of the backward difference system:
+\begin{align}
+h[n] &= \delta[n] - \delta[n-1] \\
+\intertext{Then}
+S &= \infsum{n} | \delta[n] - \delta[n-1] | \zdtag \\
+&= | \delta[0] - \delta[-1] | + | \delta[1] - \delta[0] | \zdtag \\
+&= 1+1 =  2 < \infty 
+\end{align}
+The system is stable.
+\end{enumerate}
+\end{Exa}
+
+\begin{Rem}
+The impulse response of the ideal delay, moving average, forward difference
+system has only a finite number of non zero samples. Such systems are called
+Finite-duration Impulse Response (FIR) \index{FIR} systems. FIR systems will
+always be stable as long as each of the impulse value is finite in magnitude.
+
+In comparison, the impulse response of the accumulator is infinite in
+duration.
+Such a system is called an Infinite-duration Impulse Response (IIR\index{IIR})
+system.
+\end{Rem}
+
+
+\begin{Exa}
+Given an IIR system
+\begin{equation}
+h[n] = a^n u[n]
+\end{equation}
+where $u[n]$ is the unit step sequence, test the stability of the system.
+
+Solution:\\
+
+\begin{align}
+S &= \infsum{n} | h[n]| \zdtag \\
+&= \infsum{n} | a^n u[n] | \zdtag \\
+&= \sum_{n=0}^{\infty} |a|^n \\
+&= \begin{cases}
+\frac{1}{1-|a|} & \mbox{for $|a| < 1$} \\
+\infty & \mbox{for $|a| \geqslant 1$} \\
+\end{cases}
+\end{align}
+
+Therefore if $|a|<1$, the system is stable, if $|a|\geqslant 1$, it is
+unstable.
+\end{Exa}
+
+\section[Convolution and Interconnection of LTI Systems]{Properties of Convolution and the Interconnection of LTI Systems} %4
+
+The convolution operation, denoted by $\ast$, of two discrete sequences is
+defined as
+\begin{equation}
+g[n] = h[n] \ast f[n] = \infsum{m} h[m] f[n-m] \label{eq7-741}
+\end{equation}
+
+Define $m'=n-m$, and substitute $m'$ into Equation~(\ref{eq7-741}).
+\begin{align}
+g[n] &= \infsum{m'} h[n-m'] f[m'] \zdtag \\
+&= \infsum{m} h[n-m] f[m] \zdtag \\
+&= f[n] \ast h[n] 
+\end{align}
+
+Thus the convolution operation is commutative.
+
+\begin{description}
+\item[Commutative Law]
+\begin{equation}
+h[n] \ast f[n] = f[n] \ast h[n]
+\end{equation}
+\item[Associative Law]
+\begin{equation}
+( h_1[n] \ast h_2[n] ) \ast f[n] = h_a[n] \ast ( h_2[n] \ast f[n] )
+\end{equation}
+\item[Distributive Law]
+\begin{equation}
+(h_1[n] + h_2[n]) \ast f[n] = h_1[n] \ast f[n] + h_2[n] \ast f[n]
+\end{equation}
+\end{description}
+
+\subsection{Implications and interpretation of properties of convolution}
+\subsubsection{Commutative Property}
+\begin{center}
+\input{pix/discsig/commprop.eepic}
+\end{center}
+\subsubsection{Associative Property}
+\begin{center}
+\input{pix/discsig/assocprop.eepic}
+\end{center}
+\subsubsection{Distributive Property}
+\begin{center}
+\input{pix/discsig/distrprop.eepic}
+\end{center}
+
+\begin{Exa}
+Consider a system that consists of a forward difference system cascaded with
+an ideal delay of one sample
+\begin{center}
+\input{pix/discsig/eg1.eepic}
+\end{center}
+
+where $h_1[n]=\delta[n+1]-\delta[n]$ forward difference, and
+$h_2[n]=\delta[n-1]$ one sample ideal delay.
+
+Find the impulse response of the overall system.
+
+Solution:\\
+\begin{align}
+h[n] &= h_1[n] \ast h_2[n] \zdtag \\
+&= (\delta[n+1] - \delta[n] ) \ast \delta[n-1] \zdtag \\
+&= \delta[n-1] \ast ( \delta[n+1] - \delta[n] ) \zdtag \\
+&=\delta[n-1] \ast \delta[n+1] - \delta[n-1] \ast \delta[n] \zdtag \\
+&= \infsum{k} \delta[k-1] \delta[n-k+1] - \infsum{k} \delta[k-1] \delta[n-k]
+\zdtag \\
+&= \delta[n] - \delta[n-1] 
+\end{align}
+
+The impulse response of the cascade system is
+\begin{align}
+h[n] &= u[n] \ast ( \delta[n] - \delta[n-1] ) \zdtag \\
+&= \infsum{k} u[k] \delta[n-k] - \infsum{k} u[k] \delta[n-k-1] \zdtag \\
+&= u[n] - u[n-1] \zdtag \\
+&= \delta[n] 
+\end{align}
+
+Thus the overall impulse response is an impulse. As a result,
+\begin{align}
+g[n] &= h[n] \ast f[n] \zdtag \\
+&= \infsum{k} h[k] f[n-k] \zdtag \\
+&= \infsum{k} \delta[k] f[n-k] \zdtag \\
+&= f[n] 
+\end{align}
+
+In this case, the backward difference system compensates exactly for the
+effect of the accumulator, i.e., the backward difference system is the inverse
+system for the accumulator, and vice versa. 
+
+The overall system is identical to the backward difference system.
+\end{Exa}
+
+\begin{Rem}
+The noncausal forward difference system has been converted to a causal system
+by cascading with a delay.
+
+In general, any noncausal FIR system can be made causal by cascading it with a
+sufficiently long delay.
+\end{Rem}
+
+\begin{Exa}
+Consider a system which consists of an accumulator system and a backward
+difference system
+\begin{center}
+\input{pix/discsig/eg2.eepic}
+\end{center}
+where $h_1[n]=u[n]$, the impulse response of the accumulator,
+$h_2[n]=\delta[n] - \delta[n-1]$, the impulse response of the backward
+difference system.
+\end{Exa}
+
+\begin{Def}[Inverse Systems]
+\index{inverse systems}
+If a linear time-invariant system has impulse response $h[n]$, then its
+inverse system, if it exists, has impulse response $h_i[n]$ defined by the
+relation
+\begin{equation}
+h[n] \ast h_i[n] = h_i[n] \ast h[n] = \delta[n]
+\end{equation}
+\end{Def}
+
+\section{Linear Constant Coefficient Difference Equations}	%5
+
+An important subclass of LTI systems consists of those systems for which the
+input $x[n]$ and the output $y[n]$ satisfy an Nth-order linear
+constant-coefficient difference equation of the form
+\begin{equation}
+\sum_{k=0}^{N} a_k y[n-k] = \sum_{k=0}^{M} b_k x[n-k] \label{eq7-751}
+\end{equation}
+
+The $z$-transform can be used to solve the difference equations.
+
+\begin{Exa}
+The accumulator can be represented by a linear constant-coefficient difference
+equation
+\begin{align}
+y[n] &= \sum_{k=-\infty}^{n} x[k] \zdtag \\
+&= \sum_{k=-\infty}^{n-1} x[k] + x[n] \zdtag \\
+&= y[n-1] + x[n] \\
+\intertext{or}
+y[n]-y[n-1] &= x[n]
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/recrrepr.eepic}
+\end{center}
+\caption{Recursion representation of $y[n]-y[n-1]=x[n]$\label{f7-recrrepr}}
+\end{figure}
+
+Figure~\ref{f7-recrrepr} is often referred to as a {\em recursion
+representation\/}\index{recursion representation} of the system since each
+value $y[n]$ is computed using previous computed values $y[n-1]$.
+\end{Exa}
+
+\begin{Exa}
+The moving average system can also be expressed by a linear constant
+coefficient difference equation.
+
+Assume $M_1=0$ so that the system is causal. The impulse response of the
+system is
+\begin{align}
+h[n] &= \frac{1}{M_1+M_2+1} \sum_{k=-M_1}^{M_2} \delta[n-k] \zdtag \\
+&= \frac{1}{M_1+M_2+1} \left\{ u[n+M_1] - u[n-M_2-1] \right\} \zdtag \\
+&= \frac{1}{M_2+1} \left\{ u[n]-u[n-M_2-1] \right\} \label{eq7-754}
+\end{align}
+
+It follows that
+\begin{align}
+y[n] &= \infsum{m} \left\{ \frac{1}{M_2+1} \sum_{k=0}^{M_2} \delta[m-k] x[n-m]
+\right\} \zdtag \\
+&= \frac{1}{M_2+1} \sum_{k=0}^{M_2} \left\{ \infsum{m} \delta[m-k] x[n-m]
+\right\} \zdtag \\
+&= \frac{1}{M_2+1} \sum_{k=0}^{M_2} x[n-k] \label{eq7-755}
+\end{align}
+
+Equation~(\ref{eq7-755}) is a special case of Equation~(\ref{eq7-751}) with $N=0$,
+$a_0=1$ and $b_k=\frac{1}{M_2+1}$ for $0 \leqslant k \leqslant M_2$.
+
+From Equation~(\ref{eq7-754})
+\begin{equation}
+h[n] = \underbrace{\frac{1}{M_2+1} \left\{ \delta[n] - \delta[n-M_2-1]
+\right\}}_{h_1[n]} \ast \underbrace{u[n]}_{h_2[n]} \label{eq7-756a}
+\end{equation}
+
+Equation~(\ref{eq7-756a}) suggests that the moving average system can be
+represented as a cascade system as shown below
+\begin{center}
+\input{pix/discsig/moveav.eepic}
+\end{center}
+and noticing $h_2[n]=u[n]$ is the impulse response of the accumulator.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/moverec.eepic}
+\end{center}
+\caption{Recursive representation of moving average system\label{f7-moverec}}
+\end{figure}
+
+From Figure~\ref{f7-moverec}
+\begin{align}
+y[n]-y[n-1] &= x_1[n] \qquad \mbox{(Accumulator)} \zdtag \\
+\intertext{and}
+x_1[n] &= \frac{1}{M_2+1} \left\{ x[n] - x[n-M_2-1] \right\} \\
+&= h_1[n] \ast x[n] \zdtag  \\
+\intertext{Therefore}
+y[n]-y[n-1] &= \frac{1}{M_2+1} \left\{ x[n] - x[n-M_2-1] \right\}
+\label{eq7-756}
+\end{align}
+
+Equation~(\ref{eq7-756}) is also a special case of Equation~(\ref{eq7-751}) with
+$N=1$, $a_0=1$, $a_1=-1$ and $b_0=-b_{M_2+1}=\frac{1}{M_2+1}$, and $b_k=0$
+otherwise.
+\end{Exa}
+
+\section[Frequency Domain Representation of Discrete Time Signals]{Frequency Domain Representation of Discrete Time Signals and Systems}
+%6
+
+Assume an LTI system with the impulse response $h[n]$, its response to an input
+sequence $x[n]=e^{j\omega n}$ for $-\infty < n < \infty$, with a complex
+exponential of radian frequency $\omega$, is given by
+\begin{align}
+y[n] &= \infsum{k} h[k] x[n-k] \zdtag \\
+&= \infsum{k} h[k] e^{j\omega[n-k]} \zdtag \\
+&= e^{j\omega n} \left\{ \infsum{k} h[k] e^{-j \omega k} \right\} \\
+\intertext{Define}
+H(e^{j\omega}) &= \infsum{k} h[k] e^{-j\omega k} \label{eq7-762}\\
+\intertext{It follows that}
+y[n] &= H(e^{j\omega}) e^{j\omega n}
+\end{align}
+
+Consequently, $e^{j\omega n}$ is an eigenfunction of the system, and
+$H(e^{j\omega})$ is its associated eigenvalue.
+
+$H(e^{j\omega})$ is called the frequency response\index{frequency response} of
+the system and it is complex in general
+\begin{align}
+H(e^{j\omega}) &= H_R(e^{j\omega}) + j H_I(e^{j\omega}) \\
+\intertext{or}
+H(e^{j\omega}) &= | H(e^{j\omega}) | e^{j\measuredangle H(e^{j\omega})}
+\end{align}
+
+\begin{Exa}
+Find the frequency response of the ideal delay system (LTI)
+\begin{align}
+y[n] &= x[n-n_d] \\
+\intertext{or}
+h[n] &= \delta[n-n_d] 
+\end{align}
+where $n_d$ is a fixed integer.
+
+Use $x[n]=e^{j\omega n}$ as the input, 
+\begin{align}
+y[n] &= \infsum{k} \delta[k-n_d] e^{j\omega(n-k)} \zdtag \\
+&= e^{j \omega (n-n_d)} \zdtag \\
+&= e^{-j \omega n_d} e^{j \omega n} \zdtag \\
+&= H(e^{j\omega}) e^{j\omega n} \\
+|H(e^{j\omega})| &= \left|e^{-j \omega n_d} \right| = 1 \\
+\intertext{and}
+\measuredangle H(e^{j \omega}) &= -\omega n_d
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+Given an LTI system with the frequency response $H(e^{j\omega})$, find its
+response to a sinusoid
+\begin{equation}
+x[n]=A\cos(\omega_0 n + \phi)
+\end{equation}
+
+Solution: \\
+Express $x[n]$ as
+\begin{equation}
+x[n] = \underbrace{\frac{A}{2} e^{j\phi} e^{j\omega_0 n}}_{x_1[n]} +
+\underbrace{\frac{A}{2} e^{-j\phi} e^{-j\omega_0 n}}_{x_2[n]} 
+\end{equation}
+The system response to $x_1[n]$ 
+\begin{align}
+y_1[n] &= H(e^{j\omega_0}) \frac{A}{2} e^{j\phi}e^{j\omega_0 n} \\
+\intertext{and to $x_2[n]$}
+y_2[n] &= H(e^{-j\omega_0}) \frac{A}{2} e^{-j\phi}e^{-j\omega_0 n} \\
+\intertext{Thus}
+y[n] &= y_1[n]+y_2[n] \zdtag \\
+&= \frac{A}{2} \left\{ H(e^{j\omega_0}) e^{j\phi} e^{j\omega_0 n} +
+H(e^{-j\omega_0}) e^{-j\phi} e^{-j\omega_0 n} \right\} \label{eq7-7612} \\
+\intertext{If $h[n]$ is real, then}
+H(e^{-j\omega_0}) &= H^{\ast}(e^{j\omega_0}) \\
+\intertext{From Equation~(\ref{eq7-7612})}
+y[n] &= \frac{A}{2} \left\{ \left| H(e^{j\omega_0}) \right| e^{j \measuredangle
+H(e^{j\omega_0})} e^{j\phi} e^{j \omega_0 n}  + \left| H(e^{j\omega_0})
+\right| e^{-j\measuredangle H(e^{j\omega_0})} e^{-j\phi} e^{-j\omega_0 n} \right\}
+\zdtag \\
+&= A \left| H(e^{j\omega_0})\right| \cos \left( \omega_0 n+\phi + \theta\right) 
+\end{align}
+where $\theta=\measuredangle H(e^{j\omega_0})$ is the phase of the system at
+frequency $\omega_0$.\\
+Sinusoid in $\rightarrow$ sinusoid out.
+\end{Exa}
+
+\section{Representation of Sequences by Fourier Transforms}	%7
+
+\begin{Def}[Discrete-time Fourier Transform and Its Inverse]
+The discrete-time Fourier transform and its inverse are defined as follows:
+\begin{align}
+X(e^{j\omega}) &= \infsum{n} x[n] e^{-j\omega n} \label{eq7-771}\\ 
+\intertext{and}
+x[n] &= \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{j\omega}) e^{j\omega n} d\omega
+\label{eq7-772}
+\end{align}
+where $x[n]$ is the discrete-time sequence and $X(e^{j\omega})$ is the Fourier
+transform of $x[n]$. Equation~(\ref{eq7-771}) gives the Fourier transform of
+$x[n]$, which is used for analyzing the sequence $x[n]$ to determine how much
+of each frequency component is required to synthesize $x[n]$ using
+Equation~(\ref{eq7-772}). Equation~(\ref{eq7-772}) is the inverse Fourier
+transform, which is a synthesis formula.
+
+$-\pi < \measuredangle X(e^{j\omega}) < \pi$ is denoted as $ARG(X(e^{j\omega}))$ which
+is the principal range.
+
+Comparing Equation~(\ref{eq7-762}) and Equation~(\ref{eq7-771}) it can be seen
+that the frequency response of an LTI system is simply the Fourier transform of
+the impulse response $h[n]$ and therefore the impulse response can be obtained
+from the frequency response $H(e^{j\omega})$ using the inverse Fourier
+transform integral, i.e.,
+\begin{equation}
+h[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} H(e^{j\omega}) e^{j \omega n}
+d\omega 
+\end{equation}
+\end{Def}
+
+\begin{Rem}
+It is useful to be aware of the equivalence between the Fourier series
+representation of continuous variable periodic functions and the Fourier
+transform representation of discrete-time signals, since all the familiar
+properties of the Fourier series can be applied, with appropriate
+interpretation of variables, to the Fourier transform representation of a
+sequence.
+\end{Rem}
+
+In general, the discrete-time Fourier transform is a complex-valued function of
+$\omega$, which can either be expressed in rectangular form as
+\begin{align}
+X(e^{j\omega}) &= X_R(e^{j\omega}) + j X_I(e^{j\omega}) \label{eq7-773} \\
+\intertext{or in polar form as}
+X(e^{j\omega}) &= \underbrace{ \left| X(e^{j\omega})
+\right|}_{\mbox{magnitude}} \underbrace{e^{j\measuredangle
+X(e^{j\omega})}}_{\mbox{phase}} \label{eq7-774}
+\end{align}
+
+The Fourier transform is also referred to as the Fourier transform spectrum or
+simply the spectrum.
+\begin{center}
+\begin{tabular}{ll}
+$\left|X(e^{j\omega})\right|$ & magnitude spectrum \\
+$\measuredangle X(e^{j\omega})$ & phase spectrum \\
+\end{tabular}
+\end{center}
+
+Note: The phase $\measuredangle X(e^{j\omega})$ is not uniquely defined by
+Equation~(\ref{eq7-774}) since any integer multiple of $2\pi$ may be added to
+$\measuredangle X(e^{j\omega})$ at any value of $\omega$ without affecting the
+result of complex exponentiation.
+
+Absolute summability of $x[n]$ is a sufficient condition for existence of a
+Fourier transform representation, and it also guarantees uniform convergence.
+In other words, if $x[n]$ is absolutely summable $X(e^{j\omega})$ exists.
+
+Since any finite-length sequence is absolutely summable, it will have a
+Fourier transform representation.
+
+\begin{Exa}
+Given $x[n]=a^n u[n]$, its Fourier Transform is
+\begin{align}
+X(e^{j\omega}) &= \sum_{n=0}^{\infty} a^n e^{-j\omega n} \zdtag \\
+&= \sum_{n=0}^{\infty} \left[ a e^{-j \omega} \right]^n \zdtag \\
+&= \frac{1}{1-a e^{-j \omega}} \qquad \mbox{if $|a|<1$} 
+\end{align}
+
+Clearly the condition $|a|<1$ is also the condition for absolute summability
+of $x[n]$. i.e.,
+\begin{equation}
+\sum_{n=0}^{\infty} a^n = \frac{1}{1-|a|} \qquad \mbox{if $|a|<1$}
+\end{equation}
+\end{Exa}
+
+\begin{table}[hbtp]
+\begin{center}
+\begin{tabular}{|l|l|c|c|} \hline
+ & Sequence & Transform & ROC \\ \hline
+1 & $\delta[n]$ & $1$ & All $z$ \\
+2 & $u[n]$ & $\frac{1}{1-z^{-1}}$ & $|z|>1$ \\
+3 & $-u[-n-1]$ & $\frac{1}{1-z^{-1}}$ & $|z|<1$ \\
+4 & $\delta[n-m]$ & $z^{-m}$ & All $z$ except 0 [if $m>0$] \\
+  &               &          & or $\infty$ [if $m<0$] \\
+5 & $a^nu[n]$ & $\frac{1}{1-az^{-1}}$ & $|z|>|a|$ \\
+6 & $-a^nu[-n-1]$ & $\frac{1}{1-az^{-1}}$ & $|z|<|a|$ \\
+7 & $n a^n u[n]$ & $\frac{a z^{-1}}{[1-az^{-1}]^2}$ & $|z|>|a|$ \\
+8 & $-n a^n u[-n-1]$ & $\frac{a z^{-1}}{[1-az^{-1}]^2}$ & $|z|<|a|$ \\
+9 & $(\cos \omega_0 n) u[n]$ & $\frac{1-(\cos \omega_0)z^{-1}}{1-(2\cos
+\omega_0 ) z^{-1} + z^{-2}}$ & $|z|>1$\\
+10 & $(\sin \omega_0 n)u[n]$ & $\frac{(\sin \omega_0)z^{-1}}{1-
+(2\cos\omega_0 ) z^{-1} + z^{-2}}$ & $|z|>1$\\
+11 & $(r^n \cos \omega_0 n) u[n]$ & $\frac{1-(r\cos \omega_0)
+z^{-1}}{1-(2r\cos \omega_0) z^{-1} + r^2z^{-2}}$ & $|z|>r$ \\
+12 & $(r^n \sin \omega_0 n) u[n]$ & $\frac{1-(r\sin \omega_0)
+z^{-1}}{1-(2r\cos \omega_0) z^{-1} + r^2z^{-2}}$ & $|z|>r$ \\
+13 & $\begin{cases} a^n & 0 \leqslant n \leqslant N-1\\
+0 & \mbox{otherwise} \\ \end{cases}$ & $\frac{1-a^Nz^{-N}}{1-az^{-1}}$ &
+$|z|>0$  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Some common $z$-transform pairs\label{t7-ztrans}}
+\end{table}
+
+\section{The $z$-Transform and Its Properties}	%8
+
+\begin{Def}[Two sided $z$-transform]
+\index{2 sided $z$-transform}
+Given a sequence of real numbers $f[n]$, its two-sided $z$-transform is
+defined by
+\begin{align}
+\hat{F}(z) &= \Z\left\{ f[n] \right\} \zdtag \\
+& \triangleq \infsum{n} f[n] z^{-n}
+\end{align}
+where $z$ is a complex variable.
+\end{Def}
+
+\begin{Def}[One sided $z$-transform]
+\index{1 sided $z$-transform}
+The one sided $z$ transform of the sequence is defined by
+\begin{align}
+F(z) &= \Z \left\{ f[n] \right\} \zdtag \\
+& \triangleq \sum_{n=0}^{\infty} f[n] z^{-n}
+\end{align}
+where $z$ is a complex variable. If the sequence is causal, i.e.,
+\begin{align}
+f[n] &=0 \qquad \mbox{for $n<0$} \\
+\hat{F}(z) &= F(z)
+\end{align}
+i.e., the two-sided and one-sided $z$-transforms are identical.
+\end{Def}
+
+\begin{Exa}
+Given a sequence $f[n]$
+\begin{equation}
+f[n] = \begin{cases}
+1 & n=0 \\
+-1.5 & n=1 \\
+2 & n=2 \\
+0 & n=3 \\
+3 & n=4 \\
+0 & \mbox{for $n>4$ and $n<0$} \\
+\end{cases} 
+\end{equation}
+
+the $z$-transform of $f[n]$ is
+\begin{align}
+F(z) &= \sum_{n=0}^{\infty} f[n] z^{-n} \zdtag \\
+&= 1 -1.5z^{-1} + 2 z^{-2} + 3 z^{-4} 
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+The $z$-transform of the discrete impulse sequence is
+\begin{align}
+\Z \left\{ \delta[n] \right\} &= \sum_{n=0}^{\infty} z^{-n} \zdtag \\
+&= \delta[0] z^0 \zdtag \\
+&= 1
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+The $z$-transform of the discrete unit step sequence.
+\begin{align}
+\Z\left\{ u[n] \right\} &= \sum_{n=0}^{\infty} u[n] z^{-n} \zdtag \\
+&= \sum_{n=0}^{\infty} z^{-n} \zdtag \\
+&= \frac{1}{1-z^{-1}} \qquad \mbox{for $|z|>1$}
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+The $z$-transform of the shifted discrete impulse sequence $\delta[n-m]$ is
+\begin{align}
+\Z\{\delta[n-m]\} &= \sum_{n=0}^{\infty} \delta[n-m] z^{-n} \zdtag \\
+&= z^{-m}
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+The $z$-transform of the shifted unit step sequence $u[n-m]$ is
+\begin{align}
+\Z\{ u[n-m]\} &= \sum_{n=0}^{\infty} u[n-m] z^{-n} \zdtag \\
+&= \sum_{n=m}^{\infty} z^{-n} \zdtag \\
+&= z^{-m} + z^{-(m+1)} + z^{-(m+2)} + \cdots \zdtag \\
+&= z^{-m} \left\{ 1 + z^{-1} + z^{-2} + \cdots \right\} \zdtag \\
+&= \frac{z^{-m}}{1-z^{-1}} \qquad \mbox{for $|z|>1$}
+\end{align}
+\end{Exa}
+
+\begin{Exa}
+Given an exponential sequence
+\begin{equation}
+f[n] = e^{-\alpha n} \qquad \alpha>0 
+\end{equation}
+the $z$-transform of $f[n]$ is
+\begin{align}
+\Z \left\{ e^{-\alpha n} \right\} &= \sum_{n=0}^{\infty} e^{-\alpha n} z^{-n}
+\zdtag \\
+&= \sum_{n=0}^{\infty} \left[ e^{-\alpha} z^{-1} \right]^n \zdtag \\
+&= \frac{1}{1-e^{-\alpha} z^{-1}} \qquad \mbox{for $|e^{-\alpha} z^{-1}|<1$}
+\end{align}
+\end{Exa}
+
+
+\subsection{Linearity of the $z$-transform}
+
+Assume that
+\begin{align}
+F_1(z) &= \Z \{ f_1[n] \} \\
+\intertext{and}
+F_2(z) &= \Z \{ f_2[n] \} \\
+\Z \left\{ a f_1[n] + b f_2[n] \right\} &= a F_1(z) + b F_2(z) 
+\end{align}
+where $a$ and $b$ are constants. That is the $z$-transform is linear.
+
+Proof:\\
+\begin{align}
+\Z\left\{ a f_1[n] + b f_2[n] \right\} &= \sum_{n=0}^{\infty} \left\{ a f_1[n]
++ b f_2[n] \right\} z^{-n} \zdtag\\
+&= a \sum_{n=0}^{\infty} f_1[n] z^{-n} + b \sum_{n=0}^{\infty} f_2[n] z^{-n}
+\zdtag \\
+&= a F_1(z) + b F_2(z) 
+\end{align}
+
+\subsection{Shifting}
+If $\Z\{f[n] \} = F(z)$
+\begin{equation}
+\Z \left\{ f[n-m] \right\} = z^{-m} F(z) 
+\end{equation}
+with $m>0$ and $f[n]$ assumed causal.
+
+Proof:\\
+\begin{align}
+\Z\{ f[n-m] \} &= \sum_{n=0}^{\infty} f[n-m] z^{-n} \zdtag \\
+&= \sum_{k=-m}^{\infty} f[k] z^{-[k+m]} \zdtag \\
+&= z^{-m} \sum_{k=-m}^{\infty} f[k] z^{-k} \\
+&= z^{-m} \sum_{k=-m}^{-1} f[k] z^{-k} + z^{-m} \sum_{k=0}^{\infty} f[k]
+z^{-k} \zdtag \\
+&= z^{-m} \sum_{k=0}^{\infty} f[k] z^{-k} + z^{-m} \sum_{k=1}^{m} f[-k] z^{k}
+\zdtag \\
+&= z^{-m} F(z) + z^{-m} \sum_{k=1}^{m} f[-k] z^k
+\end{align}
+where $F(z)$ is the $z$-transform of $f[n]$. If the sequence $f[n]$ is causal,
+i.e., $f[-k]=0$ for $k>0$,
+\begin{equation}
+\Z \{ f[n-m] \} = z^{-m} F(z) 
+\end{equation}
+
+The term
+\begin{equation}
+z^{-m} \sum_{k=1}^{m} f[-k] z^k 
+\end{equation}
+represents the initial conditions.
+
+From the shifting property, delaying a sequence by $1$ unit (or $1$ sample
+period) is equivalent to multiplication by $z^{-1}$ in the $z$-domain.
+Therefore, $z^{-1}$ is called the unit delay operator.
+\begin{align}
+\Z \{ f[n+m]\} &= \sum_{n=0}^{\infty} f[n+m] z^{-n} \zdtag \\
+&= \sum_{k=m}^{\infty} f[k] z^{-[k-m]} \zdtag \\
+&= \sum_{k=0}^{\infty} f[k] z^{-[k-m]} - \sum_{k=0}^{m-1} f[k] z^{-[k-m]}
+\zdtag \\
+&= z^m \sum_{k=0}^{\infty} f[k] z^{-k} - z^{-m} \sum_{k=0}^{m-1} f[k] z^{-k}
+\end{align}
+
+\subsection{Convolution of sequences}
+
+Recalling that the convolution of two sequences $f_1[n]$ and $f_2[n]$ is
+deifned as
+\begin{align}
+f_1[n] \ast f_2[n] &\triangleq \sum_{m=0}^{\infty} f_1[m] f_2[n-m] \zdtag \\
+&= \sum_{m=0}^{\infty} f_2[m] f_1[n-m] \\
+\intertext{it follws that}
+f_1[n] \ast f_2[n] &= \sum_{m=0}^{n} f_1[m] f_2[n-m]
+\end{align}
+if $f_1[n]$ and $f_2[n]$ are causal.
+
+The $z$-transform of the convolution of two sequences $f_1[n]$ and $f_2[n]$ is
+\begin{align}
+\Z \{ f_1[n] \ast f_2[n] \} &= \sum_{n=0}^{\infty} \left\{ \sum_{m=0}^{\infty}
+f_1[m] f_2[n-m] \right\} z^{-n} \zdtag \\
+&= \sum_{m=0}^{\infty} f_1[m] \sum_{n=0}^{\infty} f_2[n-m,] z^{-n} \zdtag \\
+&= \sum_{m=0}^{\infty} f_1[m] \sum_{k=-m}^{\infty} f_2[k] z^{-[k+m]} \zdtag \\
+&= \sum_{m=0}^{\infty} f_1[m] z^{-m} \left\{ \sum_{k=0}^{\infty} f_2[k] z^{-k}
++ \sum_{k=-m}^{-1} f_2[k] z^{-k} \right\} \zdtag \\
+&= \left\{ \sum_{m=0}^{\infty} f_1[m] z^{-m} \right\} \left\{
+\sum_{k=0}^{\infty} f_2[k] z^{-k} \right\} \zdtag \\
+&= F_1(z) F_2(z) 
+\end{align}
+where $F_1(z) = \Z \{ f_1[n] \}$ and $F_2(z) = \Z \{ f_2[n] \}$.
+i.e.,
+\begin{equation}
+\Z \{ f_1[n] \ast f_2[n] \} = \Z \{ f_1[n] \} \Z \{ f_2[n] \}
+\end{equation}
+
+If $f_1[n]$ and $f_2[n]$ are causal, the $z$-transform of the convolution of
+two sequences is equivalent to the product of $z$-transforms of each
+sequence.
+
+\begin{table}[hbtp]
+\begin{center}
+\begin{tabular}{|l|c|c|c|} \hline
+Property &&& \\
+Number & Sequence & Transform & ROC \\ \hline
+& $x[n]$ 					& $X(z)$ & $R_x$ \\
+& $x_1[n]$ 					& $X_1(z)$ & $R_{x1}$ \\
+& $x_2[n]$ 					& $X_2(z)$ & $R_{x2}$ \\
+1 & $ax_1[n] + b x_2[n]$ 	& $aX_1(z) + b X_2(z)$ & 
+Contains $ R_{x1} \cap R_{x2}$ \\
+2 & $x[n-n_0]$ 				& $z^{-n_0} X(z)$ 
+	& $R_x$ except for the possible \\
+  	& & & addition or deletion of \\
+  	& & & the origin or $\infty$ \\
+3 & $z_0^n x[n]$ 			& $X(z/Z_0)$ & $|z_0|R_x$ \\
+4 & $n x[n]$ 				& $-z \frac{dX(z)}{dz}$ 
+	& $R_x$ except for the possible \\
+  	& & & addition or deletion of \\
+  	& & & the origin or $\infty$ \\
+5 & $x^{\ast}$ 				& $X^{\ast}(z^{\ast})$ & $R_x$ \\
+6 & $\Re\{x[n]\}$ 			& $\half [ X(z) + X^{\ast}(z^{\ast})]$ 
+	& Contains $R_x$ \\
+7 & $\Im\{x[n]\}$ 			& $\frac{1}{2j} [ X(z)-X^{\ast}(z^{\ast})]$ 
+	& Contains $R_x$ \\
+8 & $x[-n]$ 				& $X(1/z)$ & $1/R_x$ \\
+9 & $ x_1[n] \ast x_2[n]$ 	& $X_1(z) X_2(z)$ & Contains $R_{x1} \cap R_{x2}$ \\
+10 & \multicolumn{3}{l|}{Initial Value Theorem: $x[n]=0, n<0 \quad
+\lim_{z\rightarrow \infty} X(z)=x[0]$} \\
+11 & $x_1[n] x_2[n]$ & $ \frac{1}{2\pi j} \oint_C X_1(v) X_2(z/v) v^{-1} dv$ &
+Contains $R_{x1}R_{x2}$ \\
+12 & \multicolumn{3}{l|}{Parseval's Relation: $ \infsum{n} x_1[n] x_2^{\ast}[n]
+= \frac{1}{2\pi j} \oint_C X_1(v) X_2^{\ast} \left(\frac{1}{v^{\ast}} \right)
+v^{-1} dv$} \\ \hline
+\end{tabular}
+\end{center}
+\caption{Some $z$-transform properties\label{t7-ztransprop}}
+\end{table}
+
+\subsection{Convergence}
+
+The one-sided $z$-transform of the causal sequence $f[n]$:
+\begin{equation}
+F(z) = \sum_{n=0}^{\infty} f[n] z^{-n} \label{eq7-7825}
+\end{equation}
+is only  defined at all points in the $z$-plane where the
+Equation~(\ref{eq7-7825}) converges.
+
+\section{Relationship between the $z$-Transform and the Laplace Transform}	%9
+
+Assume that the sequence $f[n]$ is obtained by sampling a causal continuous
+signal $f(t)$. i.e.,
+\begin{equation}
+f[n]=f(nT) \qquad n=0,1,\ldots
+\end{equation}
+the $z$-transform of the sequence is 
+\begin{align}
+F(z) &= \sum_{n=0}^{\infty} f(nT) z^{-n} \label{eq7-792} \\
+\intertext{Recalling that the sampled signal $f_s(t)$ of a causal
+continuous-time $f(t)$ is}
+f_s(t) &= \sum_{n=0}^{\infty} f(nT) \delta(t-nT) \\
+\intertext{the Laplace transform of $f_s(t)$ is}
+\L \{ f_s(t) \} &= F_s(s) \zdtag \\
+&= \int_0^\infty f_s[t] e^{-ts}dt \zdtag \\
+&= \int_0^\infty \sum_{n=0}^\infty f(nT) \delta(t-nT) e^{-ts} dt \zdtag \\
+&= \sum_{n=0}^{\infty} f(nT) \int_0^\infty \delta(t-nT) e^{-ts} dt \zdtag \\
+&= \sum_{n=0}^{\infty} f(nT) e^{-nTs} \label{eq7-794} \\
+\intertext{Comparing Equation~(\ref{eq7-792}) and Equation~(\ref{eq7-794})}
+F(z) &= \Z \{ f[n] \} |_{z=e^{Ts}} \zdtag \\
+&= \L \{ f_s(t) \} = F_s(s) 
+\end{align}
+i.e., the $z$-transform and the Laplace transform of the causal sampled signal
+are identical if we define $z=e^{Ts}$.
+
+Noticing that:
+\begin{align}
+s &= \sigma + j\omega \\ 
+z &= e^{\sigma T}e^{j\omega T}
+\end{align}
+
+\begin{align}
+\sigma < 0 & \quad \mbox{maps into} \quad |z|<1 \\
+\sigma > 0 & \quad \mbox{maps into} \quad |z|>1 \\
+j\omega \mbox{ axis} & \quad \mbox{maps into} \quad |z|=1
+\end{align}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/sz.eepic}
+\end{center}
+\caption{Relationship between $s$ and $z$-planes\label{f7-sz}}
+\end{figure}
+
+The Fourier transform of the sequence $f[n]$ is obtained by substituting
+$j\omega$ for $s$ in Equation~(\ref{eq7-794}).
+\begin{equation}
+F(j\omega) = \sum_{n=0}^{\infty} f(nT) e^{-j nT\omega}
+\end{equation}
+
+\section{The Inverse $z$-Transform}	%10
+
+There are several ways to calculate the inverse $z$-trasnform to obtain the
+sequence $f[n]$ from its $z$-transform.
+\begin{itemize}
+\item the inversion integral
+\item long division (series expansion)
+\item partial fractions
+\end{itemize}
+
+\subsection{Use of the Inversion Integral}
+
+Given the $z$-transform of the sequence $f[n]$
+\begin{equation}
+F(z) = \sum_{n=0}^{\infty} z^{-n} \label{eq7-7101}
+\end{equation}
+multiply Equation~(\ref{eq7-7101}) by $z^{k-1}$ and integrate over a closed
+contour $C$ within the region of convergence of $F(z)$, which gives
+\begin{align}
+\oint_C F(z) z^{k-1} dz &= \oint_C \sum_{n=0}^{\infty} f[n] z^{-n+k-1} dz \label{eq7-7102} \\
+\intertext{Providing that $f[n]$ is absolutely summable, i.e.,}
+\sum_{n=0}^{\infty} | f[n]| &< \infty \\
+\intertext{the order of integration and summation in Equation~(\ref{eq7-7102})
+can be reversed. That is}
+\oint_C F(z) z^{k-1} dz &= \sum_{n=0}^{\infty} f[n] \oint_C z^{-n+k-1} dz \\
+\intertext{Using the Cauchy integral theorem}
+\frac{1}{2\pi j} \oint_C z^{-n+k-1} dz &= \begin{cases}
+1 &n=k \\ 0 & n\neq k \\ \end{cases} \zdtag \\
+\sum_{n=0}^{\infty} f[n] \oint_C z^{-n+k-1} dz &= 2\pi j f[k] \qquad \mbox{for
+$n=k$} \\
+\intertext{Thus}
+2\pi j f[n] &= \oint_C F(z) z^{n-1} dz \\
+\intertext{or}
+f[n] &= \frac{1}{2\pi j} \oint_C F(z) z^{n-1} dz \\
+&= \Z^{-1} [ F(z) ]
+\end{align}
+where $C$ is a contour (counter clockwise) enclosing all the singularities of
+poles of $F(z)$.
+
+Using Cauchy's residue theorem,
+\begin{align}
+f[n] &= \frac{1}{2\pi j} \oint_C F(z) z^{n-1} dz \zdtag \\
+&= \sum\left(\mbox{residues of $F(z)z^{n-1}$ at the poles inside $C$}\right)
+\label{eq7-7108} \\
+\intertext{If $F(z)$ is a rational function}
+F(z) &= \frac{\sum_{r=0}^{M} a_r z^{-r}}{\sum_{r=0}^{N} b_r z^{-r}} \\
+\intertext{define}
+F_0(z) &= F(z) z^{n-1} \zdtag \\
+&= \frac{z^{n-1} P_M(z)}{\prod_{i=0}^{l} (z-p_i)^{m_i}}
+\end{align}
+where $p_i$ are the poles of $F_0(z)$ and $m_i$ are their multiplicities.
+
+From Equation~(\ref{eq7-7108}),
+\begin{align}
+f[n] &= \sum_i k_i \\
+\intertext{where $k_i$ are the residues of $F_0(z)$ at its poles}
+\intertext{At a simple pole}
+k_i=\lim_{z\rightarrow p_i} [ (z-p_i) F_0(z) ] \\
+\intertext{while at an $m$th order pole}
+k_i &= \frac{1}{[m_i-1]!} \lim_{z\rightarrow p_i} \frac{d^{m_i-1}}{d
+z^{m_i-1}} (z-p_i)^{m_i} F_0(z)
+\end{align}
+
+\begin{Exa}
+Given
+\begin{align}
+F(z) &= \frac{z(2z-1)}{(z-1)(z+0.5)} \\
+F_0(z) &= z^{n-1} F(z) \zdtag \\
+&= z^n \frac{(2z-1)}{(z-1)(z+0.5)} \\
+k_1 &= \left. \frac{(2z-1)}{(z+0.5)} z^n \right|_{z=1} = \frac{2}{3} \\
+k_{0.5} &= \left. \frac{(2z-1)}{(z-1)} z^n \right|_{z=-0.5} \zdtag  \\
+&= \frac{2[-\half]-1}{-\half -1} \left[ -\half \right]^n \zdtag \\
+&= \frac{4}{3} \left[ -\half \right]^n \\
+\intertext{Hence}
+f[n] &= \frac{2}{3}+ \frac{4}{3} \left[ -\half \right]^n 
+\end{align}
+\end{Exa}
+
+\subsection{Use of Long Division (Power Series Expansion)}
+
+If the $z$-traznsform is given as a power series in the form
+\begin{align}
+F(z) &= \infsum{n} f[n] z^{-n} \\
+&= \cdots + f[-2] z^2 + f[-1] z + f[0] + f[1] z^{-1} + f[2] z^{-2} + \cdots
+\end{align}
+any particular value of the sequence can be determined by finding the
+coefficient of the appropriate power of $z^{-1}$.
+
+For a given rational function
+\begin{equation}
+F(z) = \frac{\sum_{r=0}^{M} a_r z^{-r}}{\sum_{r=0}^{N} b_r z^{-r}}
+\end{equation}
+the power series expansion can be obtained by dividing the numerator by the
+denominator.
+
+\begin{Exa}
+Consider the function
+\begin{equation}
+F(z) = \frac{1}{1-0.8 z^{-1}}
+\end{equation}
+where $|0.8 z^{-1}|$ or $|z|>0.8$.
+
+\begin{center}
+\input{pix/discsig/ldiv.eepic}
+\end{center}
+
+Thus
+\begin{align}
+F(z) &= 1 + 0.8 z^{-1} + 0.64 z^{-2} + \cdots \zdtag \\
+&= 1 +0.8 z^{-1} + [0.8]^2z^{-2} + \cdots + (0.8)^n z^{-n} + \cdots  \\
+\intertext{and}
+f[n] &= (0.8)^n u[n] 
+\end{align}
+where $u[n]$ is the unit step sequence.
+\end{Exa}
+
+\subsection{Use of Partial Fractions}
+Consider $F(z)$ to be a rational function
+\begin{align}
+F(z) &= \frac{P_M(z^{-1})}{D_N(z^{-1})} \zdtag \\
+&= \frac{P_M(z^{-1})}{\sum_{r=1}^{N} ( 1-P_r z^{-1})} \label{eq7-71024}
+\end{align}
+
+Express Equation~(\ref{eq7-71024}) using the partial fraction expansion,
+\begin{equation}
+F(z)= \sum_{r=1}^{N} \frac{a_r}{(1-P_r z^{-1})} \label{eq7-71025}
+\end{equation}
+
+Notice that the $z$-transform pair
+\begin{align}
+a^n u[n] & \stackrel{z}{\fpair} \frac{1}{1-az^{-1}} \qquad \mbox{for
+$|z|>|a|$} \label{eq7-71026} \\
+\intertext{From Equation~(\ref{eq7-71025}) and Equation~(\ref{eq7-71026})}
+f_n[n] &= \sum_{r=1}^{N} a_r P_r^n u[n] \zdtag \\
+&= \begin{cases}
+\sum_{r=1}^N a_r P_r^n & \mbox{for $n\geqslant 0$,} \\
+0 & \mbox{otherwise.} \\
+\end{cases}
+\end{align}
+
+\begin{Exa}
+Given
+\begin{align}
+F(z) &= \frac{1}{(1-z^{-1})(1+0.8z^{-1})} \\
+\intertext{the partial fraction expansion of $F(z)$,}
+F(z) &= \frac{a_1}{1-z^{-1}}+\frac{a_2}{1+0.8z^{-1}} \zdtag \\
+\intertext{where}
+a_1 &= (1-z^{-1}) F(z) |_{z=1} = \frac{1}{1+0.8} = \frac{1}{1.8} = \frac{5}{9}
+\zdtag \\
+a_2 &= (1+0.8z^{-1}) F(z) |_{z=-0.8} = \frac{1}{1+\frac{1}{0.8}} =
+\frac{1}{1+\frac{5}{4}} = \frac{4}{9} \zdtag \\
+\intertext{Thus}
+F(z) &= \frac{\frac{5}{9}}{1-z^{-1}} + \frac{\frac{4}{9}}{1+0.8z^{-1}} \\
+\intertext{The inverse trasnform is the sequence}
+f[n] &= \frac{5}{9}+\frac{4}{9}[-0.8]^n \qquad \mbox{for $n\geqslant 0$}
+\end{align}
+\end{Exa}
+
+\section{Complex Convolution Theorem}	%11
+
+Given two discrete-time sequences $f[n]$ and $g[n]$, assuming that they have
+$z$-transforms
+\begin{align}
+F(z) &= \Z\{f[n] \} = \sum_{n=0}^{\infty} f[n] z^{-n} \\
+\intertext{and}
+G(z) &= \Z\{ g[n] \} = \sum_{n=0}^{\infty} g[n] z^{-n} \\
+\intertext{define the sequence}
+q[n] &= f[n] g[n]
+\end{align}
+
+The complex convolution theorem states that the $z$-transform of $q[n]$ can be
+obtained using the $z$-transforms of $f[n]$ and $g[n]$ in the following manner:
+\begin{align}
+Q(z) &= \Z \{ q[n] \} \zdtag \\
+&= \frac{1}{2\pi j} \oint_{C1} F(\nu) G\left( \frac{z}{\nu} \right)
+\frac{d\nu}{\nu} \\
+&= \frac{1}{2\pi j} \oint_{C2} F\left( \frac{z}{\nu} \right) G(z)
+\frac{d\nu}{\nu}
+\end{align}
+where $C1$ (or $C2$) is a contour in the common region of convergence of
+$F[\nu]$ and $G\left[\frac{z}{\nu}\right]$ (or $F\left[\frac{z}{\nu} \right]$
+and $G[\nu]$).
+
+Proof:\\
+The $z$-transform of $q[n]$ is given by
+\begin{align}
+Q(z) &= \Z\{ q[n] \} \zdtag \\
+&= \sum_{n=0}^{\infty} \{ f[n] g[n] \} z^{-n} \label{eq7-7115} \\
+\intertext{Notice that $g[n]$ can be expressed using the inverse
+$z$-transform:}
+g[n] &= \frac{1}{2\pi j} \oint_C G(z) z^{n-1} dz \label{eq7-7116} \\
+\intertext{Thus}
+Q(z) &= \sum_{n=0}^{\infty} \left\{ f[n] \frac{1}{2\pi j} \oint_{C_2} G(\nu)
+\nu^{n-1} d\nu \right\} z^{-n} \zdtag \\
+&= \frac{1}{2\pi j} \oint_{C_2} \sum_{n=0}^{\infty} f[n] \left[ \frac{z}{\nu}
+\right]^{-n} G(\nu) \frac{d\nu}{\nu} \zdtag \\
+&= \frac{1}{2\pi j} \oint_{C_2} F \left( \frac{z}{\nu} \right) G(\nu)
+\frac{d\nu}{\nu} \label{eq7-7117} \\
+\intertext{Note:}
+F(z) &= \sum_{n=0}^{\infty} f[n] z^{-n} \label{eq7-7118} \\
+\intertext{and}
+F\left[ \frac{z}{\nu} \right] &= \sum_{n=0}^{\infty} f[n] \left[ \frac{z}{\nu}
+\right]^{-n} \label{eq7-7119}
+\end{align}
+
+\subsection{Parseval's Relation}
+From Equation~(\ref{eq7-7115}) and Equation~(\ref{eq7-7117}),
+\begin{align}
+\sum_{n=0}^{\infty} \{ f[n] g[n] \} z^{-n} &= \frac{1}{2\pi j} \oint_C F
+\left[ \frac{z}{\nu} \right] G[\nu] \frac{d\nu}{\nu} \label{eq7-71110} \\
+\intertext{If $f[n]=g[n]$ and $z=1$, Equation~(\ref{eq7-71110}) becomes}
+\sum_{n=0}^{\infty} f^2[n] &= \frac{1}{2\pi j} \oint_C F[\nu^{-1}] F[\nu]
+\frac{d\nu}{\nu} \label{eq7-71111} \\
+\intertext{or}
+\sum_{n=0}^{\infty} f^2[n] &= \frac{1}{2\pi j} \oint_C F(z) F(z^{-1})
+\frac{dz}{z} \label{eq7-71112}
+\end{align}
+
+Equation~(\ref{eq7-71112}) is the discrete form of Parseval's relation for
+causal sequences and the one-sided $z$-transform.
+
+\section{Discription of Discrete Systems}	%12
+
+A very important subclass of linear time-invariant discrete systems consists
+of those systems for which the input $f[n]$ and the output $g[n]$ are related
+by a linear difference equation with constant coefficients in the following
+form.
+
+\begin{equation}
+g[n] = \sum_{r=0}^{M} a_r f[n-r] - \sum_{r=1}^{N} b_r g[n-r] \label{eq7-7121}
+\end{equation}
+where $M \leqslant N$, providing that the system is causal, and $a_r$ and
+$b_r$ are real constants.
+
+Applying $z$-transform to Equation~(\ref{eq7-7121}),
+\begin{align}
+G(z) &= \sum_{r=0}^{M} a_r F(z) z^{-r} - \sum_{r=1}^{N} b_r G(z) z^{-r} \\
+&= \left\{ \sum_{r=0}^{M} a_r z^{-r} \right\} F(z) - \left( \sum_{r=1}^{N} b_r
+z^{-r} \right) G(z) \label{eq7-7122} \\
+\intertext{Thus, the transfer function of the system can be given as}
+H(z) &= \frac{G(z)}{F(z)} = \frac{ \sum_{r=0}^{M} a_r z^{-r}}{ 1+
+\sum_{r=1}^{N} b_r z^{-r}} \label{eq7-7123} 
+\end{align}
+
+This means that the relationship between the input and output of the above
+system is represented by a real rational function in the $z$-domain.
+
+In the discussion of the relationship between the $z$-transform and the
+Laplace transform, it is defined that
+\begin{equation}
+z^{-1} \triangleq e^{-T s} \label{eq7-7124}
+\end{equation}
+
+Substitute Equation~(\ref{eq7-7124}) into Equation~(\ref{eq7-7123}) to obtain the
+system frequency response as
+\begin{align}
+H(e^{j\omega T}) &=  \frac{ \sum_{r=0}^{M} a_r e^{-j r \omega T} }{ 1 +
+\sum_{r=1}^{N} b_r e^{-j r \omega T}} \label{eq7-7125} \\
+\intertext{or}
+H(e^{j\omega T}) &= \left| H(e^{j\omega T}) \right| e^{j \Psi[\omega]}
+\label{eq7-7125b}
+\end{align}
+where $|H(e^{j\omega T})|$ is the amplitude response of the system and
+$\Psi[\omega]$ is the phase response.
+
+Since $H(z)$ is a rational function of $z$ and the exponential function is
+periodic with a period of $2\pi$, it follows that $|H(e^{j\omega T})|$ and
+$\Psi[\omega]$ are also periodic with respect to $\omega$, the period being
+$\omega_N=2\pi f_N$, where $f_N=\frac{1}{T}$ is the sampling frequency.
+
+Therefore, the system frequency response is obtained by considering the points
+on the $j\omega$-axis of the s-plane, which is equaivalent to considering the
+points on the unit circle $|z|=1$ in the $z$-plane.
+
+\subsection{Stability and causality}
+
+Using the transfer function $H(z)$, the system response in the $z$-domain can
+be expressed
+\begin{equation}
+G(z) = H(z) F(z) 
+\end{equation}
+where $G(z)$ and $F(z)$ are $z$-transforms of the output and input of the
+system respectively.
+
+Using the convolution theorem, the system response is given
+\begin{align}
+g[n] &= \sum_{m=0}^{n} h[m] f[n-m] \\
+\intertext{i.e.,}
+g[n] &= h[n] \ast f[n] \\
+\intertext{where $h[n]$ is the impulse response of the causal system given by}
+h[n] &= \Z^{-1} \{ H(z) \} \label{eq7-7126}
+\end{align}
+
+If the system is strictly stable (BIBO), the system impulse response $h[n]$ is
+absolutely summable, i.e.,
+\begin{align}
+\sum_{n=0}^{\infty} | h[n] | < \infty \\
+\intertext{Assume that the transfer function is expressed as}
+H(z) &= \frac{P[z^{-1}]}{\prod_{r=1}^{N} [1-P_r z^{-1}]} \\
+&= \sum_{r=1}^{N} \frac{a_r}{[1-P_r z^{-1}]} \label{eq7-7128} \\
+\intertext{Therefore,}
+h[n] &= \sum_{r=1}^{N} a_r P_r^n \\
+\intertext{Note that:}
+\Z \left\{ b^n \right\} &= \frac{1}{1-b z^{-1}} \qquad \mbox{for $|z|>b$}
+\zdtag 
+\end{align}
+
+Hence, the impulse response $h[n]$ is absolutely summable, if and only if
+\begin{equation}
+|P_r| < 1 \qquad \mbox{for all $r$} 
+\end{equation}
+which means that the poles of the trasnfer function defined by $z=P_r$ must
+lie inside the unit circle in the $z$-plane.
+
+Notice that in general
+\begin{align}
+\infsum{n} |h[n] | &< \infty \\
+\intertext{is identical to}
+\infsum{n} | h[n] z^{-n} | &< \infty 
+\end{align}
+for $|z|=1$, the condition for  stability is equivalent to the condition that
+the ROC of $H(z)$ includes the unit circle.
+
+Now let's consider the relation between the causality and the ROC of a
+sequence.
+
+\begin{Def}[Right-Sided sequence]
+\index{right-sided sequence}
+A sequence $x[n]$ is said to be a right-sided sequence if $x[n]$ is zero for a
+given $N_1<\infty$ and $n\leqslant N_1$.
+\begin{center}
+\input{pix/discsig/rss.eepic}
+\end{center}
+A causal sequence is a right-sided sequence.
+\end{Def}
+
+{\large Property of the ROC for the $z$-transform of a Right-Sided
+Sequence}
+\vspace{1em}
+
+If $x[n]$ is a right-sided sequence, the ROC extends outward from the
+outermost (i.e., largest magnitude) finite pole in $X(z)$ to (and possibly
+including) $z=\infty$.
+
+To understand the above property and its implication, the following facts have
+to be understood first.
+
+The region of convergence (ROC) of the $z$-transform cannot contain any poles
+by definition because $X(z)$ is infinite at a pole and therefore does not
+converge.
+
+Since the complex variable $z$ can be expressed in polar form as
+\begin{equation}
+z= r e^{j\omega}
+\end{equation} 
+where $r=|z|$, the convergence of the $z$-transform requires absolute
+summabilty of the sequence $x[n] |z|^{-n}$ or equivalently $x[n]r^{-n}$. It is
+clear that the ROC is concentric with the origin.
+
+\begin{center}\input{pix/discsig/rscirc.eepic}\end{center}
+
+For a given right-sided sequence, if the circle $|z|=r_0$ is in the ROC, $x[n]
+r_0^{-n}$ is absolutely summable, or equivalently, the Fourier transform of
+$x[n]r_0^{-n}$ converges. Since the sequence $x[n]$ is right-sided, the term
+$x[n]$ multiplied by any real exponential sequence $r_1^{-n}$ [$r_1>r_0$]
+which, with increasing $n$ decays faster than $r_0^{-n}$ will also be
+absolutely summable.
+
+As a result, for a right-sided sequence, the ROC extends outward from some
+circle in the $z$-plane, concentric with the origin.
+
+What is left is to verify that this circle is in fact at the outermost pole
+in $X(z)$.
+
+Without losing generality, assume that $X(z)$ has simple poles at
+$z=p_1,p_2,\ldots,p_N$ with $p_1$ having the smallest magnitude corresponding
+to the innermost pole, and $p_N$ having the largest magnitude corresponding to
+the outermost pole.
+
+As we discussed previously, $X(z)$ can be expressed in partial fraction
+expansion, and
+\begin{align}
+x[n] &= \sum_{k=1}^{N} a_k p_k^n \qquad n\geqslant N_1 \label{eq7-12.9}\\
+\intertext{referring to Equation~(\ref{eq7-7128}) and Equation~(\ref{eq7-12.9})}
+\intertext{Consider}
+x[n]r^{-n} &= r^{-n} \sum_{k=1}^{N} a_k p_k^n \zdtag \\
+&= \sum_{k=1}^N a_k [p_k r^{-1}]^n \qquad n \geqslant N_1 \\
+\intertext{Absolutle summability of $x[n]r^{-n}$ requires that}
+\infsum{n} \left| x[n] r^{-n} \right| &< \infty \label{eq7-71215}\\
+\intertext{or}
+\sum_{n=N_1}^{\infty} \left| x[n] r^{-n} \right| &< \infty \\
+\intertext{as $x[n]$ is right-sided}
+\sum_{n=N_1}^{\infty} \left| \sum_{k=1}^{N} a_k [p_k r^{-1}]^n \right| &<
+\infty \label{eq7-71217} \\
+\intertext{If each exponential $a_k[p_k r^{-1}]^n$ is absolutely summable,
+Equation~(\ref{eq7-71217}) and therefore Equation~(\ref{eq7-71215}) holds. i.e.,}
+\sum_{n=N_1}^{\infty} \left| a_k [p_k r^{-1}]^n \right| &< \infty \label{eq7-71218} \\
+\intertext{or equivalently}
+\sum_{n=N_1}^{\infty} | p_k r^{-1} |^n &< \infty \qquad \mbox{where
+$k=1,\ldots,N$} \label{eq7-71218b} \\
+\intertext{For Equation~(\ref{eq7-71218b}) to be true, the following must hold}
+|p_k r^{-1} | &< 1 \\
+\intertext{i.e.,}
+|r| &> |p_k| \qquad \mbox{for all $k=1,\ldots,N$} 
+\end{align}
+
+Since $p_N$ has the largest magnitude, the absolute summability of $x[n]
+r^{-n}$ requires that
+\begin{equation}
+|r| > |p_N| \label{eq7-71221}
+\end{equation}
+which means that the ROC is outside the outermost pole, extending to infinity.
+
+If $N_1<0$ [noncausal sequence], the ROC will not include $|z|=r=\infty$ since
+$r^{-n}$ is infinite for $r$ infinite and $n$ negative.
+
+In the following example, we shall see that causality and stability are not
+necessarily compatible requirements.
+
+\begin{Exa}
+Consider the LTI system with input and output related through the difference
+equation
+\begin{equation}
+g[n] - \frac{5}{2} g[n-1] + g[n-2] = f[n] \label{eq7-71222}
+\end{equation}
+
+The transfer function $H(z)$ is obtained using the $z$-transform.
+\begin{align}
+H(z) &= \frac{G(z)}{F(z)}= \frac{1}{1-\frac{5}{2}z^{-1} + z^{-2}} \zdtag \\
+&= \frac{1}{[1-\half z^{-1}][1-2z^{-1}]}
+\end{align}
+
+The pole-zero plot for $H(z)$ is shown in Figure~\ref{f7-polezero}.
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/polezero.eepic}
+\end{center}
+\caption{Pole-zero plot for $H(z)$\label{f7-polezero}}
+\end{figure}
+
+There are two poles ($\half,2$) and two zeros (both at origin). Note that
+$\frac{1}{1-\half z^{-1}}=\frac{z}{z-\half}$ and
+$\frac{1}{1-2z^{-1}}=\frac{z}{z-2}$.
+
+There are three possible choices for the ROC.
+\begin{enumerate}
+\item If the system is assumed to be causal, the ROC is outside the outermost
+pole
+\begin{equation}
+|z| = r>2 
+\end{equation}
+In this case the system will not be stable since the ROC does not include the
+unit circle.
+\item If the system is assumed to be stable, the ROC will be $\half < |z| <
+2$. The system is not causal though.
+\item For $|z|<\half$ as the ROC, the system will be neither stable nor
+causal.
+\end{enumerate}
+\end{Exa}
+
+\begin{Rem}
+In order for an LTI system whose input and output satisfy a difference equation
+in the form
+\begin{equation}
+\sum_{k=0}^{N} a_k g[n-k] = \sum_{k=0}^{M} b_k f[n-k]
+\end{equation}
+to be both causal and stable, the ROC of the corresponding system function
+$H(z)$ must be outside the outermost pole and include the unit circle. Clearly,
+this requires that all the poles of the system function be inside the unit
+circle.
+\end{Rem}
+
+\subsection{The Bilinear variable}
+To facilitate testing the stability of the sampled data system without
+resorting to factorization of polynomials and to assist the digital filter
+design the bilinear variable $\lambda$ is introduced as
+\begin{align}
+\lambda &= \frac{1-z^{-1}}{1+z^{-1}} = \frac{z-1}{z+1} \label{eq7-71225} \\
+\intertext{or}
+z &= \frac{1+\lambda}{1-\lambda} \label{eq7-71226}
+\end{align}
+
+$\lambda$ is a bilinear function of $z$. The relationship between the
+$\lambda$-plane and the $z$-plane is explained as follows.
+
+Both $\lambda$ and $z$ are complex and can be given as
+\begin{align}
+z &= x + j y \\
+\intertext{and}
+\lambda &= \Sigma + j \Omega \\
+\intertext{From Equation~(\ref{eq7-71225})}
+\Sigma+j\Omega &= \frac{[x+j y]-1}{[x+j y]+1} \\
+&= \frac{ [x^2+y^2]-1}{[1+x]^2+y^2} + j \frac{2y}{[1+x]^2+y^2} \label{eq7-7129} \\
+\intertext{or equivalently}
+\Sigma+j\Omega &= \frac{ |z|^2-1}{[1+x]^2+y^2} + j \frac{2y}{[1+x]^2 + y^2}
+\end{align}
+
+\vspace{1em}
+\begin{enumerate}
+\item 
+
+\parbox{0.35\textwidth}{$|z|<1$ point in the unit circle in the $z$-plane.}
+$\quad \stackrel{\mbox{maps onto}}{\fpair} \quad $ 
+\parbox{0.35\textwidth}{$\Sigma<0$ points in the left half of the
+$\lambda$-plane.}
+\item
+\parbox{0.35\textwidth}{$|z|>1$ points outside the unit circle in the
+$z$-plane.}
+$\quad \stackrel{\mbox{maps onto}}{\fpair} \quad $ 
+\parbox{0.35\textwidth}{$\Sigma>0$ points in the right half of the
+$\lambda$-plane.}
+\item
+\parbox{0.35\textwidth}{$|z|=1$ points on the unit circle in the
+$z$-plane.}
+$\quad \stackrel{\mbox{maps onto}}{\fpair} \quad $ 
+\parbox{0.35\textwidth}{$\Sigma=0$ points on the $j\Omega$-axis.}
+
+\parbox{0.35\textwidth}{$z=1$}
+$\quad \stackrel{\mbox{maps onto}}{\fpair} \quad $ 
+\parbox{0.35\textwidth}{$\Omega=0$}
+
+\parbox{0.35\textwidth}{$z=-1$}
+$\quad \stackrel{\mbox{maps onto}}{\fpair} \quad $ 
+\parbox{0.35\textwidth}{$\Omega=\infty$}
+\end{enumerate}
+
+\begin{center}
+\input{pix/discsig/zlambda.eepic}
+\end{center}
+
+For a given transfer function
+\begin{equation}
+H(z) = \frac{N[z^{-1}]}{D[z^{-1}]} \label{eq7-71231}
+\end{equation}
+where $N[z^{-1}]$ and $D[z^{-1}]$ are polynomials with real coefficients.
+
+Substitute Equation~(\ref{eq7-71226}) into Equation~(\ref{eq7-71231}) resulting in
+\begin{equation}
+H(\lambda) = \frac{P_M[\lambda]}{Q_N[\lambda]}
+\end{equation}
+where $P_M[\lambda]$ and $Q_N[\lambda]$ are real polynomials of $\lambda$.
+
+As we discussed previously, the system is strictly stable if all the poles of
+$H(z)$ are inside the unit circle in the $z$-plane. As a result, $H[\lambda]$
+is stable if and only if
+\begin{align}
+M & \leqslant N \label{eq7-71233} \\
+\intertext{and}
+Q_N[\lambda] &\neq 0 \qquad \mbox{for $\Re[\lambda]> 0 $ \label{eq7-71234}}
+\end{align}
+i.e. $H(\lambda)$ has all its poles in the open left half plane.
+Condition~(\ref{eq7-71233}) excludes poles at $\lambda=\pm \infty$
+corresponding to the point $z=-1$ on the unit circle in the $z$-plane.
+Therefore, the stability of the system requires that the polynomial
+$Q_N[\lambda]$ be strictly Hurwitz in the $\lambda$-plane.
+
+\begin{Exa}
+Given a transfer function
+\begin{equation}
+H(z) = \frac{[1+z^{-1}]^3}{37 + 51z^{-1} +27z^{-2} + 5z^{-3}} 
+\end{equation}
+test for stability.
+
+Solution:\\
+\begin{align}
+z^{-1} &= \frac{1-\lambda}{1+\lambda} \\
+\intertext{into $H(z)$ to obtain}
+H(\lambda) &= \frac{ \left[1+ \frac{1-\lambda}{1+\lambda} \right]^3}{ 37 + 51
+\left[ \frac{1-\lambda}{1+\lambda} \right] + 27 \left[
+\frac{1-\lambda}{1+\lambda} \right]^2 + 5 \left[ \frac{1-\lambda}{1+\lambda}
+\right]^3 } \\
+&= \frac{8}{37 [1+\lambda]^3 + 51 [1-\lambda][1+\lambda]^2 + 27 [1-\lambda]^2
+[1+\lambda] + 5[1-\lambda]^3 } \\
+&= \frac{8}{120 + 120\lambda+48\lambda^2 +8\lambda^3} \\
+&= \frac{1}{15+15\lambda+6\lambda^2 +\lambda^3}
+\end{align}
+
+Using the Hurwitz polynomial testing method separate
+$Q_N[\lambda]=\lambda^3+6\lambda^2+15\lambda+15$,
+\begin{align}
+N[\lambda] &= \lambda^3 + 15 \lambda \\
+M[\lambda] &= 6\lambda^2 + 15
+\end{align}
+\end{Exa}
+\begin{center}
+\input{pix/discsig/ldiv2.eepic}
+\end{center}
+
+Since all the quotients are positive, $H(\lambda)$ is strictly Hurwitz.
+Therefore, all the poles of $H(\lambda)$ are in the open left half
+$\lambda$-plane which corresponds to the inside of the unit circle in the
+$z$-plane. The $H(z)$ is stable.
+
+\section{Digital Filters}	%13
+
+Digital filters described by the linear time-invariance equation
+\begin{equation}
+g[n] = \sum_{r=0}^{M} a_r f[n-r] - \sum_{r=1}^{N} b_r g[n-r] 
+\label{eq7-7131}
+\end{equation}
+involve essentially three types of operations
+\begin{enumerate}
+\item multiplications
+\begin{center} \input{pix/discsig/mult.eepic} \end{center}
+\item additions
+\begin{center} \input{pix/discsig/add.eepic} \end{center}
+\item delay or shifting
+\begin{center} \input{pix/discsig/delay.eepic} \end{center}
+\end{enumerate}
+
+A block diagram using these operations can be used to realize a system
+represented by Equation~(\ref{eq7-7131}).
+
+\begin{Exa}
+Given a system defined by
+\begin{equation}
+g[n] = a f[n] - b_1 g[n-1] - b_2 g[n-2]
+\end{equation}
+where $g[n]$ and $f[n]$ are output and input sequences of the system,
+respectively.
+
+The corresponding system function is 
+\begin{equation}
+H(z) = \frac{G(z)}{F(z)} = \frac{a}{1+b_1 z^{-1} + b_2 z^{-2}}
+\end{equation}
+
+The block diagram representation of the system realization is given as shown
+in Figure~\ref{f7-blockd}. This representation aids in many ways.
+\begin{itemize}
+\item representation of the algorithm.
+\item structure of the hardware architecture.
+\item storage needs for $z^{-1}$.
+\item number of additions.
+\item number of multiplications.
+\item steps or computation sequence.
+\end{itemize}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/blockd.eepic}
+\end{center}
+\caption{Block diagram representation\label{f7-blockd}}
+\end{figure}
+
+Figure~\ref{f7-blockd} can also be represented in  the form of the Signal Flow
+Graph as shown in Figure~\ref{f7-sigflow}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/sigflow.eepic}
+\end{center}
+\caption{Signal flow graph\label{f7-sigflow}}
+\end{figure}
+\end{Exa}
+
+Formally, a signal flow graph is a network of directed branches that connect
+at nodes.
+\begin{enumerate}
+\item Associated with each node is a variable or node value which migh be
+designated as $w_k$ or $w_k[n]$ for the node $k$ since node variables for
+digital filters are generally sequences.
+\item Branch $[j,k]$ denotes a branch originating at node $j$ and terminating
+at node $k$ being indicated by an arrowhead on the branch. Each branch has an
+input signal and an output signal. The input signal from node $j$ to branch
+$[j,k]$ is the node value $w_j[n]$. In a linear SFG, the output of a branch is
+a linear transformation of the input to the branch, In the simplest cast, the
+transform is a constant gain when the output of the branch is simply a
+constant multiple of the input to the branch. When an explicit indication of
+the branch operation is omitted, the branch transmittance is unity.
+\item The node value at each node is the sum of the outputs of all the
+branches entering the node.
+\item There are two special types of nodes --- source nodes and sink nodes.
+Source nodes are nodes that have no entering bracnhes. They are used to
+represent the injection of external inputs or signal sources into an SFG. Sink
+nodes are nodes tha have only entering branches. They are used to extract
+outputs from an SFG.
+\end{enumerate}
+
+\begin{Exa}
+Given a signal flow graph
+\begin{center}
+\input{pix/discsig/egsfg.eepic}
+\end{center}
+
+Solution: \\
+\begin{align}
+w_1[n] &= x[n] + a w_2[n] + b w_2[n] \\
+w_2[n] &= c w_1[n] \\
+y[n] &= d x[n] + e w_2[n] \\
+w_1[n] &= x[n] + a c w_1[n] + b c w_1[n] \\
+y[n] &= d x[n] + e c w_1[n] \label{eq7-13.6}\\
+w_1[n] &= \frac{1}{1-a c - b c} x[n] \label{eq7-13.7}\\
+\intertext{Substitute Equation~(\ref{eq7-13.7}) into Equation~(\ref{eq7-13.6})}
+y[n] &= d x[n] +  e c \frac{1}{1-a c - b c } x[n] \\
+&= \frac{d - a c d - b c d + e c}{1 - a c - b c} x[n] \\
+&= \alpha x[n] 
+\end{align}
+
+Assume that $[1-a c - b c]\neq 0$.
+\end{Exa}
+
+\begin{Exa}
+Given a SFG
+\begin{center}
+\input{pix/discsig/egsfg2.eepic}
+\end{center}
+find the realtion between $y[n]$ and $x[n]$.
+
+Solution:\\
+\begin{align}
+w_1[n] &= a w_4[n] + x[n] \label{eq7-13.9a}\\
+w_2[n] &= w_1[n] \label{eq7-13.9b} \\
+w_3[n] &= b_0 w_2[n] + b_1 w_4[n] \label{eq7-13.9c} \\
+w_4[n] &= w_2[n-1] \label{eq7-13.9d} \\
+y[n] &= w_3[n] \\
+\intertext{Substitute Equation~(\ref{eq7-13.9d}) into Equation~(\ref{eq7-13.9a})}
+w_1[n] &= a w_2[n-1] + x[n] \label{eq7-13.10}\\
+\intertext{Then, substitute Equation~(\ref{eq7-13.10}) into
+Equation~(\ref{eq7-13.9b})}
+w_2[n] &= a w_2[n-1] + x[n] \\
+\intertext{By the same token, substitute Equation~(\ref{eq7-13.9d}) into
+Equation~(\ref{eq7-13.9c})}
+w_3[n] &= b_0 w_2[n] + b_1 w_2[n-1] \\
+\intertext{and therefore}
+y[n] &= b_0 w_2[n] + b_1 w_2[n-1] \\
+\intertext{or}
+& \begin{cases}
+w_2[n] &= a w_2[n-1] + x[n] \\
+y[n] &= b_0 w_2[n] + b_1 w_2[n-1] \\
+\end{cases}  \label{eq7-13.14}
+\end{align}
+
+Often, the manupulation of the difference equations of a flow graph is
+difficult when dealing with the time-domain variables due to feedback of
+delayed variables.
+
+To obtain the corresponding linear difference equation which represents the
+input output relation, use $z$-transform on Equation~(\ref{eq7-13.14}) to obtain
+\begin{align}
+& \begin{cases}
+W_2(z) &= a  z^{-1} W_2(z) + X(z) \label{eq7-13.15a}  \\
+Y(z) &= b_0 W_2(z) + b_1 z^{-1} W_2(z)  \label{eq7-13.15b} \\
+\end{cases}  \\
+\intertext{From Equation~(\ref{eq7-13.15a})}
+W_2(z) &= \frac{X(z)}{1-a z^{-1}} \label{eq7-13.16} \\
+\intertext{Substitute Equation~(\ref{eq7-13.16}) into Equation~(\ref{eq7-13.15b})}
+Y(z) &= \frac{b_0 + b_1 z^{-1}}{1-a z^{-1}} X(z) \\
+\intertext{Thus}
+[1-a z^{-1}] Y(z) &= [b_0 + b_1 z^{-1}] X(z) \label{eq7-13.18}\\
+\intertext{Take the inverse $z$-transform of Equation~(\ref{eq7-13.18}) }
+y[n] - a y[n-1] &= b_0 x[n] + b_1 x[n-1] \\
+\intertext{or}
+y[n] &= a y[n-1] + b_0 x[n] + b_1 x[n-1]
+\end{align}
+\end{Exa}
+
+\subsection{Classification of digital filters}
+
+In terms of the realization methods used for digital filters, they can be
+classified into two types:
+\begin{itemize}
+\item recursive realization
+\item non-recursive realization
+\end{itemize}
+
+The relationship between the output and input sequence of a filter for a
+recursive realization is given by
+\begin{equation}
+g[n] \triangleq \mbox{function of} \{ g[n-1], g[n-2], \ldots; f[n], f[n-1],
+\ldots \}
+\end{equation}
+
+The present output sample $g[n]$ is a funtion of past outputs as well as
+present and past input samples.
+
+For a non-recursive realization, the relationship between the input sequence
+and output sequence is given by
+\begin{equation}
+g[n] \triangleq \mbox{function of} \{  f[n], f[n-1], \ldots \}
+\end{equation}
+In this case, the present output sample is a function only of past and present
+inputs.
+
+Digital filters can be also classified in terms of their impulse responses.
+If the input and output sequences of the system are related as 
+\begin{equation}
+g[n] = \sum_{r=0}^{M} a_r f[n-r] \label{eq7-13.22}
+\end{equation}
+where $g[n]$ is the output and $f[n]$ is the input sequence. The system
+function is given by
+\begin{equation}
+\frac{G(z)}{F(z)} = H(z) = \sum_{r=0}^{M} a_r z^{-r}
+\end{equation}
+
+Therefore, the impulse response is
+\begin{equation}
+h[n] = \sum_{r=0}^{M} a_r \delta[n-r] = \begin{cases} 
+a_n & 0 \leqslant n \leqslant M \\
+0 & \mbox{otherwise} \\
+\end{cases}
+\end{equation}
+
+Since the impulse response $h[n]$ is finite in length, i.e., it is zero
+outside a finite interval, the system is called Finite Impulse Response (FIR)%
+\index{FIR} system. It can be seen that Equation~(\ref{eq7-13.22}) is identical
+to the convolution sum. An important property of the FIR filter is that it is
+inherently stable since all poles of its transfer funtions are at $z=0$ which
+is inside the unit circle.
+
+If a system's input-output relation is defined as
+\begin{equation}
+g[n] = \sum_{r=0}^{M} a_r f[n-r] - \sum_{r=1}^{N} b_r g[n-r]
+\end{equation}
+where $g[n]$ and $f[n]$ are the output and input sequences of the system
+respectively, the system function will be given as
+\begin{equation}
+H(z) = \frac{ \sum_{r=0}^{M} a_r z^{-r}}{1 + \sum_{r=1}^{N} b_r z^{-r}}
+\end{equation}
+which is a rational function of $z^{-1}$. If $H(z)$ only possess first-order
+poles, it can be expressed in the form
+\begin{equation}
+H(z) = \sum_{r=0}^{M-N} B_r z^{-r} + \sum_{k=1}^{N} \frac{A_k}{1-P_k z^{-1}}
+\label{eq7-13.26}
+\end{equation}
+where the first summation term is present only if $M\geqslant N$ and obtained
+by long division of the denominator into the numerator.
+
+For a causal system, the ROC is outside all of the poles in
+Equation~(\ref{eq7-13.26}) and it follows that
+\begin{equation}
+h[n] = \sum_{r=0}^{M-N} B_r \delta [n-r] + \sum_{k=1}^{N} A_k P_k^n u[n]
+\end{equation}
+where the first term is present only if $M \geqslant N$. When there is at
+least one nonzero pole of $H(z)$ which is not cancelled by a zero, there will
+be a term in the form of $A_k P_k^n u[n]$ and $h[n]$ will not be of finite
+length, i.e., $h[n]$ will not be zero outside a finite interval. Therefore,
+this system is called Infinite Impulse Response (IIR)\index{IIR} system.
+
+\begin{Rem} \ \ 
+\begin{itemize}
+\item The terms FIR and IIR refer to the type of the filter
+\item The terms non-recursive and recursive refer to the method of
+realization or implementation.
+\end{itemize}
+\end{Rem}
+
+\subsection{Structures for discrete-time systems}
+
+A generalized Nth-order difference equation can be given as
+\begin{align}
+g[n] - \sum_{r=1}^{N} b_r g[n-r] &= \sum_{r=0}^{M} a_r f[n-r]
+\label{eq7-13.28} \\
+\intertext{with the corresponding system function}
+H(z) &= \frac{\sum_{r=0}^{M} a_r z^{-r}}{1 - \sum_{r=1}^{N} b_r z^{-r}}
+\label{eq7-13.29}\\
+\intertext{Rewriting Equation~(\ref{eq7-13.28}) as a recursive realization leads
+to}
+g[n] &= \sum_{r=1}^{N} b_r g[n-r] + \sum_{r=0}^{M} a_r f[n-r] \\
+\intertext{and further to a pair of difference equations}
+v[n] &= \sum_{r=0}^{M} a_r f[n-r] \label{eq7-13.31a} \\
+g[n] &= \sum_{r=1}^{N} b_r g[n-r] +v[n]  \label{eq7-13.31b}
+\end{align}
+In block diagram form, Equations~(\ref{eq7-13.31a})
+and~\ref{eq7-13.31b} can be represented as shown in
+Figure~\ref{f7-blockdf1}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/blockdf1.eepic}
+\end{center}
+\caption{Block diagram: Direct Form I\label{f7-blockdf1}}
+\end{figure}
+
+In the $z$-domain
+\begin{align}
+V(z) &= \left( \sum_{r=0}^{M} a_r z^{-r} \right) F(z) \zdtag \\
+&= H_1(z) F(z) \\
+\intertext{and}
+G(z) &= \frac{1}{1-\sum_{r=1}^{N} b_r z^{-r}} \zdtag \\
+&= H_2(z) V(z) \\
+\intertext{or}
+G(z) &= H_2(z) V(z) \zdtag \\
+&= H_2(z) H_1(z) F(z) \zdtag \\
+&= H(z) F(z) \\
+\intertext{where}
+H(z) &= H_2(z) H_1(z) \zdtag \\
+&= \left[ \frac{1}{ 1- \sum_{r=1}^{N} b_r z^{-r}} \right] \left[
+\sum_{r=0}^{M} a_r z^{-r} \right] \zdtag \\
+\intertext{Since $H(z)$ can be also decompossed into}
+H(z) &= H_1(z) H_2(z) \zdtag \\
+&= \left[ \sum_{r=0}^{M} a_r z^{-r} \right]  \left[ \frac{1}{ 1-
+\sum_{r=1}^{N} b_r z^{-r}} \right] \\
+\intertext{A new pair of difference equations are obtained rendering the same
+$f[n]$ and $g[n]$ relation}
+w[n] &= \sum_{r=1}^{N} b_r w[n-r] + f[n] \\
+g[n] &= \sum_{r=0}^{M} a_r w[n-r] 
+\end{align}
+
+Depending on whether zeros or poles of the transfer function $H(z)$ are
+implemented first the block diagrams are categorized as the direct form I
+[zero first] or direct form II [poles first]. The direct form I requires
+[$N+M$] delay elements in its realization, whilst the direct form II only
+requires [$MAX[N,M]$].
+
+\subsection{Basic structures for IIR filters}
+
+For any given rational system function, there exists a wide variety of
+equivalent sets of difference equations or network structures. The choice
+between various structures is usually determined by practical considerations
+such as computational complexity [mults., adds. and delay elements],
+modularity and simplicity of data transfer and effects of finite register
+length and finite-precision arithmetic.
+
+An LTI IIR system, as we have discussed can be represented by the difference
+equation resulting from the $z$-domain expression.
+
+\begin{align}
+W(z) &= H_2(z) F(z) \zdtag \\
+&=  \left[ \frac{1}{ 1- \sum_{r=1}^{N} b_r z^{-r}} \right] F(z) \\
+\intertext{and}
+G(z) &= H_1(z) W(z) \\
+&= \left[ \sum_{r=0}^{M} a_r z^{-r} \right] W(z) 
+\end{align}
+
+Their block diagram representation will have the form shown in
+Figure~\ref{f7-IIRblockI}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/IIRblockI.eepic}
+\end{center}
+\caption{Block diagram of LTI IIR system\label{f7-IIRblockI}}
+\end{figure}
+
+If $M\neq N$, some of the coefficients will be zero. The above diagram can be
+further modified to obtain Figure~\ref{f7-IIRblockII}, which is also known as
+the Canonic Direct Form\index{canonic direct form}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/IIRblockII.eepic}
+\end{center}
+\caption{Block diagram of LTI IIR system: Direct Form II\label{f7-IIRblockII}}
+\end{figure}
+
+\begin{align}
+g[n] - \sum_{r=1}^{N} b_r g[n-r] &= \sum_{r=0}^{M} a_r f[n-r]
+\label{eq7-13.38} \\
+\intertext{with the corresponding rational transfer function}
+H(z) &= \frac{ \sum_{r=0}^{M} a_r z^{-r}}{1 - \sum_{r=1}^{N} b_r z^{-r}}
+\end{align}
+
+The direct form I and II realizations of Equation~(\ref{eq7-13.38}) are given in
+signal flow graphs for $M=N$ in Figure~\ref{f7-sfgI} and
+Figure~\ref{f7-sfgII}. ( For $M\neq N$, some of the coefficients will be
+zero.)
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/sfgI.eepic}
+\end{center}
+\caption{Direct Form I for an Nth order system\label{f7-sfgI}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/sfgII.eepic}
+\end{center}
+\caption{Direct Form II for an Nth order system\label{f7-sfgII}}
+\end{figure}
+
+\begin{Exa}
+Given the transfer function
+\begin{equation}
+H(z) = \frac{ 1 + 2z^{-1} + z^{-2}}{1 - 0.75 z^{-1} + 0.125 z^{-2}} 
+\end{equation}
+the direct form I structure is given as shown in Figure~\ref{f7-egdfI}, while
+the direct form II structure is shown in Figure~\ref{f7-egdfII}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/egdfI.eepic}
+\end{center}
+\caption{Direct Form I for $H(z)$\label{f7-egdfI}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/egdfII.eepic}
+\end{center}
+\caption{Direct Form II for $H(z)$\label{f7-egdfII}}
+\end{figure}
+
+\end{Exa}
+
+\subsubsection{Cascade form}
+
+If the system function $H(z)$ is a rational function with the numerator and
+denominator polynomials being real, $H(z)$ can be expressed by
+\begin{equation}
+H(z) = A \frac{ \prod_{k=1}^{M_1} \left[ 1 - g_k z^{-1}\right]
+\prod_{k=1}^{M_2} \left[ 1 - h_k z^{-1}\right] \left[1-h_k^\ast z^{-1}\right]
+}{ \prod_{k=1}^{N_1} \left[ 1 - c_k z^{-1}\right] \prod_{k=1}^{N_2} \left[
+1-d_k z^{-1} \right] \left[ 1-d_k^\ast z^{-1} \right] }
+\end{equation}
+where $M=M_1+2M_2$ and $N=N_1+2N_2$. The first order factors represent real
+zeros at $g_k$ and real poles at $c_k$, and the second-order factors represent
+complex conjugate pairs of zeros at $h_k$ and $h_k^\ast$ and complex conjugate
+pairs of poles at $d_k$ and $d_k^\ast$.
+
+Combining pairs of real factors and complex conjugate pairs into second-order
+factors results in a modular structure provided that $M \leqslant N$.
+\begin{equation}
+H(z) = \prod_{k=1}^{N_s} \frac{a_{0 k} + a_{1 k} z^{-1} + a_{2 k}
+z^{-2}}{1 - b_{1k} z^{-1} - b_{2k} z^{-2}}
+\end{equation}
+where $N_s=[[N+1]/2]$ is the largest integer contained in $[N+1]/2$.
+
+If there are an odd number of real zeros, one of the coefficients $b_{2k}$
+will be zero. Likewise, if there are an odd number of real poles, one of the
+coefficients $a_{2k}$ will be zero.
+
+The second order factor
+\begin{equation}
+H_k(z) = \frac{ a_{0k} + a_{1k} z^{-1} + a_{2 k}z^{-2}}{1 - b_{1 k}z^{-1} -
+b_{2k} z^{-2} }
+\end{equation}
+can be represented by the structure shown in Figure~\ref{f7-2odfII}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/2odfII.eepic}
+\end{center}
+\caption{Second order factor in direct form II\label{f7-2odfII}}
+\end{figure}
+
+The difference equations represented by a general cascade of direct form II
+second-order sections are of the form
+\begin{align}
+g_0[n] &= f[n] \zdtag \\
+w_k[n] &= b_{1k} w_k[n-1] + b_{2k} w_k[n-2] + g_{k-1}[n] \zdtag \\
+g_k[n] &= a_{0k} w_k[n] + a_{1k} w_k[n-1] + a_{2k} w[n-2] \zdtag \\
+g[n] &= g_{N_s}[n] \qquad\mbox{where $k=1,2,\ldots,N_s$}
+\end{align}
+
+\begin{Exa}
+A cascade structure for a sixth-order system is given by a direct-form II
+realization of each second order system as shown in Figure~\ref{f7-cascade}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/cascade.eepic}
+\end{center}
+\caption{Cascade structure of sixth order system\label{f7-cascade}}
+\end{figure}
+\end{Exa}
+
+\begin{Exa}
+Given a second order system
+\begin{align}
+H(z) &= \frac{1+2z^{-1} + z^{-2}}{1-0.75 z^{-1} + 0.125 z^{-2}} \\
+&= \frac{[1+z^{-1}][1+z^{-1}]}{[1-0.5z^{-1}][1-0.25 z^{-1}]}
+\end{align}
+it can be implemented in different forms as shown in Figure~\ref{f7-dIIsos}
+and Figure~\ref{f7-cascfos}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/dIIsos.eepic}
+\end{center}
+\caption{Direct Form II second-order section\label{f7-dIIsos}}
+\end{figure}
+
+\begin{figure}[hbtp]
+\begin{center}
+\subfigure{\input{pix/discsig/cascfosa.eepic}}
+\subfigure{\input{pix/discsig/cascfosb.eepic}}
+\subfigure{\input{pix/discsig/cascfosc.eepic}}
+\end{center}
+\caption{Cascade structures with first-order sections\label{f7-cascfos}}
+\end{figure}
+\end{Exa}
+
+\subsubsection{Parallel form}
+
+The system function $H(z)$ can be expressed as a partial fraction expansion.
+\begin{equation}
+H(z) = \sum_{k=0}^{N_p} c_k z^{-k} + \sum_{k=1}^{N_1} \frac{A_k}{1-c_k z^{-1}}
++ \sum_{k=1}^{N_2} \frac{B_k[1-e_kz^{-1}]}{(1-d_k z^{-1})(1-d_k^\ast z^{-1})}
+\end{equation}
+where $N=N_1+2N_2$. If $M\geqslant N$, $N_p=M-N$; otherwise $c_k=0$. If $a_k$
+and $b_k$ for all $k$ are real in $H(z)$, $A_k$, $B_k$, $C_k$ $c_k$ and $e_k$
+are all real.
+
+If the real poles are grouped in pairs
+\begin{equation}
+H(z) = \sum_{k=0}^{N_p} c_k z^{-1} + \sum_{k=1}^{N_s} \frac{e_{0k} + e_{1k}
+z^{-1}}{1-a_{1k}z^{-1}-a_{2k} z^{-2}} \label{eq7-13.45}
+\end{equation}
+where $N_s=((N+1)/2)$ is the largest integer contained in $(N+1)/2$.
+
+The signal flow graph for the second-order term in Equation~(\ref{eq7-13.45}) is
+given in Figure~\ref{f7-sotsfg}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/sotsfg.eepic}
+\end{center}
+\caption{Signal flow graph for second order term\label{f7-sotsfg}}
+\end{figure}
+
+The general difference equations for the parallel form with second-order
+direct form II sections are
+\begin{align}
+w_k[n] &= 1_{ak}w_k[n-1] + a_{2k}w_k[n-2]+f[n] \zdtag \\
+g_k[n] &= e_{0k} w_k[n] + e_{1k} w_k[n-1] \zdtag \\
+g[n] &= \sum_{k=0}^{N_p} c_k f[n-k] + \sum_{k=1}^{N_s} g_s[n]
+\end{align}
+
+\begin{Exa}
+Given a system function
+\begin{align}
+H(z) = \frac{1+2z^{-1}+z^{-2}}{1-0.75z^{-1}+0.125 z^{-2}} \\
+&= 8 + \frac{-7+8z^{-1}}{1-0.75z^{-1}+0.125z^{-2}}
+\end{align}
+the paralled realization is presented as shown in Figure~\ref{f7-parrel}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/parrel.eepic}
+\end{center}
+\caption{Parallel realization\label{f7-parrel}}
+\end{figure}
+
+The given $H(z)$ can also be written as
+\begin{equation}
+H(z) = 8 + \frac{18}{1-0.5z^{-1}} - \frac{25}{1-0.25z^{-1}} 
+\end{equation}
+Therefore, another form of the Signal Flow Graph is shown in
+Figure~\ref{f7-altsfg}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/altsfg.eepic}
+\end{center}
+\caption{Alternative realization\label{f7-altsfg}}
+\end{figure}
+\end{Exa}
+
+\subsection{Feedback in IIR systems}
+
+The flow graphs of IIR systems have feedback loops which are closed paths that
+begin at a node and return to that node by traversing branches only in the
+direction of their arrowheads. For example, the SFG
+\begin{center}
+\input{pix/discsig/IIRsfg.eepic}
+\end{center}
+represents the difference equation
+\begin{align}
+g[n] &= a g[n-1] + f[n] \\
+\intertext{which has an infinite impulse response}
+h[n] &= a^n u[n] \\
+\intertext{The system function is}
+H(z) &= \frac{1}{1-a z^{-1}}
+\end{align}
+
+However, neither poles in the system function nor loops in the network are
+sufficient for the impulse response to be infinitely long.
+
+\begin{Exa}
+Given an SFG with feedback loop
+\begin{center}
+\input{pix/discsig/feedback.eepic}
+\end{center}
+the difference equations representing the input output relation is obtianed by
+\begin{align}
+w_1[n] &= f[n] + a w_4[n] \\
+w_2[n] &= w_1[n] \\
+w_4[n] &= w_2[n-1] \\
+w_5[n] &= w_4[n-1] = w_2[n-2] \\
+w_3[n] &= w_2[n] - a^2w_5[n] \\
+&= w_2[n] -a^2w_2[n-2] \\
+g[n] &= w_3[n] \\
+w_2[n] &= f[n] + a w_2[n-1] \\
+g[n] &= w_2[n] - a^2 w_2[n-2] \\
+\intertext{using the $z$-transform}
+W_2(z) [1-az^{-1}] &= F(z) \\
+G(z) &= [1-a^2z^{-2}] W(z) \\
+G(z) &= \frac{1-a^2z^{-2}}{1-az^{-1}} F(z) \\
+\intertext{That is}
+H(z) &= \frac{1-a^2z^{-2}}{1-az^{-1}} \\
+&= 1+az^{-1} \\
+\intertext{Therefore}
+g[n] &= f[n] + af[n-1] \\
+\intertext{with the system impulse response}
+h[n] &= \delta[n] + a\delta[n-1]
+\end{align}
+
+The system is an FIR system (frequency sampling system.)
+\end{Exa}
+
+\begin{Exa}
+The followinf SFG is noncomputable.
+\begin{center}
+\input{pix/discsig/noncomp.eepic}
+\end{center}
+since
+\begin{align}
+g[n] &= a g[n] + f[n] \\
+\intertext{However, the solution to the problem can be found if the SFG is
+modified according to}
+g[n] &= \frac{1}{1-a}f[n] 
+\end{align}
+provided that $a\neq 1$.
+\begin{center}
+\input{pix/discsig/noncompmod.eepic}
+\end{center}
+\end{Exa}
+
+\subsection{Signal flow graph transposition}
+
+Transposition of a flow graph is accomplished by reversing the directiopns of
+all the branches in the network while keeping the branch trasnmittance
+unchanged and changing the source nodes to sink nodes and vice versa.
+
+For single-input/single-output systems, resulting flow graphs have the same
+system function as the original graph if the input and output nodes are
+interchanged.
+
+\begin{Exa}
+Given a first order system presented by
+\begin{equation}
+H(z) = \frac{1}{1-a z^{-1}} 
+\end{equation}
+with the SFG
+\begin{center}
+\input{pix/discsig/egsfg3.eepic}
+\end{center}
+the transposed form of the given SFG is shown
+\begin{center}
+\input{pix/discsig/egsfg3trans.eepic}
+\end{center}
+and redrawing the above SFG with input on the left
+\begin{center}
+\input{pix/discsig/egsfg3trans2.eepic}
+\end{center}
+By inspection of the original system and the corresponding transposed system,
+the only difference between the two is the order of operations by the
+coefficient $a$ and the units delay ($z^{-1}$). Therefore they have the same
+system function.
+\end{Exa}
+
+\subsection{Basic structures for FIR systems}
+
+FIR system may be considered as a special case of the IIR systems when the
+coefficients $b_k$ of the denominator polynomial are all zero resulting in
+\begin{align}
+g[n] &= \sum_{r=0}^{M} a_k f[n-r] \\
+\intertext{with the impulse response}
+h[n] &= \begin{cases}
+a_k & \mbox{for} n=0,1,\ldots,M \\
+0 & \mbox{otehrwise} \\
+\end{cases}
+\end{align}
+
+The direct form I and II structures of the IIR system reduces to the same
+direct form FIR structure shown in Figure~\ref{f7-directFIR}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/directFIR.eepic}
+\end{center}
+\caption{Direct form FIR structure\label{f7-directFIR}}
+\end{figure}
+
+This structure is also referred to as a {\em tapped delay line\/}\index{tapped
+delay line} structure or a transversal filter structure\index{transversal
+filter}.
+
+Using the transposition theorem, the transposed direct form for the FIR
+systems is obtained as is shown in Figure~\ref{f7-transdirectFIR}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/transdirectFIR.eepic}
+\end{center}
+\caption{Transposed direct form FIR structure\label{f7-transdirectFIR}}
+\end{figure}
+
+\subsubsection{Cascade form for FIR systems}
+The cascade form for FIR systems is obtained by factorizing the system
+function $H(z)$,
+\begin{equation}
+H(z) = \sum_{n=0}^{M} h[n] z^{-n} = \prod_{k=1}^{M_s} ( a_{0k} + a_{1k} z^{-1}
++a_{2k} z^{-2})
+\end{equation}
+where $M_s=((M+1)/2)$ is the largest integer contained in $(M+1)/2$. When $M$
+is odd, one of the $b_{2k}$ will be zero. The corresponding SFG is shown in
+Figure~\ref{f7-cascFIR}.
+
+\begin{figure}[hbtp]
+\begin{center}
+\input{pix/discsig/cascFIR.eepic}
+\end{center}
+\caption{Cascaded form for FIR structure\label{f7-cascFIR}}
+\end{figure}

@@ -1,0 +1,96 @@
+\setlength{\unitlength}{0.0125in}
+\begin{picture}(318,495)(0,-10)
+\dottedline{5}(115,480)(115,160)
+\thicklines
+\path(120,235)(140,215)
+\path(120,215)(140,235)
+\path(190,75)(210,55)
+\path(190,55)(210,75)
+\thinlines
+\put(150,225){\ellipse{6}{6}}
+\put(120,194){\ellipse{6}{6}}
+\put(130,198){\ellipse{6}{6}}
+\put(140,204){\ellipse{6}{6}}
+\put(160,265){\ellipse{6}{6}}
+\put(170,265){\ellipse{6}{6}}
+\put(180,271){\ellipse{6}{6}}
+\put(190,271){\ellipse{6}{6}}
+\put(200,212){\ellipse{6}{6}}
+\put(210,209){\ellipse{6}{6}}
+\put(220,241){\ellipse{6}{6}}
+\put(190,111){\ellipse{6}{6}}
+\put(220,81){\ellipse{6}{6}}
+\put(230,94){\ellipse{6}{6}}
+\put(240,102){\ellipse{6}{6}}
+\put(250,105){\ellipse{6}{6}}
+\put(260,107){\ellipse{6}{6}}
+\put(270,102){\ellipse{6}{6}}
+\put(280,89){\ellipse{6}{6}}
+\put(290,77){\ellipse{6}{6}}
+\put(150,380){\ellipse{6}{6}}
+\put(50,380){\ellipse{6}{6}}
+\put(60,427){\ellipse{6}{6}}
+\put(70,438){\ellipse{6}{6}}
+\put(80,439){\ellipse{6}{6}}
+\put(90,432){\ellipse{6}{6}}
+\put(100,405){\ellipse{6}{6}}
+\put(110,350){\ellipse{6}{6}}
+\put(120,349){\ellipse{6}{6}}
+\put(130,353){\ellipse{6}{6}}
+\put(140,359){\ellipse{6}{6}}
+\put(40,410){\ellipse{6}{6}}
+\put(30,400){\ellipse{6}{6}}
+\put(20,405){\ellipse{6}{6}}
+\put(210,49){\ellipse{6}{6}}
+\put(200,52){\ellipse{6}{6}}
+\dottedline{5}(145,480)(145,160)
+\dottedline{5}(215,320)(215,0)
+\path(0,225)(300,225)
+\path(120,225)(120,195)
+\path(130,225)(130,200)
+\path(140,225)(140,205)
+\path(160,225)(160,265)
+\path(170,225)(170,265)
+\path(180,225)(180,270)
+\path(190,225)(190,270)
+\path(200,225)(200,215)
+\path(210,225)(210,210)
+\path(190,65)(190,110)
+\path(210,65)(210,50)
+\path(220,65)(220,80)
+\path(230,65)(230,95)
+\path(240,65)(240,100)
+\path(250,65)(250,105)
+\path(260,105)(260,65)
+\path(270,100)(270,65)
+\path(280,85)(280,65)
+\path(290,75)(290,65)
+\path(0,380)(300,380)
+\path(60,426)(60,380)
+\path(70,440)(70,380)
+\path(80,440)(80,380)
+\drawline(90,430)(90,430)
+\path(90,430)(90,380)
+\path(100,405)(100,380)
+\path(110,380)(110,350)
+\path(120,380)(120,350)
+\path(130,380)(130,355)
+\path(140,380)(140,360)
+\path(120,395)(120,385)
+\path(118.000,393.000)(120.000,385.000)(122.000,393.000)
+\dottedline{5}(50,480)(50,160)
+\path(20,380)(20,405)
+\path(30,380)(30,400)
+\path(40,380)(40,410)
+\path(0,65)(300,65)
+\path(200,65)(200,55)
+\dottedline{5}(185,320)(185,0)
+\put(300,205){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $n$}}}}}
+\put(300,45){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $n$}}}}}
+\put(300,360){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm $n$}}}}}
+\put(50,360){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm 0}}}}}
+\put(120,400){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{\twlrm L}}}}}
+\put(300,440){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y_0[n]$}}}}}
+\put(300,285){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y_1[n]$}}}}}
+\put(300,125){\makebox(0,0)[rb]{\raisebox{0pt}[0pt][0pt]{\shortstack[r]{{\twlrm $y_2[n]$}}}}}
+\end{picture}
