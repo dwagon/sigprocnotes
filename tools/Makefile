@@ -1,8 +1,8 @@
 DESTDIR=$(HOME)/bin
-all: texproc
+all: install
 
 texproc: proc.c
 	$(CC) -o texproc proc.c
 
-install:
+install: texproc
 	install -s texproc $(DESTDIR)

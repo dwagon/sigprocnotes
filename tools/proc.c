@@ -33,27 +33,30 @@
 extern int errno;
 FILE * tmp;
 
+/****************************************************************************************************************/
 void process(char * buff) {
-  char tmpname[80], /* Name of tmp file */
-    progname[80], /* Name of program to execute */
-    cmdline[80], /* What to feed to popen */
-    outbuff[BUFSIZ]; /* What to take output of prgram from */
+  char tmpname[BUFSIZ], /* Name of tmp file */
+    progname[BUFSIZ], /* Name of program to execute */
+    cmdline[BUFSIZ], /* What to feed to popen */
+    outbuff[BUFSIZ]; /* What to take output of program from */
   FILE * p;
 
-  strcpy(tmpname, "/tmp/PrcXXXXXX");
-  mkstemp(tmpname);
+  strncpy(tmpname, "/tmp/texproc.out", BUFSIZ);
   if ((tmp = fopen(tmpname, "w")) == NULL) {
     fprintf(stderr, "Could not open %s for writing\n", tmpname);
     fprintf(stderr, "Program aborting\n");
     exit(-1);
   }
   TRACE(fprintf(stderr, "Saving to tmp file %s\n", tmpname));
-  strcpy(progname, & buff[3]);
+  strncpy(progname, & buff[3], BUFSIZ);  // Start from after the initial #%
+  progname[strcspn(progname, "\n")] = '\0';
   fprintf(stdout, "%% Including output from %s\n", progname);
   /* Put buffer to file for executing */
   while (fgets(buff, BUFSIZ, stdin) != NULL) {
     if (buff[0] == '%' && buff[1] == '#') {
       fclose(tmp);
+      buff[strcspn(buff, "\n")] = '\0';
+      TRACE(fprintf(stderr, "Executing >%s< >%s<\n", progname, tmpname));
       sprintf(cmdline, "%s %s", progname, tmpname);
       fprintf(stderr, "%s\n", progname);
       if ((p = popen(cmdline, "r")) == NULL) {
@@ -66,12 +69,13 @@ void process(char * buff) {
       unlink(tmpname);
       return;
     } else {
-      TRACE(fprintf(stderr, "%s\n", buff));
-      fprintf(tmp, "%s\n", buff);
+      TRACE(fprintf(stderr, "%s", buff));
+      fprintf(tmp, "%s", buff);
     }
   }
 }
 
+/****************************************************************************************************************/
 int main(int argc, char ** argv) {
   char buff[BUFSIZ];
 
@@ -79,7 +83,7 @@ int main(int argc, char ** argv) {
     if (buff[0] == '%' && buff[1] == '#')
       process(buff);
     else
-      fprintf(stdout, "%s\n", buff);
+      fprintf(stdout, "%s", buff);
   }
   return (0);
 }
