@@ -66,7 +66,7 @@ bandlimited inputs.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/filterdes/bandlimit.eepic}
+\input{pix/filterdes/bandlimit.pict2e}
 \end{center}
 \caption{Equivalent systems for bandlimited inputs\label{f8-bandlimit}}
 \end{figure}
@@ -214,7 +214,7 @@ Figure~\ref{f8-bandl2}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/filterdes/bandl2.eepic}
+\input{pix/filterdes/bandl2.pict2e}
 \end{center}
 \caption{Aliasing in bandlimited filters\label{f8-bandl2}}
 \end{figure}
@@ -229,7 +229,7 @@ smaller) then the cut-off frequency of the continuous-time filter
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/filterdes/bandl3.eepic}
+\input{pix/filterdes/bandl3.pict2e}
 \end{center}
 \caption{Aliasing in bandlimited filters\label{f8-bandl3}}
 \end{figure}
@@ -279,7 +279,7 @@ time filter.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/filterdes/egdiglp.eepic}
+\input{pix/filterdes/egdiglp.pict2e}
 \end{center}
 \caption{Discrete-time low-pass filter specification\label{f8-eglowpass-a}}
 \end{figure}
@@ -293,7 +293,7 @@ Since $T_d$ cancels in the impulse invariance procedure, $T_d$ is chosen to be
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/filterdes/eganallp.eepic}
+\input{pix/filterdes/eganallp.pict2e}
 \end{center}
 \caption{Low-pass analog filter specification\label{f8-eglowpass-b}}
 \end{figure}
@@ -418,10 +418,10 @@ $z$-plane. When $z=re^{j\omega}$ is in its polar form $-\infty < \Omega <
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure{\input{pix/filterdes/s-zplane.eepic}}
+\subfigure{\input{pix/filterdes/s-zplane.pict2e}}
 \subfigure{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set noxtics
@@ -543,13 +543,13 @@ digital filters, we may follow the following steps.
 \item \ 
 
 \begin{center}
-\input{pix/filterdes/FTL.eepic}
+\input{pix/filterdes/FTL.pict2e}
 \end{center}
 
 \item \ 
 
 \begin{center}
-\input{pix/filterdes/FTL2.eepic}
+\input{pix/filterdes/FTL2.pict2e}
 \end{center}
 
 \end{enumerate}
@@ -910,16 +910,16 @@ used to approximate the high-pass or band-stop filters.
 \begin{figure}[hbtp]
 \begin{center}
 \parbox{0.4\textwidth}{
-\subfigure[Type I]{\input{pix/filterdes/linphaseI.eepic}}}
+\subfigure[Type I]{\input{pix/filterdes/linphaseI.pict2e}}}
 \hspace{4em}
 \parbox{0.4\textwidth}{
-\subfigure[Type II]{\input{pix/filterdes/linphaseII.eepic}}}
+\subfigure[Type II]{\input{pix/filterdes/linphaseII.pict2e}}}
 
 \parbox{0.4\textwidth}{
-\subfigure[Type III]{\input{pix/filterdes/linphaseIII.eepic}}}
+\subfigure[Type III]{\input{pix/filterdes/linphaseIII.pict2e}}}
 \hspace{4em}
 \parbox{0.4\textwidth}{
-\subfigure[Type IV]{\input{pix/filterdes/linphaseIV.eepic}}}
+\subfigure[Type IV]{\input{pix/filterdes/linphaseIV.pict2e}}}
 \end{center}
 \caption{Typical zero locations for linear phase systems}
 \end{figure}
@@ -982,7 +982,7 @@ e^{-j\omega(M+1)}}{1-e^{-j\omega}} \zdtag \\
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics

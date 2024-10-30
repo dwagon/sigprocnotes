@@ -1,16 +1,8 @@
-CC=gcc
-DESTDIR=/staff/edp/dwagon/bin.ultrix
-
-all: texproc ldiv demo.dvi
+DESTDIR=$(HOME)/bin
+all: install
 
 texproc: proc.c
 	$(CC) -o texproc proc.c
 
-install:
+install: texproc
 	install -s texproc $(DESTDIR)
-
-demo.dvi: tst.tex
-	latex demo
-
-tst.tex: ldiv
-	ldiv tst > tst.tex

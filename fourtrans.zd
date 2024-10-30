@@ -161,7 +161,7 @@ Find the fourier transform of the function $f=\frac{1}{t}$.
 
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -266,7 +266,7 @@ F.T. See Figure~\ref{f3-evod} for an example.
 \begin{center}
 \subfigure[Real Function $f(t)$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -284,7 +284,7 @@ plot f(x)
 }
 \subfigure[Even part of $f(t)$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -302,7 +302,7 @@ plot 0.5*(f(x)+f(-x))
 }
 \subfigure[Odd part of $f(t)$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -358,7 +358,7 @@ Transform}.
 \section{Basic Properties of the Fourier Transform}	%2
 
 \begin{center}
-\input{pix/fourtrans/repr.eepic}
+\input{pix/fourtrans/repr.pict2e}
 \end{center}
 
 \begin{itemize}
@@ -395,7 +395,7 @@ f(t) = \begin{cases}
 }
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -433,7 +433,7 @@ f(t) &\fpair a\frac{\sin \frac{\omega a}{2}}{\frac{\omega a}{2}}
 
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -467,7 +467,7 @@ f(-\omega) &=\begin{cases}
 \begin{center}
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -490,7 +490,7 @@ plot sin(x/2)/(x/2)
 $\fpair$ 
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -554,7 +554,7 @@ horizontal expands. As shown in Figure~\ref{f3-scale}.
 \subfigure[$\alpha=0.5$]{
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -578,7 +578,7 @@ plot g(x)
 $\fpair$
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -603,7 +603,7 @@ plot G(x)
 \subfigure[$\alpha=1$]{
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -627,7 +627,7 @@ plot g(x)
 $\fpair$
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -652,7 +652,7 @@ plot G(x)
 \subfigure[$\alpha=2$]{
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -676,7 +676,7 @@ plot g(x)
 $\fpair$
 \parbox[c]{3in}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -715,7 +715,7 @@ an example.
 \begin{center}
 \subfigure[$e^{-bt}$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set nozeroaxis
@@ -734,7 +734,7 @@ plot x>0?exp(-x):0
 
 \subfigure[$e^{-bt}$ shifted by $\alpha$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set nozeroaxis
@@ -794,7 +794,7 @@ side-bands\index{side bands} as shown in Figure~\ref{f3-modulation}.
 \begin{center}
 \subfigure[The baseband]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -812,7 +812,7 @@ plot f(x)
 }
 \subfigure[The two side bands]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1037,7 +1037,7 @@ discontinuity point), a function $\nu(t)$ is introduced.
 	\end{equation}
 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set noxtics
 set size 1,0.7
@@ -1049,7 +1049,7 @@ set xrange [-2:4]
 set arrow from -2,0 to 4,0
 set label "$t$" at 4.5,0
 set arrow from 0,0 to 0,1
-set label "$\nu(t)$" at 0.2,1.1
+set label "\n$u(t)$" at 0.2,1.1
 set label "$\frac{1}{\epsilon}$" at -0.2,0.7
 plot (x>0&&x<1)?0.7:0
 %#
@@ -1377,7 +1377,7 @@ Figure~\ref{f3-infimp}.
 \begin{center}
 \subfigure[Train of $2n+1$ impulses]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1411,7 +1411,7 @@ plot 0
 
 \subfigure[and its spectrum]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1438,7 +1438,7 @@ plot f(x-4)+f(x)+f(x+4)
 \begin{center}
 \subfigure[Train of $\infty$ impulses]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1469,7 +1469,7 @@ plot 0
 
 \subfigure[and its spectrum]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1526,7 +1526,7 @@ An example of signal extension can be seen in Figure~\ref{f3-sigext}.
 \begin{center}
 \subfigure[A signal $f(t)$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noxtics
 set noytics
 set nozeroaxis
@@ -1544,7 +1544,7 @@ plot f(x)>0?f(x):0
 
 \subfigure[the signal obtained by extension $f(t)$ every $T$ seconds]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noxtics
 set noytics
 set nozeroaxis
@@ -1600,7 +1600,7 @@ F(k\omega_0) &=\int_{-T/2}^{T/2} f(t)e^{-j k\omega_0 t}dt \zdtag \\
 \begin{center}
 \subfigure[A periodic signal $f_p(t)$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noxtics
 set noytics
 set noborder
@@ -1618,7 +1618,7 @@ plot sin(x+cos(x))**2
 
 \subfigure[A non-periodic signal obtained $f_p(t)$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noxtics
 set noytics
 set noborder
@@ -1675,7 +1675,7 @@ Figure~\ref{f3-recpulse}.
 \begin{center}
 \subfigure[A periodic train of rectangular pulses]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1699,7 +1699,7 @@ plot f(x),f(x-5),f(x+5)
 
 \subfigure[Its spectrum as a train of impulses]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics

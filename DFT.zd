@@ -114,7 +114,7 @@ W_N^{-kn} \zdtag \\
 \end{align}
 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set nozeroaxis
@@ -165,7 +165,7 @@ respectively.
 \begin{figure}[hbtp]
 \subfigure[]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -192,7 +192,7 @@ plot f(x)+f(x-11)+f(x+10) with impulses
 }
 \subfigure[]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -299,7 +299,7 @@ $\omega_k=\frac{2\pi}{N}$ and tje Fourier transform is equal to the
 z-transform evaluated on the unit circle.
 
 \begin{center}
-\input{pix/DFT/circle.eepic}
+\input{pix/DFT/circle.pict2e}
 \end{center}
 
 The $\tilde{X}[k]$ so defined in Equation~(\ref{eq9-921}) could be seen as the
@@ -396,14 +396,14 @@ FT & & DFS & & DFT \\
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[Finite Length Sequence]{\input{pix/DFT/dfta.eepic}}
+\subfigure[Finite Length Sequence]{\input{pix/DFT/dfta.pict2e}}
 \subfigure[Periodic sequence $\tilde{x}\lbrak n\rbrak$ formed from $x\lbrak
-n\rbrak$ with period $N=5$]{\input{pix/DFT/dftb.eepic}}
+n\rbrak$ with period $N=5$]{\input{pix/DFT/dftb.pict2e}}
 \subfigure[Fourier series coefficients $\tilde{X}\lbrak k\rbrak$ for
 $\tilde{x}\lbrak n\rbrak$. To emphasise that the Fourier series coefficients
 are samples of the Fourier transform, $|X(e^{j\omega})|$ is also
-shown.]{\input{pix/DFT/dftc.eepic}}
-\subfigure[DFT of $x\lbrak n\rbrak$]{\input{pix/DFT/dftd.eepic}}
+shown.]{\input{pix/DFT/dftc.pict2e}}
+\subfigure[DFT of $x\lbrak n\rbrak$]{\input{pix/DFT/dftd.pict2e}}
 \end{center}
 \caption{Illustration of the DFT\label{f9-illdft}}
 \end{figure}
@@ -423,10 +423,10 @@ X[k] &= \begin{cases}
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[Finite Length Sequence]{\input{pix/DFT/dft2a.eepic}}
-\subfigure[Periodic sequence $\tilde{x}\lbrak n\rbrak$ formed from $x\lbrak n\rbrak$ with period $N=10$]{\input{pix/DFT/dft2b.eepic}}
-\subfigure[DFT magnitude.]{\input{pix/DFT/dft2c.eepic}}
-\subfigure[DFT phase. ($\times$ indicate indeterminate value)]{\input{pix/DFT/dft2d.eepic}}
+\subfigure[Finite Length Sequence]{\input{pix/DFT/dft2a.pict2e}}
+\subfigure[Periodic sequence $\tilde{x}\lbrak n\rbrak$ formed from $x\lbrak n\rbrak$ with period $N=10$]{\input{pix/DFT/dft2b.pict2e}}
+\subfigure[DFT magnitude.]{\input{pix/DFT/dft2c.pict2e}}
+\subfigure[DFT phase. ($\times$ indicate indeterminate value)]{\input{pix/DFT/dft2d.pict2e}}
 \end{center}
 \caption{Illustration of the DFT\label{f9-illdft2}}
 \end{figure}
@@ -481,9 +481,9 @@ X_3[k]=X_1[k]X_2[k] \label{eq9-946}
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[]{\input{pix/DFT/nconva.eepic}}
-\subfigure[]{\input{pix/DFT/nconvb.eepic}}
-\subfigure[]{\input{pix/DFT/nconvc.eepic}}
+\subfigure[]{\input{pix/DFT/nconva.pict2e}}
+\subfigure[]{\input{pix/DFT/nconvb.pict2e}}
+\subfigure[]{\input{pix/DFT/nconvc.pict2e}}
 \end{center}
 \caption{N-point circular convolution of two constant sequences of length
 $N$\label{f9-nconv}}
@@ -537,11 +537,11 @@ shown in Figure~\ref{f9-lconv}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[]{\input{pix/DFT/lconva.eepic}}
-\subfigure[]{\input{pix/DFT/lconvb.eepic}}
-\subfigure[]{\input{pix/DFT/lconvc.eepic}}
-\subfigure[]{\input{pix/DFT/lconvd.eepic}}
-\subfigure[]{\input{pix/DFT/lconve.eepic}}
+\subfigure[]{\input{pix/DFT/lconva.pict2e}}
+\subfigure[]{\input{pix/DFT/lconvb.pict2e}}
+\subfigure[]{\input{pix/DFT/lconvc.pict2e}}
+\subfigure[]{\input{pix/DFT/lconvd.pict2e}}
+\subfigure[]{\input{pix/DFT/lconve.pict2e}}
 \end{center}
 \caption{$2L$-point circular convolution of two constant sequences of length
 $L$ \label{f9-lconv}}
@@ -558,11 +558,11 @@ finite-length sequences.
 \begin{figure}[hbtp]
 \begin{center}
 \subfigure[The sequences $x_1 \lbrak n \rbrak$ and $x_2 \lbrak n \rbrak$ to be
-convolved]{\input{pix/DFT/convequiva.eepic}}
+convolved]{\input{pix/DFT/convequiva.pict2e}}
 \subfigure[The linear convolution of $x_1 \lbrak n \rbrak$ and $x_2 \lbrak n
-\rbrak$.]{\input{pix/DFT/convequivb.eepic}}
-\subfigure[$x_3 \lbrak n-N \rbrak$ for $N=6$]{\input{pix/DFT/convequivc.eepic}}
-\subfigure[$x_3 \lbrak n+N \rbrak$ for $N=6$]{\input{pix/DFT/convequivd.eepic}}
+\rbrak$.]{\input{pix/DFT/convequivb.pict2e}}
+\subfigure[$x_3 \lbrak n-N \rbrak$ for $N=6$]{\input{pix/DFT/convequivc.pict2e}}
+\subfigure[$x_3 \lbrak n+N \rbrak$ for $N=6$]{\input{pix/DFT/convequivd.pict2e}}
 \end{center}
 \caption{Illustration that circular convolution is equivalent to linear
 convolution followed by aliasing\label{f9-convequiv}}
@@ -573,9 +573,9 @@ convolution followed by aliasing\label{f9-convequiv}}
 \setcounter{subfigure}{4}
 \subfigure[$x_1 \lbrak n \rbrak \bigcirc \hspace{-1em} 6 \; x_2 \lbrak n
 \rbrak $, which is equal to the sum of (b), (c) and (d) in the interval $0
-\leqslant n \leqslant 5$.]{\input{pix/DFT/convequive.eepic}}
+\leqslant n \leqslant 5$.]{\input{pix/DFT/convequive.pict2e}}
 \subfigure[$x_1 \lbrak n \rbrak \bigcirc \hspace{-1.1em} {\scriptscriptstyle
-12} \; x_2 \lbrak n \rbrak $.]{\input{pix/DFT/convequivf.eepic}}
+12} \; x_2 \lbrak n \rbrak $.]{\input{pix/DFT/convequivf.pict2e}}
 \end{center}
 \caption{Illustration that circular convolution is equivalent to linear
 convolution followed by aliasing continued\label{f9-convequiv2}}
@@ -624,11 +624,11 @@ maximum length of $x_3[n]$.
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[Finite-length sequence $x_1 \lbrak n \rbrak$]{\input{pix/DFT/finitea.eepic}}
-\subfigure{\input{pix/DFT/finiteb.eepic}}
-\subfigure{\input{pix/DFT/finitec.eepic}}
+\subfigure[Finite-length sequence $x_1 \lbrak n \rbrak$]{\input{pix/DFT/finitea.pict2e}}
+\subfigure{\input{pix/DFT/finiteb.pict2e}}
+\subfigure{\input{pix/DFT/finitec.pict2e}}
 \setcounter{subfigure}{1}
-\subfigure[$x_2 \lbrak n - m \rbrak$ for several values of $n$]{\input{pix/DFT/finited.eepic}}
+\subfigure[$x_2 \lbrak n - m \rbrak$ for several values of $n$]{\input{pix/DFT/finited.pict2e}}
 \end{center}
 \caption[Example of linear convolution of two finite-length sequences]{
 Example of linear convolution of two finite-length sequences showing
@@ -645,7 +645,7 @@ Given an input sequence $x[n]$ with length $L$ and a $P$-point impulse
 response $h[n]$, the system response $y[n]$ has a length $(L+P-1)$.
 
 \begin{center}
-\input{pix/DFT/system.eepic}
+\input{pix/DFT/system.pict2e}
 \end{center}
 
 In this case for $\nconv$ and $\ast$ operations to be identical, the length of
@@ -678,8 +678,8 @@ L+P-1.$.
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[Finite length impulse response $h \lbrak n \rbrak$]{\input{pix/DFT/fir.eepic}}
-\subfigure[Indefinite length signal $x \lbrak n \rbrak$ to be filtered]{\input{pix/DFT/ils.eepic}}
+\subfigure[Finite length impulse response $h \lbrak n \rbrak$]{\input{pix/DFT/fir.pict2e}}
+\subfigure[Indefinite length signal $x \lbrak n \rbrak$ to be filtered]{\input{pix/DFT/ils.pict2e}}
 \end{center}
 \caption{Example signal for convolution\label{f9-egconv}}
 \end{figure}
@@ -691,17 +691,17 @@ method\/}.\index{overlap-add method}
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure{ \input{pix/DFT/overadda.eepic} }
-\subfigure{ \input{pix/DFT/overaddb.eepic} }
+\subfigure{ \input{pix/DFT/overadda.pict2e} }
+\subfigure{ \input{pix/DFT/overaddb.pict2e} }
 \subfigure[Decomposition of $x\lbrak n \rbrak$ in Figure~\ref{f9-egconv} into
-non-overlapping sections of length $L$]{ \input{pix/DFT/overaddc.eepic} }
+non-overlapping sections of length $L$]{ \input{pix/DFT/overaddc.pict2e} }
 \end{center}
 \caption{Example of the overlap-add method\label{f9-overadd}}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[Result of convolving each section with $h \lbrak n \rbrak$]{ \input{pix/DFT/overaddd.eepic} }
+\subfigure[Result of convolving each section with $h \lbrak n \rbrak$]{ \input{pix/DFT/overaddd.pict2e} }
 \end{center}
 \caption{Example of the overlap-add method continued\label{f9-overadd2}}
 \end{figure}
@@ -737,7 +737,7 @@ overlap-save method\/}.\index{overlap-save method}
 \begin{figure}[hbtp]
 \begin{center}
 \subfigure[Decomposition of $x \lbrak n \rbrak$ of Figure~\ref{f9-egconv} into
-overlapping sections of length $L$.]{ \input{pix/DFT/oversavea.eepic}}
+overlapping sections of length $L$.]{ \input{pix/DFT/oversavea.pict2e}}
 \end{center}
 \caption{Example of the overlap-save method\label{f9-oversave}}
 \end{figure}
@@ -747,7 +747,7 @@ overlapping sections of length $L$.]{ \input{pix/DFT/oversavea.eepic}}
 \setcounter{subfigure}{1}
 \subfigure[Result of convolving each section with $h \lbrak n \rbrak$. The
 portions of each filtered section to be discarded in forming the linear
-convolution are indicated.]{\input{pix/DFT/oversaveb.eepic}}
+convolution are indicated.]{\input{pix/DFT/oversaveb.pict2e}}
 \end{center}
 \caption{Example of the overlap-save method continued\label{f9-oversave2}}
 \end{figure}

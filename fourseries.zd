@@ -186,7 +186,7 @@ An example is shown in Figure~\ref{f2-harmsynth}.
 \begin{figure}[hbtp]
 \begin{center}
 \subfigure[Illustrating harmonic (spectral) analysis and synthesis] {
-\input{pix/fourseries/harmsynth.eepic}
+\input{pix/fourseries/harmsynth.pict2e}
 }
 
 \subfigure[General system]{
@@ -251,7 +251,7 @@ truncated Four\-ier Series.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/fourseries/hhat.eepic}
+\input{pix/fourseries/hhat.pict2e}
 \end{center}
 \caption{Function $\hat{H}(\theta)$\label{f2-hhat}}
 \end{figure}
@@ -307,7 +307,7 @@ shown individually in Figure~\ref{f2-harmon}.
 \begin{center}
 \subfigure[n=1]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set xrange [-pi:pi]
 set arrow from -pi-0.5,-0.5 to pi+0.5,-0.5
 set arrow from 0,-0.7 to 0,1.1
@@ -330,7 +330,7 @@ plot 1/2+(2/pi)*cos(x) , abs(x)<(pi/2)?0.5:-0.5 with lines
 
 \subfigure[n=3]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set xrange [-pi:pi]
 set arrow from -pi-0.5,-0.5 to pi+0.5,-0.5
 set arrow from 0,-0.7 to 0,1.1
@@ -353,7 +353,7 @@ plot (1/2+(2/pi)*cos(x))-(2/(3*pi))*cos(3*x),abs(x)<(pi/2)?0.5:-0.5 with lines
 
 \subfigure[n=5]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set nozeroaxis
@@ -388,7 +388,7 @@ represented by high frequency harmonics.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set xrange [-pi+0.5:2*pi]
 set samples 1000
 set noytics
@@ -541,7 +541,7 @@ saw-tooth function in Figure~\ref{f2-gibbs}.)
 \begin{center}
 \subfigure[Square Wave]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set samples 500
 set nokey
 set noborder
@@ -559,7 +559,7 @@ plot ((1/2+(2/pi)*cos(x))-(2/(3*pi))*cos(3*x))+(2/(5*pi))*cos(5*x)-(2/(7*pi))*co
 
 \subfigure[Saw-Tooth Wave]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set samples 500
 set nokey
 set noborder
@@ -645,7 +645,7 @@ shown in Figure~\ref{f2-conv}.
 \begin{center}
 \subfigure[$C_n$ convoluted with square wave]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noytics
 set noxtics
@@ -662,7 +662,7 @@ plot sin(x/2)/(x/2),abs(x-10)<4?1:0
 
 \subfigure[$C_n$ convoluted with square wave]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noytics
 set noxtics
@@ -679,7 +679,7 @@ plot sin(x/2)/(x/2),abs(x)<4?1:0
 
 \subfigure[Partial sum showing Gibb's phenomenon]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noytics
 set noxtics

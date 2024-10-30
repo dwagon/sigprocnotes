@@ -16,7 +16,7 @@ a digital signal involves
 \begin{figure}[hbtp]
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.7,0.7
 set noborder
@@ -36,7 +36,7 @@ plot 2*(sin(x)+cos(x/2))
 %#
 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.7,0.7
 set noborder
@@ -56,7 +56,7 @@ plot 2*(sin(x)+cos(x/2))
 %# 
 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.7,0.7
 set noborder
@@ -78,7 +78,7 @@ plot 2*(sin(x)+cos(x/2))
 \hspace{3em}
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.7,0.7
 set noborder
@@ -102,7 +102,7 @@ plot 2*(sin(x)+cos(x/2)) with points
 %#
 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.7,0.7
 set noborder
@@ -130,7 +130,7 @@ plot int(2*(sin(x)+cos(x/2))) with points
 %# 
 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.7,0.7
 set noborder
@@ -192,7 +192,7 @@ it is depicted in Figure~\ref{f6-sampling}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/sampling.eepic}
+\input{pix/digitanalog/sampling.pict2e}
 \end{center}
 \caption{Impulse modulation\label{f6-sampling}}
 \end{figure}
@@ -209,7 +209,7 @@ spectrum of the given signal
 \begin{equation}
 f(t) \stackrel{\F}{\fpair} F(\omega) 
 \end{equation}
-\input{pix/digitanalog/spectrum.eepic}
+\input{pix/digitanalog/spectrum.pict2e}
 \end{center}
 
 Find the Fourier transform of $f_s(t)$.
@@ -248,7 +248,7 @@ periodic extension of the spectrum $F(\omega)$ of the analog signal $f(t)$.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/prdexten.eepic}
+\input{pix/digitanalog/prdexten.pict2e}
 \end{center}
 \caption{Effects of changing sampling rate\label{f6-chngsamp}}
 \end{figure}
@@ -301,7 +301,7 @@ F(\omega) &= F_s(\omega) H(\omega)
 \end{align}
 
 \begin{center}
-\input{pix/digitanalog/lpfilt.eepic}
+\input{pix/digitanalog/lpfilt.pict2e}
 \end{center}
 \caption{Low-pass reconstruction filter\label{f6-reconfilt}}
 \end{figure}
@@ -373,7 +373,7 @@ of rectangular pulse is used in its place.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/rectpulse.eepic}
+\input{pix/digitanalog/rectpulse.pict2e}
 \end{center}
 \caption{Rectangular pulse train\label{f6-rectpulse}}
 \end{figure}
@@ -439,7 +439,7 @@ windowing.
 \subfigure[Original Signal]{
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -455,7 +455,7 @@ plot cos(x)
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -474,7 +474,7 @@ plot abs(x)<0.001?1:0
 \subfigure[Window]{
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -490,7 +490,7 @@ plot abs(x)<7.5?1:0
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -508,7 +508,7 @@ plot sinc(x)
 \subfigure[Signal after windowing]{
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -524,7 +524,7 @@ plot abs(x)<7.5?cos(x):0
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -548,7 +548,7 @@ plot sinc(x-5)+sinc(x+5)
 \subfigure[Original Signal]{
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -564,7 +564,7 @@ plot cos(x)
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -583,7 +583,7 @@ plot abs(x)<0.001?1:0
 \subfigure[Window]{
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -599,7 +599,7 @@ plot abs(x)<2.5?1:0
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -617,7 +617,7 @@ plot sinc(x)
 \subfigure[Signal after windowing]{
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -633,7 +633,7 @@ plot abs(x)<2.5?cos(x):0
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -666,7 +666,7 @@ quantization is called a quantizer as shown in Figure~\ref{f6-quant}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/quant.eepic}
+\input{pix/digitanalog/quant.pict2e}
 \end{center}
 \caption{Quantization operation\label{f6-quant}}
 \end{figure}
@@ -724,7 +724,7 @@ Figure~\ref{f6-fixedpoint}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/fixedpoint.eepic}
+\input{pix/digitanalog/fixedpoint.pict2e}
 \end{center}
 \caption{Fixed-point Number Representation\label{f6-fixedpoint}}
 \end{figure}
@@ -948,7 +948,7 @@ required to change the signal into its analog for, A zero-order hold D/A
 converter may be used 
 
 \begin{center}
-\input{pix/digitanalog/recon.eepic}
+\input{pix/digitanalog/recon.pict2e}
 \end{center}
 
 \begin{equation}
@@ -966,10 +966,10 @@ h(t) = \begin{cases} 1 & 0<t<T \\
 \end{equation}
 
 \parbox{0.30\textwidth}{
-\input{pix/digitanalog/zoh.eepic}
+\input{pix/digitanalog/zoh.pict2e}
 } $\stackrel{\F}{\Leftrightarrow}$ \parbox{0.6\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set noxtics
@@ -995,9 +995,9 @@ plot (sin(x)/x)**2,(abs(x)<(pi/2)?1:0)
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[Input to D/A Converter]{ \input{pix/digitanalog/daconvinput.eepic}}
+\subfigure[Input to D/A Converter]{ \input{pix/digitanalog/daconvinput.pict2e}}
 
-\subfigure[Resulting Output from D/A Converter]{\input{pix/digitanalog/daconvoutput.eepic}}
+\subfigure[Resulting Output from D/A Converter]{\input{pix/digitanalog/daconvoutput.pict2e}}
 \end{center}
 \caption{D/A Converter \label{f6-daconv}}
 \end{figure}
@@ -1037,7 +1037,7 @@ T}{2}} & |\omega| < \frac{\pi}{T} \\
 \begin{center}
 \subfigure[Frequency response]{ 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set xrange [-5:5]
 set yrange [0:1.5]
 set nokey
@@ -1058,7 +1058,7 @@ plot (abs(x)<2)?1:0
 }
 \subfigure[Impulse response]{ 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set xrange [-4.5:4.5]
 set yrange [-1:1.5]
 set noxtics
@@ -1105,7 +1105,7 @@ The waveform is shown in Figure~\ref{f6-waveform}.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set nozeroaxis
@@ -1184,7 +1184,7 @@ Figure~\ref{f6-discwave}.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set nozeroaxis
@@ -1299,7 +1299,7 @@ when $\omega_0=0$, there is no oscillation.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.7,0.7
 set nokey
@@ -1319,7 +1319,7 @@ plot cos(0*x) with impulses, cos(0*x) with points
 
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1339,7 +1339,7 @@ plot cos(pi/8*x) with impulses, cos(pi/8*x) with points
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1360,7 +1360,7 @@ plot cos((pi/4)*x) with impulses, cos(pi/4*x) with points
 
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1380,7 +1380,7 @@ plot cos(pi/2*x) with impulses, cos(pi/2*x) with points
 }
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -1443,7 +1443,7 @@ provided both input and output signals are in analog form.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/dsp.eepic}
+\input{pix/digitanalog/dsp.pict2e}
 \end{center}
 \caption{Digital signal processing system\label{f6-dsp}}
 \end{figure}
@@ -1453,7 +1453,7 @@ Figure~\ref{f6-adc}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/adc.eepic}
+\input{pix/digitanalog/adc.pict2e}
 \end{center}
 \caption{A/D converter\label{f6-adc}}
 \end{figure}
@@ -1618,7 +1618,7 @@ produce identical samples as shown in Figure~\ref{f6-aliasing}.
 
 \begin{figure}[hbtp]
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set xlabel "Time in seconds"
 set xrange [0:8]
@@ -1646,7 +1646,7 @@ shown in Figure~\ref{f6-alias2}.
 
 \begin{figure}[hbtp]
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set xlabel "Time in seconds"
 set xrange [0:8]
@@ -1724,7 +1724,7 @@ as shown in Figure~\ref{f6-zohfreq}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/zohapprox.eepic}
+\input{pix/digitanalog/zohapprox.pict2e}
 \end{center}
 \caption{Approximation of an analog signal by a zero-order
 hold\label{f6-zohapprox}}
@@ -1734,7 +1734,7 @@ hold\label{f6-zohapprox}}
 \begin{center}
 \subfigure{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set noytics
@@ -1755,7 +1755,7 @@ plot (abs(x-100)<4)?0.15:0,"pix/digitanalog/zohdata.freq" with lines
 }
 \subfigure{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set noytics
@@ -1809,7 +1809,7 @@ as shown in Figure~\ref{f6-fohimpresp}.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noxtics
 set noytics
 set nokey
@@ -1847,7 +1847,7 @@ as shown in Figure~\ref{f6-fohfreqresp}.
 \begin{center}
 \subfigure{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set noytics
@@ -1866,7 +1866,7 @@ plot "pix/digitanalog/fohfreq.data" with lines
 }
 \subfigure{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set nozeroaxis
@@ -1899,7 +1899,7 @@ $F_s/2$.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/fohapprox.eepic}
+\input{pix/digitanalog/fohapprox.pict2e}
 \end{center}
 \caption{Approximation of an analog signal by a first-order
 hold\label{f6-fohapprox}}
@@ -1913,7 +1913,7 @@ past sample $x(nT-T)$ of the signal as shown in Figure~\ref{f6-tsec}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/tsec.eepic}
+\input{pix/digitanalog/tsec.pict2e}
 \end{center}
 \caption{Linear interpolation of $x[t]$ with a $T$-second delay
 \label{f6-tsec}}
@@ -1936,7 +1936,7 @@ H(F) &= T \left( \frac{\sin \pi F T}{\pi F T} \right)^2 e^{-j2\pi F t}
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set noytics
@@ -1966,7 +1966,7 @@ due to the delay $T$.
 \begin{center}
 \subfigure{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set nozeroaxis
@@ -1986,7 +1986,7 @@ plot "pix/digitanalog/lidfreq.data" with lines
 }
 \subfigure{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set nozeroaxis
@@ -2252,7 +2252,7 @@ Figure~\ref{f6-downsampler}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/downsampler.eepic}
+\input{pix/digitanalog/downsampler.pict2e}
 \end{center}
 \caption{Representation of downsampler\label{f6-downsampler}}
 \end{figure}
@@ -2286,7 +2286,7 @@ Recall that the discrete-time sequence $x[n]$ is defined as $x_c(nT)$.
 
 ( Note:
 \begin{center}
-\input{pix/digitanalog/convtrain.eepic}
+\input{pix/digitanalog/convtrain.pict2e}
 \end{center}
 \begin{tabbing}
 where \= \\
@@ -2389,11 +2389,11 @@ and
 \end{Rem}
 
 \begin{figure}[hbtp]
-\subfigure{ \input{pix/digitanalog/freqdowna.eepic} }
-%\subfigure{ \input{pix/digitanalog/freqdownb.eepic} }
-\subfigure{ \input{pix/digitanalog/freqdownc.eepic} }
-\subfigure{ \input{pix/digitanalog/freqdownd.eepic} }
-\subfigure{ \input{pix/digitanalog/freqdowne.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdowna.pict2e} }
+%\subfigure{ \input{pix/digitanalog/freqdownb.pict2e} }
+\subfigure{ \input{pix/digitanalog/freqdownc.pict2e} }
+\subfigure{ \input{pix/digitanalog/freqdownd.pict2e} }
+\subfigure{ \input{pix/digitanalog/freqdowne.pict2e} }
 \caption{Frequency domain illustration of downsampling\label{f6-freqdown}}
 \end{figure}
 
@@ -2412,17 +2412,17 @@ Because $\omega_N'=M \omega_N = 3\pi/2$, which is greater than $\pi$ aliasing
 occurs.
 
 \begin{figure}[hbtp]
-\subfigure{ \input{pix/digitanalog/freqdownaliasa.eepic} }
-\subfigure{ \input{pix/digitanalog/freqdownaliasb.eepic} }
-\subfigure{ \input{pix/digitanalog/freqdownaliasc.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasa.pict2e} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasb.pict2e} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasc.pict2e} }
 \caption{Frequency domain illustration of downsampling with aliasing
 \label{f6-freqdownalias}}
 \end{figure}
 
 \begin{figure}[hbtp]
-\subfigure{ \input{pix/digitanalog/freqdownaliasd.eepic} }
-\subfigure{ \input{pix/digitanalog/freqdownaliase.eepic} }
-\subfigure{ \input{pix/digitanalog/freqdownaliasf.eepic} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasd.pict2e} }
+\subfigure{ \input{pix/digitanalog/freqdownaliase.pict2e} }
+\subfigure{ \input{pix/digitanalog/freqdownaliasf.pict2e} }
 \caption{Downsampling with prefiltering to avoid aliasing
 \label{f6-freqdownaliasfilt}}
 \end{figure}
@@ -2452,7 +2452,7 @@ followed by compression.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/gendown.eepic}
+\input{pix/digitanalog/gendown.pict2e}
 \end{center}
 \caption{General system for downsampling\label{f6-gendown}}
 \end{figure}
@@ -2487,7 +2487,7 @@ discrete-time processing as shown in Figure~\ref{f6-expander}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/expander.eepic}
+\input{pix/digitanalog/expander.pict2e}
 \end{center}
 \caption{Expander\label{f6-expander}}
 \end{figure}
@@ -2645,7 +2645,7 @@ Figure~\ref{f6-lininterp} shows $h_{lin}[n]$ for $L=5$.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/lininterp.eepic}
+\input{pix/digitanalog/lininterp.pict2e}
 \end{center}
 \caption{Impulse response for linear interpolation\label{f6-lininterp}}
 \end{figure}
@@ -2701,7 +2701,7 @@ effective sampling period of $T'=\left( \frac{M}{L} \right) T$.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/digitanalog/interdec.eepic}
+\input{pix/digitanalog/interdec.pict2e}
 \end{center}
 \caption{System for changing sampling rate by a non-integer
 factor\label{f6-interdec}}
