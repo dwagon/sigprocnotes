@@ -274,7 +274,7 @@ to a finite length input sequence $x[n]$. And $X[k]$ is the value of the
 output when $n=N$.
 
 \begin{center}
-\input{pix/compDFT/sfg1.eepic}
+\input{pix/compDFT/sfg1.pict2e}
 \end{center}
 
 To compute $X[k]=y_k[N]$ we need $4N$ real multiplications and $4N$ real
@@ -294,7 +294,7 @@ H_k[z] &= \frac{1-\wn{k} z^{-1}}{1-2\cos (2\pi k/N) z^{-1} + z^{-2}}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/sfg2.eepic}
+\input{pix/compDFT/sfg2.pict2e}
 \end{center}
 \caption{SFG of DFT\label{f10-sfgdft}}
 \end{figure}
@@ -415,21 +415,21 @@ Note: Further reduction of multiplications can be achieved using
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft1.eepic}
+\input{pix/compDFT/dft1.pict2e}
 \end{center}
 \caption{SFG of decimation-in-time of N-point DFT into 2 N/2-points DFTs\label{f10-dftn}}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft2.eepic}
+\input{pix/compDFT/dft2.pict2e}
 \end{center}
 \caption{SFG of decimation-in-time of N/2-point DFT into 2 N/4-points DFTs\label{f10-dftn2}}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft3.eepic}
+\input{pix/compDFT/dft3.pict2e}
 \end{center}
 \caption{Result of Substituting Figure~\ref{f10-dftn} into
 Figure~\ref{f10-dftn2}\label{f10-dftn3}}
@@ -437,7 +437,7 @@ Figure~\ref{f10-dftn2}\label{f10-dftn3}}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft4.eepic}
+\input{pix/compDFT/dft4.pict2e}
 \end{center}
 \caption{SFG of complete DIT decomposition of an 8-point DFT
 computation}
@@ -445,14 +445,14 @@ computation}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft5.eepic}
+\input{pix/compDFT/dft5.pict2e}
 \end{center}
 \caption{SFG of complete DIT using butterfly computation\label{f10-dft5}}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft6.eepic}
+\input{pix/compDFT/dft6.pict2e}
 \end{center}
 \caption{Rearrangement of Figure~\ref{f10-dft5} with input in normal order and
 output in bit-reversed order}
@@ -460,7 +460,7 @@ output in bit-reversed order}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft7.eepic}
+\input{pix/compDFT/dft7.pict2e}
 \end{center}
 \caption{Rearrangement of Figure~\ref{f10-dft5} with both input and output in
 normal order}
@@ -469,17 +469,17 @@ normal order}
 \begin{figure}[hbtp]
 \begin{center}
 \parbox{0.45\textwidth}{
-\subfigure[Flow graph of basic butterfly computation]{\input{pix/compDFT/BFa.eepic}}} \ \ 
-\parbox{0.45\textwidth}{ \subfigure[Flow graph of 2-point DFT]{\input{pix/compDFT/BFb.eepic}}}
+\subfigure[Flow graph of basic butterfly computation]{\input{pix/compDFT/BFa.pict2e}}} \ \ 
+\parbox{0.45\textwidth}{ \subfigure[Flow graph of 2-point DFT]{\input{pix/compDFT/BFb.pict2e}}}
 \subfigure[Flow graph of simplified butterfly computation requiring only one%
-complex multiplication]{\input{pix/compDFT/BFc.eepic}}
+complex multiplication]{\input{pix/compDFT/BFc.pict2e}}
 \end{center}
 \caption{Butterfly computations}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dft8.eepic}
+\input{pix/compDFT/dft8.pict2e}
 \end{center}
 \caption[Rearrangement of Figure~\ref{f10-dft5} having the same geometry for
 each stage]{Rearrangement of Figure~\ref{f10-dft5} having the same geometry for
@@ -532,7 +532,7 @@ The DIF FFT algorithms are transposes of the DIT FFTs and vice versa.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dif1.eepic}
+\input{pix/compDFT/dif1.pict2e}
 \end{center}
 \caption[SFG of decimation-in-frequency decomposition]{SFG of
 decimation-in-frequency decomposition of an N-point DFT computation into two
@@ -541,7 +541,7 @@ N/2-point DFT computations (N=8)}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dif2.eepic}
+\input{pix/compDFT/dif2.pict2e}
 \end{center}
 \caption[SFG of decimation-in-frequency decomposition]{SFG of
 decimation-in-frequency decomposition of an 8-point DFT into two 4-point DFT computations}
@@ -549,7 +549,7 @@ decimation-in-frequency decomposition of an 8-point DFT into two 4-point DFT com
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dif3.eepic}
+\input{pix/compDFT/dif3.pict2e}
 \end{center}
 \caption[SFG of complete decimation-in-frequency decomposition]{SFG of
 complete decimation-in-frequency decomposition of an 8-point DFT}
@@ -557,7 +557,7 @@ complete decimation-in-frequency decomposition of an 8-point DFT}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dif4.eepic}
+\input{pix/compDFT/dif4.pict2e}
 \end{center}
 \caption[SFG of DFT using butterfly computation]{SFG of 8-point DFT using the
 butterfly computation}
@@ -565,14 +565,14 @@ butterfly computation}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dif5.eepic}
+\input{pix/compDFT/dif5.pict2e}
 \end{center}
 \caption{Rearrangement so both input and output in normal order}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/dif6.eepic}
+\input{pix/compDFT/dif6.pict2e}
 \end{center}
 \caption[Rearrangement so all phases similar geometry]{Rearrangement so that
 each stage has the same geometry thereby permitting sequential data accessing
@@ -595,7 +595,7 @@ Figure~\ref{f10-conv}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/tpair.eepic}
+\input{pix/compDFT/tpair.pict2e}
 \end{center}
 \caption{FFT implementation of convolution\label{f10-conv}}
 \end{figure}
@@ -713,7 +713,7 @@ FFT as shown in Figure~\ref{f10-bfly}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/compDFT/bfly.eepic}
+\input{pix/compDFT/bfly.pict2e}
 \end{center}
 \caption{General radix-2 butterfly\label{f10-bfly}}
 \end{figure}
@@ -863,11 +863,11 @@ including the unit circle.
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[$R_0=r_0=1$,$\phi_0=\theta_0=0$]{\input{pix/compDFT/circa.eepic}}
-\subfigure[$R_0=1$,$r_0>1$,$\phi_0=\theta_0=0$]{\input{pix/compDFT/circb.eepic}}
+\subfigure[$R_0=r_0=1$,$\phi_0=\theta_0=0$]{\input{pix/compDFT/circa.pict2e}}
+\subfigure[$R_0=1$,$r_0>1$,$\phi_0=\theta_0=0$]{\input{pix/compDFT/circb.pict2e}}
 
-\subfigure[$R_0<1$]{\input{pix/compDFT/circc.eepic}}
-\subfigure[$R_0>1$]{\input{pix/compDFT/circd.eepic}}
+\subfigure[$R_0<1$]{\input{pix/compDFT/circc.pict2e}}
+\subfigure[$R_0>1$]{\input{pix/compDFT/circd.pict2e}}
 \end{center}
 \caption{Some examples of contours on which we may evaluate the $z$-transform}
 \end{figure}
@@ -934,7 +934,7 @@ y[k] &= \sum_{n=0}^{N-1} g[n] h[k-n] \qquad k=0,1,\ldots,L-1
 Note that both $g[n]$ and $h[n]$ are complex valued sequences.
 
 \begin{center}
-\input{pix/compDFT/cvs.eepic}
+\input{pix/compDFT/cvs.pict2e}
 \end{center}
 
 When $R_0=1$, the sequence

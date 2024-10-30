@@ -28,7 +28,7 @@ implemented with finite numerical precision.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/advDSP/overview.eepic}
+\input{pix/advDSP/overview.pict2e}
 \end{center}
 \caption{Overview of digital signal processing\label{f11-overview}}
 \end{figure}
@@ -36,16 +36,16 @@ implemented with finite numerical precision.
 \begin{figure}[hbtp]
 \begin{center}
 \subfigure[Discrete-time filtering of continuous-time %
-signals]{\input{pix/advDSP/discfilt.eepic}}
-\subfigure[A more realistic model]{\input{pix/advDSP/realdiscfilt.eepic}}
+signals]{\input{pix/advDSP/discfilt.pict2e}}
+\subfigure[A more realistic model]{\input{pix/advDSP/realdiscfilt.pict2e}}
 \end{center}
 \caption{Discrete-time filtering of continuous-time signals}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure[Representation of an ideal sample and hold]{\input{pix/advDSP/idealsah.eepic}}
-\subfigure[Typical input and output signals for the sample and hold]{\input{pix/advDSP/sahio.eepic}}
+\subfigure[Representation of an ideal sample and hold]{\input{pix/advDSP/idealsah.pict2e}}
+\subfigure[Typical input and output signals for the sample and hold]{\input{pix/advDSP/sahio.pict2e}}
 \end{center}
 \caption{Sample and Hold}
 \end{figure}
@@ -62,14 +62,14 @@ value closes to the amplitude of the input at its output.
 The A/D consists of a quantizer and a coder
 
 \begin{center}
-\input{pix/advDSP/ad.eepic}
+\input{pix/advDSP/ad.pict2e}
 \end{center}
 where $x[n]=x_a(nT)$ are the ideal samples of $x_a(t)$. The sample and hold
 are normally uised for C/D conversion.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/advDSP/typquant.eepic}
+\input{pix/advDSP/typquant.pict2e}
 \end{center}
 \caption{Typical quantizer for A/D conversion}
 \end{figure}
@@ -174,7 +174,7 @@ A statistical model of the quantization error $e[n]$ is useful in representing
 the effects of quantization.
 
 \begin{center}
-\input{pix/advDSP/quant1.eepic}
+\input{pix/advDSP/quant1.pict2e}
 \end{center}
 
 When rounding is used, $e[n]$ in the model is usually assumed to be a uniformly

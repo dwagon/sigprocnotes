@@ -127,7 +127,7 @@ unbounded or uncontrollable.
 
 For example an integrator
 \begin{center}
-%\input{pix/anasigproc/integ.eepic}
+%\input{pix/anasigproc/integ.pict2e}
 \end{center}
 
 \begin{equation}
@@ -139,7 +139,7 @@ Input and output waveforms of an integrator are shown in Figure~\ref{f5-integ}.
 \begin{center}
 \begin{tabular}{cc}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -155,7 +155,7 @@ plot abs(x)<0.01?1:0
 %#
 &
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -171,7 +171,7 @@ plot x>0?1:0
 %#
 \\
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -187,7 +187,7 @@ plot sin(x)
 %#
 &
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -203,7 +203,7 @@ plot cos(x)
 %#
 \\
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -219,7 +219,7 @@ plot x>0?1:0
 %#
 &
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -234,7 +234,7 @@ plot x
 %#
 \\
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -250,7 +250,7 @@ plot sin(x)+(x>0?1:0)
 %#
 &
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -462,7 +462,7 @@ N(s)=s^4+4s^2+3
 \end{align}
 \item Use successive division and inversion
 \begin{center}
-\input{pix/anasigproc/ldiv1.eepic}
+\input{pix/anasigproc/ldiv1.pict2e}
 \end{center}
 i.e.
 \begin{equation}
@@ -490,7 +490,7 @@ N(s) &= 3s^7+24s^5+57s^3+36s
 \end{align}
 \item \ 
 \begin{center}
-\input{pix/anasigproc/ldiv2.eepic}
+\input{pix/anasigproc/ldiv2.pict2e}
 \end{center}
 
 $D(s)$ is no strict Hurwitz, and $M(s)$ and $N(s)$ have an even polynomial
@@ -542,7 +542,7 @@ G_1(s) &= H_1(s)F_1(s) = (b_2s^2+b_1s+b_0)F_1(s) \zdtag \\
 
 A realization of $H_1(s)$ is
 \begin{center}
-\input{pix/anasigproc/realh1.eepic}
+\input{pix/anasigproc/realh1.pict2e}
 \end{center}
 
 \begin{align}
@@ -553,7 +553,7 @@ G_2(s) &= F_2(s)-a_1sG_2(s)-a_2s^2G_2(s)
 
 A realization of $H_2(s)$ is
 \begin{center}
-\input{pix/anasigproc/realh2.eepic}
+\input{pix/anasigproc/realh2.pict2e}
 \end{center}
 
 If 
@@ -575,23 +575,23 @@ G_2(s) &= F(s)-a_1sG(s)-a_2s^2G(s)
 
 A realization of $H(s)$ is
 \begin{center}
-\input{pix/anasigproc/realh.eepic}
+\input{pix/anasigproc/realh.pict2e}
 
-\input{pix/anasigproc/realizeh.eepic}
+\input{pix/anasigproc/realizeh.pict2e}
 \end{center}
 
 In the realization diagram for $H(s)$, all the elementary operations:
 \begin{center}
 \begin{tabular}{cc}
-\input{pix/anasigproc/adder.eepic}  & Adder \\
-\input{pix/anasigproc/multip.eepic}  & Multiplier \\
-\input{pix/anasigproc/different.eepic}  & Differentiator \\
+\input{pix/anasigproc/adder.pict2e}  & Adder \\
+\input{pix/anasigproc/multip.pict2e}  & Multiplier \\
+\input{pix/anasigproc/different.pict2e}  & Differentiator \\
 \end{tabular}
 \end{center}
 can be implemented using active circuits.
 
 \begin{center}
-\input{pix/anasigproc/active.eepic}
+\input{pix/anasigproc/active.pict2e}
 \end{center}
 
 In general, a system transform function
@@ -601,7 +601,7 @@ a_{n-1}s^{n-1} + \cdots + a_2s^2+a_1s+1}
 \end{equation}
 can be simulated or realized by the following diagram:
 \begin{center}
-\input{pix/anasigproc/gensim.eepic}
+\input{pix/anasigproc/gensim.pict2e}
 \end{center}
 
 Since the system transfer function $H(s)$ may be also represented in the
@@ -613,7 +613,7 @@ s^{-n}}
 
 another system realization is shown as follows.
 \begin{center}
-\input{pix/anasigproc/gensim2.eepic}
+\input{pix/anasigproc/gensim2.pict2e}
 \end{center}
 
 Each $\frac{1}{s}$ represents an integrator.
@@ -628,7 +628,7 @@ H(s)=\prod_{k=1}^{r} H_k(s)
 
 Therefore a realization of $H(s)$ is
 \begin{center}
-\input{pix/anasigproc/real3.eepic}
+\input{pix/anasigproc/real3.pict2e}
 \end{center}
 
 If the partial fraction expansion is used for $H(s)$,
@@ -638,7 +638,7 @@ H(s)=\sum_{k=1}^{r} H_k(s)
 
 Therefore, a parallel realization of $H(s)$ is
 \begin{center}
-\input{pix/anasigproc/parallel.eepic}
+\input{pix/anasigproc/parallel.pict2e}
 \end{center}
 
 From the above realizations of system functions it can be seen that the first
@@ -701,7 +701,7 @@ given as shown in Figure~\ref{f5-spec}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/lpfilt.eepic}
+\input{pix/anasigproc/lpfilt.pict2e}
 \end{center}
 \caption{Specification for a low-pass filter\label{f5-spec}}
 \end{figure}
@@ -725,7 +725,7 @@ in Figure~\ref{f5-superpos}.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set xrange [0:2]
 set yrange [0:3]
@@ -759,7 +759,7 @@ becomes a cut and try excersise.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/filtdes.eepic}
+\input{pix/anasigproc/filtdes.pict2e}
 \end{center}
 \caption{Filter Design\label{f5-filtdes}}
 \end{figure}
@@ -811,7 +811,7 @@ Figure~\ref{f5-idealfilter}.
 \begin{center}
 \parbox[c]{0.45\textwidth}{ \subfigure[Low Pass]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set noxtics
 set noytics
@@ -832,7 +832,7 @@ plot x<5?1:0
 }}
 \parbox[c]{0.45\textwidth}{ \subfigure[High Pass]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set noxtics
 set noytics
@@ -854,7 +854,7 @@ plot x>5?1:0
 
 \parbox[c]{0.45\textwidth}{ \subfigure[Band Pass]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set noxtics
 set nozeroaxis
@@ -876,7 +876,7 @@ plot abs(x-5)<2.5?1:0
 }}
 \parbox[c]{0.45\textwidth}{ \subfigure[Band Stop]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set noxtics
 set noytics
@@ -917,7 +917,7 @@ It is a linear phase-shifting filter.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set noxtics
 set noytics
@@ -989,7 +989,7 @@ d\omega \\
 
 \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set size 0.55,0.6
@@ -1009,7 +1009,7 @@ plot abs(x)<2?1:0
 }
 $\Leftrightarrow$ \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set size 0.55,0.6
@@ -1032,7 +1032,7 @@ plot sin(x)/x
 Because $h(t)$ is not causal, therefore, cannot be implemented using analog
 devices in practice.} \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set size 0.55,0.6
 set nokey
@@ -1055,7 +1055,7 @@ plot sin(x-7)/(x-7)
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/desproc.eepic}
+\input{pix/anasigproc/desproc.pict2e}
 \end{center}
 \caption{Basic design procedure of a filter\label{f5-desproc}}
 \end{figure}
@@ -1108,7 +1108,7 @@ To draw the asymptotic Bode phase plot $\Psi_1(\omega)=\tan^{-1} \frac{\omega}{\
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/sfoz.eepic}
+\input{pix/anasigproc/sfoz.pict2e}
 \end{center}
 \caption{Simple first order zero\label{f5-sfoz}}
 \end{figure}
@@ -1166,7 +1166,7 @@ To draw the asymptotic Bode phase plot $\Psi_2$
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/sfop.eepic}
+\input{pix/anasigproc/sfop.pict2e}
 \end{center}
 \caption{Simple first order pole\label{f5-sfop}}
 \end{figure}
@@ -1225,7 +1225,7 @@ To draw the asymptotic Bode phase diagram  for $\Psi_3$
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/ssoz.eepic}
+\input{pix/anasigproc/ssoz.pict2e}
 \end{center}
 \caption{Simple second order zero\label{f5-ssoz}}
 \end{figure}
@@ -1243,7 +1243,7 @@ diagrams are shown in Figure~\ref{f5-sop}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/sop.eepic}
+\input{pix/anasigproc/sop.pict2e}
 \end{center}
 \caption{Second order pole\label{f5-sop}}
 \end{figure}
@@ -1304,7 +1304,7 @@ can be obtained as
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/rlc.eepic}
+\input{pix/anasigproc/rlc.pict2e}
 \end{center}
 \caption{RLC circuit\label{f5-rlc}}
 \end{figure}
@@ -1363,7 +1363,7 @@ The angle $\Psi$ with respect to the negative real axis is
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/splane.eepic}
+\input{pix/anasigproc/splane.pict2e}
 \end{center}
 \caption{Quality factor relationships\label{f5-splane}}
 \end{figure}
@@ -1372,7 +1372,7 @@ The angle $\Psi$ with respect to the negative real axis is
 \begin{center}
 \parbox{.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set logscale x
 set xrange [0.001:100]
@@ -1392,7 +1392,7 @@ plot 1/(sqrt((1-x**2)**2+(x/1)**2))
 %#
 } \parbox{0.45\textwidth}{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set logscale x
 set yrange [-2:0.5]
@@ -1444,7 +1444,7 @@ The importance of $Q$ may be seen in Figure~\ref{f5-qimp}
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set logscale x
 set logscale y
@@ -1456,7 +1456,7 @@ plot 1/(sqrt((1-x**2)**2+(x/5)**2)), 1/(sqrt((1-x**2)**2+(x/2)**2)), 1/(sqrt((1-
 %#
 
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set logscale x
 set xlabel "$\omega$"
@@ -1538,7 +1538,7 @@ s_3 &= e^{j225^\circ} = \cos 225^\circ+j\sin 225^\circ=-0.707-j0.707 \\
 s_4 &= e^{j315^\circ} = \cos 315^\circ+j\sin 315^\circ=0.707-j0.707
 \end{align}
 }\parbox{0.25\textwidth}{
-\input{pix/anasigproc/circn2.eepic}
+\input{pix/anasigproc/circn2.pict2e}
 }
 
 Again, two poles in the right s-plane are not stable. Therefore
@@ -1573,7 +1573,7 @@ s_5 = e^{j 240^\circ} &= \cos 240^\circ + j\sin 240^\circ \\
 s_6 = e^{j 300^\circ} &= \cos 300^\circ + j\sin 300^\circ
 \end{align}
 }\parbox{0.25\textwidth}{
-\input{pix/anasigproc/circn6.eepic}}
+\input{pix/anasigproc/circn6.pict2e}}
 
 Leave out the roots in the right half s-plane.
 
@@ -1697,7 +1697,7 @@ Assume that \\
 Maximum passband attenuation $=\alpha_p$, for $\omega \leqslant \omega_p$ \\
 Minimum stopband attenuation $=\alpha_s$, for $\omega > \omega_s$ \\
 } \parbox{0.35\textwidth}{
-\input{pix/anasigproc/lpfig.eepic}}
+\input{pix/anasigproc/lpfig.pict2e}}
 
 Dividing both sides of Equation~\ref{eq5-5720} and finding the antilogarithm
 gives
@@ -1836,7 +1836,7 @@ required response.
 
 If the required $|H_n(j\omega)|^2$ is defined by 
 \begin{center}
-\input{pix/anasigproc/chebyresp.eepic}
+\input{pix/anasigproc/chebyresp.pict2e}
 \end{center}
 $\varepsilon\leqslant1$, $\varepsilon T_n(\omega)$ may be used for
 $F_n(\omega)$ where $T_n(\omega)$ is the Chebyshev polynomial of the first
@@ -2045,7 +2045,7 @@ which represents an ellipse.
 $\cosh a$ is the major semiaxis\\
 $\sinh a$ is the minor semiaxis\\
 foci are at $\pm j 1$. } \parbox{0.45\textwidth}{
-\input{pix/anasigproc/ellipse.eepic}}
+\input{pix/anasigproc/ellipse.pict2e}}
 
 \begin{Exa}
 Given $n=3$ and $\alpha_p=1$, determine the location of the Chebyshev poles.
@@ -2188,7 +2188,7 @@ edge at $\omega_0$ as shown in Figure~\ref{f5-low2hi}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/low2hi.eepic}
+\input{pix/anasigproc/low2hi.pict2e}
 \end{center}
 \caption{Low-pass to High-pass Transformation\label{f5-low2hi}}
 \end{figure}
@@ -2200,7 +2200,7 @@ Figure~\ref{f5-low2bp}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/doublelow.eepic}
+\input{pix/anasigproc/doublelow.pict2e}
 \end{center}
 \caption{Double sided low-pass filter\label{f5-doublelow}}
 \end{figure}
@@ -2210,7 +2210,7 @@ $\omega_1$ to $\omega_2$ as shown in Figure~\ref{f5-low2bp}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/low2bp.eepic}
+\input{pix/anasigproc/low2bp.pict2e}
 \end{center}
 \caption{Double sided low-pass filter\label{f5-low2bp}}
 \end{figure}
@@ -2315,7 +2315,7 @@ s & \rightarrow \frac{1}{\beta \left( \frac{s}{\omega_0}+ \frac{\omega_0}{s}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/low2bs.eepic}
+\input{pix/anasigproc/low2bs.pict2e}
 \end{center}
 \caption{Low pass to band stop transformation\label{f5-low2bs}}
 \end{figure}
@@ -2329,7 +2329,7 @@ The ideal delay filter can be depicter as shown in Figure~\ref{f5-delfilt}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/delayfilt.eepic}
+\input{pix/anasigproc/delayfilt.pict2e}
 \end{center}
 \caption{Ideal delay filter\label{f5-delfilt}}
 \end{figure}
@@ -2347,7 +2347,7 @@ H(s) = \frac{v_2(s)}{v_1(s)} = e^{-Ds}
 Its frequency responses are given as shown in Figure~\ref{f5-delayfreq}.
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/anasigproc/delayfreq.eepic}
+\input{pix/anasigproc/delayfreq.pict2e}
 \end{center}
 \caption{Ideal delay filter\label{f5-delayreq}}
 \end{figure}

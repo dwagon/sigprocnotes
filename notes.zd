@@ -12,9 +12,13 @@
 %\usepackage{twoside}	% comment this line out if you want only one sided printing
 \usepackage{minitoc}
 \usepackage{righttag}
-\usepackage{psfig}
-\usepackage{epic}
+\usepackage{graphicx}
+\usepackage{pict2e}
+\usepackage{xcolor}
 \usepackage{eepic}
+\usepackage{latexsym}
+\usepackage{epic}
+\usepackage{epsfig}
 \usepackage{figstuff}
 \input{amssym.def}
 \input{amssym}
@@ -60,7 +64,7 @@
 \setcounter{tocdepth}{3}
 \makeindex
 \pssilent
-\psdraftbox
+% \psdraftbox
 \newcommand{\largemonash}{x}	% Unless you have the monlogos
 \psdraft    % Comment this line to make the final version, otherwise all 
 			% PostScript pictures will only be boxes.

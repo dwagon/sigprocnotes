@@ -43,7 +43,7 @@ Further information can be found in
 \end{enumerate}
 
 \begin{figure}[hbtp]
-\centerline{\psfig{figure=eps/Pilot.eps}}
+\centerline{\includegraphics[natwidth=241,natheight=263]{pdf/Pilot.pdf}}
 \caption[PILOT FMCW navigation radar]{PILOT Frequency Modulated Continuous Wave navigation radar --- K. Fuller, IEEE Proceedings}
 \end{figure}
 
@@ -110,18 +110,18 @@ analog signals.
 \subfigure[Continuous-Time, Non-periodic]{
 % Example 1
 %# gnuplot
-set terminal eepic
-set noborder
-set noxtics
-set noytics
-set nozeroaxis
+set terminal pict2e
+unset border
+unset xtics
+unset ytics
+unset zeroaxis
 set arrow from 1,0 to 11,0
 set arrow from 3,0 to 3,3
 set label "$f(t)$" at 3,3.2
 set label "$0$" at 3,-0.25
 set label "$t$" at 11,-0.25
 set size 1,0.8
-set nokey
+unset key
 set xrange[1:10]
 set yrange[-0.3:3.2]
 plot exp(sin(x+cos(x*2)-sin(x/2)))
@@ -131,17 +131,17 @@ plot exp(sin(x+cos(x*2)-sin(x/2)))
 \subfigure[Continuous-Time, Periodic]{
 % Example 2
 %# gnuplot
-set terminal eepic
-set nozeroaxis
+set terminal pict2e
+unset zeroaxis
 set arrow from -15,0 to 15,0
 set arrow from 0,-1.3 to 0,1.3
 set label "$0$" at 0.25,-0.25
 set label "$t$" at 15,-0.25
 set label "$f(t)$" at -0.75,1.32
-set noborder
-set noxtics
-set noytics
-set nokey
+unset border
+unset xtics
+unset ytics
+unset key
 set size 1,0.8
 set yrange [-1.35:1.35]
 set xrange [-14:14]
@@ -161,12 +161,12 @@ plot sin(x)
 \subfigure{
 % Example 3
 %# gnuplot
-set terminal eepic
-set noborder
-set noxtics
-set noytics
-set nokey
-set nozeroaxis
+set terminal pict2e
+unset border
+unset xtics
+unset ytics
+unset key
+unset zeroaxis
 set size 1,0.8
 set samples 400
 set arrow from 0,0 to 11,0
@@ -183,12 +183,12 @@ plot 2*(int(x)%2)
 \subfigure{
 % Example 4
 %# gnuplot
-set terminal eepic
-set noborder
-set noxtics
-set noytics
-set nokey
-set nozeroaxis
+set terminal pict2e
+unset border
+unset xtics
+unset ytics
+unset key
+unset zeroaxis
 set size 1,0.9
 set arrow from 0,0 to 85,0
 set arrow from 0,0 to 0,0.6
@@ -218,12 +218,12 @@ $t_i=iT$, where $T$ is a constant.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
-set nokey
-set noborder
-set noxtics
-set noytics
-set nozeroaxis
+set terminal pict2e
+unset key
+unset border
+unset xtics
+unset ytics
+unset zeroaxis
 set arrow from 1,0 to 11,0
 set arrow from 3,0 to 3,1.1
 set label "$0$" at 3,-0.1
@@ -233,7 +233,7 @@ set label "$f(nT)$" at 3,1.2
 set label "$t=nT$" at 11,-0.1
 set samples 20
 set xrange [1:10]
-plot 2*rand(x)-1 with impulses
+plot 2*rand(0)-1 with impulses
 %#
 \end{center}
 \caption{Example of a discrete-time signal\label{f1-discrete}}
@@ -252,11 +252,11 @@ quantization error.
 \begin{center}
 \subfigure[Analog input signal]{
 %# gnuplot
-set terminal eepic
-set noborder
-set noxtics
-set noytics
-set nokey
+set terminal pict2e
+unset border
+unset xtics
+unset ytics
+unset key
 set size 1,0.8
 set samples 250
 plot sin(x/4)*8
@@ -265,28 +265,28 @@ plot sin(x/4)*8
 
 \subfigure[Digitized output signal]{
 %# gnuplot
-set terminal eepic
-set noborder
-set noxtics
-set noytics
-set nokey
+set terminal pict2e
+unset border
+unset xtics
+unset ytics
+unset key
 set size 1,0.8
 set samples 250
-plot floor(sin(x/4)*8) with points 1
+plot floor(sin(x/4)*8) with points
 %#
 }
 
 \subfigure[Error introduced by quantization]{
 %# gnuplot
-set terminal eepic
-set noborder
-set noxtics
-set noytics
-set nokey
+set terminal pict2e
+unset border
+unset xtics
+unset ytics
+unset key
 set size 1,0.8
 set samples 250
-set noxzeroaxis
-plot (sin(x/4)*8)-floor(sin(x/4)*8) with points 3
+unset xzeroaxis
+plot (sin(x/4)*8)-floor(sin(x/4)*8) with points
 %#
 }
 \end{center}
@@ -350,9 +350,9 @@ signal $g(t)$, as shown in Figure~\ref{f1-anasys}.
 See Figure~\ref{f1-eganasys} for examples of analog systems.
 \begin{figure}[hbtp]
 \begin{tabular}{c}
-\subfigure[Simple $RC$ analog system]{\input{pix/intro/1.3.1-1a.eepic}} \\
+\subfigure[Simple $RC$ analog system]{\input{pix/intro/1.3.1-1a.pict2e}} \\
 
-\subfigure[Complex analog system]{\input{pix/intro/1.3.1-1b.eepic}} \\
+\subfigure[Complex analog system]{\input{pix/intro/1.3.1-1b.pict2e}} \\
 \end{tabular}
 \caption{Examples of analog systems\label{f1-eganasys}}
 \end{figure}
@@ -422,7 +422,7 @@ See Figure~\ref{f1-multbb} for circuit.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/intro/1.3.2a.eepic}
+\input{pix/intro/1.3.2a.pict2e}
 \end{center}
 \caption{Multiplier building block\label{f1-multbb}}
 \end{figure}
@@ -435,7 +435,7 @@ See Figure~\ref{f1-diffbb} for circuit.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/intro/1.3.2b.eepic}
+\input{pix/intro/1.3.2b.pict2e}
 \end{center}
 \caption{Differentiator building block\label{f1-diffbb}}
 \end{figure}
@@ -448,7 +448,7 @@ See Figure~\ref{f1-intgbb} for circuit.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/intro/1.3.2c.eepic}
+\input{pix/intro/1.3.2c.pict2e}
 \end{center}
 \caption{Integrator building block\label{f1-intgbb}}
 \end{figure}
@@ -461,7 +461,7 @@ See Figure~\ref{f1-addrbb} for circuit.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/intro/1.3.2d.eepic}
+\input{pix/intro/1.3.2d.pict2e}
 \end{center}
 \caption{Adder building block\label{f1-addrbb}}
 \end{figure}

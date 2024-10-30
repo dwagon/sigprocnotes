@@ -1,5 +1,0 @@
-\setlength{\unitlength}{0.0125in}
-\begin{picture}(42,57)(0,-10)
-\put(21,21){\ellipse{42}{42}}
-\put(17,19){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{$+$}}}}
-\end{picture}

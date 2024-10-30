@@ -33,7 +33,7 @@ the analog form.
 
 Given a discrete system
 \begin{center}
-\input{pix/discsig/discsys.eepic}
+\input{pix/discsig/discsys.pict2e}
 \end{center}
 where $f[n]$ is the input and $g[n]$ is the output.
 \begin{equation}
@@ -602,22 +602,22 @@ h[n] \ast f[n] = f[n] \ast h[n]
 \subsection{Implications and interpretation of properties of convolution}
 \subsubsection{Commutative Property}
 \begin{center}
-\input{pix/discsig/commprop.eepic}
+\input{pix/discsig/commprop.pict2e}
 \end{center}
 \subsubsection{Associative Property}
 \begin{center}
-\input{pix/discsig/assocprop.eepic}
+\input{pix/discsig/assocprop.pict2e}
 \end{center}
 \subsubsection{Distributive Property}
 \begin{center}
-\input{pix/discsig/distrprop.eepic}
+\input{pix/discsig/distrprop.pict2e}
 \end{center}
 
 \begin{Exa}
 Consider a system that consists of a forward difference system cascaded with
 an ideal delay of one sample
 \begin{center}
-\input{pix/discsig/eg1.eepic}
+\input{pix/discsig/eg1.pict2e}
 \end{center}
 
 where $h_1[n]=\delta[n+1]-\delta[n]$ forward difference, and
@@ -671,7 +671,7 @@ sufficiently long delay.
 Consider a system which consists of an accumulator system and a backward
 difference system
 \begin{center}
-\input{pix/discsig/eg2.eepic}
+\input{pix/discsig/eg2.pict2e}
 \end{center}
 where $h_1[n]=u[n]$, the impulse response of the accumulator,
 $h_2[n]=\delta[n] - \delta[n-1]$, the impulse response of the backward
@@ -712,7 +712,7 @@ y[n]-y[n-1] &= x[n]
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/recrrepr.eepic}
+\input{pix/discsig/recrrepr.pict2e}
 \end{center}
 \caption{Recursion representation of $y[n]-y[n-1]=x[n]$\label{f7-recrrepr}}
 \end{figure}
@@ -755,13 +755,13 @@ h[n] = \underbrace{\frac{1}{M_2+1} \left\{ \delta[n] - \delta[n-M_2-1]
 Equation~(\ref{eq7-756a}) suggests that the moving average system can be
 represented as a cascade system as shown below
 \begin{center}
-\input{pix/discsig/moveav.eepic}
+\input{pix/discsig/moveav.pict2e}
 \end{center}
 and noticing $h_2[n]=u[n]$ is the impulse response of the accumulator.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/moverec.eepic}
+\input{pix/discsig/moverec.pict2e}
 \end{center}
 \caption{Recursive representation of moving average system\label{f7-moverec}}
 \end{figure}
@@ -1264,7 +1264,7 @@ j\omega \mbox{ axis} & \quad \mbox{maps into} \quad |z|=1
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/sz.eepic}
+\input{pix/discsig/sz.pict2e}
 \end{center}
 \caption{Relationship between $s$ and $z$-planes\label{f7-sz}}
 \end{figure}
@@ -1378,7 +1378,7 @@ F(z) = \frac{1}{1-0.8 z^{-1}}
 where $|0.8 z^{-1}|$ or $|z|>0.8$.
 
 \begin{center}
-\input{pix/discsig/ldiv.eepic}
+\input{pix/discsig/ldiv.pict2e}
 \end{center}
 
 Thus
@@ -1606,7 +1606,7 @@ sequence.
 A sequence $x[n]$ is said to be a right-sided sequence if $x[n]$ is zero for a
 given $N_1<\infty$ and $n\leqslant N_1$.
 \begin{center}
-\input{pix/discsig/rss.eepic}
+\input{pix/discsig/rss.pict2e}
 \end{center}
 A causal sequence is a right-sided sequence.
 \end{Def}
@@ -1634,7 +1634,7 @@ where $r=|z|$, the convergence of the $z$-transform requires absolute
 summabilty of the sequence $x[n] |z|^{-n}$ or equivalently $x[n]r^{-n}$. It is
 clear that the ROC is concentric with the origin.
 
-\begin{center}\input{pix/discsig/rscirc.eepic}\end{center}
+\begin{center}\input{pix/discsig/rscirc.pict2e}\end{center}
 
 For a given right-sided sequence, if the circle $|z|=r_0$ is in the ROC, $x[n]
 r_0^{-n}$ is absolutely summable, or equivalently, the Fourier transform of
@@ -1710,7 +1710,7 @@ H(z) &= \frac{G(z)}{F(z)}= \frac{1}{1-\frac{5}{2}z^{-1} + z^{-2}} \zdtag \\
 The pole-zero plot for $H(z)$ is shown in Figure~\ref{f7-polezero}.
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/polezero.eepic}
+\input{pix/discsig/polezero.pict2e}
 \end{center}
 \caption{Pole-zero plot for $H(z)$\label{f7-polezero}}
 \end{figure}
@@ -1802,7 +1802,7 @@ $\quad \stackrel{\mbox{maps onto}}{\fpair} \quad $
 \end{enumerate}
 
 \begin{center}
-\input{pix/discsig/zlambda.eepic}
+\input{pix/discsig/zlambda.pict2e}
 \end{center}
 
 For a given transfer function
@@ -1860,7 +1860,7 @@ M[\lambda] &= 6\lambda^2 + 15
 \end{align}
 \end{Exa}
 \begin{center}
-\input{pix/discsig/ldiv2.eepic}
+\input{pix/discsig/ldiv2.pict2e}
 \end{center}
 
 Since all the quotients are positive, $H(\lambda)$ is strictly Hurwitz.
@@ -1878,11 +1878,11 @@ g[n] = \sum_{r=0}^{M} a_r f[n-r] - \sum_{r=1}^{N} b_r g[n-r]
 involve essentially three types of operations
 \begin{enumerate}
 \item multiplications
-\begin{center} \input{pix/discsig/mult.eepic} \end{center}
+\begin{center} \input{pix/discsig/mult.pict2e} \end{center}
 \item additions
-\begin{center} \input{pix/discsig/add.eepic} \end{center}
+\begin{center} \input{pix/discsig/add.pict2e} \end{center}
 \item delay or shifting
-\begin{center} \input{pix/discsig/delay.eepic} \end{center}
+\begin{center} \input{pix/discsig/delay.pict2e} \end{center}
 \end{enumerate}
 
 A block diagram using these operations can be used to realize a system
@@ -1914,7 +1914,7 @@ in Figure~\ref{f7-blockd}. This representation aids in many ways.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/blockd.eepic}
+\input{pix/discsig/blockd.pict2e}
 \end{center}
 \caption{Block diagram representation\label{f7-blockd}}
 \end{figure}
@@ -1924,7 +1924,7 @@ Graph as shown in Figure~\ref{f7-sigflow}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/sigflow.eepic}
+\input{pix/discsig/sigflow.pict2e}
 \end{center}
 \caption{Signal flow graph\label{f7-sigflow}}
 \end{figure}
@@ -1956,7 +1956,7 @@ outputs from an SFG.
 \begin{Exa}
 Given a signal flow graph
 \begin{center}
-\input{pix/discsig/egsfg.eepic}
+\input{pix/discsig/egsfg.pict2e}
 \end{center}
 
 Solution: \\
@@ -1979,7 +1979,7 @@ Assume that $[1-a c - b c]\neq 0$.
 \begin{Exa}
 Given a SFG
 \begin{center}
-\input{pix/discsig/egsfg2.eepic}
+\input{pix/discsig/egsfg2.pict2e}
 \end{center}
 find the realtion between $y[n]$ and $x[n]$.
 
@@ -2143,7 +2143,7 @@ Figure~\ref{f7-blockdf1}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/blockdf1.eepic}
+\input{pix/discsig/blockdf1.pict2e}
 \end{center}
 \caption{Block diagram: Direct Form I\label{f7-blockdf1}}
 \end{figure}
@@ -2204,7 +2204,7 @@ Figure~\ref{f7-IIRblockI}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/IIRblockI.eepic}
+\input{pix/discsig/IIRblockI.pict2e}
 \end{center}
 \caption{Block diagram of LTI IIR system\label{f7-IIRblockI}}
 \end{figure}
@@ -2215,7 +2215,7 @@ the Canonic Direct Form\index{canonic direct form}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/IIRblockII.eepic}
+\input{pix/discsig/IIRblockII.pict2e}
 \end{center}
 \caption{Block diagram of LTI IIR system: Direct Form II\label{f7-IIRblockII}}
 \end{figure}
@@ -2234,14 +2234,14 @@ zero.)
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/sfgI.eepic}
+\input{pix/discsig/sfgI.pict2e}
 \end{center}
 \caption{Direct Form I for an Nth order system\label{f7-sfgI}}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/sfgII.eepic}
+\input{pix/discsig/sfgII.pict2e}
 \end{center}
 \caption{Direct Form II for an Nth order system\label{f7-sfgII}}
 \end{figure}
@@ -2256,14 +2256,14 @@ the direct form II structure is shown in Figure~\ref{f7-egdfII}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/egdfI.eepic}
+\input{pix/discsig/egdfI.pict2e}
 \end{center}
 \caption{Direct Form I for $H(z)$\label{f7-egdfI}}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/egdfII.eepic}
+\input{pix/discsig/egdfII.pict2e}
 \end{center}
 \caption{Direct Form II for $H(z)$\label{f7-egdfII}}
 \end{figure}
@@ -2306,7 +2306,7 @@ can be represented by the structure shown in Figure~\ref{f7-2odfII}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/2odfII.eepic}
+\input{pix/discsig/2odfII.pict2e}
 \end{center}
 \caption{Second order factor in direct form II\label{f7-2odfII}}
 \end{figure}
@@ -2326,7 +2326,7 @@ realization of each second order system as shown in Figure~\ref{f7-cascade}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/cascade.eepic}
+\input{pix/discsig/cascade.pict2e}
 \end{center}
 \caption{Cascade structure of sixth order system\label{f7-cascade}}
 \end{figure}
@@ -2343,16 +2343,16 @@ and Figure~\ref{f7-cascfos}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/dIIsos.eepic}
+\input{pix/discsig/dIIsos.pict2e}
 \end{center}
 \caption{Direct Form II second-order section\label{f7-dIIsos}}
 \end{figure}
 
 \begin{figure}[hbtp]
 \begin{center}
-\subfigure{\input{pix/discsig/cascfosa.eepic}}
-\subfigure{\input{pix/discsig/cascfosb.eepic}}
-\subfigure{\input{pix/discsig/cascfosc.eepic}}
+\subfigure{\input{pix/discsig/cascfosa.pict2e}}
+\subfigure{\input{pix/discsig/cascfosb.pict2e}}
+\subfigure{\input{pix/discsig/cascfosc.pict2e}}
 \end{center}
 \caption{Cascade structures with first-order sections\label{f7-cascfos}}
 \end{figure}
@@ -2381,7 +2381,7 @@ given in Figure~\ref{f7-sotsfg}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/sotsfg.eepic}
+\input{pix/discsig/sotsfg.pict2e}
 \end{center}
 \caption{Signal flow graph for second order term\label{f7-sotsfg}}
 \end{figure}
@@ -2404,7 +2404,7 @@ the paralled realization is presented as shown in Figure~\ref{f7-parrel}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/parrel.eepic}
+\input{pix/discsig/parrel.pict2e}
 \end{center}
 \caption{Parallel realization\label{f7-parrel}}
 \end{figure}
@@ -2418,7 +2418,7 @@ Figure~\ref{f7-altsfg}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/altsfg.eepic}
+\input{pix/discsig/altsfg.pict2e}
 \end{center}
 \caption{Alternative realization\label{f7-altsfg}}
 \end{figure}
@@ -2430,7 +2430,7 @@ The flow graphs of IIR systems have feedback loops which are closed paths that
 begin at a node and return to that node by traversing branches only in the
 direction of their arrowheads. For example, the SFG
 \begin{center}
-\input{pix/discsig/IIRsfg.eepic}
+\input{pix/discsig/IIRsfg.pict2e}
 \end{center}
 represents the difference equation
 \begin{align}
@@ -2447,7 +2447,7 @@ sufficient for the impulse response to be infinitely long.
 \begin{Exa}
 Given an SFG with feedback loop
 \begin{center}
-\input{pix/discsig/feedback.eepic}
+\input{pix/discsig/feedback.pict2e}
 \end{center}
 the difference equations representing the input output relation is obtianed by
 \begin{align}
@@ -2479,7 +2479,7 @@ The system is an FIR system (frequency sampling system.)
 \begin{Exa}
 The followinf SFG is noncomputable.
 \begin{center}
-\input{pix/discsig/noncomp.eepic}
+\input{pix/discsig/noncomp.pict2e}
 \end{center}
 since
 \begin{align}
@@ -2490,7 +2490,7 @@ g[n] &= \frac{1}{1-a}f[n]
 \end{align}
 provided that $a\neq 1$.
 \begin{center}
-\input{pix/discsig/noncompmod.eepic}
+\input{pix/discsig/noncompmod.pict2e}
 \end{center}
 \end{Exa}
 
@@ -2511,15 +2511,15 @@ H(z) = \frac{1}{1-a z^{-1}}
 \end{equation}
 with the SFG
 \begin{center}
-\input{pix/discsig/egsfg3.eepic}
+\input{pix/discsig/egsfg3.pict2e}
 \end{center}
 the transposed form of the given SFG is shown
 \begin{center}
-\input{pix/discsig/egsfg3trans.eepic}
+\input{pix/discsig/egsfg3trans.pict2e}
 \end{center}
 and redrawing the above SFG with input on the left
 \begin{center}
-\input{pix/discsig/egsfg3trans2.eepic}
+\input{pix/discsig/egsfg3trans2.pict2e}
 \end{center}
 By inspection of the original system and the corresponding transposed system,
 the only difference between the two is the order of operations by the
@@ -2545,7 +2545,7 @@ direct form FIR structure shown in Figure~\ref{f7-directFIR}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/directFIR.eepic}
+\input{pix/discsig/directFIR.pict2e}
 \end{center}
 \caption{Direct form FIR structure\label{f7-directFIR}}
 \end{figure}
@@ -2559,7 +2559,7 @@ systems is obtained as is shown in Figure~\ref{f7-transdirectFIR}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/transdirectFIR.eepic}
+\input{pix/discsig/transdirectFIR.pict2e}
 \end{center}
 \caption{Transposed direct form FIR structure\label{f7-transdirectFIR}}
 \end{figure}
@@ -2577,7 +2577,7 @@ Figure~\ref{f7-cascFIR}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/discsig/cascFIR.eepic}
+\input{pix/discsig/cascFIR.pict2e}
 \end{center}
 \caption{Cascaded form for FIR structure\label{f7-cascFIR}}
 \end{figure}

@@ -171,7 +171,7 @@ Find the $\L[p(t)]$ where $p(t)$ is shown in Figure~\ref{f4-pt}.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set noborder
 set nokey
 set noxtics
@@ -196,7 +196,7 @@ plot abs(x-0.5)<0.5?1:0
 \begin{center}
 \parbox{3.5in}{\subfigure[$U(t)$] {
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set samples 400
 set nokey
 set noborder
@@ -215,7 +215,7 @@ plot x>0?1:0
 %#
 }} \parbox{3.5in}{\subfigure[$-U(t-T)$]{
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noborder
 set noxtics
@@ -918,12 +918,12 @@ y(s)=\frac{I(s)}{V(s)}=G=\frac{1}{R}
 \subsubsection{The Inductor}
 \begin{center}
 \begin{tabular}{ccc}
-\input{pix/laptrans/inductor.eepic} & $\Rightarrow$ & \input{pix/laptrans/inductor2.eepic} \\
+\input{pix/laptrans/inductor.pict2e} & $\Rightarrow$ & \input{pix/laptrans/inductor2.pict2e} \\
 $v(t)=L\frac{di(t)}{dt}$ & $\Rightarrow$ & $V(s)=L(sI(s)-i(0^-))$ \\
 \end{tabular}
 \end{center}
 
-The impendance is defined as the ratio of $V(s)$ to $I(s)$ under zero initial
+The impedance is defined as the ratio of $V(s)$ to $I(s)$ under zero initial
 conditions.
 \begin{align}
 Z(s) &= \frac{V(s)}{I(s)} = Ls \\
@@ -938,7 +938,7 @@ i(\tau) d\tau \\
 \end{align}
 \begin{center}
 \begin{tabular}{ccc}
-\input{pix/laptrans/capacitor.eepic} & $\Rightarrow$ & \input{pix/laptrans/capacitor2.eepic} \\
+\input{pix/laptrans/capacitor.pict2e} & $\Rightarrow$ & \input{pix/laptrans/capacitor2.pict2e} \\
 \end{tabular}
 \end{center}
 \begin{equation}
@@ -952,7 +952,7 @@ start with:
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/laptrans/rlc.eepic}
+\input{pix/laptrans/rlc.pict2e}
 \end{center}
 \caption{Series $RLC$ circuit \label{f4-rlc}}
 \end{figure}
@@ -967,7 +967,7 @@ For a series connection of $n$ impedances as shown in Figure~\ref{f4-nimp},
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/laptrans/imped.eepic}
+\input{pix/laptrans/imped.pict2e}
 \end{center}
 \caption{Series connection of $n$ impedences\label{f4-nimp}}
 \end{figure}
@@ -986,7 +986,7 @@ the Laplace transform.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/laptrans/sln.eepic}
+\input{pix/laptrans/sln.pict2e}
 \end{center}
 \caption{Single Loop Network\label{f4-sln}}
 \end{figure}
@@ -997,7 +997,7 @@ building blocks giving Figure~\ref{f4-sln-trans}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/laptrans/sln2.eepic}
+\input{pix/laptrans/sln2.pict2e}
 \end{center}
 \caption{Transformed Single Loop Network\label{f4-sln-trans}}
 \end{figure}
@@ -1056,7 +1056,7 @@ conditions and the input conditions shown in Figure~\ref{f4-463ex}.
 
 \begin{figure}[hbtp]
 \begin{center}
-\input{pix/laptrans/egnet.eepic}
+\input{pix/laptrans/egnet.pict2e}
 \end{center}
 \caption{Network for Example~\ref{ex-tnet}\label{f4-463nw}}
 \end{figure}
@@ -1064,7 +1064,7 @@ conditions and the input conditions shown in Figure~\ref{f4-463ex}.
 \begin{figure}[hbtp]
 \begin{center}
 %# gnuplot
-set terminal eepic
+set terminal pict2e
 set nokey
 set noxtics
 set noytics
@@ -1096,7 +1096,7 @@ V_i(s) &= \frac{1}{s^2} \left( 1-e^{-s} - e^{-3s} + e^{-4s}  \right)
 
 \item Transformed network
 \begin{center}
-\input{pix/laptrans/egnetxf.eepic}
+\input{pix/laptrans/egnetxf.pict2e}
 \end{center}
 
 \begin{align}
@@ -1150,10 +1150,10 @@ Basic building blocks:
 
 \begin{center}
 \begin{tabular}{ccc}
-\input{pix/laptrans/parinduct.eepic} & $\Rightarrow$ &
-\input{pix/laptrans/parinduct2.eepic} \\
-\input{pix/laptrans/parcapac.eepic} & $\Rightarrow$ &
-\input{pix/laptrans/parcapac2.eepic} \\
+\input{pix/laptrans/parinduct.pict2e} & $\Rightarrow$ &
+\input{pix/laptrans/parinduct2.pict2e} \\
+\input{pix/laptrans/parcapac.pict2e} & $\Rightarrow$ &
+\input{pix/laptrans/parcapac2.pict2e} \\
 \end{tabular}
 \end{center}
 
